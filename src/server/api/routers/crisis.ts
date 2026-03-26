@@ -103,6 +103,7 @@ const crisisInput = z.object({
   how: z.string().trim().min(1),
   when: z.coerce.date(),
   severity: z.enum(["LOW", "MEDIUM", "HIGH"]),
+  location: z.string().trim().min(1),
   allowedEtaterIds: z.array(z.string()).optional(),
 });
 
@@ -144,6 +145,7 @@ export const crisisRouter = createTRPCRouter({
           how: input.how,
           when: input.when,
           severity: input.severity,
+          location: input.location,
           createdBy: { connect: { id: ctx.session.user.id } },
           ...(input.allowedEtaterIds && input.allowedEtaterIds.length > 0
             ? {
@@ -194,6 +196,7 @@ export const crisisRouter = createTRPCRouter({
           how: input.how,
           when: input.when,
           severity: input.severity,
+          location: input.location,
           allowedEtater: {
             set: input.allowedEtaterIds
               ? input.allowedEtaterIds.map((id) => ({ id }))

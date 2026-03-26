@@ -15,6 +15,7 @@ type CrisisFormValues = {
   how: string;
   when: string;
   severity: "LOW" | "MEDIUM" | "HIGH";
+  location: string;
   allowedEtaterIds: string[];
 };
 
@@ -39,6 +40,7 @@ const defaultInitialValues: CrisisFormValues = {
   how: "",
   when: "",
   severity: "LOW",
+  location: "",
   allowedEtaterIds: [],
 };
 
@@ -173,6 +175,18 @@ export function CrisisForm({
               </ToggleGroupItem>
             </ToggleGroup>
           </div>
+        </div>
+
+        <div className="space-y-1">
+          <label className="text-sm font-medium">Sted</label>
+          <Input
+            value={form.location}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, location: e.target.value }))
+            }
+            placeholder="F.eks. Trondheim"
+            required
+          />
         </div>
       </div>
 

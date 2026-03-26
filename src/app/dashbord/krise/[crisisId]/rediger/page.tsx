@@ -64,6 +64,7 @@ export default function RedigerKrisePage() {
     how: crisis.how,
     when: new Date(crisis.when).toISOString().slice(0, 16),
     severity: crisis.severity,
+    location: crisis.location ?? "",
     allowedEtaterIds: crisis.allowedEtater.map((e) => e.id),
   };
 
@@ -93,6 +94,7 @@ export default function RedigerKrisePage() {
             how: values.how,
             when: new Date(values.when),
             severity: values.severity,
+            location: values.location,
             allowedEtaterIds:
               values.allowedEtaterIds.length > 0
                 ? values.allowedEtaterIds

@@ -42,6 +42,7 @@ export default function NyKrisePage() {
             how: values.how,
             when: new Date(values.when),
             severity: values.severity,
+            location: values.location,
             allowedEtaterIds:
               values.allowedEtaterIds.length > 0
                 ? values.allowedEtaterIds
