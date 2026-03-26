@@ -1,3 +1,6 @@
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Clock01Icon } from "@hugeicons/core-free-icons";
+
 import type { TimelineEntryData } from "./types";
 
 export function PublicTimeline({ entries }: { entries: TimelineEntryData[] }) {
@@ -13,7 +16,12 @@ export function PublicTimeline({ entries }: { entries: TimelineEntryData[] }) {
     <div className="divide-y">
       {entries.map((entry) => (
         <div key={entry.id} className="flex gap-3 px-4 py-3">
-          <div className="pt-1">
+          <div className="flex shrink-0 items-center gap-1.5 pt-1">
+            <HugeiconsIcon
+              icon={Clock01Icon}
+              size={14}
+              className="text-muted-foreground"
+            />
             <span className="text-muted-foreground text-sm font-medium">
               {entry.createdAt.toLocaleTimeString("nb-NO", {
                 hour: "2-digit",
