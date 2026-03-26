@@ -3,6 +3,8 @@
 import { useState } from "react";
 
 import { Button } from "~/components/ui/button";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Share01Icon, Tick02Icon } from "@hugeicons/core-free-icons";
 
 export function ShareButton() {
   const [copied, setCopied] = useState(false);
@@ -14,8 +16,8 @@ export function ShareButton() {
   };
 
   return (
-    <Button variant="ghost" size="sm" onClick={handleShare}>
-      {copied ? "Kopiert!" : "Del"}
+    <Button variant="ghost" size="icon" onClick={handleShare}>
+      <HugeiconsIcon icon={copied ? Tick02Icon : Share01Icon} size={18} />
     </Button>
   );
 }
