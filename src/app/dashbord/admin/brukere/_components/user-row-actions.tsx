@@ -50,9 +50,7 @@ export function UserRowActions({ user }: UserRowActionsProps) {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {user.isVerified
-                ? "Fjerne verifisering?"
-                : "Verifisere bruker?"}
+              {user.isVerified ? "Fjerne verifisering?" : "Verifisere bruker?"}
             </DialogTitle>
             <DialogDescription>
               {user.isVerified

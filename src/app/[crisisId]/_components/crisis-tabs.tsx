@@ -35,9 +35,7 @@ export function CrisisTabs({
           <PublicTimeline entries={timelineEntries} />
         )}
         {activeTab === "tiltak" && <PublicMeasures measures={measures} />}
-        {activeTab === "kart" && hasMap && (
-          <PublicMap markers={mapMarkers} />
-        )}
+        {activeTab === "kart" && hasMap && <PublicMap markers={mapMarkers} />}
       </div>
 
       <nav className="sticky bottom-0 flex border-t bg-white">

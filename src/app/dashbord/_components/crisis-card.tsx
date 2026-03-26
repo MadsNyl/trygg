@@ -18,9 +18,18 @@ type CrisisCardProps = {
 };
 
 const severityConfig = {
-  LOW: { label: "Lav", className: "bg-green-500/15 text-green-500 border-green-500/30" },
-  MEDIUM: { label: "Middels", className: "bg-amber-500/15 text-amber-500 border-amber-500/30" },
-  HIGH: { label: "Høy", className: "bg-red-500/15 text-red-500 border-red-500/30" },
+  LOW: {
+    label: "Lav",
+    className: "bg-green-500/15 text-green-500 border-green-500/30",
+  },
+  MEDIUM: {
+    label: "Middels",
+    className: "bg-amber-500/15 text-amber-500 border-amber-500/30",
+  },
+  HIGH: {
+    label: "Høy",
+    className: "bg-red-500/15 text-red-500 border-red-500/30",
+  },
 } as const;
 
 const severityBorderColor = {
@@ -47,12 +56,12 @@ export function CrisisCard({ crisis }: CrisisCardProps) {
             {severity.label}
           </Badge>
         </div>
-        <p className="text-sm text-muted-foreground line-clamp-2">
+        <p className="text-muted-foreground line-clamp-2 text-sm">
           {crisis.description}
         </p>
       </CardHeader>
       <CardContent className="space-y-3">
-        <div className="flex gap-4 text-xs text-muted-foreground">
+        <div className="text-muted-foreground flex gap-4 text-xs">
           <span>
             {crisis.when.toLocaleDateString("nb-NO", {
               day: "numeric",

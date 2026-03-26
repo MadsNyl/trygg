@@ -8,7 +8,7 @@ const PublicMapContent = dynamic(() => import("./public-map-content"), {
   ssr: false,
   loading: () => (
     <div className="flex h-full items-center justify-center">
-      <p className="text-sm text-muted-foreground">Laster kart...</p>
+      <p className="text-muted-foreground text-sm">Laster kart...</p>
     </div>
   ),
 });
@@ -22,7 +22,7 @@ export function PublicMap({ markers }: { markers: MapMarkerData[] }) {
       {markers.some((m) => m.type === "RADIUS") && (
         <div className="flex items-center gap-2 px-4 py-3">
           <span className="h-3 w-3 rounded-full bg-red-300" />
-          <span className="text-sm text-muted-foreground">
+          <span className="text-muted-foreground text-sm">
             Sperret område — hold deg unna
           </span>
         </div>

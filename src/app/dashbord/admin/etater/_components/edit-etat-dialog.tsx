@@ -65,7 +65,9 @@ export function EditEtatDialog({ etat }: EditEtatDialogProps) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Rediger etat</DialogTitle>
-          <DialogDescription>Oppdater informasjon for denne etaten.</DialogDescription>
+          <DialogDescription>
+            Oppdater informasjon for denne etaten.
+          </DialogDescription>
         </DialogHeader>
 
         <form
@@ -97,7 +99,10 @@ export function EditEtatDialog({ etat }: EditEtatDialogProps) {
             <Input
               value={form.contactPhone}
               onChange={(event) => {
-                setForm((prev) => ({ ...prev, contactPhone: event.target.value }));
+                setForm((prev) => ({
+                  ...prev,
+                  contactPhone: event.target.value,
+                }));
               }}
               required
             />
@@ -109,7 +114,10 @@ export function EditEtatDialog({ etat }: EditEtatDialogProps) {
               type="email"
               value={form.contactEmail}
               onChange={(event) => {
-                setForm((prev) => ({ ...prev, contactEmail: event.target.value }));
+                setForm((prev) => ({
+                  ...prev,
+                  contactEmail: event.target.value,
+                }));
               }}
               required
             />
@@ -121,7 +129,10 @@ export function EditEtatDialog({ etat }: EditEtatDialogProps) {
               type="color"
               value={form.themeColor}
               onChange={(event) => {
-                setForm((prev) => ({ ...prev, themeColor: event.target.value }));
+                setForm((prev) => ({
+                  ...prev,
+                  themeColor: event.target.value,
+                }));
               }}
               required
             />

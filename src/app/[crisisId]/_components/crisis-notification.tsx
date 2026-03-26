@@ -25,9 +25,9 @@ export function CrisisNotification({
 
         <h1 className="mb-2 text-xl font-bold">{crisis.title}</h1>
 
-        <p className="mb-3 text-muted-foreground">{crisis.description}</p>
+        <p className="text-muted-foreground mb-3">{crisis.description}</p>
 
-        <p className="mb-6 text-sm text-muted-foreground">
+        <p className="text-muted-foreground mb-6 text-sm">
           {crisis.when.toLocaleDateString("nb-NO", {
             hour: "2-digit",
             minute: "2-digit",

@@ -1,13 +1,9 @@
 import type { TimelineEntryData } from "./types";
 
-export function PublicTimeline({
-  entries,
-}: {
-  entries: TimelineEntryData[];
-}) {
+export function PublicTimeline({ entries }: { entries: TimelineEntryData[] }) {
   if (entries.length === 0) {
     return (
-      <p className="px-4 py-8 text-center text-sm text-muted-foreground">
+      <p className="text-muted-foreground px-4 py-8 text-center text-sm">
         Ingen oppdateringer enda.
       </p>
     );
@@ -18,7 +14,7 @@ export function PublicTimeline({
       {entries.map((entry) => (
         <div key={entry.id} className="flex gap-3 px-4 py-3">
           <div className="pt-1">
-            <span className="text-sm font-medium text-muted-foreground">
+            <span className="text-muted-foreground text-sm font-medium">
               {entry.createdAt.toLocaleTimeString("nb-NO", {
                 hour: "2-digit",
                 minute: "2-digit",

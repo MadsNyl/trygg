@@ -86,23 +86,20 @@ export function TimelineSection({
       </div>
 
       {entries.length === 0 ? (
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           Ingen oppdateringer enda.
         </p>
       ) : (
         <div className="space-y-3">
           {entries.map((entry) => (
-            <div
-              key={entry.id}
-              className="flex gap-3 rounded-lg border p-3"
-            >
+            <div key={entry.id} className="flex gap-3 rounded-lg border p-3">
               <div
                 className="mt-1 h-3 w-3 shrink-0 rounded-full"
                 style={{ backgroundColor: entry.etat.themeColor }}
               />
               <div className="min-w-0 flex-1">
                 <p className="text-sm">{entry.text}</p>
-                <div className="mt-1 flex gap-2 text-xs text-muted-foreground">
+                <div className="text-muted-foreground mt-1 flex gap-2 text-xs">
                   <Badge variant="outline" className="text-[0.625rem]">
                     {entry.etat.title}
                   </Badge>

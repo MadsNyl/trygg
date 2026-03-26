@@ -310,18 +310,21 @@ export const crisisRouter = createTRPCRouter({
 
   addMapMarker: protectedProcedure
     .input(
-      z.object({
-        crisisId: z.string().min(1),
-        type: z.enum(["RADIUS", "SHELTER"]),
-        label: z.string().trim().min(1),
-        lat: z.number().min(-90).max(90),
-        lng: z.number().min(-180).max(180),
-        radius: z.number().int().min(1).optional(),
-        etatId: z.string().min(1),
-      }).refine(
-        (data) => data.type !== "RADIUS" || (data.radius != null && data.radius > 0),
-        { message: "Radius is required for RADIUS type", path: ["radius"] },
-      ),
+      z
+        .object({
+          crisisId: z.string().min(1),
+          type: z.enum(["RADIUS", "SHELTER"]),
+          label: z.string().trim().min(1),
+          lat: z.number().min(-90).max(90),
+          lng: z.number().min(-180).max(180),
+          radius: z.number().int().min(1).optional(),
+          etatId: z.string().min(1),
+        })
+        .refine(
+          (data) =>
+            data.type !== "RADIUS" || (data.radius != null && data.radius > 0),
+          { message: "Radius is required for RADIUS type", path: ["radius"] },
+        ),
     )
     .mutation(async ({ ctx, input }) => {
       const userEtatIds = await ensureVerifiedEtatMember(ctx);

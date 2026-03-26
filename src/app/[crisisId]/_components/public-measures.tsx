@@ -11,7 +11,7 @@ const measureIcons: Record<number, string> = {
 export function PublicMeasures({ measures }: { measures: MeasureData[] }) {
   if (measures.length === 0) {
     return (
-      <p className="px-4 py-8 text-center text-sm text-muted-foreground">
+      <p className="text-muted-foreground px-4 py-8 text-center text-sm">
         Ingen tiltak enda.
       </p>
     );

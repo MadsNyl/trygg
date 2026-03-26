@@ -68,16 +68,23 @@ export function AddEtatUserDialog({ etatId }: AddEtatUserDialogProps) {
           />
 
           {query.trim().length < 2 ? (
-            <p className="text-xs text-muted-foreground">Skriv minst 2 tegn for å søke.</p>
+            <p className="text-muted-foreground text-xs">
+              Skriv minst 2 tegn for å søke.
+            </p>
           ) : usersQuery.isLoading ? (
-            <p className="text-xs text-muted-foreground">Søker...</p>
+            <p className="text-muted-foreground text-xs">Søker...</p>
           ) : usersQuery.data && usersQuery.data.length > 0 ? (
             <div className="max-h-64 space-y-2 overflow-y-auto">
               {usersQuery.data.map((user) => (
-                <div key={user.id} className="flex items-center justify-between rounded-md border p-2">
+                <div
+                  key={user.id}
+                  className="flex items-center justify-between rounded-md border p-2"
+                >
                   <div>
                     <p className="font-medium">{user.name}</p>
-                    <p className="text-xs text-muted-foreground">{user.email}</p>
+                    <p className="text-muted-foreground text-xs">
+                      {user.email}
+                    </p>
                   </div>
                   <Button
                     size="sm"
@@ -93,7 +100,9 @@ export function AddEtatUserDialog({ etatId }: AddEtatUserDialogProps) {
               ))}
             </div>
           ) : (
-            <p className="text-xs text-muted-foreground">Ingen brukere funnet.</p>
+            <p className="text-muted-foreground text-xs">
+              Ingen brukere funnet.
+            </p>
           )}
         </div>
       </DialogContent>

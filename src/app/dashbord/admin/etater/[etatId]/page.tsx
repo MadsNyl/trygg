@@ -21,7 +21,9 @@ type EtatDetailsPageProps = {
   }>;
 };
 
-export default async function EtatDetailsPage({ params }: EtatDetailsPageProps) {
+export default async function EtatDetailsPage({
+  params,
+}: EtatDetailsPageProps) {
   const { etatId } = await params;
   const etat = await getEtatDetails(etatId);
 
@@ -55,8 +57,10 @@ export default async function EtatDetailsPage({ params }: EtatDetailsPageProps) 
           />
           {etat.title}
         </h1>
-        <p className="text-xs text-muted-foreground">{etat.contactEmail}</p>
-        <p className="text-xs text-muted-foreground">Telefon: {etat.contactPhone}</p>
+        <p className="text-muted-foreground text-xs">{etat.contactEmail}</p>
+        <p className="text-muted-foreground text-xs">
+          Telefon: {etat.contactPhone}
+        </p>
       </div>
 
       <div className="flex items-center justify-between">
@@ -75,7 +79,10 @@ export default async function EtatDetailsPage({ params }: EtatDetailsPageProps) 
         <TableBody>
           {etat.users.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={3} className="py-6 text-center text-muted-foreground">
+              <TableCell
+                colSpan={3}
+                className="text-muted-foreground py-6 text-center"
+              >
                 Ingen medlemmer ennå.
               </TableCell>
             </TableRow>

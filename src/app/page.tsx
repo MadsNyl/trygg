@@ -37,7 +37,7 @@ export default async function Home({
     <main className="mx-auto min-h-screen max-w-md bg-white">
       <header className="px-4 pt-6 pb-4">
         <h1 className="font-heading text-2xl font-bold">Trygg</h1>
-        <p className="text-sm text-muted-foreground">Kriseoversikt</p>
+        <p className="text-muted-foreground text-sm">Kriseoversikt</p>
       </header>
 
       <Suspense>
@@ -46,7 +46,7 @@ export default async function Home({
 
       <div className="mt-4">
         {crises.length === 0 ? (
-          <p className="px-4 py-8 text-center text-sm text-muted-foreground">
+          <p className="text-muted-foreground px-4 py-8 text-center text-sm">
             Ingen kriser funnet.
           </p>
         ) : (

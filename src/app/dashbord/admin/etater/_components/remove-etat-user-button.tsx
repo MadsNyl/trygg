@@ -10,7 +10,10 @@ type RemoveEtatUserButtonProps = {
   userId: string;
 };
 
-export function RemoveEtatUserButton({ etatId, userId }: RemoveEtatUserButtonProps) {
+export function RemoveEtatUserButton({
+  etatId,
+  userId,
+}: RemoveEtatUserButtonProps) {
   const router = useRouter();
 
   const removeUser = api.etat.removeUser.useMutation({

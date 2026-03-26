@@ -27,9 +27,18 @@ type Measure = {
 };
 
 const severityConfig = {
-  LOW: { label: "Lav", className: "bg-green-500/15 text-green-500 border-green-500/30" },
-  MEDIUM: { label: "Middels", className: "bg-amber-500/15 text-amber-500 border-amber-500/30" },
-  HIGH: { label: "Høy", className: "bg-red-500/15 text-red-500 border-red-500/30" },
+  LOW: {
+    label: "Lav",
+    className: "bg-green-500/15 text-green-500 border-green-500/30",
+  },
+  MEDIUM: {
+    label: "Middels",
+    className: "bg-amber-500/15 text-amber-500 border-amber-500/30",
+  },
+  HIGH: {
+    label: "Høy",
+    className: "bg-red-500/15 text-red-500 border-red-500/30",
+  },
 } as const;
 
 export function MeasuresSection({
@@ -93,13 +102,22 @@ export function MeasuresSection({
               if (value) setSeverity(value as "LOW" | "MEDIUM" | "HIGH");
             }}
           >
-            <ToggleGroupItem value="LOW" className="data-[state=on]:bg-green-500/15 data-[state=on]:text-green-500">
+            <ToggleGroupItem
+              value="LOW"
+              className="data-[state=on]:bg-green-500/15 data-[state=on]:text-green-500"
+            >
               Lav
             </ToggleGroupItem>
-            <ToggleGroupItem value="MEDIUM" className="data-[state=on]:bg-amber-500/15 data-[state=on]:text-amber-500">
+            <ToggleGroupItem
+              value="MEDIUM"
+              className="data-[state=on]:bg-amber-500/15 data-[state=on]:text-amber-500"
+            >
               Middels
             </ToggleGroupItem>
-            <ToggleGroupItem value="HIGH" className="data-[state=on]:bg-red-500/15 data-[state=on]:text-red-500">
+            <ToggleGroupItem
+              value="HIGH"
+              className="data-[state=on]:bg-red-500/15 data-[state=on]:text-red-500"
+            >
               Høy
             </ToggleGroupItem>
           </ToggleGroup>
@@ -121,7 +139,7 @@ export function MeasuresSection({
       </div>
 
       {measures.length === 0 ? (
-        <p className="text-sm text-muted-foreground">Ingen tiltak enda.</p>
+        <p className="text-muted-foreground text-sm">Ingen tiltak enda.</p>
       ) : (
         <div className="space-y-3">
           {measures.map((measure) => {
@@ -142,7 +160,7 @@ export function MeasuresSection({
                       {sev.label}
                     </Badge>
                   </div>
-                  <div className="mt-1 flex gap-2 text-xs text-muted-foreground">
+                  <div className="text-muted-foreground mt-1 flex gap-2 text-xs">
                     <Badge variant="outline" className="text-[0.625rem]">
                       {measure.etat.title}
                     </Badge>

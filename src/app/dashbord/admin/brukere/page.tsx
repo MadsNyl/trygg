@@ -31,15 +31,16 @@ const buildPageHref = (page: number, query: string) => {
   return `/dashbord/admin/brukere?${params.toString()}`;
 };
 
-export default async function BrukerePage({
-  searchParams,
-}: BrukerePageProps) {
+export default async function BrukerePage({ searchParams }: BrukerePageProps) {
   const resolvedSearchParams = await searchParams;
   const { users, query, pagination } = await getUsers(resolvedSearchParams);
 
   return (
     <main className="min-h-[calc(100vh-11.5rem)] space-y-4">
-      <form action="/dashbord/admin/brukere" className="flex max-w-sm items-center gap-2">
+      <form
+        action="/dashbord/admin/brukere"
+        className="flex max-w-sm items-center gap-2"
+      >
         <Input
           name="q"
           placeholder="Søk etter navn eller e-post"
@@ -63,7 +64,10 @@ export default async function BrukerePage({
         <TableBody>
           {users.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={5} className="py-6 text-center text-muted-foreground">
+              <TableCell
+                colSpan={5}
+                className="text-muted-foreground py-6 text-center"
+              >
                 Ingen brukere funnet.
               </TableCell>
             </TableRow>
@@ -73,8 +77,12 @@ export default async function BrukerePage({
                 <TableCell>
                   <div className="flex items-center gap-2">
                     <Avatar size="sm">
-                      {user.image ? <AvatarImage src={user.image} alt={user.name} /> : null}
-                      <AvatarFallback>{user.name.charAt(0).toUpperCase()}</AvatarFallback>
+                      {user.image ? (
+                        <AvatarImage src={user.image} alt={user.name} />
+                      ) : null}
+                      <AvatarFallback>
+                        {user.name.charAt(0).toUpperCase()}
+                      </AvatarFallback>
                     </Avatar>
                     <span className="font-medium">{user.name}</span>
                   </div>
@@ -107,14 +115,17 @@ export default async function BrukerePage({
       </Table>
 
       <div className="flex items-center justify-between">
-        <p className="text-xs text-muted-foreground">
-          Side {pagination.page} av {pagination.totalPages} ({pagination.total} brukere)
+        <p className="text-muted-foreground text-xs">
+          Side {pagination.page} av {pagination.totalPages} ({pagination.total}{" "}
+          brukere)
         </p>
 
         <div className="flex items-center gap-2">
           {pagination.hasPreviousPage ? (
             <Button variant="outline" asChild>
-              <Link href={buildPageHref(pagination.page - 1, query)}>Forrige</Link>
+              <Link href={buildPageHref(pagination.page - 1, query)}>
+                Forrige
+              </Link>
             </Button>
           ) : (
             <Button variant="outline" disabled>
@@ -124,7 +135,9 @@ export default async function BrukerePage({
 
           {pagination.hasNextPage ? (
             <Button variant="outline" asChild>
-              <Link href={buildPageHref(pagination.page + 1, query)}>Neste</Link>
+              <Link href={buildPageHref(pagination.page + 1, query)}>
+                Neste
+              </Link>
             </Button>
           ) : (
             <Button variant="outline" disabled>

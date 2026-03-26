@@ -164,13 +164,22 @@ export function CrisisForm({
               }}
               className="justify-start"
             >
-              <ToggleGroupItem value="LOW" className="data-[state=on]:bg-green-500/15 data-[state=on]:text-green-500">
+              <ToggleGroupItem
+                value="LOW"
+                className="data-[state=on]:bg-green-500/15 data-[state=on]:text-green-500"
+              >
                 Lav
               </ToggleGroupItem>
-              <ToggleGroupItem value="MEDIUM" className="data-[state=on]:bg-amber-500/15 data-[state=on]:text-amber-500">
+              <ToggleGroupItem
+                value="MEDIUM"
+                className="data-[state=on]:bg-amber-500/15 data-[state=on]:text-amber-500"
+              >
                 Middels
               </ToggleGroupItem>
-              <ToggleGroupItem value="HIGH" className="data-[state=on]:bg-red-500/15 data-[state=on]:text-red-500">
+              <ToggleGroupItem
+                value="HIGH"
+                className="data-[state=on]:bg-red-500/15 data-[state=on]:text-red-500"
+              >
                 Høy
               </ToggleGroupItem>
             </ToggleGroup>
@@ -194,7 +203,7 @@ export function CrisisForm({
       <div className="space-y-4 border-t pt-6">
         <div>
           <h2 className="text-sm font-semibold">Redigeringstilgang</h2>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             Velg hvilke etater som kan redigere denne krisen. Standard er alle.
           </p>
         </div>

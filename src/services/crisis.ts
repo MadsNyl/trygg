@@ -110,7 +110,5 @@ export async function getDistinctLocations() {
     orderBy: { location: "asc" },
   });
 
-  return results
-    .map((r) => r.location)
-    .filter((l): l is string => l !== null);
+  return results.map((r) => r.location).filter((l): l is string => l !== null);
 }

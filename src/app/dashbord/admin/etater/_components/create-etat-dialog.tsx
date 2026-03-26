@@ -87,7 +87,10 @@ export function CreateEtatDialog() {
             <Input
               value={form.contactPhone}
               onChange={(event) => {
-                setForm((prev) => ({ ...prev, contactPhone: event.target.value }));
+                setForm((prev) => ({
+                  ...prev,
+                  contactPhone: event.target.value,
+                }));
               }}
               placeholder="f.eks. 22 66 90 50"
               required
@@ -100,7 +103,10 @@ export function CreateEtatDialog() {
               type="email"
               value={form.contactEmail}
               onChange={(event) => {
-                setForm((prev) => ({ ...prev, contactEmail: event.target.value }));
+                setForm((prev) => ({
+                  ...prev,
+                  contactEmail: event.target.value,
+                }));
               }}
               placeholder="post@etat.no"
               required
@@ -113,7 +119,10 @@ export function CreateEtatDialog() {
               type="color"
               value={form.themeColor}
               onChange={(event) => {
-                setForm((prev) => ({ ...prev, themeColor: event.target.value }));
+                setForm((prev) => ({
+                  ...prev,
+                  themeColor: event.target.value,
+                }));
               }}
               required
             />
