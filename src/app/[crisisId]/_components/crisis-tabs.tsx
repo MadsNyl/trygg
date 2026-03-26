@@ -9,12 +9,6 @@ import { PublicMap } from "./public-map";
 
 type Tab = "siste-nytt" | "tiltak" | "kart";
 
-const tabs: { id: Tab; label: string }[] = [
-  { id: "siste-nytt", label: "Siste nytt" },
-  { id: "tiltak", label: "Tiltak" },
-  { id: "kart", label: "Kart" },
-];
-
 export function CrisisTabs({
   timelineEntries,
   measures,
@@ -24,6 +18,14 @@ export function CrisisTabs({
   measures: MeasureData[];
   mapMarkers: MapMarkerData[];
 }) {
+  const hasMap = mapMarkers.length > 0;
+
+  const tabs: { id: Tab; label: string }[] = [
+    { id: "siste-nytt", label: "Siste nytt" },
+    { id: "tiltak", label: "Tiltak" },
+    ...(hasMap ? [{ id: "kart" as Tab, label: "Kart" }] : []),
+  ];
+
   const [activeTab, setActiveTab] = useState<Tab>("siste-nytt");
 
   return (
@@ -33,7 +35,9 @@ export function CrisisTabs({
           <PublicTimeline entries={timelineEntries} />
         )}
         {activeTab === "tiltak" && <PublicMeasures measures={measures} />}
-        {activeTab === "kart" && <PublicMap markers={mapMarkers} />}
+        {activeTab === "kart" && hasMap && (
+          <PublicMap markers={mapMarkers} />
+        )}
       </div>
 
       <nav className="sticky bottom-0 flex border-t bg-white">
