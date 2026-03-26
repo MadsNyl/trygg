@@ -27,7 +27,7 @@ export function FeedFilters({ locations }: FeedFiltersProps) {
   );
 
   return (
-    <div className="space-y-3 px-4">
+    <div className="space-y-3 bg-white px-4 pb-4">
       <Input
         placeholder="Søk etter krise..."
         defaultValue={searchParams.get("q") ?? ""}
@@ -35,7 +35,7 @@ export function FeedFilters({ locations }: FeedFiltersProps) {
       />
       <div className="flex gap-2">
         <select
-          className="flex-1 rounded-md border px-3 py-2 text-sm"
+          className="flex-1 rounded-md border bg-white px-3 py-2 text-sm"
           defaultValue={searchParams.get("severity") ?? ""}
           onChange={(e) => updateParams("severity", e.target.value)}
         >
@@ -45,7 +45,7 @@ export function FeedFilters({ locations }: FeedFiltersProps) {
           <option value="LOW">Lav</option>
         </select>
         <select
-          className="flex-1 rounded-md border px-3 py-2 text-sm"
+          className="flex-1 rounded-md border bg-white px-3 py-2 text-sm"
           defaultValue={searchParams.get("location") ?? ""}
           onChange={(e) => updateParams("location", e.target.value)}
         >

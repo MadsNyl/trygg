@@ -34,9 +34,9 @@ export default async function Home({
   ]);
 
   return (
-    <main className="mx-auto min-h-screen max-w-md bg-white">
-      <header className="px-4 pt-6 pb-4">
-        <h1 className="font-heading text-2xl font-bold">Trygg</h1>
+    <main className="mx-auto min-h-screen max-w-md bg-gray-50">
+      <header className="bg-white px-4 pt-6 pb-4 shadow-sm">
+        <h1 className="font-heading text-2xl font-bold text-primary">Trygg</h1>
         <p className="text-muted-foreground text-sm">Kriseoversikt</p>
       </header>
 
@@ -44,9 +44,9 @@ export default async function Home({
         <FeedFilters locations={locations} />
       </Suspense>
 
-      <div className="mt-4">
+      <div className="space-y-3 px-4 py-4">
         {crises.length === 0 ? (
-          <p className="text-muted-foreground px-4 py-8 text-center text-sm">
+          <p className="text-muted-foreground py-8 text-center text-sm">
             Ingen kriser funnet.
           </p>
         ) : (
