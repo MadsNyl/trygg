@@ -87,6 +87,15 @@ const checkEditAccess = async (
   return crisis;
 };
 
+const validateUserEtat = (userEtatIds: string[], etatId: string) => {
+  if (!userEtatIds.includes(etatId)) {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "You do not belong to this etat",
+    });
+  }
+};
+
 const crisisInput = z.object({
   title: z.string().trim().min(1).max(200),
   description: z.string().trim().min(1),
@@ -202,4 +211,152 @@ export const crisisRouter = createTRPCRouter({
       orderBy: { title: "asc" },
     });
   }),
+
+  listTimelineEntries: protectedProcedure
+    .input(z.object({ crisisId: z.string().min(1) }))
+    .query(async ({ ctx, input }) => {
+      await ensureVerifiedEtatMember(ctx);
+
+      return ctx.db.timelineEntry.findMany({
+        where: { crisisId: input.crisisId },
+        orderBy: { createdAt: "desc" },
+        include: {
+          etat: { select: { id: true, title: true, themeColor: true } },
+          createdBy: { select: { id: true, name: true } },
+        },
+      });
+    }),
+
+  listMeasures: protectedProcedure
+    .input(z.object({ crisisId: z.string().min(1) }))
+    .query(async ({ ctx, input }) => {
+      await ensureVerifiedEtatMember(ctx);
+
+      return ctx.db.measure.findMany({
+        where: { crisisId: input.crisisId },
+        orderBy: [{ severity: "desc" }, { createdAt: "desc" }],
+        include: {
+          etat: { select: { id: true, title: true, themeColor: true } },
+          createdBy: { select: { id: true, name: true } },
+        },
+      });
+    }),
+
+  addTimelineEntry: protectedProcedure
+    .input(
+      z.object({
+        crisisId: z.string().min(1),
+        text: z.string().trim().min(1),
+        etatId: z.string().min(1),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userEtatIds = await ensureVerifiedEtatMember(ctx);
+      await checkEditAccess(ctx, input.crisisId, userEtatIds);
+      validateUserEtat(userEtatIds, input.etatId);
+
+      return ctx.db.timelineEntry.create({
+        data: {
+          text: input.text,
+          crisis: { connect: { id: input.crisisId } },
+          etat: { connect: { id: input.etatId } },
+          createdBy: { connect: { id: ctx.session.user.id } },
+        },
+      });
+    }),
+
+  addMeasure: protectedProcedure
+    .input(
+      z.object({
+        crisisId: z.string().min(1),
+        text: z.string().trim().min(1),
+        severity: z.enum(["LOW", "MEDIUM", "HIGH"]),
+        etatId: z.string().min(1),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userEtatIds = await ensureVerifiedEtatMember(ctx);
+      await checkEditAccess(ctx, input.crisisId, userEtatIds);
+      validateUserEtat(userEtatIds, input.etatId);
+
+      return ctx.db.measure.create({
+        data: {
+          text: input.text,
+          severity: input.severity,
+          crisis: { connect: { id: input.crisisId } },
+          etat: { connect: { id: input.etatId } },
+          createdBy: { connect: { id: ctx.session.user.id } },
+        },
+      });
+    }),
+
+  listMapMarkers: protectedProcedure
+    .input(z.object({ crisisId: z.string().min(1) }))
+    .query(async ({ ctx, input }) => {
+      await ensureVerifiedEtatMember(ctx);
+
+      return ctx.db.mapMarker.findMany({
+        where: { crisisId: input.crisisId },
+        orderBy: { createdAt: "desc" },
+        include: {
+          etat: { select: { id: true, title: true, themeColor: true } },
+          createdBy: { select: { id: true, name: true } },
+        },
+      });
+    }),
+
+  addMapMarker: protectedProcedure
+    .input(
+      z.object({
+        crisisId: z.string().min(1),
+        type: z.enum(["RADIUS", "SHELTER"]),
+        label: z.string().trim().min(1),
+        lat: z.number().min(-90).max(90),
+        lng: z.number().min(-180).max(180),
+        radius: z.number().int().min(1).optional(),
+        etatId: z.string().min(1),
+      }).refine(
+        (data) => data.type !== "RADIUS" || (data.radius != null && data.radius > 0),
+        { message: "Radius is required for RADIUS type", path: ["radius"] },
+      ),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userEtatIds = await ensureVerifiedEtatMember(ctx);
+      await checkEditAccess(ctx, input.crisisId, userEtatIds);
+      validateUserEtat(userEtatIds, input.etatId);
+
+      return ctx.db.mapMarker.create({
+        data: {
+          type: input.type,
+          label: input.label,
+          lat: input.lat,
+          lng: input.lng,
+          radius: input.type === "RADIUS" ? input.radius : null,
+          crisis: { connect: { id: input.crisisId } },
+          etat: { connect: { id: input.etatId } },
+          createdBy: { connect: { id: ctx.session.user.id } },
+        },
+      });
+    }),
+
+  removeMapMarker: protectedProcedure
+    .input(z.object({ id: z.string().min(1) }))
+    .mutation(async ({ ctx, input }) => {
+      const userEtatIds = await ensureVerifiedEtatMember(ctx);
+
+      const marker = await ctx.db.mapMarker.findUnique({
+        where: { id: input.id },
+        select: { crisisId: true },
+      });
+
+      if (!marker) {
+        throw new TRPCError({ code: "NOT_FOUND" });
+      }
+
+      await checkEditAccess(ctx, marker.crisisId, userEtatIds);
+
+      return ctx.db.mapMarker.delete({
+        where: { id: input.id },
+      });
+    }),
 });

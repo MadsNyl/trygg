@@ -4,17 +4,35 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
 import { CrisisForm } from "~/app/dashbord/krise/_components/crisis-form";
+import { TimelineSection } from "~/app/dashbord/krise/_components/timeline-section";
+import { MeasuresSection } from "~/app/dashbord/krise/_components/measures-section";
+import { MapSection } from "~/app/dashbord/krise/_components/map-section";
 import { Spinner } from "~/components/ui/spinner";
 import { api } from "~/trpc/react";
 
 export default function RedigerKrisePage() {
   const params = useParams<{ crisisId: string }>();
   const router = useRouter();
+  const utils = api.useUtils();
 
   const { data: crisis, isLoading: crisisLoading } =
     api.crisis.getById.useQuery({ id: params.crisisId });
 
   const { data: etater } = api.crisis.listEtater.useQuery();
+
+  const { data: timelineEntries } = api.crisis.listTimelineEntries.useQuery({
+    crisisId: params.crisisId,
+  });
+
+  const { data: measures } = api.crisis.listMeasures.useQuery({
+    crisisId: params.crisisId,
+  });
+
+  const { data: userEtater } = api.crisis.listEtater.useQuery();
+
+  const { data: mapMarkers } = api.crisis.listMapMarkers.useQuery({
+    crisisId: params.crisisId,
+  });
 
   const updateCrisis = api.crisis.update.useMutation({
     onSuccess: () => {
@@ -85,6 +103,41 @@ export default function RedigerKrisePage() {
         submitLabel="Lagre endringer"
         pendingLabel="Lagrer..."
       />
+
+      <div className="mt-10 space-y-10 border-t pt-10">
+        <TimelineSection
+          crisisId={params.crisisId}
+          userEtater={userEtater ?? []}
+          entries={timelineEntries ?? []}
+          onEntryAdded={() => {
+            void utils.crisis.listTimelineEntries.invalidate({
+              crisisId: params.crisisId,
+            });
+          }}
+        />
+
+        <MeasuresSection
+          crisisId={params.crisisId}
+          userEtater={userEtater ?? []}
+          measures={measures ?? []}
+          onMeasureAdded={() => {
+            void utils.crisis.listMeasures.invalidate({
+              crisisId: params.crisisId,
+            });
+          }}
+        />
+
+        <MapSection
+          crisisId={params.crisisId}
+          userEtater={userEtater ?? []}
+          markers={mapMarkers ?? []}
+          onMarkersChanged={() => {
+            void utils.crisis.listMapMarkers.invalidate({
+              crisisId: params.crisisId,
+            });
+          }}
+        />
+      </div>
     </main>
   );
 }

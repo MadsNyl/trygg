@@ -12,8 +12,8 @@ export default function NyKrisePage() {
   const { data: etater } = api.crisis.listEtater.useQuery();
 
   const createCrisis = api.crisis.create.useMutation({
-    onSuccess: () => {
-      router.push("/dashbord");
+    onSuccess: (data) => {
+      router.push(`/dashbord/krise/${data.id}/rediger`);
       router.refresh();
     },
   });

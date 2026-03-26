@@ -21,3 +21,25 @@ export async function getCrises(userId: string, userEtatIds: string[]) {
     return { ...crisis, canEdit };
   });
 }
+
+export async function getTimelineEntries(crisisId: string) {
+  return db.timelineEntry.findMany({
+    where: { crisisId },
+    orderBy: { createdAt: "desc" },
+    include: {
+      etat: { select: { id: true, title: true, themeColor: true } },
+      createdBy: { select: { id: true, name: true } },
+    },
+  });
+}
+
+export async function getMeasures(crisisId: string) {
+  return db.measure.findMany({
+    where: { crisisId },
+    orderBy: [{ severity: "desc" }, { createdAt: "desc" }],
+    include: {
+      etat: { select: { id: true, title: true, themeColor: true } },
+      createdBy: { select: { id: true, name: true } },
+    },
+  });
+}

@@ -28,41 +28,52 @@ model Post {
 }
 
 model User {
-  id            String    @id
-  name          String //@db.Text
-  email         String
-  emailVerified Boolean   @default(false)
-  isVerified    Boolean   @default(false)
-  isAdmin       Boolean   @default(false)
-  image         String? //@db.Text
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @default(now()) @updatedAt
-  sessions      Session[]
-  accounts      Account[]
-  posts         Post[]
-  crises        Crisis[]
-  etater        Etat[]
+  id              String          @id
+  name            String //@db.Text
+  email           String
+  emailVerified   Boolean         @default(false)
+  isVerified      Boolean         @default(false)
+  isAdmin         Boolean         @default(false)
+  image           String? //@db.Text
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @default(now()) @updatedAt
+  sessions        Session[]
+  accounts        Account[]
+  posts           Post[]
+  crises          Crisis[]
+  timelineEntries TimelineEntry[]
+  measures        Measure[]
+  mapMarkers      MapMarker[]
+  etater          Etat[]
 
   @@unique([email])
   @@map("user")
 }
 
 model Etat {
-  id           String   @id @default(cuid())
-  title        String
-  contactPhone String
-  contactEmail String
-  themeColor   String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  users        User[]
-  crises       Crisis[]
+  id              String          @id @default(cuid())
+  title           String
+  contactPhone    String
+  contactEmail    String
+  themeColor      String
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  users           User[]
+  crises          Crisis[]
+  timelineEntries TimelineEntry[]
+  measures        Measure[]
+  mapMarkers      MapMarker[]
 }
 
 enum Severity {
   LOW
   MEDIUM
   HIGH
+}
+
+enum MarkerType {
+  RADIUS
+  SHELTER
 }
 
 model Crisis {
@@ -77,10 +88,66 @@ model Crisis {
   createdBy   User   @relation(fields: [createdById], references: [id])
   createdById String
 
-  allowedEtater Etat[]
+  allowedEtater   Etat[]
+  timelineEntries TimelineEntry[]
+  measures        Measure[]
+  mapMarkers      MapMarker[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model TimelineEntry {
+  id   String @id @default(cuid())
+  text String @db.Text
+
+  crisis   Crisis @relation(fields: [crisisId], references: [id], onDelete: Cascade)
+  crisisId String
+
+  etat   Etat   @relation(fields: [etatId], references: [id])
+  etatId String
+
+  createdBy   User   @relation(fields: [createdById], references: [id])
+  createdById String
+
+  createdAt DateTime @default(now())
+}
+
+model Measure {
+  id       String   @id @default(cuid())
+  text     String   @db.Text
+  severity Severity
+
+  crisis   Crisis @relation(fields: [crisisId], references: [id], onDelete: Cascade)
+  crisisId String
+
+  etat   Etat   @relation(fields: [etatId], references: [id])
+  etatId String
+
+  createdBy   User   @relation(fields: [createdById], references: [id])
+  createdById String
+
+  createdAt DateTime @default(now())
+}
+
+model MapMarker {
+  id     String     @id @default(cuid())
+  type   MarkerType
+  label  String
+  lat    Float
+  lng    Float
+  radius Int?
+
+  crisis   Crisis @relation(fields: [crisisId], references: [id], onDelete: Cascade)
+  crisisId String
+
+  etat   Etat   @relation(fields: [etatId], references: [id])
+  etatId String
+
+  createdBy   User   @relation(fields: [createdById], references: [id])
+  createdById String
+
+  createdAt DateTime @default(now())
 }
 
 model Session {
