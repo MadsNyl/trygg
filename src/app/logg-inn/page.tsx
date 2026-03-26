@@ -11,7 +11,10 @@ export default async function LoggInnSide() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-zinc-50 px-4">
+    <main className="flex min-h-screen flex-col items-center justify-center bg-gray-50 px-4">
+      <h1 className="font-heading mb-6 text-2xl font-bold text-primary">
+        Trygg
+      </h1>
       <InnloggingKort />
     </main>
   );
