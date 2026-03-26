@@ -29,6 +29,26 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type Etat = $Result.DefaultSelection<Prisma.$EtatPayload>
 /**
+ * Model Crisis
+ * 
+ */
+export type Crisis = $Result.DefaultSelection<Prisma.$CrisisPayload>
+/**
+ * Model TimelineEntry
+ * 
+ */
+export type TimelineEntry = $Result.DefaultSelection<Prisma.$TimelineEntryPayload>
+/**
+ * Model Measure
+ * 
+ */
+export type Measure = $Result.DefaultSelection<Prisma.$MeasurePayload>
+/**
+ * Model MapMarker
+ * 
+ */
+export type MapMarker = $Result.DefaultSelection<Prisma.$MapMarkerPayload>
+/**
  * Model Session
  * 
  */
@@ -43,6 +63,36 @@ export type Account = $Result.DefaultSelection<Prisma.$AccountPayload>
  * 
  */
 export type Verification = $Result.DefaultSelection<Prisma.$VerificationPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const Severity: {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH'
+};
+
+export type Severity = (typeof Severity)[keyof typeof Severity]
+
+
+export const MarkerType: {
+  RADIUS: 'RADIUS',
+  SHELTER: 'SHELTER'
+};
+
+export type MarkerType = (typeof MarkerType)[keyof typeof MarkerType]
+
+}
+
+export type Severity = $Enums.Severity
+
+export const Severity: typeof $Enums.Severity
+
+export type MarkerType = $Enums.MarkerType
+
+export const MarkerType: typeof $Enums.MarkerType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -191,6 +241,46 @@ export class PrismaClient<
     * ```
     */
   get etat(): Prisma.EtatDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.crisis`: Exposes CRUD operations for the **Crisis** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Crises
+    * const crises = await prisma.crisis.findMany()
+    * ```
+    */
+  get crisis(): Prisma.CrisisDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.timelineEntry`: Exposes CRUD operations for the **TimelineEntry** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TimelineEntries
+    * const timelineEntries = await prisma.timelineEntry.findMany()
+    * ```
+    */
+  get timelineEntry(): Prisma.TimelineEntryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.measure`: Exposes CRUD operations for the **Measure** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Measures
+    * const measures = await prisma.measure.findMany()
+    * ```
+    */
+  get measure(): Prisma.MeasureDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.mapMarker`: Exposes CRUD operations for the **MapMarker** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MapMarkers
+    * const mapMarkers = await prisma.mapMarker.findMany()
+    * ```
+    */
+  get mapMarker(): Prisma.MapMarkerDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.session`: Exposes CRUD operations for the **Session** model.
@@ -665,6 +755,10 @@ export namespace Prisma {
     Post: 'Post',
     User: 'User',
     Etat: 'Etat',
+    Crisis: 'Crisis',
+    TimelineEntry: 'TimelineEntry',
+    Measure: 'Measure',
+    MapMarker: 'MapMarker',
     Session: 'Session',
     Account: 'Account',
     Verification: 'Verification'
@@ -686,7 +780,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "post" | "user" | "etat" | "session" | "account" | "verification"
+      modelProps: "post" | "user" | "etat" | "crisis" | "timelineEntry" | "measure" | "mapMarker" | "session" | "account" | "verification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -909,6 +1003,302 @@ export namespace Prisma {
           count: {
             args: Prisma.EtatCountArgs<ExtArgs>
             result: $Utils.Optional<EtatCountAggregateOutputType> | number
+          }
+        }
+      }
+      Crisis: {
+        payload: Prisma.$CrisisPayload<ExtArgs>
+        fields: Prisma.CrisisFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CrisisFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CrisisFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>
+          }
+          findFirst: {
+            args: Prisma.CrisisFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CrisisFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>
+          }
+          findMany: {
+            args: Prisma.CrisisFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>[]
+          }
+          create: {
+            args: Prisma.CrisisCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>
+          }
+          createMany: {
+            args: Prisma.CrisisCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CrisisCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>[]
+          }
+          delete: {
+            args: Prisma.CrisisDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>
+          }
+          update: {
+            args: Prisma.CrisisUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>
+          }
+          deleteMany: {
+            args: Prisma.CrisisDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CrisisUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CrisisUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>[]
+          }
+          upsert: {
+            args: Prisma.CrisisUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>
+          }
+          aggregate: {
+            args: Prisma.CrisisAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCrisis>
+          }
+          groupBy: {
+            args: Prisma.CrisisGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CrisisGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CrisisCountArgs<ExtArgs>
+            result: $Utils.Optional<CrisisCountAggregateOutputType> | number
+          }
+        }
+      }
+      TimelineEntry: {
+        payload: Prisma.$TimelineEntryPayload<ExtArgs>
+        fields: Prisma.TimelineEntryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TimelineEntryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimelineEntryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TimelineEntryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimelineEntryPayload>
+          }
+          findFirst: {
+            args: Prisma.TimelineEntryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimelineEntryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TimelineEntryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimelineEntryPayload>
+          }
+          findMany: {
+            args: Prisma.TimelineEntryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimelineEntryPayload>[]
+          }
+          create: {
+            args: Prisma.TimelineEntryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimelineEntryPayload>
+          }
+          createMany: {
+            args: Prisma.TimelineEntryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TimelineEntryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimelineEntryPayload>[]
+          }
+          delete: {
+            args: Prisma.TimelineEntryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimelineEntryPayload>
+          }
+          update: {
+            args: Prisma.TimelineEntryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimelineEntryPayload>
+          }
+          deleteMany: {
+            args: Prisma.TimelineEntryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TimelineEntryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TimelineEntryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimelineEntryPayload>[]
+          }
+          upsert: {
+            args: Prisma.TimelineEntryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimelineEntryPayload>
+          }
+          aggregate: {
+            args: Prisma.TimelineEntryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTimelineEntry>
+          }
+          groupBy: {
+            args: Prisma.TimelineEntryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TimelineEntryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TimelineEntryCountArgs<ExtArgs>
+            result: $Utils.Optional<TimelineEntryCountAggregateOutputType> | number
+          }
+        }
+      }
+      Measure: {
+        payload: Prisma.$MeasurePayload<ExtArgs>
+        fields: Prisma.MeasureFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MeasureFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeasurePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MeasureFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeasurePayload>
+          }
+          findFirst: {
+            args: Prisma.MeasureFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeasurePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MeasureFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeasurePayload>
+          }
+          findMany: {
+            args: Prisma.MeasureFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeasurePayload>[]
+          }
+          create: {
+            args: Prisma.MeasureCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeasurePayload>
+          }
+          createMany: {
+            args: Prisma.MeasureCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MeasureCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeasurePayload>[]
+          }
+          delete: {
+            args: Prisma.MeasureDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeasurePayload>
+          }
+          update: {
+            args: Prisma.MeasureUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeasurePayload>
+          }
+          deleteMany: {
+            args: Prisma.MeasureDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MeasureUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MeasureUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeasurePayload>[]
+          }
+          upsert: {
+            args: Prisma.MeasureUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeasurePayload>
+          }
+          aggregate: {
+            args: Prisma.MeasureAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMeasure>
+          }
+          groupBy: {
+            args: Prisma.MeasureGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MeasureGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MeasureCountArgs<ExtArgs>
+            result: $Utils.Optional<MeasureCountAggregateOutputType> | number
+          }
+        }
+      }
+      MapMarker: {
+        payload: Prisma.$MapMarkerPayload<ExtArgs>
+        fields: Prisma.MapMarkerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MapMarkerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MapMarkerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MapMarkerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MapMarkerPayload>
+          }
+          findFirst: {
+            args: Prisma.MapMarkerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MapMarkerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MapMarkerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MapMarkerPayload>
+          }
+          findMany: {
+            args: Prisma.MapMarkerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MapMarkerPayload>[]
+          }
+          create: {
+            args: Prisma.MapMarkerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MapMarkerPayload>
+          }
+          createMany: {
+            args: Prisma.MapMarkerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MapMarkerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MapMarkerPayload>[]
+          }
+          delete: {
+            args: Prisma.MapMarkerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MapMarkerPayload>
+          }
+          update: {
+            args: Prisma.MapMarkerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MapMarkerPayload>
+          }
+          deleteMany: {
+            args: Prisma.MapMarkerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MapMarkerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MapMarkerUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MapMarkerPayload>[]
+          }
+          upsert: {
+            args: Prisma.MapMarkerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MapMarkerPayload>
+          }
+          aggregate: {
+            args: Prisma.MapMarkerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMapMarker>
+          }
+          groupBy: {
+            args: Prisma.MapMarkerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MapMarkerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MapMarkerCountArgs<ExtArgs>
+            result: $Utils.Optional<MapMarkerCountAggregateOutputType> | number
           }
         }
       }
@@ -1233,6 +1623,10 @@ export namespace Prisma {
     post?: PostOmit
     user?: UserOmit
     etat?: EtatOmit
+    crisis?: CrisisOmit
+    timelineEntry?: TimelineEntryOmit
+    measure?: MeasureOmit
+    mapMarker?: MapMarkerOmit
     session?: SessionOmit
     account?: AccountOmit
     verification?: VerificationOmit
@@ -1319,6 +1713,10 @@ export namespace Prisma {
     sessions: number
     accounts: number
     posts: number
+    crises: number
+    timelineEntries: number
+    measures: number
+    mapMarkers: number
     etater: number
   }
 
@@ -1326,6 +1724,10 @@ export namespace Prisma {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     posts?: boolean | UserCountOutputTypeCountPostsArgs
+    crises?: boolean | UserCountOutputTypeCountCrisesArgs
+    timelineEntries?: boolean | UserCountOutputTypeCountTimelineEntriesArgs
+    measures?: boolean | UserCountOutputTypeCountMeasuresArgs
+    mapMarkers?: boolean | UserCountOutputTypeCountMapMarkersArgs
     etater?: boolean | UserCountOutputTypeCountEtaterArgs
   }
 
@@ -1364,6 +1766,34 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountCrisesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CrisisWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountTimelineEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TimelineEntryWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMeasuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MeasureWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMapMarkersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MapMarkerWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountEtaterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EtatWhereInput
   }
@@ -1375,10 +1805,18 @@ export namespace Prisma {
 
   export type EtatCountOutputType = {
     users: number
+    crises: number
+    timelineEntries: number
+    measures: number
+    mapMarkers: number
   }
 
   export type EtatCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | EtatCountOutputTypeCountUsersArgs
+    crises?: boolean | EtatCountOutputTypeCountCrisesArgs
+    timelineEntries?: boolean | EtatCountOutputTypeCountTimelineEntriesArgs
+    measures?: boolean | EtatCountOutputTypeCountMeasuresArgs
+    mapMarkers?: boolean | EtatCountOutputTypeCountMapMarkersArgs
   }
 
   // Custom InputTypes
@@ -1397,6 +1835,92 @@ export namespace Prisma {
    */
   export type EtatCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
+  }
+
+  /**
+   * EtatCountOutputType without action
+   */
+  export type EtatCountOutputTypeCountCrisesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CrisisWhereInput
+  }
+
+  /**
+   * EtatCountOutputType without action
+   */
+  export type EtatCountOutputTypeCountTimelineEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TimelineEntryWhereInput
+  }
+
+  /**
+   * EtatCountOutputType without action
+   */
+  export type EtatCountOutputTypeCountMeasuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MeasureWhereInput
+  }
+
+  /**
+   * EtatCountOutputType without action
+   */
+  export type EtatCountOutputTypeCountMapMarkersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MapMarkerWhereInput
+  }
+
+
+  /**
+   * Count Type CrisisCountOutputType
+   */
+
+  export type CrisisCountOutputType = {
+    allowedEtater: number
+    timelineEntries: number
+    measures: number
+    mapMarkers: number
+  }
+
+  export type CrisisCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    allowedEtater?: boolean | CrisisCountOutputTypeCountAllowedEtaterArgs
+    timelineEntries?: boolean | CrisisCountOutputTypeCountTimelineEntriesArgs
+    measures?: boolean | CrisisCountOutputTypeCountMeasuresArgs
+    mapMarkers?: boolean | CrisisCountOutputTypeCountMapMarkersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CrisisCountOutputType without action
+   */
+  export type CrisisCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CrisisCountOutputType
+     */
+    select?: CrisisCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CrisisCountOutputType without action
+   */
+  export type CrisisCountOutputTypeCountAllowedEtaterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EtatWhereInput
+  }
+
+  /**
+   * CrisisCountOutputType without action
+   */
+  export type CrisisCountOutputTypeCountTimelineEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TimelineEntryWhereInput
+  }
+
+  /**
+   * CrisisCountOutputType without action
+   */
+  export type CrisisCountOutputTypeCountMeasuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MeasureWhereInput
+  }
+
+  /**
+   * CrisisCountOutputType without action
+   */
+  export type CrisisCountOutputTypeCountMapMarkersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MapMarkerWhereInput
   }
 
 
@@ -2661,6 +3185,10 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
+    crises?: boolean | User$crisesArgs<ExtArgs>
+    timelineEntries?: boolean | User$timelineEntriesArgs<ExtArgs>
+    measures?: boolean | User$measuresArgs<ExtArgs>
+    mapMarkers?: boolean | User$mapMarkersArgs<ExtArgs>
     etater?: boolean | User$etaterArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -2706,6 +3234,10 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
+    crises?: boolean | User$crisesArgs<ExtArgs>
+    timelineEntries?: boolean | User$timelineEntriesArgs<ExtArgs>
+    measures?: boolean | User$measuresArgs<ExtArgs>
+    mapMarkers?: boolean | User$mapMarkersArgs<ExtArgs>
     etater?: boolean | User$etaterArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -2718,6 +3250,10 @@ export namespace Prisma {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       posts: Prisma.$PostPayload<ExtArgs>[]
+      crises: Prisma.$CrisisPayload<ExtArgs>[]
+      timelineEntries: Prisma.$TimelineEntryPayload<ExtArgs>[]
+      measures: Prisma.$MeasurePayload<ExtArgs>[]
+      mapMarkers: Prisma.$MapMarkerPayload<ExtArgs>[]
       etater: Prisma.$EtatPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -3127,6 +3663,10 @@ export namespace Prisma {
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    crises<T extends User$crisesArgs<ExtArgs> = {}>(args?: Subset<T, User$crisesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    timelineEntries<T extends User$timelineEntriesArgs<ExtArgs> = {}>(args?: Subset<T, User$timelineEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimelineEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    measures<T extends User$measuresArgs<ExtArgs> = {}>(args?: Subset<T, User$measuresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MeasurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    mapMarkers<T extends User$mapMarkersArgs<ExtArgs> = {}>(args?: Subset<T, User$mapMarkersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MapMarkerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     etater<T extends User$etaterArgs<ExtArgs> = {}>(args?: Subset<T, User$etaterArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EtatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3626,6 +4166,102 @@ export namespace Prisma {
   }
 
   /**
+   * User.crises
+   */
+  export type User$crisesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    where?: CrisisWhereInput
+    orderBy?: CrisisOrderByWithRelationInput | CrisisOrderByWithRelationInput[]
+    cursor?: CrisisWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CrisisScalarFieldEnum | CrisisScalarFieldEnum[]
+  }
+
+  /**
+   * User.timelineEntries
+   */
+  export type User$timelineEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimelineEntry
+     */
+    select?: TimelineEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimelineEntry
+     */
+    omit?: TimelineEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimelineEntryInclude<ExtArgs> | null
+    where?: TimelineEntryWhereInput
+    orderBy?: TimelineEntryOrderByWithRelationInput | TimelineEntryOrderByWithRelationInput[]
+    cursor?: TimelineEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TimelineEntryScalarFieldEnum | TimelineEntryScalarFieldEnum[]
+  }
+
+  /**
+   * User.measures
+   */
+  export type User$measuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Measure
+     */
+    select?: MeasureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Measure
+     */
+    omit?: MeasureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeasureInclude<ExtArgs> | null
+    where?: MeasureWhereInput
+    orderBy?: MeasureOrderByWithRelationInput | MeasureOrderByWithRelationInput[]
+    cursor?: MeasureWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MeasureScalarFieldEnum | MeasureScalarFieldEnum[]
+  }
+
+  /**
+   * User.mapMarkers
+   */
+  export type User$mapMarkersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MapMarker
+     */
+    select?: MapMarkerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MapMarker
+     */
+    omit?: MapMarkerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MapMarkerInclude<ExtArgs> | null
+    where?: MapMarkerWhereInput
+    orderBy?: MapMarkerOrderByWithRelationInput | MapMarkerOrderByWithRelationInput[]
+    cursor?: MapMarkerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MapMarkerScalarFieldEnum | MapMarkerScalarFieldEnum[]
+  }
+
+  /**
    * User.etater
    */
   export type User$etaterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3849,6 +4485,10 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     users?: boolean | Etat$usersArgs<ExtArgs>
+    crises?: boolean | Etat$crisesArgs<ExtArgs>
+    timelineEntries?: boolean | Etat$timelineEntriesArgs<ExtArgs>
+    measures?: boolean | Etat$measuresArgs<ExtArgs>
+    mapMarkers?: boolean | Etat$mapMarkersArgs<ExtArgs>
     _count?: boolean | EtatCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["etat"]>
 
@@ -3885,6 +4525,10 @@ export namespace Prisma {
   export type EtatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "contactPhone" | "contactEmail" | "themeColor" | "createdAt" | "updatedAt", ExtArgs["result"]["etat"]>
   export type EtatInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Etat$usersArgs<ExtArgs>
+    crises?: boolean | Etat$crisesArgs<ExtArgs>
+    timelineEntries?: boolean | Etat$timelineEntriesArgs<ExtArgs>
+    measures?: boolean | Etat$measuresArgs<ExtArgs>
+    mapMarkers?: boolean | Etat$mapMarkersArgs<ExtArgs>
     _count?: boolean | EtatCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EtatIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3894,6 +4538,10 @@ export namespace Prisma {
     name: "Etat"
     objects: {
       users: Prisma.$UserPayload<ExtArgs>[]
+      crises: Prisma.$CrisisPayload<ExtArgs>[]
+      timelineEntries: Prisma.$TimelineEntryPayload<ExtArgs>[]
+      measures: Prisma.$MeasurePayload<ExtArgs>[]
+      mapMarkers: Prisma.$MapMarkerPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4298,6 +4946,10 @@ export namespace Prisma {
   export interface Prisma__EtatClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     users<T extends Etat$usersArgs<ExtArgs> = {}>(args?: Subset<T, Etat$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    crises<T extends Etat$crisesArgs<ExtArgs> = {}>(args?: Subset<T, Etat$crisesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    timelineEntries<T extends Etat$timelineEntriesArgs<ExtArgs> = {}>(args?: Subset<T, Etat$timelineEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimelineEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    measures<T extends Etat$measuresArgs<ExtArgs> = {}>(args?: Subset<T, Etat$measuresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MeasurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    mapMarkers<T extends Etat$mapMarkersArgs<ExtArgs> = {}>(args?: Subset<T, Etat$mapMarkersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MapMarkerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4746,6 +5398,102 @@ export namespace Prisma {
   }
 
   /**
+   * Etat.crises
+   */
+  export type Etat$crisesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    where?: CrisisWhereInput
+    orderBy?: CrisisOrderByWithRelationInput | CrisisOrderByWithRelationInput[]
+    cursor?: CrisisWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CrisisScalarFieldEnum | CrisisScalarFieldEnum[]
+  }
+
+  /**
+   * Etat.timelineEntries
+   */
+  export type Etat$timelineEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimelineEntry
+     */
+    select?: TimelineEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimelineEntry
+     */
+    omit?: TimelineEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimelineEntryInclude<ExtArgs> | null
+    where?: TimelineEntryWhereInput
+    orderBy?: TimelineEntryOrderByWithRelationInput | TimelineEntryOrderByWithRelationInput[]
+    cursor?: TimelineEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TimelineEntryScalarFieldEnum | TimelineEntryScalarFieldEnum[]
+  }
+
+  /**
+   * Etat.measures
+   */
+  export type Etat$measuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Measure
+     */
+    select?: MeasureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Measure
+     */
+    omit?: MeasureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeasureInclude<ExtArgs> | null
+    where?: MeasureWhereInput
+    orderBy?: MeasureOrderByWithRelationInput | MeasureOrderByWithRelationInput[]
+    cursor?: MeasureWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MeasureScalarFieldEnum | MeasureScalarFieldEnum[]
+  }
+
+  /**
+   * Etat.mapMarkers
+   */
+  export type Etat$mapMarkersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MapMarker
+     */
+    select?: MapMarkerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MapMarker
+     */
+    omit?: MapMarkerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MapMarkerInclude<ExtArgs> | null
+    where?: MapMarkerWhereInput
+    orderBy?: MapMarkerOrderByWithRelationInput | MapMarkerOrderByWithRelationInput[]
+    cursor?: MapMarkerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MapMarkerScalarFieldEnum | MapMarkerScalarFieldEnum[]
+  }
+
+  /**
    * Etat without action
    */
   export type EtatDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4761,6 +5509,4611 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: EtatInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Crisis
+   */
+
+  export type AggregateCrisis = {
+    _count: CrisisCountAggregateOutputType | null
+    _min: CrisisMinAggregateOutputType | null
+    _max: CrisisMaxAggregateOutputType | null
+  }
+
+  export type CrisisMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    what: string | null
+    how: string | null
+    when: Date | null
+    severity: $Enums.Severity | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CrisisMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    what: string | null
+    how: string | null
+    when: Date | null
+    severity: $Enums.Severity | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CrisisCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    what: number
+    how: number
+    when: number
+    severity: number
+    createdById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CrisisMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    what?: true
+    how?: true
+    when?: true
+    severity?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CrisisMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    what?: true
+    how?: true
+    when?: true
+    severity?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CrisisCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    what?: true
+    how?: true
+    when?: true
+    severity?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CrisisAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Crisis to aggregate.
+     */
+    where?: CrisisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Crises to fetch.
+     */
+    orderBy?: CrisisOrderByWithRelationInput | CrisisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CrisisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Crises from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Crises.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Crises
+    **/
+    _count?: true | CrisisCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CrisisMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CrisisMaxAggregateInputType
+  }
+
+  export type GetCrisisAggregateType<T extends CrisisAggregateArgs> = {
+        [P in keyof T & keyof AggregateCrisis]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCrisis[P]>
+      : GetScalarType<T[P], AggregateCrisis[P]>
+  }
+
+
+
+
+  export type CrisisGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CrisisWhereInput
+    orderBy?: CrisisOrderByWithAggregationInput | CrisisOrderByWithAggregationInput[]
+    by: CrisisScalarFieldEnum[] | CrisisScalarFieldEnum
+    having?: CrisisScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CrisisCountAggregateInputType | true
+    _min?: CrisisMinAggregateInputType
+    _max?: CrisisMaxAggregateInputType
+  }
+
+  export type CrisisGroupByOutputType = {
+    id: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date
+    severity: $Enums.Severity
+    createdById: string
+    createdAt: Date
+    updatedAt: Date
+    _count: CrisisCountAggregateOutputType | null
+    _min: CrisisMinAggregateOutputType | null
+    _max: CrisisMaxAggregateOutputType | null
+  }
+
+  type GetCrisisGroupByPayload<T extends CrisisGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CrisisGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CrisisGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CrisisGroupByOutputType[P]>
+            : GetScalarType<T[P], CrisisGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CrisisSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    what?: boolean
+    how?: boolean
+    when?: boolean
+    severity?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    allowedEtater?: boolean | Crisis$allowedEtaterArgs<ExtArgs>
+    timelineEntries?: boolean | Crisis$timelineEntriesArgs<ExtArgs>
+    measures?: boolean | Crisis$measuresArgs<ExtArgs>
+    mapMarkers?: boolean | Crisis$mapMarkersArgs<ExtArgs>
+    _count?: boolean | CrisisCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["crisis"]>
+
+  export type CrisisSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    what?: boolean
+    how?: boolean
+    when?: boolean
+    severity?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["crisis"]>
+
+  export type CrisisSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    what?: boolean
+    how?: boolean
+    when?: boolean
+    severity?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["crisis"]>
+
+  export type CrisisSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    what?: boolean
+    how?: boolean
+    when?: boolean
+    severity?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CrisisOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "what" | "how" | "when" | "severity" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["crisis"]>
+  export type CrisisInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    allowedEtater?: boolean | Crisis$allowedEtaterArgs<ExtArgs>
+    timelineEntries?: boolean | Crisis$timelineEntriesArgs<ExtArgs>
+    measures?: boolean | Crisis$measuresArgs<ExtArgs>
+    mapMarkers?: boolean | Crisis$mapMarkersArgs<ExtArgs>
+    _count?: boolean | CrisisCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CrisisIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CrisisIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $CrisisPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Crisis"
+    objects: {
+      createdBy: Prisma.$UserPayload<ExtArgs>
+      allowedEtater: Prisma.$EtatPayload<ExtArgs>[]
+      timelineEntries: Prisma.$TimelineEntryPayload<ExtArgs>[]
+      measures: Prisma.$MeasurePayload<ExtArgs>[]
+      mapMarkers: Prisma.$MapMarkerPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      description: string
+      what: string
+      how: string
+      when: Date
+      severity: $Enums.Severity
+      createdById: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["crisis"]>
+    composites: {}
+  }
+
+  type CrisisGetPayload<S extends boolean | null | undefined | CrisisDefaultArgs> = $Result.GetResult<Prisma.$CrisisPayload, S>
+
+  type CrisisCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CrisisFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CrisisCountAggregateInputType | true
+    }
+
+  export interface CrisisDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Crisis'], meta: { name: 'Crisis' } }
+    /**
+     * Find zero or one Crisis that matches the filter.
+     * @param {CrisisFindUniqueArgs} args - Arguments to find a Crisis
+     * @example
+     * // Get one Crisis
+     * const crisis = await prisma.crisis.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CrisisFindUniqueArgs>(args: SelectSubset<T, CrisisFindUniqueArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Crisis that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CrisisFindUniqueOrThrowArgs} args - Arguments to find a Crisis
+     * @example
+     * // Get one Crisis
+     * const crisis = await prisma.crisis.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CrisisFindUniqueOrThrowArgs>(args: SelectSubset<T, CrisisFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Crisis that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CrisisFindFirstArgs} args - Arguments to find a Crisis
+     * @example
+     * // Get one Crisis
+     * const crisis = await prisma.crisis.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CrisisFindFirstArgs>(args?: SelectSubset<T, CrisisFindFirstArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Crisis that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CrisisFindFirstOrThrowArgs} args - Arguments to find a Crisis
+     * @example
+     * // Get one Crisis
+     * const crisis = await prisma.crisis.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CrisisFindFirstOrThrowArgs>(args?: SelectSubset<T, CrisisFindFirstOrThrowArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Crises that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CrisisFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Crises
+     * const crises = await prisma.crisis.findMany()
+     * 
+     * // Get first 10 Crises
+     * const crises = await prisma.crisis.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const crisisWithIdOnly = await prisma.crisis.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CrisisFindManyArgs>(args?: SelectSubset<T, CrisisFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Crisis.
+     * @param {CrisisCreateArgs} args - Arguments to create a Crisis.
+     * @example
+     * // Create one Crisis
+     * const Crisis = await prisma.crisis.create({
+     *   data: {
+     *     // ... data to create a Crisis
+     *   }
+     * })
+     * 
+     */
+    create<T extends CrisisCreateArgs>(args: SelectSubset<T, CrisisCreateArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Crises.
+     * @param {CrisisCreateManyArgs} args - Arguments to create many Crises.
+     * @example
+     * // Create many Crises
+     * const crisis = await prisma.crisis.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CrisisCreateManyArgs>(args?: SelectSubset<T, CrisisCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Crises and returns the data saved in the database.
+     * @param {CrisisCreateManyAndReturnArgs} args - Arguments to create many Crises.
+     * @example
+     * // Create many Crises
+     * const crisis = await prisma.crisis.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Crises and only return the `id`
+     * const crisisWithIdOnly = await prisma.crisis.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CrisisCreateManyAndReturnArgs>(args?: SelectSubset<T, CrisisCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Crisis.
+     * @param {CrisisDeleteArgs} args - Arguments to delete one Crisis.
+     * @example
+     * // Delete one Crisis
+     * const Crisis = await prisma.crisis.delete({
+     *   where: {
+     *     // ... filter to delete one Crisis
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CrisisDeleteArgs>(args: SelectSubset<T, CrisisDeleteArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Crisis.
+     * @param {CrisisUpdateArgs} args - Arguments to update one Crisis.
+     * @example
+     * // Update one Crisis
+     * const crisis = await prisma.crisis.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CrisisUpdateArgs>(args: SelectSubset<T, CrisisUpdateArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Crises.
+     * @param {CrisisDeleteManyArgs} args - Arguments to filter Crises to delete.
+     * @example
+     * // Delete a few Crises
+     * const { count } = await prisma.crisis.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CrisisDeleteManyArgs>(args?: SelectSubset<T, CrisisDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Crises.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CrisisUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Crises
+     * const crisis = await prisma.crisis.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CrisisUpdateManyArgs>(args: SelectSubset<T, CrisisUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Crises and returns the data updated in the database.
+     * @param {CrisisUpdateManyAndReturnArgs} args - Arguments to update many Crises.
+     * @example
+     * // Update many Crises
+     * const crisis = await prisma.crisis.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Crises and only return the `id`
+     * const crisisWithIdOnly = await prisma.crisis.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CrisisUpdateManyAndReturnArgs>(args: SelectSubset<T, CrisisUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Crisis.
+     * @param {CrisisUpsertArgs} args - Arguments to update or create a Crisis.
+     * @example
+     * // Update or create a Crisis
+     * const crisis = await prisma.crisis.upsert({
+     *   create: {
+     *     // ... data to create a Crisis
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Crisis we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CrisisUpsertArgs>(args: SelectSubset<T, CrisisUpsertArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Crises.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CrisisCountArgs} args - Arguments to filter Crises to count.
+     * @example
+     * // Count the number of Crises
+     * const count = await prisma.crisis.count({
+     *   where: {
+     *     // ... the filter for the Crises we want to count
+     *   }
+     * })
+    **/
+    count<T extends CrisisCountArgs>(
+      args?: Subset<T, CrisisCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CrisisCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Crisis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CrisisAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CrisisAggregateArgs>(args: Subset<T, CrisisAggregateArgs>): Prisma.PrismaPromise<GetCrisisAggregateType<T>>
+
+    /**
+     * Group by Crisis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CrisisGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CrisisGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CrisisGroupByArgs['orderBy'] }
+        : { orderBy?: CrisisGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CrisisGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCrisisGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Crisis model
+   */
+  readonly fields: CrisisFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Crisis.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CrisisClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    allowedEtater<T extends Crisis$allowedEtaterArgs<ExtArgs> = {}>(args?: Subset<T, Crisis$allowedEtaterArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EtatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    timelineEntries<T extends Crisis$timelineEntriesArgs<ExtArgs> = {}>(args?: Subset<T, Crisis$timelineEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimelineEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    measures<T extends Crisis$measuresArgs<ExtArgs> = {}>(args?: Subset<T, Crisis$measuresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MeasurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    mapMarkers<T extends Crisis$mapMarkersArgs<ExtArgs> = {}>(args?: Subset<T, Crisis$mapMarkersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MapMarkerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Crisis model
+   */
+  interface CrisisFieldRefs {
+    readonly id: FieldRef<"Crisis", 'String'>
+    readonly title: FieldRef<"Crisis", 'String'>
+    readonly description: FieldRef<"Crisis", 'String'>
+    readonly what: FieldRef<"Crisis", 'String'>
+    readonly how: FieldRef<"Crisis", 'String'>
+    readonly when: FieldRef<"Crisis", 'DateTime'>
+    readonly severity: FieldRef<"Crisis", 'Severity'>
+    readonly createdById: FieldRef<"Crisis", 'String'>
+    readonly createdAt: FieldRef<"Crisis", 'DateTime'>
+    readonly updatedAt: FieldRef<"Crisis", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Crisis findUnique
+   */
+  export type CrisisFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * Filter, which Crisis to fetch.
+     */
+    where: CrisisWhereUniqueInput
+  }
+
+  /**
+   * Crisis findUniqueOrThrow
+   */
+  export type CrisisFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * Filter, which Crisis to fetch.
+     */
+    where: CrisisWhereUniqueInput
+  }
+
+  /**
+   * Crisis findFirst
+   */
+  export type CrisisFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * Filter, which Crisis to fetch.
+     */
+    where?: CrisisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Crises to fetch.
+     */
+    orderBy?: CrisisOrderByWithRelationInput | CrisisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Crises.
+     */
+    cursor?: CrisisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Crises from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Crises.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Crises.
+     */
+    distinct?: CrisisScalarFieldEnum | CrisisScalarFieldEnum[]
+  }
+
+  /**
+   * Crisis findFirstOrThrow
+   */
+  export type CrisisFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * Filter, which Crisis to fetch.
+     */
+    where?: CrisisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Crises to fetch.
+     */
+    orderBy?: CrisisOrderByWithRelationInput | CrisisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Crises.
+     */
+    cursor?: CrisisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Crises from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Crises.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Crises.
+     */
+    distinct?: CrisisScalarFieldEnum | CrisisScalarFieldEnum[]
+  }
+
+  /**
+   * Crisis findMany
+   */
+  export type CrisisFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * Filter, which Crises to fetch.
+     */
+    where?: CrisisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Crises to fetch.
+     */
+    orderBy?: CrisisOrderByWithRelationInput | CrisisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Crises.
+     */
+    cursor?: CrisisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Crises from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Crises.
+     */
+    skip?: number
+    distinct?: CrisisScalarFieldEnum | CrisisScalarFieldEnum[]
+  }
+
+  /**
+   * Crisis create
+   */
+  export type CrisisCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Crisis.
+     */
+    data: XOR<CrisisCreateInput, CrisisUncheckedCreateInput>
+  }
+
+  /**
+   * Crisis createMany
+   */
+  export type CrisisCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Crises.
+     */
+    data: CrisisCreateManyInput | CrisisCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Crisis createManyAndReturn
+   */
+  export type CrisisCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * The data used to create many Crises.
+     */
+    data: CrisisCreateManyInput | CrisisCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Crisis update
+   */
+  export type CrisisUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Crisis.
+     */
+    data: XOR<CrisisUpdateInput, CrisisUncheckedUpdateInput>
+    /**
+     * Choose, which Crisis to update.
+     */
+    where: CrisisWhereUniqueInput
+  }
+
+  /**
+   * Crisis updateMany
+   */
+  export type CrisisUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Crises.
+     */
+    data: XOR<CrisisUpdateManyMutationInput, CrisisUncheckedUpdateManyInput>
+    /**
+     * Filter which Crises to update
+     */
+    where?: CrisisWhereInput
+    /**
+     * Limit how many Crises to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Crisis updateManyAndReturn
+   */
+  export type CrisisUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * The data used to update Crises.
+     */
+    data: XOR<CrisisUpdateManyMutationInput, CrisisUncheckedUpdateManyInput>
+    /**
+     * Filter which Crises to update
+     */
+    where?: CrisisWhereInput
+    /**
+     * Limit how many Crises to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Crisis upsert
+   */
+  export type CrisisUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Crisis to update in case it exists.
+     */
+    where: CrisisWhereUniqueInput
+    /**
+     * In case the Crisis found by the `where` argument doesn't exist, create a new Crisis with this data.
+     */
+    create: XOR<CrisisCreateInput, CrisisUncheckedCreateInput>
+    /**
+     * In case the Crisis was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CrisisUpdateInput, CrisisUncheckedUpdateInput>
+  }
+
+  /**
+   * Crisis delete
+   */
+  export type CrisisDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * Filter which Crisis to delete.
+     */
+    where: CrisisWhereUniqueInput
+  }
+
+  /**
+   * Crisis deleteMany
+   */
+  export type CrisisDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Crises to delete
+     */
+    where?: CrisisWhereInput
+    /**
+     * Limit how many Crises to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Crisis.allowedEtater
+   */
+  export type Crisis$allowedEtaterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Etat
+     */
+    select?: EtatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Etat
+     */
+    omit?: EtatOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EtatInclude<ExtArgs> | null
+    where?: EtatWhereInput
+    orderBy?: EtatOrderByWithRelationInput | EtatOrderByWithRelationInput[]
+    cursor?: EtatWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EtatScalarFieldEnum | EtatScalarFieldEnum[]
+  }
+
+  /**
+   * Crisis.timelineEntries
+   */
+  export type Crisis$timelineEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimelineEntry
+     */
+    select?: TimelineEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimelineEntry
+     */
+    omit?: TimelineEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimelineEntryInclude<ExtArgs> | null
+    where?: TimelineEntryWhereInput
+    orderBy?: TimelineEntryOrderByWithRelationInput | TimelineEntryOrderByWithRelationInput[]
+    cursor?: TimelineEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TimelineEntryScalarFieldEnum | TimelineEntryScalarFieldEnum[]
+  }
+
+  /**
+   * Crisis.measures
+   */
+  export type Crisis$measuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Measure
+     */
+    select?: MeasureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Measure
+     */
+    omit?: MeasureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeasureInclude<ExtArgs> | null
+    where?: MeasureWhereInput
+    orderBy?: MeasureOrderByWithRelationInput | MeasureOrderByWithRelationInput[]
+    cursor?: MeasureWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MeasureScalarFieldEnum | MeasureScalarFieldEnum[]
+  }
+
+  /**
+   * Crisis.mapMarkers
+   */
+  export type Crisis$mapMarkersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MapMarker
+     */
+    select?: MapMarkerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MapMarker
+     */
+    omit?: MapMarkerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MapMarkerInclude<ExtArgs> | null
+    where?: MapMarkerWhereInput
+    orderBy?: MapMarkerOrderByWithRelationInput | MapMarkerOrderByWithRelationInput[]
+    cursor?: MapMarkerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MapMarkerScalarFieldEnum | MapMarkerScalarFieldEnum[]
+  }
+
+  /**
+   * Crisis without action
+   */
+  export type CrisisDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TimelineEntry
+   */
+
+  export type AggregateTimelineEntry = {
+    _count: TimelineEntryCountAggregateOutputType | null
+    _min: TimelineEntryMinAggregateOutputType | null
+    _max: TimelineEntryMaxAggregateOutputType | null
+  }
+
+  export type TimelineEntryMinAggregateOutputType = {
+    id: string | null
+    text: string | null
+    crisisId: string | null
+    etatId: string | null
+    createdById: string | null
+    createdAt: Date | null
+  }
+
+  export type TimelineEntryMaxAggregateOutputType = {
+    id: string | null
+    text: string | null
+    crisisId: string | null
+    etatId: string | null
+    createdById: string | null
+    createdAt: Date | null
+  }
+
+  export type TimelineEntryCountAggregateOutputType = {
+    id: number
+    text: number
+    crisisId: number
+    etatId: number
+    createdById: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type TimelineEntryMinAggregateInputType = {
+    id?: true
+    text?: true
+    crisisId?: true
+    etatId?: true
+    createdById?: true
+    createdAt?: true
+  }
+
+  export type TimelineEntryMaxAggregateInputType = {
+    id?: true
+    text?: true
+    crisisId?: true
+    etatId?: true
+    createdById?: true
+    createdAt?: true
+  }
+
+  export type TimelineEntryCountAggregateInputType = {
+    id?: true
+    text?: true
+    crisisId?: true
+    etatId?: true
+    createdById?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type TimelineEntryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TimelineEntry to aggregate.
+     */
+    where?: TimelineEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TimelineEntries to fetch.
+     */
+    orderBy?: TimelineEntryOrderByWithRelationInput | TimelineEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TimelineEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TimelineEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TimelineEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TimelineEntries
+    **/
+    _count?: true | TimelineEntryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TimelineEntryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TimelineEntryMaxAggregateInputType
+  }
+
+  export type GetTimelineEntryAggregateType<T extends TimelineEntryAggregateArgs> = {
+        [P in keyof T & keyof AggregateTimelineEntry]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTimelineEntry[P]>
+      : GetScalarType<T[P], AggregateTimelineEntry[P]>
+  }
+
+
+
+
+  export type TimelineEntryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TimelineEntryWhereInput
+    orderBy?: TimelineEntryOrderByWithAggregationInput | TimelineEntryOrderByWithAggregationInput[]
+    by: TimelineEntryScalarFieldEnum[] | TimelineEntryScalarFieldEnum
+    having?: TimelineEntryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TimelineEntryCountAggregateInputType | true
+    _min?: TimelineEntryMinAggregateInputType
+    _max?: TimelineEntryMaxAggregateInputType
+  }
+
+  export type TimelineEntryGroupByOutputType = {
+    id: string
+    text: string
+    crisisId: string
+    etatId: string
+    createdById: string
+    createdAt: Date
+    _count: TimelineEntryCountAggregateOutputType | null
+    _min: TimelineEntryMinAggregateOutputType | null
+    _max: TimelineEntryMaxAggregateOutputType | null
+  }
+
+  type GetTimelineEntryGroupByPayload<T extends TimelineEntryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TimelineEntryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TimelineEntryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TimelineEntryGroupByOutputType[P]>
+            : GetScalarType<T[P], TimelineEntryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TimelineEntrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    text?: boolean
+    crisisId?: boolean
+    etatId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["timelineEntry"]>
+
+  export type TimelineEntrySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    text?: boolean
+    crisisId?: boolean
+    etatId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["timelineEntry"]>
+
+  export type TimelineEntrySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    text?: boolean
+    crisisId?: boolean
+    etatId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["timelineEntry"]>
+
+  export type TimelineEntrySelectScalar = {
+    id?: boolean
+    text?: boolean
+    crisisId?: boolean
+    etatId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+  }
+
+  export type TimelineEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "text" | "crisisId" | "etatId" | "createdById" | "createdAt", ExtArgs["result"]["timelineEntry"]>
+  export type TimelineEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type TimelineEntryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type TimelineEntryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $TimelineEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TimelineEntry"
+    objects: {
+      crisis: Prisma.$CrisisPayload<ExtArgs>
+      etat: Prisma.$EtatPayload<ExtArgs>
+      createdBy: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      text: string
+      crisisId: string
+      etatId: string
+      createdById: string
+      createdAt: Date
+    }, ExtArgs["result"]["timelineEntry"]>
+    composites: {}
+  }
+
+  type TimelineEntryGetPayload<S extends boolean | null | undefined | TimelineEntryDefaultArgs> = $Result.GetResult<Prisma.$TimelineEntryPayload, S>
+
+  type TimelineEntryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TimelineEntryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TimelineEntryCountAggregateInputType | true
+    }
+
+  export interface TimelineEntryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TimelineEntry'], meta: { name: 'TimelineEntry' } }
+    /**
+     * Find zero or one TimelineEntry that matches the filter.
+     * @param {TimelineEntryFindUniqueArgs} args - Arguments to find a TimelineEntry
+     * @example
+     * // Get one TimelineEntry
+     * const timelineEntry = await prisma.timelineEntry.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TimelineEntryFindUniqueArgs>(args: SelectSubset<T, TimelineEntryFindUniqueArgs<ExtArgs>>): Prisma__TimelineEntryClient<$Result.GetResult<Prisma.$TimelineEntryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TimelineEntry that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TimelineEntryFindUniqueOrThrowArgs} args - Arguments to find a TimelineEntry
+     * @example
+     * // Get one TimelineEntry
+     * const timelineEntry = await prisma.timelineEntry.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TimelineEntryFindUniqueOrThrowArgs>(args: SelectSubset<T, TimelineEntryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TimelineEntryClient<$Result.GetResult<Prisma.$TimelineEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TimelineEntry that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimelineEntryFindFirstArgs} args - Arguments to find a TimelineEntry
+     * @example
+     * // Get one TimelineEntry
+     * const timelineEntry = await prisma.timelineEntry.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TimelineEntryFindFirstArgs>(args?: SelectSubset<T, TimelineEntryFindFirstArgs<ExtArgs>>): Prisma__TimelineEntryClient<$Result.GetResult<Prisma.$TimelineEntryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TimelineEntry that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimelineEntryFindFirstOrThrowArgs} args - Arguments to find a TimelineEntry
+     * @example
+     * // Get one TimelineEntry
+     * const timelineEntry = await prisma.timelineEntry.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TimelineEntryFindFirstOrThrowArgs>(args?: SelectSubset<T, TimelineEntryFindFirstOrThrowArgs<ExtArgs>>): Prisma__TimelineEntryClient<$Result.GetResult<Prisma.$TimelineEntryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TimelineEntries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimelineEntryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TimelineEntries
+     * const timelineEntries = await prisma.timelineEntry.findMany()
+     * 
+     * // Get first 10 TimelineEntries
+     * const timelineEntries = await prisma.timelineEntry.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const timelineEntryWithIdOnly = await prisma.timelineEntry.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TimelineEntryFindManyArgs>(args?: SelectSubset<T, TimelineEntryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimelineEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TimelineEntry.
+     * @param {TimelineEntryCreateArgs} args - Arguments to create a TimelineEntry.
+     * @example
+     * // Create one TimelineEntry
+     * const TimelineEntry = await prisma.timelineEntry.create({
+     *   data: {
+     *     // ... data to create a TimelineEntry
+     *   }
+     * })
+     * 
+     */
+    create<T extends TimelineEntryCreateArgs>(args: SelectSubset<T, TimelineEntryCreateArgs<ExtArgs>>): Prisma__TimelineEntryClient<$Result.GetResult<Prisma.$TimelineEntryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TimelineEntries.
+     * @param {TimelineEntryCreateManyArgs} args - Arguments to create many TimelineEntries.
+     * @example
+     * // Create many TimelineEntries
+     * const timelineEntry = await prisma.timelineEntry.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TimelineEntryCreateManyArgs>(args?: SelectSubset<T, TimelineEntryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TimelineEntries and returns the data saved in the database.
+     * @param {TimelineEntryCreateManyAndReturnArgs} args - Arguments to create many TimelineEntries.
+     * @example
+     * // Create many TimelineEntries
+     * const timelineEntry = await prisma.timelineEntry.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TimelineEntries and only return the `id`
+     * const timelineEntryWithIdOnly = await prisma.timelineEntry.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TimelineEntryCreateManyAndReturnArgs>(args?: SelectSubset<T, TimelineEntryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimelineEntryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TimelineEntry.
+     * @param {TimelineEntryDeleteArgs} args - Arguments to delete one TimelineEntry.
+     * @example
+     * // Delete one TimelineEntry
+     * const TimelineEntry = await prisma.timelineEntry.delete({
+     *   where: {
+     *     // ... filter to delete one TimelineEntry
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TimelineEntryDeleteArgs>(args: SelectSubset<T, TimelineEntryDeleteArgs<ExtArgs>>): Prisma__TimelineEntryClient<$Result.GetResult<Prisma.$TimelineEntryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TimelineEntry.
+     * @param {TimelineEntryUpdateArgs} args - Arguments to update one TimelineEntry.
+     * @example
+     * // Update one TimelineEntry
+     * const timelineEntry = await prisma.timelineEntry.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TimelineEntryUpdateArgs>(args: SelectSubset<T, TimelineEntryUpdateArgs<ExtArgs>>): Prisma__TimelineEntryClient<$Result.GetResult<Prisma.$TimelineEntryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TimelineEntries.
+     * @param {TimelineEntryDeleteManyArgs} args - Arguments to filter TimelineEntries to delete.
+     * @example
+     * // Delete a few TimelineEntries
+     * const { count } = await prisma.timelineEntry.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TimelineEntryDeleteManyArgs>(args?: SelectSubset<T, TimelineEntryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TimelineEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimelineEntryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TimelineEntries
+     * const timelineEntry = await prisma.timelineEntry.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TimelineEntryUpdateManyArgs>(args: SelectSubset<T, TimelineEntryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TimelineEntries and returns the data updated in the database.
+     * @param {TimelineEntryUpdateManyAndReturnArgs} args - Arguments to update many TimelineEntries.
+     * @example
+     * // Update many TimelineEntries
+     * const timelineEntry = await prisma.timelineEntry.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TimelineEntries and only return the `id`
+     * const timelineEntryWithIdOnly = await prisma.timelineEntry.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TimelineEntryUpdateManyAndReturnArgs>(args: SelectSubset<T, TimelineEntryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimelineEntryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TimelineEntry.
+     * @param {TimelineEntryUpsertArgs} args - Arguments to update or create a TimelineEntry.
+     * @example
+     * // Update or create a TimelineEntry
+     * const timelineEntry = await prisma.timelineEntry.upsert({
+     *   create: {
+     *     // ... data to create a TimelineEntry
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TimelineEntry we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TimelineEntryUpsertArgs>(args: SelectSubset<T, TimelineEntryUpsertArgs<ExtArgs>>): Prisma__TimelineEntryClient<$Result.GetResult<Prisma.$TimelineEntryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TimelineEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimelineEntryCountArgs} args - Arguments to filter TimelineEntries to count.
+     * @example
+     * // Count the number of TimelineEntries
+     * const count = await prisma.timelineEntry.count({
+     *   where: {
+     *     // ... the filter for the TimelineEntries we want to count
+     *   }
+     * })
+    **/
+    count<T extends TimelineEntryCountArgs>(
+      args?: Subset<T, TimelineEntryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TimelineEntryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TimelineEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimelineEntryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TimelineEntryAggregateArgs>(args: Subset<T, TimelineEntryAggregateArgs>): Prisma.PrismaPromise<GetTimelineEntryAggregateType<T>>
+
+    /**
+     * Group by TimelineEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimelineEntryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TimelineEntryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TimelineEntryGroupByArgs['orderBy'] }
+        : { orderBy?: TimelineEntryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TimelineEntryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTimelineEntryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TimelineEntry model
+   */
+  readonly fields: TimelineEntryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TimelineEntry.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TimelineEntryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    crisis<T extends CrisisDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CrisisDefaultArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    etat<T extends EtatDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EtatDefaultArgs<ExtArgs>>): Prisma__EtatClient<$Result.GetResult<Prisma.$EtatPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TimelineEntry model
+   */
+  interface TimelineEntryFieldRefs {
+    readonly id: FieldRef<"TimelineEntry", 'String'>
+    readonly text: FieldRef<"TimelineEntry", 'String'>
+    readonly crisisId: FieldRef<"TimelineEntry", 'String'>
+    readonly etatId: FieldRef<"TimelineEntry", 'String'>
+    readonly createdById: FieldRef<"TimelineEntry", 'String'>
+    readonly createdAt: FieldRef<"TimelineEntry", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TimelineEntry findUnique
+   */
+  export type TimelineEntryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimelineEntry
+     */
+    select?: TimelineEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimelineEntry
+     */
+    omit?: TimelineEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimelineEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which TimelineEntry to fetch.
+     */
+    where: TimelineEntryWhereUniqueInput
+  }
+
+  /**
+   * TimelineEntry findUniqueOrThrow
+   */
+  export type TimelineEntryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimelineEntry
+     */
+    select?: TimelineEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimelineEntry
+     */
+    omit?: TimelineEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimelineEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which TimelineEntry to fetch.
+     */
+    where: TimelineEntryWhereUniqueInput
+  }
+
+  /**
+   * TimelineEntry findFirst
+   */
+  export type TimelineEntryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimelineEntry
+     */
+    select?: TimelineEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimelineEntry
+     */
+    omit?: TimelineEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimelineEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which TimelineEntry to fetch.
+     */
+    where?: TimelineEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TimelineEntries to fetch.
+     */
+    orderBy?: TimelineEntryOrderByWithRelationInput | TimelineEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TimelineEntries.
+     */
+    cursor?: TimelineEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TimelineEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TimelineEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TimelineEntries.
+     */
+    distinct?: TimelineEntryScalarFieldEnum | TimelineEntryScalarFieldEnum[]
+  }
+
+  /**
+   * TimelineEntry findFirstOrThrow
+   */
+  export type TimelineEntryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimelineEntry
+     */
+    select?: TimelineEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimelineEntry
+     */
+    omit?: TimelineEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimelineEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which TimelineEntry to fetch.
+     */
+    where?: TimelineEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TimelineEntries to fetch.
+     */
+    orderBy?: TimelineEntryOrderByWithRelationInput | TimelineEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TimelineEntries.
+     */
+    cursor?: TimelineEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TimelineEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TimelineEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TimelineEntries.
+     */
+    distinct?: TimelineEntryScalarFieldEnum | TimelineEntryScalarFieldEnum[]
+  }
+
+  /**
+   * TimelineEntry findMany
+   */
+  export type TimelineEntryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimelineEntry
+     */
+    select?: TimelineEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimelineEntry
+     */
+    omit?: TimelineEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimelineEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which TimelineEntries to fetch.
+     */
+    where?: TimelineEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TimelineEntries to fetch.
+     */
+    orderBy?: TimelineEntryOrderByWithRelationInput | TimelineEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TimelineEntries.
+     */
+    cursor?: TimelineEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TimelineEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TimelineEntries.
+     */
+    skip?: number
+    distinct?: TimelineEntryScalarFieldEnum | TimelineEntryScalarFieldEnum[]
+  }
+
+  /**
+   * TimelineEntry create
+   */
+  export type TimelineEntryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimelineEntry
+     */
+    select?: TimelineEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimelineEntry
+     */
+    omit?: TimelineEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimelineEntryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TimelineEntry.
+     */
+    data: XOR<TimelineEntryCreateInput, TimelineEntryUncheckedCreateInput>
+  }
+
+  /**
+   * TimelineEntry createMany
+   */
+  export type TimelineEntryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TimelineEntries.
+     */
+    data: TimelineEntryCreateManyInput | TimelineEntryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TimelineEntry createManyAndReturn
+   */
+  export type TimelineEntryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimelineEntry
+     */
+    select?: TimelineEntrySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimelineEntry
+     */
+    omit?: TimelineEntryOmit<ExtArgs> | null
+    /**
+     * The data used to create many TimelineEntries.
+     */
+    data: TimelineEntryCreateManyInput | TimelineEntryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimelineEntryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TimelineEntry update
+   */
+  export type TimelineEntryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimelineEntry
+     */
+    select?: TimelineEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimelineEntry
+     */
+    omit?: TimelineEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimelineEntryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TimelineEntry.
+     */
+    data: XOR<TimelineEntryUpdateInput, TimelineEntryUncheckedUpdateInput>
+    /**
+     * Choose, which TimelineEntry to update.
+     */
+    where: TimelineEntryWhereUniqueInput
+  }
+
+  /**
+   * TimelineEntry updateMany
+   */
+  export type TimelineEntryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TimelineEntries.
+     */
+    data: XOR<TimelineEntryUpdateManyMutationInput, TimelineEntryUncheckedUpdateManyInput>
+    /**
+     * Filter which TimelineEntries to update
+     */
+    where?: TimelineEntryWhereInput
+    /**
+     * Limit how many TimelineEntries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TimelineEntry updateManyAndReturn
+   */
+  export type TimelineEntryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimelineEntry
+     */
+    select?: TimelineEntrySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimelineEntry
+     */
+    omit?: TimelineEntryOmit<ExtArgs> | null
+    /**
+     * The data used to update TimelineEntries.
+     */
+    data: XOR<TimelineEntryUpdateManyMutationInput, TimelineEntryUncheckedUpdateManyInput>
+    /**
+     * Filter which TimelineEntries to update
+     */
+    where?: TimelineEntryWhereInput
+    /**
+     * Limit how many TimelineEntries to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimelineEntryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TimelineEntry upsert
+   */
+  export type TimelineEntryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimelineEntry
+     */
+    select?: TimelineEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimelineEntry
+     */
+    omit?: TimelineEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimelineEntryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TimelineEntry to update in case it exists.
+     */
+    where: TimelineEntryWhereUniqueInput
+    /**
+     * In case the TimelineEntry found by the `where` argument doesn't exist, create a new TimelineEntry with this data.
+     */
+    create: XOR<TimelineEntryCreateInput, TimelineEntryUncheckedCreateInput>
+    /**
+     * In case the TimelineEntry was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TimelineEntryUpdateInput, TimelineEntryUncheckedUpdateInput>
+  }
+
+  /**
+   * TimelineEntry delete
+   */
+  export type TimelineEntryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimelineEntry
+     */
+    select?: TimelineEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimelineEntry
+     */
+    omit?: TimelineEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimelineEntryInclude<ExtArgs> | null
+    /**
+     * Filter which TimelineEntry to delete.
+     */
+    where: TimelineEntryWhereUniqueInput
+  }
+
+  /**
+   * TimelineEntry deleteMany
+   */
+  export type TimelineEntryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TimelineEntries to delete
+     */
+    where?: TimelineEntryWhereInput
+    /**
+     * Limit how many TimelineEntries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TimelineEntry without action
+   */
+  export type TimelineEntryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimelineEntry
+     */
+    select?: TimelineEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimelineEntry
+     */
+    omit?: TimelineEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimelineEntryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Measure
+   */
+
+  export type AggregateMeasure = {
+    _count: MeasureCountAggregateOutputType | null
+    _min: MeasureMinAggregateOutputType | null
+    _max: MeasureMaxAggregateOutputType | null
+  }
+
+  export type MeasureMinAggregateOutputType = {
+    id: string | null
+    text: string | null
+    severity: $Enums.Severity | null
+    crisisId: string | null
+    etatId: string | null
+    createdById: string | null
+    createdAt: Date | null
+  }
+
+  export type MeasureMaxAggregateOutputType = {
+    id: string | null
+    text: string | null
+    severity: $Enums.Severity | null
+    crisisId: string | null
+    etatId: string | null
+    createdById: string | null
+    createdAt: Date | null
+  }
+
+  export type MeasureCountAggregateOutputType = {
+    id: number
+    text: number
+    severity: number
+    crisisId: number
+    etatId: number
+    createdById: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type MeasureMinAggregateInputType = {
+    id?: true
+    text?: true
+    severity?: true
+    crisisId?: true
+    etatId?: true
+    createdById?: true
+    createdAt?: true
+  }
+
+  export type MeasureMaxAggregateInputType = {
+    id?: true
+    text?: true
+    severity?: true
+    crisisId?: true
+    etatId?: true
+    createdById?: true
+    createdAt?: true
+  }
+
+  export type MeasureCountAggregateInputType = {
+    id?: true
+    text?: true
+    severity?: true
+    crisisId?: true
+    etatId?: true
+    createdById?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type MeasureAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Measure to aggregate.
+     */
+    where?: MeasureWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Measures to fetch.
+     */
+    orderBy?: MeasureOrderByWithRelationInput | MeasureOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MeasureWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Measures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Measures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Measures
+    **/
+    _count?: true | MeasureCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MeasureMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MeasureMaxAggregateInputType
+  }
+
+  export type GetMeasureAggregateType<T extends MeasureAggregateArgs> = {
+        [P in keyof T & keyof AggregateMeasure]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMeasure[P]>
+      : GetScalarType<T[P], AggregateMeasure[P]>
+  }
+
+
+
+
+  export type MeasureGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MeasureWhereInput
+    orderBy?: MeasureOrderByWithAggregationInput | MeasureOrderByWithAggregationInput[]
+    by: MeasureScalarFieldEnum[] | MeasureScalarFieldEnum
+    having?: MeasureScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MeasureCountAggregateInputType | true
+    _min?: MeasureMinAggregateInputType
+    _max?: MeasureMaxAggregateInputType
+  }
+
+  export type MeasureGroupByOutputType = {
+    id: string
+    text: string
+    severity: $Enums.Severity
+    crisisId: string
+    etatId: string
+    createdById: string
+    createdAt: Date
+    _count: MeasureCountAggregateOutputType | null
+    _min: MeasureMinAggregateOutputType | null
+    _max: MeasureMaxAggregateOutputType | null
+  }
+
+  type GetMeasureGroupByPayload<T extends MeasureGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MeasureGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MeasureGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MeasureGroupByOutputType[P]>
+            : GetScalarType<T[P], MeasureGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MeasureSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    text?: boolean
+    severity?: boolean
+    crisisId?: boolean
+    etatId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["measure"]>
+
+  export type MeasureSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    text?: boolean
+    severity?: boolean
+    crisisId?: boolean
+    etatId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["measure"]>
+
+  export type MeasureSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    text?: boolean
+    severity?: boolean
+    crisisId?: boolean
+    etatId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["measure"]>
+
+  export type MeasureSelectScalar = {
+    id?: boolean
+    text?: boolean
+    severity?: boolean
+    crisisId?: boolean
+    etatId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+  }
+
+  export type MeasureOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "text" | "severity" | "crisisId" | "etatId" | "createdById" | "createdAt", ExtArgs["result"]["measure"]>
+  export type MeasureInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MeasureIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MeasureIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $MeasurePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Measure"
+    objects: {
+      crisis: Prisma.$CrisisPayload<ExtArgs>
+      etat: Prisma.$EtatPayload<ExtArgs>
+      createdBy: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      text: string
+      severity: $Enums.Severity
+      crisisId: string
+      etatId: string
+      createdById: string
+      createdAt: Date
+    }, ExtArgs["result"]["measure"]>
+    composites: {}
+  }
+
+  type MeasureGetPayload<S extends boolean | null | undefined | MeasureDefaultArgs> = $Result.GetResult<Prisma.$MeasurePayload, S>
+
+  type MeasureCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MeasureFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MeasureCountAggregateInputType | true
+    }
+
+  export interface MeasureDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Measure'], meta: { name: 'Measure' } }
+    /**
+     * Find zero or one Measure that matches the filter.
+     * @param {MeasureFindUniqueArgs} args - Arguments to find a Measure
+     * @example
+     * // Get one Measure
+     * const measure = await prisma.measure.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MeasureFindUniqueArgs>(args: SelectSubset<T, MeasureFindUniqueArgs<ExtArgs>>): Prisma__MeasureClient<$Result.GetResult<Prisma.$MeasurePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Measure that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MeasureFindUniqueOrThrowArgs} args - Arguments to find a Measure
+     * @example
+     * // Get one Measure
+     * const measure = await prisma.measure.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MeasureFindUniqueOrThrowArgs>(args: SelectSubset<T, MeasureFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MeasureClient<$Result.GetResult<Prisma.$MeasurePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Measure that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeasureFindFirstArgs} args - Arguments to find a Measure
+     * @example
+     * // Get one Measure
+     * const measure = await prisma.measure.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MeasureFindFirstArgs>(args?: SelectSubset<T, MeasureFindFirstArgs<ExtArgs>>): Prisma__MeasureClient<$Result.GetResult<Prisma.$MeasurePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Measure that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeasureFindFirstOrThrowArgs} args - Arguments to find a Measure
+     * @example
+     * // Get one Measure
+     * const measure = await prisma.measure.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MeasureFindFirstOrThrowArgs>(args?: SelectSubset<T, MeasureFindFirstOrThrowArgs<ExtArgs>>): Prisma__MeasureClient<$Result.GetResult<Prisma.$MeasurePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Measures that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeasureFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Measures
+     * const measures = await prisma.measure.findMany()
+     * 
+     * // Get first 10 Measures
+     * const measures = await prisma.measure.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const measureWithIdOnly = await prisma.measure.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MeasureFindManyArgs>(args?: SelectSubset<T, MeasureFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MeasurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Measure.
+     * @param {MeasureCreateArgs} args - Arguments to create a Measure.
+     * @example
+     * // Create one Measure
+     * const Measure = await prisma.measure.create({
+     *   data: {
+     *     // ... data to create a Measure
+     *   }
+     * })
+     * 
+     */
+    create<T extends MeasureCreateArgs>(args: SelectSubset<T, MeasureCreateArgs<ExtArgs>>): Prisma__MeasureClient<$Result.GetResult<Prisma.$MeasurePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Measures.
+     * @param {MeasureCreateManyArgs} args - Arguments to create many Measures.
+     * @example
+     * // Create many Measures
+     * const measure = await prisma.measure.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MeasureCreateManyArgs>(args?: SelectSubset<T, MeasureCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Measures and returns the data saved in the database.
+     * @param {MeasureCreateManyAndReturnArgs} args - Arguments to create many Measures.
+     * @example
+     * // Create many Measures
+     * const measure = await prisma.measure.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Measures and only return the `id`
+     * const measureWithIdOnly = await prisma.measure.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MeasureCreateManyAndReturnArgs>(args?: SelectSubset<T, MeasureCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MeasurePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Measure.
+     * @param {MeasureDeleteArgs} args - Arguments to delete one Measure.
+     * @example
+     * // Delete one Measure
+     * const Measure = await prisma.measure.delete({
+     *   where: {
+     *     // ... filter to delete one Measure
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MeasureDeleteArgs>(args: SelectSubset<T, MeasureDeleteArgs<ExtArgs>>): Prisma__MeasureClient<$Result.GetResult<Prisma.$MeasurePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Measure.
+     * @param {MeasureUpdateArgs} args - Arguments to update one Measure.
+     * @example
+     * // Update one Measure
+     * const measure = await prisma.measure.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MeasureUpdateArgs>(args: SelectSubset<T, MeasureUpdateArgs<ExtArgs>>): Prisma__MeasureClient<$Result.GetResult<Prisma.$MeasurePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Measures.
+     * @param {MeasureDeleteManyArgs} args - Arguments to filter Measures to delete.
+     * @example
+     * // Delete a few Measures
+     * const { count } = await prisma.measure.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MeasureDeleteManyArgs>(args?: SelectSubset<T, MeasureDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Measures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeasureUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Measures
+     * const measure = await prisma.measure.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MeasureUpdateManyArgs>(args: SelectSubset<T, MeasureUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Measures and returns the data updated in the database.
+     * @param {MeasureUpdateManyAndReturnArgs} args - Arguments to update many Measures.
+     * @example
+     * // Update many Measures
+     * const measure = await prisma.measure.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Measures and only return the `id`
+     * const measureWithIdOnly = await prisma.measure.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MeasureUpdateManyAndReturnArgs>(args: SelectSubset<T, MeasureUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MeasurePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Measure.
+     * @param {MeasureUpsertArgs} args - Arguments to update or create a Measure.
+     * @example
+     * // Update or create a Measure
+     * const measure = await prisma.measure.upsert({
+     *   create: {
+     *     // ... data to create a Measure
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Measure we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MeasureUpsertArgs>(args: SelectSubset<T, MeasureUpsertArgs<ExtArgs>>): Prisma__MeasureClient<$Result.GetResult<Prisma.$MeasurePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Measures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeasureCountArgs} args - Arguments to filter Measures to count.
+     * @example
+     * // Count the number of Measures
+     * const count = await prisma.measure.count({
+     *   where: {
+     *     // ... the filter for the Measures we want to count
+     *   }
+     * })
+    **/
+    count<T extends MeasureCountArgs>(
+      args?: Subset<T, MeasureCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MeasureCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Measure.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeasureAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MeasureAggregateArgs>(args: Subset<T, MeasureAggregateArgs>): Prisma.PrismaPromise<GetMeasureAggregateType<T>>
+
+    /**
+     * Group by Measure.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeasureGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MeasureGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MeasureGroupByArgs['orderBy'] }
+        : { orderBy?: MeasureGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MeasureGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMeasureGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Measure model
+   */
+  readonly fields: MeasureFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Measure.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MeasureClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    crisis<T extends CrisisDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CrisisDefaultArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    etat<T extends EtatDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EtatDefaultArgs<ExtArgs>>): Prisma__EtatClient<$Result.GetResult<Prisma.$EtatPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Measure model
+   */
+  interface MeasureFieldRefs {
+    readonly id: FieldRef<"Measure", 'String'>
+    readonly text: FieldRef<"Measure", 'String'>
+    readonly severity: FieldRef<"Measure", 'Severity'>
+    readonly crisisId: FieldRef<"Measure", 'String'>
+    readonly etatId: FieldRef<"Measure", 'String'>
+    readonly createdById: FieldRef<"Measure", 'String'>
+    readonly createdAt: FieldRef<"Measure", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Measure findUnique
+   */
+  export type MeasureFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Measure
+     */
+    select?: MeasureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Measure
+     */
+    omit?: MeasureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeasureInclude<ExtArgs> | null
+    /**
+     * Filter, which Measure to fetch.
+     */
+    where: MeasureWhereUniqueInput
+  }
+
+  /**
+   * Measure findUniqueOrThrow
+   */
+  export type MeasureFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Measure
+     */
+    select?: MeasureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Measure
+     */
+    omit?: MeasureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeasureInclude<ExtArgs> | null
+    /**
+     * Filter, which Measure to fetch.
+     */
+    where: MeasureWhereUniqueInput
+  }
+
+  /**
+   * Measure findFirst
+   */
+  export type MeasureFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Measure
+     */
+    select?: MeasureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Measure
+     */
+    omit?: MeasureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeasureInclude<ExtArgs> | null
+    /**
+     * Filter, which Measure to fetch.
+     */
+    where?: MeasureWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Measures to fetch.
+     */
+    orderBy?: MeasureOrderByWithRelationInput | MeasureOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Measures.
+     */
+    cursor?: MeasureWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Measures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Measures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Measures.
+     */
+    distinct?: MeasureScalarFieldEnum | MeasureScalarFieldEnum[]
+  }
+
+  /**
+   * Measure findFirstOrThrow
+   */
+  export type MeasureFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Measure
+     */
+    select?: MeasureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Measure
+     */
+    omit?: MeasureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeasureInclude<ExtArgs> | null
+    /**
+     * Filter, which Measure to fetch.
+     */
+    where?: MeasureWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Measures to fetch.
+     */
+    orderBy?: MeasureOrderByWithRelationInput | MeasureOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Measures.
+     */
+    cursor?: MeasureWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Measures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Measures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Measures.
+     */
+    distinct?: MeasureScalarFieldEnum | MeasureScalarFieldEnum[]
+  }
+
+  /**
+   * Measure findMany
+   */
+  export type MeasureFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Measure
+     */
+    select?: MeasureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Measure
+     */
+    omit?: MeasureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeasureInclude<ExtArgs> | null
+    /**
+     * Filter, which Measures to fetch.
+     */
+    where?: MeasureWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Measures to fetch.
+     */
+    orderBy?: MeasureOrderByWithRelationInput | MeasureOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Measures.
+     */
+    cursor?: MeasureWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Measures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Measures.
+     */
+    skip?: number
+    distinct?: MeasureScalarFieldEnum | MeasureScalarFieldEnum[]
+  }
+
+  /**
+   * Measure create
+   */
+  export type MeasureCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Measure
+     */
+    select?: MeasureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Measure
+     */
+    omit?: MeasureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeasureInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Measure.
+     */
+    data: XOR<MeasureCreateInput, MeasureUncheckedCreateInput>
+  }
+
+  /**
+   * Measure createMany
+   */
+  export type MeasureCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Measures.
+     */
+    data: MeasureCreateManyInput | MeasureCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Measure createManyAndReturn
+   */
+  export type MeasureCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Measure
+     */
+    select?: MeasureSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Measure
+     */
+    omit?: MeasureOmit<ExtArgs> | null
+    /**
+     * The data used to create many Measures.
+     */
+    data: MeasureCreateManyInput | MeasureCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeasureIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Measure update
+   */
+  export type MeasureUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Measure
+     */
+    select?: MeasureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Measure
+     */
+    omit?: MeasureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeasureInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Measure.
+     */
+    data: XOR<MeasureUpdateInput, MeasureUncheckedUpdateInput>
+    /**
+     * Choose, which Measure to update.
+     */
+    where: MeasureWhereUniqueInput
+  }
+
+  /**
+   * Measure updateMany
+   */
+  export type MeasureUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Measures.
+     */
+    data: XOR<MeasureUpdateManyMutationInput, MeasureUncheckedUpdateManyInput>
+    /**
+     * Filter which Measures to update
+     */
+    where?: MeasureWhereInput
+    /**
+     * Limit how many Measures to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Measure updateManyAndReturn
+   */
+  export type MeasureUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Measure
+     */
+    select?: MeasureSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Measure
+     */
+    omit?: MeasureOmit<ExtArgs> | null
+    /**
+     * The data used to update Measures.
+     */
+    data: XOR<MeasureUpdateManyMutationInput, MeasureUncheckedUpdateManyInput>
+    /**
+     * Filter which Measures to update
+     */
+    where?: MeasureWhereInput
+    /**
+     * Limit how many Measures to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeasureIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Measure upsert
+   */
+  export type MeasureUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Measure
+     */
+    select?: MeasureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Measure
+     */
+    omit?: MeasureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeasureInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Measure to update in case it exists.
+     */
+    where: MeasureWhereUniqueInput
+    /**
+     * In case the Measure found by the `where` argument doesn't exist, create a new Measure with this data.
+     */
+    create: XOR<MeasureCreateInput, MeasureUncheckedCreateInput>
+    /**
+     * In case the Measure was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MeasureUpdateInput, MeasureUncheckedUpdateInput>
+  }
+
+  /**
+   * Measure delete
+   */
+  export type MeasureDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Measure
+     */
+    select?: MeasureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Measure
+     */
+    omit?: MeasureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeasureInclude<ExtArgs> | null
+    /**
+     * Filter which Measure to delete.
+     */
+    where: MeasureWhereUniqueInput
+  }
+
+  /**
+   * Measure deleteMany
+   */
+  export type MeasureDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Measures to delete
+     */
+    where?: MeasureWhereInput
+    /**
+     * Limit how many Measures to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Measure without action
+   */
+  export type MeasureDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Measure
+     */
+    select?: MeasureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Measure
+     */
+    omit?: MeasureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeasureInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MapMarker
+   */
+
+  export type AggregateMapMarker = {
+    _count: MapMarkerCountAggregateOutputType | null
+    _avg: MapMarkerAvgAggregateOutputType | null
+    _sum: MapMarkerSumAggregateOutputType | null
+    _min: MapMarkerMinAggregateOutputType | null
+    _max: MapMarkerMaxAggregateOutputType | null
+  }
+
+  export type MapMarkerAvgAggregateOutputType = {
+    lat: number | null
+    lng: number | null
+    radius: number | null
+  }
+
+  export type MapMarkerSumAggregateOutputType = {
+    lat: number | null
+    lng: number | null
+    radius: number | null
+  }
+
+  export type MapMarkerMinAggregateOutputType = {
+    id: string | null
+    type: $Enums.MarkerType | null
+    label: string | null
+    lat: number | null
+    lng: number | null
+    radius: number | null
+    crisisId: string | null
+    etatId: string | null
+    createdById: string | null
+    createdAt: Date | null
+  }
+
+  export type MapMarkerMaxAggregateOutputType = {
+    id: string | null
+    type: $Enums.MarkerType | null
+    label: string | null
+    lat: number | null
+    lng: number | null
+    radius: number | null
+    crisisId: string | null
+    etatId: string | null
+    createdById: string | null
+    createdAt: Date | null
+  }
+
+  export type MapMarkerCountAggregateOutputType = {
+    id: number
+    type: number
+    label: number
+    lat: number
+    lng: number
+    radius: number
+    crisisId: number
+    etatId: number
+    createdById: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type MapMarkerAvgAggregateInputType = {
+    lat?: true
+    lng?: true
+    radius?: true
+  }
+
+  export type MapMarkerSumAggregateInputType = {
+    lat?: true
+    lng?: true
+    radius?: true
+  }
+
+  export type MapMarkerMinAggregateInputType = {
+    id?: true
+    type?: true
+    label?: true
+    lat?: true
+    lng?: true
+    radius?: true
+    crisisId?: true
+    etatId?: true
+    createdById?: true
+    createdAt?: true
+  }
+
+  export type MapMarkerMaxAggregateInputType = {
+    id?: true
+    type?: true
+    label?: true
+    lat?: true
+    lng?: true
+    radius?: true
+    crisisId?: true
+    etatId?: true
+    createdById?: true
+    createdAt?: true
+  }
+
+  export type MapMarkerCountAggregateInputType = {
+    id?: true
+    type?: true
+    label?: true
+    lat?: true
+    lng?: true
+    radius?: true
+    crisisId?: true
+    etatId?: true
+    createdById?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type MapMarkerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MapMarker to aggregate.
+     */
+    where?: MapMarkerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MapMarkers to fetch.
+     */
+    orderBy?: MapMarkerOrderByWithRelationInput | MapMarkerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MapMarkerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MapMarkers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MapMarkers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MapMarkers
+    **/
+    _count?: true | MapMarkerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MapMarkerAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MapMarkerSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MapMarkerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MapMarkerMaxAggregateInputType
+  }
+
+  export type GetMapMarkerAggregateType<T extends MapMarkerAggregateArgs> = {
+        [P in keyof T & keyof AggregateMapMarker]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMapMarker[P]>
+      : GetScalarType<T[P], AggregateMapMarker[P]>
+  }
+
+
+
+
+  export type MapMarkerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MapMarkerWhereInput
+    orderBy?: MapMarkerOrderByWithAggregationInput | MapMarkerOrderByWithAggregationInput[]
+    by: MapMarkerScalarFieldEnum[] | MapMarkerScalarFieldEnum
+    having?: MapMarkerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MapMarkerCountAggregateInputType | true
+    _avg?: MapMarkerAvgAggregateInputType
+    _sum?: MapMarkerSumAggregateInputType
+    _min?: MapMarkerMinAggregateInputType
+    _max?: MapMarkerMaxAggregateInputType
+  }
+
+  export type MapMarkerGroupByOutputType = {
+    id: string
+    type: $Enums.MarkerType
+    label: string
+    lat: number
+    lng: number
+    radius: number | null
+    crisisId: string
+    etatId: string
+    createdById: string
+    createdAt: Date
+    _count: MapMarkerCountAggregateOutputType | null
+    _avg: MapMarkerAvgAggregateOutputType | null
+    _sum: MapMarkerSumAggregateOutputType | null
+    _min: MapMarkerMinAggregateOutputType | null
+    _max: MapMarkerMaxAggregateOutputType | null
+  }
+
+  type GetMapMarkerGroupByPayload<T extends MapMarkerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MapMarkerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MapMarkerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MapMarkerGroupByOutputType[P]>
+            : GetScalarType<T[P], MapMarkerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MapMarkerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    label?: boolean
+    lat?: boolean
+    lng?: boolean
+    radius?: boolean
+    crisisId?: boolean
+    etatId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mapMarker"]>
+
+  export type MapMarkerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    label?: boolean
+    lat?: boolean
+    lng?: boolean
+    radius?: boolean
+    crisisId?: boolean
+    etatId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mapMarker"]>
+
+  export type MapMarkerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    label?: boolean
+    lat?: boolean
+    lng?: boolean
+    radius?: boolean
+    crisisId?: boolean
+    etatId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mapMarker"]>
+
+  export type MapMarkerSelectScalar = {
+    id?: boolean
+    type?: boolean
+    label?: boolean
+    lat?: boolean
+    lng?: boolean
+    radius?: boolean
+    crisisId?: boolean
+    etatId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+  }
+
+  export type MapMarkerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "label" | "lat" | "lng" | "radius" | "crisisId" | "etatId" | "createdById" | "createdAt", ExtArgs["result"]["mapMarker"]>
+  export type MapMarkerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MapMarkerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MapMarkerIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    crisis?: boolean | CrisisDefaultArgs<ExtArgs>
+    etat?: boolean | EtatDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $MapMarkerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MapMarker"
+    objects: {
+      crisis: Prisma.$CrisisPayload<ExtArgs>
+      etat: Prisma.$EtatPayload<ExtArgs>
+      createdBy: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      type: $Enums.MarkerType
+      label: string
+      lat: number
+      lng: number
+      radius: number | null
+      crisisId: string
+      etatId: string
+      createdById: string
+      createdAt: Date
+    }, ExtArgs["result"]["mapMarker"]>
+    composites: {}
+  }
+
+  type MapMarkerGetPayload<S extends boolean | null | undefined | MapMarkerDefaultArgs> = $Result.GetResult<Prisma.$MapMarkerPayload, S>
+
+  type MapMarkerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MapMarkerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MapMarkerCountAggregateInputType | true
+    }
+
+  export interface MapMarkerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MapMarker'], meta: { name: 'MapMarker' } }
+    /**
+     * Find zero or one MapMarker that matches the filter.
+     * @param {MapMarkerFindUniqueArgs} args - Arguments to find a MapMarker
+     * @example
+     * // Get one MapMarker
+     * const mapMarker = await prisma.mapMarker.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MapMarkerFindUniqueArgs>(args: SelectSubset<T, MapMarkerFindUniqueArgs<ExtArgs>>): Prisma__MapMarkerClient<$Result.GetResult<Prisma.$MapMarkerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MapMarker that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MapMarkerFindUniqueOrThrowArgs} args - Arguments to find a MapMarker
+     * @example
+     * // Get one MapMarker
+     * const mapMarker = await prisma.mapMarker.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MapMarkerFindUniqueOrThrowArgs>(args: SelectSubset<T, MapMarkerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MapMarkerClient<$Result.GetResult<Prisma.$MapMarkerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MapMarker that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MapMarkerFindFirstArgs} args - Arguments to find a MapMarker
+     * @example
+     * // Get one MapMarker
+     * const mapMarker = await prisma.mapMarker.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MapMarkerFindFirstArgs>(args?: SelectSubset<T, MapMarkerFindFirstArgs<ExtArgs>>): Prisma__MapMarkerClient<$Result.GetResult<Prisma.$MapMarkerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MapMarker that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MapMarkerFindFirstOrThrowArgs} args - Arguments to find a MapMarker
+     * @example
+     * // Get one MapMarker
+     * const mapMarker = await prisma.mapMarker.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MapMarkerFindFirstOrThrowArgs>(args?: SelectSubset<T, MapMarkerFindFirstOrThrowArgs<ExtArgs>>): Prisma__MapMarkerClient<$Result.GetResult<Prisma.$MapMarkerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MapMarkers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MapMarkerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MapMarkers
+     * const mapMarkers = await prisma.mapMarker.findMany()
+     * 
+     * // Get first 10 MapMarkers
+     * const mapMarkers = await prisma.mapMarker.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mapMarkerWithIdOnly = await prisma.mapMarker.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MapMarkerFindManyArgs>(args?: SelectSubset<T, MapMarkerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MapMarkerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MapMarker.
+     * @param {MapMarkerCreateArgs} args - Arguments to create a MapMarker.
+     * @example
+     * // Create one MapMarker
+     * const MapMarker = await prisma.mapMarker.create({
+     *   data: {
+     *     // ... data to create a MapMarker
+     *   }
+     * })
+     * 
+     */
+    create<T extends MapMarkerCreateArgs>(args: SelectSubset<T, MapMarkerCreateArgs<ExtArgs>>): Prisma__MapMarkerClient<$Result.GetResult<Prisma.$MapMarkerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MapMarkers.
+     * @param {MapMarkerCreateManyArgs} args - Arguments to create many MapMarkers.
+     * @example
+     * // Create many MapMarkers
+     * const mapMarker = await prisma.mapMarker.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MapMarkerCreateManyArgs>(args?: SelectSubset<T, MapMarkerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MapMarkers and returns the data saved in the database.
+     * @param {MapMarkerCreateManyAndReturnArgs} args - Arguments to create many MapMarkers.
+     * @example
+     * // Create many MapMarkers
+     * const mapMarker = await prisma.mapMarker.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MapMarkers and only return the `id`
+     * const mapMarkerWithIdOnly = await prisma.mapMarker.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MapMarkerCreateManyAndReturnArgs>(args?: SelectSubset<T, MapMarkerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MapMarkerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MapMarker.
+     * @param {MapMarkerDeleteArgs} args - Arguments to delete one MapMarker.
+     * @example
+     * // Delete one MapMarker
+     * const MapMarker = await prisma.mapMarker.delete({
+     *   where: {
+     *     // ... filter to delete one MapMarker
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MapMarkerDeleteArgs>(args: SelectSubset<T, MapMarkerDeleteArgs<ExtArgs>>): Prisma__MapMarkerClient<$Result.GetResult<Prisma.$MapMarkerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MapMarker.
+     * @param {MapMarkerUpdateArgs} args - Arguments to update one MapMarker.
+     * @example
+     * // Update one MapMarker
+     * const mapMarker = await prisma.mapMarker.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MapMarkerUpdateArgs>(args: SelectSubset<T, MapMarkerUpdateArgs<ExtArgs>>): Prisma__MapMarkerClient<$Result.GetResult<Prisma.$MapMarkerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MapMarkers.
+     * @param {MapMarkerDeleteManyArgs} args - Arguments to filter MapMarkers to delete.
+     * @example
+     * // Delete a few MapMarkers
+     * const { count } = await prisma.mapMarker.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MapMarkerDeleteManyArgs>(args?: SelectSubset<T, MapMarkerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MapMarkers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MapMarkerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MapMarkers
+     * const mapMarker = await prisma.mapMarker.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MapMarkerUpdateManyArgs>(args: SelectSubset<T, MapMarkerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MapMarkers and returns the data updated in the database.
+     * @param {MapMarkerUpdateManyAndReturnArgs} args - Arguments to update many MapMarkers.
+     * @example
+     * // Update many MapMarkers
+     * const mapMarker = await prisma.mapMarker.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MapMarkers and only return the `id`
+     * const mapMarkerWithIdOnly = await prisma.mapMarker.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MapMarkerUpdateManyAndReturnArgs>(args: SelectSubset<T, MapMarkerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MapMarkerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MapMarker.
+     * @param {MapMarkerUpsertArgs} args - Arguments to update or create a MapMarker.
+     * @example
+     * // Update or create a MapMarker
+     * const mapMarker = await prisma.mapMarker.upsert({
+     *   create: {
+     *     // ... data to create a MapMarker
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MapMarker we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MapMarkerUpsertArgs>(args: SelectSubset<T, MapMarkerUpsertArgs<ExtArgs>>): Prisma__MapMarkerClient<$Result.GetResult<Prisma.$MapMarkerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MapMarkers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MapMarkerCountArgs} args - Arguments to filter MapMarkers to count.
+     * @example
+     * // Count the number of MapMarkers
+     * const count = await prisma.mapMarker.count({
+     *   where: {
+     *     // ... the filter for the MapMarkers we want to count
+     *   }
+     * })
+    **/
+    count<T extends MapMarkerCountArgs>(
+      args?: Subset<T, MapMarkerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MapMarkerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MapMarker.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MapMarkerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MapMarkerAggregateArgs>(args: Subset<T, MapMarkerAggregateArgs>): Prisma.PrismaPromise<GetMapMarkerAggregateType<T>>
+
+    /**
+     * Group by MapMarker.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MapMarkerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MapMarkerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MapMarkerGroupByArgs['orderBy'] }
+        : { orderBy?: MapMarkerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MapMarkerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMapMarkerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MapMarker model
+   */
+  readonly fields: MapMarkerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MapMarker.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MapMarkerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    crisis<T extends CrisisDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CrisisDefaultArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    etat<T extends EtatDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EtatDefaultArgs<ExtArgs>>): Prisma__EtatClient<$Result.GetResult<Prisma.$EtatPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MapMarker model
+   */
+  interface MapMarkerFieldRefs {
+    readonly id: FieldRef<"MapMarker", 'String'>
+    readonly type: FieldRef<"MapMarker", 'MarkerType'>
+    readonly label: FieldRef<"MapMarker", 'String'>
+    readonly lat: FieldRef<"MapMarker", 'Float'>
+    readonly lng: FieldRef<"MapMarker", 'Float'>
+    readonly radius: FieldRef<"MapMarker", 'Int'>
+    readonly crisisId: FieldRef<"MapMarker", 'String'>
+    readonly etatId: FieldRef<"MapMarker", 'String'>
+    readonly createdById: FieldRef<"MapMarker", 'String'>
+    readonly createdAt: FieldRef<"MapMarker", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MapMarker findUnique
+   */
+  export type MapMarkerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MapMarker
+     */
+    select?: MapMarkerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MapMarker
+     */
+    omit?: MapMarkerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MapMarkerInclude<ExtArgs> | null
+    /**
+     * Filter, which MapMarker to fetch.
+     */
+    where: MapMarkerWhereUniqueInput
+  }
+
+  /**
+   * MapMarker findUniqueOrThrow
+   */
+  export type MapMarkerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MapMarker
+     */
+    select?: MapMarkerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MapMarker
+     */
+    omit?: MapMarkerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MapMarkerInclude<ExtArgs> | null
+    /**
+     * Filter, which MapMarker to fetch.
+     */
+    where: MapMarkerWhereUniqueInput
+  }
+
+  /**
+   * MapMarker findFirst
+   */
+  export type MapMarkerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MapMarker
+     */
+    select?: MapMarkerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MapMarker
+     */
+    omit?: MapMarkerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MapMarkerInclude<ExtArgs> | null
+    /**
+     * Filter, which MapMarker to fetch.
+     */
+    where?: MapMarkerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MapMarkers to fetch.
+     */
+    orderBy?: MapMarkerOrderByWithRelationInput | MapMarkerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MapMarkers.
+     */
+    cursor?: MapMarkerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MapMarkers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MapMarkers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MapMarkers.
+     */
+    distinct?: MapMarkerScalarFieldEnum | MapMarkerScalarFieldEnum[]
+  }
+
+  /**
+   * MapMarker findFirstOrThrow
+   */
+  export type MapMarkerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MapMarker
+     */
+    select?: MapMarkerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MapMarker
+     */
+    omit?: MapMarkerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MapMarkerInclude<ExtArgs> | null
+    /**
+     * Filter, which MapMarker to fetch.
+     */
+    where?: MapMarkerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MapMarkers to fetch.
+     */
+    orderBy?: MapMarkerOrderByWithRelationInput | MapMarkerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MapMarkers.
+     */
+    cursor?: MapMarkerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MapMarkers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MapMarkers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MapMarkers.
+     */
+    distinct?: MapMarkerScalarFieldEnum | MapMarkerScalarFieldEnum[]
+  }
+
+  /**
+   * MapMarker findMany
+   */
+  export type MapMarkerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MapMarker
+     */
+    select?: MapMarkerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MapMarker
+     */
+    omit?: MapMarkerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MapMarkerInclude<ExtArgs> | null
+    /**
+     * Filter, which MapMarkers to fetch.
+     */
+    where?: MapMarkerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MapMarkers to fetch.
+     */
+    orderBy?: MapMarkerOrderByWithRelationInput | MapMarkerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MapMarkers.
+     */
+    cursor?: MapMarkerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MapMarkers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MapMarkers.
+     */
+    skip?: number
+    distinct?: MapMarkerScalarFieldEnum | MapMarkerScalarFieldEnum[]
+  }
+
+  /**
+   * MapMarker create
+   */
+  export type MapMarkerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MapMarker
+     */
+    select?: MapMarkerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MapMarker
+     */
+    omit?: MapMarkerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MapMarkerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MapMarker.
+     */
+    data: XOR<MapMarkerCreateInput, MapMarkerUncheckedCreateInput>
+  }
+
+  /**
+   * MapMarker createMany
+   */
+  export type MapMarkerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MapMarkers.
+     */
+    data: MapMarkerCreateManyInput | MapMarkerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MapMarker createManyAndReturn
+   */
+  export type MapMarkerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MapMarker
+     */
+    select?: MapMarkerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MapMarker
+     */
+    omit?: MapMarkerOmit<ExtArgs> | null
+    /**
+     * The data used to create many MapMarkers.
+     */
+    data: MapMarkerCreateManyInput | MapMarkerCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MapMarkerIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MapMarker update
+   */
+  export type MapMarkerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MapMarker
+     */
+    select?: MapMarkerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MapMarker
+     */
+    omit?: MapMarkerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MapMarkerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MapMarker.
+     */
+    data: XOR<MapMarkerUpdateInput, MapMarkerUncheckedUpdateInput>
+    /**
+     * Choose, which MapMarker to update.
+     */
+    where: MapMarkerWhereUniqueInput
+  }
+
+  /**
+   * MapMarker updateMany
+   */
+  export type MapMarkerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MapMarkers.
+     */
+    data: XOR<MapMarkerUpdateManyMutationInput, MapMarkerUncheckedUpdateManyInput>
+    /**
+     * Filter which MapMarkers to update
+     */
+    where?: MapMarkerWhereInput
+    /**
+     * Limit how many MapMarkers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MapMarker updateManyAndReturn
+   */
+  export type MapMarkerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MapMarker
+     */
+    select?: MapMarkerSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MapMarker
+     */
+    omit?: MapMarkerOmit<ExtArgs> | null
+    /**
+     * The data used to update MapMarkers.
+     */
+    data: XOR<MapMarkerUpdateManyMutationInput, MapMarkerUncheckedUpdateManyInput>
+    /**
+     * Filter which MapMarkers to update
+     */
+    where?: MapMarkerWhereInput
+    /**
+     * Limit how many MapMarkers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MapMarkerIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MapMarker upsert
+   */
+  export type MapMarkerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MapMarker
+     */
+    select?: MapMarkerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MapMarker
+     */
+    omit?: MapMarkerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MapMarkerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MapMarker to update in case it exists.
+     */
+    where: MapMarkerWhereUniqueInput
+    /**
+     * In case the MapMarker found by the `where` argument doesn't exist, create a new MapMarker with this data.
+     */
+    create: XOR<MapMarkerCreateInput, MapMarkerUncheckedCreateInput>
+    /**
+     * In case the MapMarker was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MapMarkerUpdateInput, MapMarkerUncheckedUpdateInput>
+  }
+
+  /**
+   * MapMarker delete
+   */
+  export type MapMarkerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MapMarker
+     */
+    select?: MapMarkerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MapMarker
+     */
+    omit?: MapMarkerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MapMarkerInclude<ExtArgs> | null
+    /**
+     * Filter which MapMarker to delete.
+     */
+    where: MapMarkerWhereUniqueInput
+  }
+
+  /**
+   * MapMarker deleteMany
+   */
+  export type MapMarkerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MapMarkers to delete
+     */
+    where?: MapMarkerWhereInput
+    /**
+     * Limit how many MapMarkers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MapMarker without action
+   */
+  export type MapMarkerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MapMarker
+     */
+    select?: MapMarkerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MapMarker
+     */
+    omit?: MapMarkerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MapMarkerInclude<ExtArgs> | null
   }
 
 
@@ -8084,6 +13437,63 @@ export namespace Prisma {
   export type EtatScalarFieldEnum = (typeof EtatScalarFieldEnum)[keyof typeof EtatScalarFieldEnum]
 
 
+  export const CrisisScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    what: 'what',
+    how: 'how',
+    when: 'when',
+    severity: 'severity',
+    createdById: 'createdById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CrisisScalarFieldEnum = (typeof CrisisScalarFieldEnum)[keyof typeof CrisisScalarFieldEnum]
+
+
+  export const TimelineEntryScalarFieldEnum: {
+    id: 'id',
+    text: 'text',
+    crisisId: 'crisisId',
+    etatId: 'etatId',
+    createdById: 'createdById',
+    createdAt: 'createdAt'
+  };
+
+  export type TimelineEntryScalarFieldEnum = (typeof TimelineEntryScalarFieldEnum)[keyof typeof TimelineEntryScalarFieldEnum]
+
+
+  export const MeasureScalarFieldEnum: {
+    id: 'id',
+    text: 'text',
+    severity: 'severity',
+    crisisId: 'crisisId',
+    etatId: 'etatId',
+    createdById: 'createdById',
+    createdAt: 'createdAt'
+  };
+
+  export type MeasureScalarFieldEnum = (typeof MeasureScalarFieldEnum)[keyof typeof MeasureScalarFieldEnum]
+
+
+  export const MapMarkerScalarFieldEnum: {
+    id: 'id',
+    type: 'type',
+    label: 'label',
+    lat: 'lat',
+    lng: 'lng',
+    radius: 'radius',
+    crisisId: 'crisisId',
+    etatId: 'etatId',
+    createdById: 'createdById',
+    createdAt: 'createdAt'
+  };
+
+  export type MapMarkerScalarFieldEnum = (typeof MapMarkerScalarFieldEnum)[keyof typeof MapMarkerScalarFieldEnum]
+
+
   export const SessionScalarFieldEnum: {
     id: 'id',
     expiresAt: 'expiresAt',
@@ -8194,6 +13604,48 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Severity'
+   */
+  export type EnumSeverityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Severity'>
+    
+
+
+  /**
+   * Reference to a field of type 'Severity[]'
+   */
+  export type ListEnumSeverityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Severity[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'MarkerType'
+   */
+  export type EnumMarkerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MarkerType'>
+    
+
+
+  /**
+   * Reference to a field of type 'MarkerType[]'
+   */
+  export type ListEnumMarkerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MarkerType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -8281,6 +13733,10 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
     posts?: PostListRelationFilter
+    crises?: CrisisListRelationFilter
+    timelineEntries?: TimelineEntryListRelationFilter
+    measures?: MeasureListRelationFilter
+    mapMarkers?: MapMarkerListRelationFilter
     etater?: EtatListRelationFilter
   }
 
@@ -8297,6 +13753,10 @@ export namespace Prisma {
     sessions?: SessionOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
     posts?: PostOrderByRelationAggregateInput
+    crises?: CrisisOrderByRelationAggregateInput
+    timelineEntries?: TimelineEntryOrderByRelationAggregateInput
+    measures?: MeasureOrderByRelationAggregateInput
+    mapMarkers?: MapMarkerOrderByRelationAggregateInput
     etater?: EtatOrderByRelationAggregateInput
   }
 
@@ -8316,6 +13776,10 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
     posts?: PostListRelationFilter
+    crises?: CrisisListRelationFilter
+    timelineEntries?: TimelineEntryListRelationFilter
+    measures?: MeasureListRelationFilter
+    mapMarkers?: MapMarkerListRelationFilter
     etater?: EtatListRelationFilter
   }, "id" | "email">
 
@@ -8361,6 +13825,10 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Etat"> | Date | string
     updatedAt?: DateTimeFilter<"Etat"> | Date | string
     users?: UserListRelationFilter
+    crises?: CrisisListRelationFilter
+    timelineEntries?: TimelineEntryListRelationFilter
+    measures?: MeasureListRelationFilter
+    mapMarkers?: MapMarkerListRelationFilter
   }
 
   export type EtatOrderByWithRelationInput = {
@@ -8372,6 +13840,10 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     users?: UserOrderByRelationAggregateInput
+    crises?: CrisisOrderByRelationAggregateInput
+    timelineEntries?: TimelineEntryOrderByRelationAggregateInput
+    measures?: MeasureOrderByRelationAggregateInput
+    mapMarkers?: MapMarkerOrderByRelationAggregateInput
   }
 
   export type EtatWhereUniqueInput = Prisma.AtLeast<{
@@ -8386,6 +13858,10 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Etat"> | Date | string
     updatedAt?: DateTimeFilter<"Etat"> | Date | string
     users?: UserListRelationFilter
+    crises?: CrisisListRelationFilter
+    timelineEntries?: TimelineEntryListRelationFilter
+    measures?: MeasureListRelationFilter
+    mapMarkers?: MapMarkerListRelationFilter
   }, "id">
 
   export type EtatOrderByWithAggregationInput = {
@@ -8412,6 +13888,323 @@ export namespace Prisma {
     themeColor?: StringWithAggregatesFilter<"Etat"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Etat"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Etat"> | Date | string
+  }
+
+  export type CrisisWhereInput = {
+    AND?: CrisisWhereInput | CrisisWhereInput[]
+    OR?: CrisisWhereInput[]
+    NOT?: CrisisWhereInput | CrisisWhereInput[]
+    id?: StringFilter<"Crisis"> | string
+    title?: StringFilter<"Crisis"> | string
+    description?: StringFilter<"Crisis"> | string
+    what?: StringFilter<"Crisis"> | string
+    how?: StringFilter<"Crisis"> | string
+    when?: DateTimeFilter<"Crisis"> | Date | string
+    severity?: EnumSeverityFilter<"Crisis"> | $Enums.Severity
+    createdById?: StringFilter<"Crisis"> | string
+    createdAt?: DateTimeFilter<"Crisis"> | Date | string
+    updatedAt?: DateTimeFilter<"Crisis"> | Date | string
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    allowedEtater?: EtatListRelationFilter
+    timelineEntries?: TimelineEntryListRelationFilter
+    measures?: MeasureListRelationFilter
+    mapMarkers?: MapMarkerListRelationFilter
+  }
+
+  export type CrisisOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    what?: SortOrder
+    how?: SortOrder
+    when?: SortOrder
+    severity?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdBy?: UserOrderByWithRelationInput
+    allowedEtater?: EtatOrderByRelationAggregateInput
+    timelineEntries?: TimelineEntryOrderByRelationAggregateInput
+    measures?: MeasureOrderByRelationAggregateInput
+    mapMarkers?: MapMarkerOrderByRelationAggregateInput
+  }
+
+  export type CrisisWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CrisisWhereInput | CrisisWhereInput[]
+    OR?: CrisisWhereInput[]
+    NOT?: CrisisWhereInput | CrisisWhereInput[]
+    title?: StringFilter<"Crisis"> | string
+    description?: StringFilter<"Crisis"> | string
+    what?: StringFilter<"Crisis"> | string
+    how?: StringFilter<"Crisis"> | string
+    when?: DateTimeFilter<"Crisis"> | Date | string
+    severity?: EnumSeverityFilter<"Crisis"> | $Enums.Severity
+    createdById?: StringFilter<"Crisis"> | string
+    createdAt?: DateTimeFilter<"Crisis"> | Date | string
+    updatedAt?: DateTimeFilter<"Crisis"> | Date | string
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    allowedEtater?: EtatListRelationFilter
+    timelineEntries?: TimelineEntryListRelationFilter
+    measures?: MeasureListRelationFilter
+    mapMarkers?: MapMarkerListRelationFilter
+  }, "id">
+
+  export type CrisisOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    what?: SortOrder
+    how?: SortOrder
+    when?: SortOrder
+    severity?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CrisisCountOrderByAggregateInput
+    _max?: CrisisMaxOrderByAggregateInput
+    _min?: CrisisMinOrderByAggregateInput
+  }
+
+  export type CrisisScalarWhereWithAggregatesInput = {
+    AND?: CrisisScalarWhereWithAggregatesInput | CrisisScalarWhereWithAggregatesInput[]
+    OR?: CrisisScalarWhereWithAggregatesInput[]
+    NOT?: CrisisScalarWhereWithAggregatesInput | CrisisScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Crisis"> | string
+    title?: StringWithAggregatesFilter<"Crisis"> | string
+    description?: StringWithAggregatesFilter<"Crisis"> | string
+    what?: StringWithAggregatesFilter<"Crisis"> | string
+    how?: StringWithAggregatesFilter<"Crisis"> | string
+    when?: DateTimeWithAggregatesFilter<"Crisis"> | Date | string
+    severity?: EnumSeverityWithAggregatesFilter<"Crisis"> | $Enums.Severity
+    createdById?: StringWithAggregatesFilter<"Crisis"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Crisis"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Crisis"> | Date | string
+  }
+
+  export type TimelineEntryWhereInput = {
+    AND?: TimelineEntryWhereInput | TimelineEntryWhereInput[]
+    OR?: TimelineEntryWhereInput[]
+    NOT?: TimelineEntryWhereInput | TimelineEntryWhereInput[]
+    id?: StringFilter<"TimelineEntry"> | string
+    text?: StringFilter<"TimelineEntry"> | string
+    crisisId?: StringFilter<"TimelineEntry"> | string
+    etatId?: StringFilter<"TimelineEntry"> | string
+    createdById?: StringFilter<"TimelineEntry"> | string
+    createdAt?: DateTimeFilter<"TimelineEntry"> | Date | string
+    crisis?: XOR<CrisisScalarRelationFilter, CrisisWhereInput>
+    etat?: XOR<EtatScalarRelationFilter, EtatWhereInput>
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type TimelineEntryOrderByWithRelationInput = {
+    id?: SortOrder
+    text?: SortOrder
+    crisisId?: SortOrder
+    etatId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    crisis?: CrisisOrderByWithRelationInput
+    etat?: EtatOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
+  }
+
+  export type TimelineEntryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: TimelineEntryWhereInput | TimelineEntryWhereInput[]
+    OR?: TimelineEntryWhereInput[]
+    NOT?: TimelineEntryWhereInput | TimelineEntryWhereInput[]
+    text?: StringFilter<"TimelineEntry"> | string
+    crisisId?: StringFilter<"TimelineEntry"> | string
+    etatId?: StringFilter<"TimelineEntry"> | string
+    createdById?: StringFilter<"TimelineEntry"> | string
+    createdAt?: DateTimeFilter<"TimelineEntry"> | Date | string
+    crisis?: XOR<CrisisScalarRelationFilter, CrisisWhereInput>
+    etat?: XOR<EtatScalarRelationFilter, EtatWhereInput>
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type TimelineEntryOrderByWithAggregationInput = {
+    id?: SortOrder
+    text?: SortOrder
+    crisisId?: SortOrder
+    etatId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    _count?: TimelineEntryCountOrderByAggregateInput
+    _max?: TimelineEntryMaxOrderByAggregateInput
+    _min?: TimelineEntryMinOrderByAggregateInput
+  }
+
+  export type TimelineEntryScalarWhereWithAggregatesInput = {
+    AND?: TimelineEntryScalarWhereWithAggregatesInput | TimelineEntryScalarWhereWithAggregatesInput[]
+    OR?: TimelineEntryScalarWhereWithAggregatesInput[]
+    NOT?: TimelineEntryScalarWhereWithAggregatesInput | TimelineEntryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TimelineEntry"> | string
+    text?: StringWithAggregatesFilter<"TimelineEntry"> | string
+    crisisId?: StringWithAggregatesFilter<"TimelineEntry"> | string
+    etatId?: StringWithAggregatesFilter<"TimelineEntry"> | string
+    createdById?: StringWithAggregatesFilter<"TimelineEntry"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"TimelineEntry"> | Date | string
+  }
+
+  export type MeasureWhereInput = {
+    AND?: MeasureWhereInput | MeasureWhereInput[]
+    OR?: MeasureWhereInput[]
+    NOT?: MeasureWhereInput | MeasureWhereInput[]
+    id?: StringFilter<"Measure"> | string
+    text?: StringFilter<"Measure"> | string
+    severity?: EnumSeverityFilter<"Measure"> | $Enums.Severity
+    crisisId?: StringFilter<"Measure"> | string
+    etatId?: StringFilter<"Measure"> | string
+    createdById?: StringFilter<"Measure"> | string
+    createdAt?: DateTimeFilter<"Measure"> | Date | string
+    crisis?: XOR<CrisisScalarRelationFilter, CrisisWhereInput>
+    etat?: XOR<EtatScalarRelationFilter, EtatWhereInput>
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type MeasureOrderByWithRelationInput = {
+    id?: SortOrder
+    text?: SortOrder
+    severity?: SortOrder
+    crisisId?: SortOrder
+    etatId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    crisis?: CrisisOrderByWithRelationInput
+    etat?: EtatOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
+  }
+
+  export type MeasureWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MeasureWhereInput | MeasureWhereInput[]
+    OR?: MeasureWhereInput[]
+    NOT?: MeasureWhereInput | MeasureWhereInput[]
+    text?: StringFilter<"Measure"> | string
+    severity?: EnumSeverityFilter<"Measure"> | $Enums.Severity
+    crisisId?: StringFilter<"Measure"> | string
+    etatId?: StringFilter<"Measure"> | string
+    createdById?: StringFilter<"Measure"> | string
+    createdAt?: DateTimeFilter<"Measure"> | Date | string
+    crisis?: XOR<CrisisScalarRelationFilter, CrisisWhereInput>
+    etat?: XOR<EtatScalarRelationFilter, EtatWhereInput>
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type MeasureOrderByWithAggregationInput = {
+    id?: SortOrder
+    text?: SortOrder
+    severity?: SortOrder
+    crisisId?: SortOrder
+    etatId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    _count?: MeasureCountOrderByAggregateInput
+    _max?: MeasureMaxOrderByAggregateInput
+    _min?: MeasureMinOrderByAggregateInput
+  }
+
+  export type MeasureScalarWhereWithAggregatesInput = {
+    AND?: MeasureScalarWhereWithAggregatesInput | MeasureScalarWhereWithAggregatesInput[]
+    OR?: MeasureScalarWhereWithAggregatesInput[]
+    NOT?: MeasureScalarWhereWithAggregatesInput | MeasureScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Measure"> | string
+    text?: StringWithAggregatesFilter<"Measure"> | string
+    severity?: EnumSeverityWithAggregatesFilter<"Measure"> | $Enums.Severity
+    crisisId?: StringWithAggregatesFilter<"Measure"> | string
+    etatId?: StringWithAggregatesFilter<"Measure"> | string
+    createdById?: StringWithAggregatesFilter<"Measure"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Measure"> | Date | string
+  }
+
+  export type MapMarkerWhereInput = {
+    AND?: MapMarkerWhereInput | MapMarkerWhereInput[]
+    OR?: MapMarkerWhereInput[]
+    NOT?: MapMarkerWhereInput | MapMarkerWhereInput[]
+    id?: StringFilter<"MapMarker"> | string
+    type?: EnumMarkerTypeFilter<"MapMarker"> | $Enums.MarkerType
+    label?: StringFilter<"MapMarker"> | string
+    lat?: FloatFilter<"MapMarker"> | number
+    lng?: FloatFilter<"MapMarker"> | number
+    radius?: IntNullableFilter<"MapMarker"> | number | null
+    crisisId?: StringFilter<"MapMarker"> | string
+    etatId?: StringFilter<"MapMarker"> | string
+    createdById?: StringFilter<"MapMarker"> | string
+    createdAt?: DateTimeFilter<"MapMarker"> | Date | string
+    crisis?: XOR<CrisisScalarRelationFilter, CrisisWhereInput>
+    etat?: XOR<EtatScalarRelationFilter, EtatWhereInput>
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type MapMarkerOrderByWithRelationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    label?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    radius?: SortOrderInput | SortOrder
+    crisisId?: SortOrder
+    etatId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    crisis?: CrisisOrderByWithRelationInput
+    etat?: EtatOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
+  }
+
+  export type MapMarkerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MapMarkerWhereInput | MapMarkerWhereInput[]
+    OR?: MapMarkerWhereInput[]
+    NOT?: MapMarkerWhereInput | MapMarkerWhereInput[]
+    type?: EnumMarkerTypeFilter<"MapMarker"> | $Enums.MarkerType
+    label?: StringFilter<"MapMarker"> | string
+    lat?: FloatFilter<"MapMarker"> | number
+    lng?: FloatFilter<"MapMarker"> | number
+    radius?: IntNullableFilter<"MapMarker"> | number | null
+    crisisId?: StringFilter<"MapMarker"> | string
+    etatId?: StringFilter<"MapMarker"> | string
+    createdById?: StringFilter<"MapMarker"> | string
+    createdAt?: DateTimeFilter<"MapMarker"> | Date | string
+    crisis?: XOR<CrisisScalarRelationFilter, CrisisWhereInput>
+    etat?: XOR<EtatScalarRelationFilter, EtatWhereInput>
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type MapMarkerOrderByWithAggregationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    label?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    radius?: SortOrderInput | SortOrder
+    crisisId?: SortOrder
+    etatId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    _count?: MapMarkerCountOrderByAggregateInput
+    _avg?: MapMarkerAvgOrderByAggregateInput
+    _max?: MapMarkerMaxOrderByAggregateInput
+    _min?: MapMarkerMinOrderByAggregateInput
+    _sum?: MapMarkerSumOrderByAggregateInput
+  }
+
+  export type MapMarkerScalarWhereWithAggregatesInput = {
+    AND?: MapMarkerScalarWhereWithAggregatesInput | MapMarkerScalarWhereWithAggregatesInput[]
+    OR?: MapMarkerScalarWhereWithAggregatesInput[]
+    NOT?: MapMarkerScalarWhereWithAggregatesInput | MapMarkerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MapMarker"> | string
+    type?: EnumMarkerTypeWithAggregatesFilter<"MapMarker"> | $Enums.MarkerType
+    label?: StringWithAggregatesFilter<"MapMarker"> | string
+    lat?: FloatWithAggregatesFilter<"MapMarker"> | number
+    lng?: FloatWithAggregatesFilter<"MapMarker"> | number
+    radius?: IntNullableWithAggregatesFilter<"MapMarker"> | number | null
+    crisisId?: StringWithAggregatesFilter<"MapMarker"> | string
+    etatId?: StringWithAggregatesFilter<"MapMarker"> | string
+    createdById?: StringWithAggregatesFilter<"MapMarker"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"MapMarker"> | Date | string
   }
 
   export type SessionWhereInput = {
@@ -8704,6 +14497,10 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisCreateNestedManyWithoutCreatedByInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutCreatedByInput
+    measures?: MeasureCreateNestedManyWithoutCreatedByInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutCreatedByInput
     etater?: EtatCreateNestedManyWithoutUsersInput
   }
 
@@ -8720,6 +14517,10 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutCreatedByInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutCreatedByInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutCreatedByInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutCreatedByInput
     etater?: EtatUncheckedCreateNestedManyWithoutUsersInput
   }
 
@@ -8736,6 +14537,10 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUpdateManyWithoutCreatedByNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutCreatedByNestedInput
+    measures?: MeasureUpdateManyWithoutCreatedByNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutCreatedByNestedInput
     etater?: EtatUpdateManyWithoutUsersNestedInput
   }
 
@@ -8752,6 +14557,10 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutCreatedByNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutCreatedByNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutCreatedByNestedInput
     etater?: EtatUncheckedUpdateManyWithoutUsersNestedInput
   }
 
@@ -8800,6 +14609,10 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutEtaterInput
+    crises?: CrisisCreateNestedManyWithoutAllowedEtaterInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutEtatInput
+    measures?: MeasureCreateNestedManyWithoutEtatInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutEtatInput
   }
 
   export type EtatUncheckedCreateInput = {
@@ -8811,6 +14624,10 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutEtaterInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutAllowedEtaterInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutEtatInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutEtatInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutEtatInput
   }
 
   export type EtatUpdateInput = {
@@ -8822,6 +14639,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutEtaterNestedInput
+    crises?: CrisisUpdateManyWithoutAllowedEtaterNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutEtatNestedInput
+    measures?: MeasureUpdateManyWithoutEtatNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutEtatNestedInput
   }
 
   export type EtatUncheckedUpdateInput = {
@@ -8833,6 +14654,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutEtaterNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutAllowedEtaterNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutEtatNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutEtatNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutEtatNestedInput
   }
 
   export type EtatCreateManyInput = {
@@ -8863,6 +14688,327 @@ export namespace Prisma {
     themeColor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CrisisCreateInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCrisesInput
+    allowedEtater?: EtatCreateNestedManyWithoutCrisesInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutCrisisInput
+    measures?: MeasureCreateNestedManyWithoutCrisisInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutCrisisInput
+  }
+
+  export type CrisisUncheckedCreateInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    allowedEtater?: EtatUncheckedCreateNestedManyWithoutCrisesInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutCrisisInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutCrisisInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutCrisisInput
+  }
+
+  export type CrisisUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCrisesNestedInput
+    allowedEtater?: EtatUpdateManyWithoutCrisesNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutCrisisNestedInput
+    measures?: MeasureUpdateManyWithoutCrisisNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutCrisisNestedInput
+  }
+
+  export type CrisisUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    allowedEtater?: EtatUncheckedUpdateManyWithoutCrisesNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutCrisisNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutCrisisNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutCrisisNestedInput
+  }
+
+  export type CrisisCreateManyInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CrisisUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CrisisUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimelineEntryCreateInput = {
+    id?: string
+    text: string
+    createdAt?: Date | string
+    crisis: CrisisCreateNestedOneWithoutTimelineEntriesInput
+    etat: EtatCreateNestedOneWithoutTimelineEntriesInput
+    createdBy: UserCreateNestedOneWithoutTimelineEntriesInput
+  }
+
+  export type TimelineEntryUncheckedCreateInput = {
+    id?: string
+    text: string
+    crisisId: string
+    etatId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type TimelineEntryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    crisis?: CrisisUpdateOneRequiredWithoutTimelineEntriesNestedInput
+    etat?: EtatUpdateOneRequiredWithoutTimelineEntriesNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutTimelineEntriesNestedInput
+  }
+
+  export type TimelineEntryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    crisisId?: StringFieldUpdateOperationsInput | string
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimelineEntryCreateManyInput = {
+    id?: string
+    text: string
+    crisisId: string
+    etatId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type TimelineEntryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimelineEntryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    crisisId?: StringFieldUpdateOperationsInput | string
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MeasureCreateInput = {
+    id?: string
+    text: string
+    severity: $Enums.Severity
+    createdAt?: Date | string
+    crisis: CrisisCreateNestedOneWithoutMeasuresInput
+    etat: EtatCreateNestedOneWithoutMeasuresInput
+    createdBy: UserCreateNestedOneWithoutMeasuresInput
+  }
+
+  export type MeasureUncheckedCreateInput = {
+    id?: string
+    text: string
+    severity: $Enums.Severity
+    crisisId: string
+    etatId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type MeasureUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    crisis?: CrisisUpdateOneRequiredWithoutMeasuresNestedInput
+    etat?: EtatUpdateOneRequiredWithoutMeasuresNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutMeasuresNestedInput
+  }
+
+  export type MeasureUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    crisisId?: StringFieldUpdateOperationsInput | string
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MeasureCreateManyInput = {
+    id?: string
+    text: string
+    severity: $Enums.Severity
+    crisisId: string
+    etatId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type MeasureUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MeasureUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    crisisId?: StringFieldUpdateOperationsInput | string
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MapMarkerCreateInput = {
+    id?: string
+    type: $Enums.MarkerType
+    label: string
+    lat: number
+    lng: number
+    radius?: number | null
+    createdAt?: Date | string
+    crisis: CrisisCreateNestedOneWithoutMapMarkersInput
+    etat: EtatCreateNestedOneWithoutMapMarkersInput
+    createdBy: UserCreateNestedOneWithoutMapMarkersInput
+  }
+
+  export type MapMarkerUncheckedCreateInput = {
+    id?: string
+    type: $Enums.MarkerType
+    label: string
+    lat: number
+    lng: number
+    radius?: number | null
+    crisisId: string
+    etatId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type MapMarkerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMarkerTypeFieldUpdateOperationsInput | $Enums.MarkerType
+    label?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    radius?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    crisis?: CrisisUpdateOneRequiredWithoutMapMarkersNestedInput
+    etat?: EtatUpdateOneRequiredWithoutMapMarkersNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutMapMarkersNestedInput
+  }
+
+  export type MapMarkerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMarkerTypeFieldUpdateOperationsInput | $Enums.MarkerType
+    label?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    radius?: NullableIntFieldUpdateOperationsInput | number | null
+    crisisId?: StringFieldUpdateOperationsInput | string
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MapMarkerCreateManyInput = {
+    id?: string
+    type: $Enums.MarkerType
+    label: string
+    lat: number
+    lng: number
+    radius?: number | null
+    crisisId: string
+    etatId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type MapMarkerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMarkerTypeFieldUpdateOperationsInput | $Enums.MarkerType
+    label?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    radius?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MapMarkerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMarkerTypeFieldUpdateOperationsInput | $Enums.MarkerType
+    label?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    radius?: NullableIntFieldUpdateOperationsInput | number | null
+    crisisId?: StringFieldUpdateOperationsInput | string
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SessionCreateInput = {
@@ -9240,6 +15386,30 @@ export namespace Prisma {
     none?: PostWhereInput
   }
 
+  export type CrisisListRelationFilter = {
+    every?: CrisisWhereInput
+    some?: CrisisWhereInput
+    none?: CrisisWhereInput
+  }
+
+  export type TimelineEntryListRelationFilter = {
+    every?: TimelineEntryWhereInput
+    some?: TimelineEntryWhereInput
+    none?: TimelineEntryWhereInput
+  }
+
+  export type MeasureListRelationFilter = {
+    every?: MeasureWhereInput
+    some?: MeasureWhereInput
+    none?: MeasureWhereInput
+  }
+
+  export type MapMarkerListRelationFilter = {
+    every?: MapMarkerWhereInput
+    some?: MapMarkerWhereInput
+    none?: MapMarkerWhereInput
+  }
+
   export type EtatListRelationFilter = {
     every?: EtatWhereInput
     some?: EtatWhereInput
@@ -9260,6 +15430,22 @@ export namespace Prisma {
   }
 
   export type PostOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CrisisOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TimelineEntryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MeasureOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MapMarkerOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9367,6 +15553,251 @@ export namespace Prisma {
     themeColor?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EnumSeverityFilter<$PrismaModel = never> = {
+    equals?: $Enums.Severity | EnumSeverityFieldRefInput<$PrismaModel>
+    in?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel>
+    not?: NestedEnumSeverityFilter<$PrismaModel> | $Enums.Severity
+  }
+
+  export type CrisisCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    what?: SortOrder
+    how?: SortOrder
+    when?: SortOrder
+    severity?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CrisisMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    what?: SortOrder
+    how?: SortOrder
+    when?: SortOrder
+    severity?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CrisisMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    what?: SortOrder
+    how?: SortOrder
+    when?: SortOrder
+    severity?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumSeverityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Severity | EnumSeverityFieldRefInput<$PrismaModel>
+    in?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel>
+    not?: NestedEnumSeverityWithAggregatesFilter<$PrismaModel> | $Enums.Severity
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSeverityFilter<$PrismaModel>
+    _max?: NestedEnumSeverityFilter<$PrismaModel>
+  }
+
+  export type CrisisScalarRelationFilter = {
+    is?: CrisisWhereInput
+    isNot?: CrisisWhereInput
+  }
+
+  export type EtatScalarRelationFilter = {
+    is?: EtatWhereInput
+    isNot?: EtatWhereInput
+  }
+
+  export type TimelineEntryCountOrderByAggregateInput = {
+    id?: SortOrder
+    text?: SortOrder
+    crisisId?: SortOrder
+    etatId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TimelineEntryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    text?: SortOrder
+    crisisId?: SortOrder
+    etatId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TimelineEntryMinOrderByAggregateInput = {
+    id?: SortOrder
+    text?: SortOrder
+    crisisId?: SortOrder
+    etatId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MeasureCountOrderByAggregateInput = {
+    id?: SortOrder
+    text?: SortOrder
+    severity?: SortOrder
+    crisisId?: SortOrder
+    etatId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MeasureMaxOrderByAggregateInput = {
+    id?: SortOrder
+    text?: SortOrder
+    severity?: SortOrder
+    crisisId?: SortOrder
+    etatId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MeasureMinOrderByAggregateInput = {
+    id?: SortOrder
+    text?: SortOrder
+    severity?: SortOrder
+    crisisId?: SortOrder
+    etatId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnumMarkerTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.MarkerType | EnumMarkerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MarkerType[] | ListEnumMarkerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MarkerType[] | ListEnumMarkerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMarkerTypeFilter<$PrismaModel> | $Enums.MarkerType
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type MapMarkerCountOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    label?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    radius?: SortOrder
+    crisisId?: SortOrder
+    etatId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MapMarkerAvgOrderByAggregateInput = {
+    lat?: SortOrder
+    lng?: SortOrder
+    radius?: SortOrder
+  }
+
+  export type MapMarkerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    label?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    radius?: SortOrder
+    crisisId?: SortOrder
+    etatId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MapMarkerMinOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    label?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    radius?: SortOrder
+    crisisId?: SortOrder
+    etatId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MapMarkerSumOrderByAggregateInput = {
+    lat?: SortOrder
+    lng?: SortOrder
+    radius?: SortOrder
+  }
+
+  export type EnumMarkerTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MarkerType | EnumMarkerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MarkerType[] | ListEnumMarkerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MarkerType[] | ListEnumMarkerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMarkerTypeWithAggregatesFilter<$PrismaModel> | $Enums.MarkerType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMarkerTypeFilter<$PrismaModel>
+    _max?: NestedEnumMarkerTypeFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type SessionCountOrderByAggregateInput = {
@@ -9545,6 +15976,34 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
+  export type CrisisCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<CrisisCreateWithoutCreatedByInput, CrisisUncheckedCreateWithoutCreatedByInput> | CrisisCreateWithoutCreatedByInput[] | CrisisUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: CrisisCreateOrConnectWithoutCreatedByInput | CrisisCreateOrConnectWithoutCreatedByInput[]
+    createMany?: CrisisCreateManyCreatedByInputEnvelope
+    connect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+  }
+
+  export type TimelineEntryCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<TimelineEntryCreateWithoutCreatedByInput, TimelineEntryUncheckedCreateWithoutCreatedByInput> | TimelineEntryCreateWithoutCreatedByInput[] | TimelineEntryUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TimelineEntryCreateOrConnectWithoutCreatedByInput | TimelineEntryCreateOrConnectWithoutCreatedByInput[]
+    createMany?: TimelineEntryCreateManyCreatedByInputEnvelope
+    connect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+  }
+
+  export type MeasureCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<MeasureCreateWithoutCreatedByInput, MeasureUncheckedCreateWithoutCreatedByInput> | MeasureCreateWithoutCreatedByInput[] | MeasureUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: MeasureCreateOrConnectWithoutCreatedByInput | MeasureCreateOrConnectWithoutCreatedByInput[]
+    createMany?: MeasureCreateManyCreatedByInputEnvelope
+    connect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+  }
+
+  export type MapMarkerCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<MapMarkerCreateWithoutCreatedByInput, MapMarkerUncheckedCreateWithoutCreatedByInput> | MapMarkerCreateWithoutCreatedByInput[] | MapMarkerUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: MapMarkerCreateOrConnectWithoutCreatedByInput | MapMarkerCreateOrConnectWithoutCreatedByInput[]
+    createMany?: MapMarkerCreateManyCreatedByInputEnvelope
+    connect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+  }
+
   export type EtatCreateNestedManyWithoutUsersInput = {
     create?: XOR<EtatCreateWithoutUsersInput, EtatUncheckedCreateWithoutUsersInput> | EtatCreateWithoutUsersInput[] | EtatUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: EtatCreateOrConnectWithoutUsersInput | EtatCreateOrConnectWithoutUsersInput[]
@@ -9570,6 +16029,34 @@ export namespace Prisma {
     connectOrCreate?: PostCreateOrConnectWithoutCreatedByInput | PostCreateOrConnectWithoutCreatedByInput[]
     createMany?: PostCreateManyCreatedByInputEnvelope
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type CrisisUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<CrisisCreateWithoutCreatedByInput, CrisisUncheckedCreateWithoutCreatedByInput> | CrisisCreateWithoutCreatedByInput[] | CrisisUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: CrisisCreateOrConnectWithoutCreatedByInput | CrisisCreateOrConnectWithoutCreatedByInput[]
+    createMany?: CrisisCreateManyCreatedByInputEnvelope
+    connect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+  }
+
+  export type TimelineEntryUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<TimelineEntryCreateWithoutCreatedByInput, TimelineEntryUncheckedCreateWithoutCreatedByInput> | TimelineEntryCreateWithoutCreatedByInput[] | TimelineEntryUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TimelineEntryCreateOrConnectWithoutCreatedByInput | TimelineEntryCreateOrConnectWithoutCreatedByInput[]
+    createMany?: TimelineEntryCreateManyCreatedByInputEnvelope
+    connect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+  }
+
+  export type MeasureUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<MeasureCreateWithoutCreatedByInput, MeasureUncheckedCreateWithoutCreatedByInput> | MeasureCreateWithoutCreatedByInput[] | MeasureUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: MeasureCreateOrConnectWithoutCreatedByInput | MeasureCreateOrConnectWithoutCreatedByInput[]
+    createMany?: MeasureCreateManyCreatedByInputEnvelope
+    connect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+  }
+
+  export type MapMarkerUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<MapMarkerCreateWithoutCreatedByInput, MapMarkerUncheckedCreateWithoutCreatedByInput> | MapMarkerCreateWithoutCreatedByInput[] | MapMarkerUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: MapMarkerCreateOrConnectWithoutCreatedByInput | MapMarkerCreateOrConnectWithoutCreatedByInput[]
+    createMany?: MapMarkerCreateManyCreatedByInputEnvelope
+    connect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
   }
 
   export type EtatUncheckedCreateNestedManyWithoutUsersInput = {
@@ -9628,6 +16115,62 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
+  export type CrisisUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<CrisisCreateWithoutCreatedByInput, CrisisUncheckedCreateWithoutCreatedByInput> | CrisisCreateWithoutCreatedByInput[] | CrisisUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: CrisisCreateOrConnectWithoutCreatedByInput | CrisisCreateOrConnectWithoutCreatedByInput[]
+    upsert?: CrisisUpsertWithWhereUniqueWithoutCreatedByInput | CrisisUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: CrisisCreateManyCreatedByInputEnvelope
+    set?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    disconnect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    delete?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    connect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    update?: CrisisUpdateWithWhereUniqueWithoutCreatedByInput | CrisisUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: CrisisUpdateManyWithWhereWithoutCreatedByInput | CrisisUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: CrisisScalarWhereInput | CrisisScalarWhereInput[]
+  }
+
+  export type TimelineEntryUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<TimelineEntryCreateWithoutCreatedByInput, TimelineEntryUncheckedCreateWithoutCreatedByInput> | TimelineEntryCreateWithoutCreatedByInput[] | TimelineEntryUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TimelineEntryCreateOrConnectWithoutCreatedByInput | TimelineEntryCreateOrConnectWithoutCreatedByInput[]
+    upsert?: TimelineEntryUpsertWithWhereUniqueWithoutCreatedByInput | TimelineEntryUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: TimelineEntryCreateManyCreatedByInputEnvelope
+    set?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    disconnect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    delete?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    connect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    update?: TimelineEntryUpdateWithWhereUniqueWithoutCreatedByInput | TimelineEntryUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: TimelineEntryUpdateManyWithWhereWithoutCreatedByInput | TimelineEntryUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: TimelineEntryScalarWhereInput | TimelineEntryScalarWhereInput[]
+  }
+
+  export type MeasureUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<MeasureCreateWithoutCreatedByInput, MeasureUncheckedCreateWithoutCreatedByInput> | MeasureCreateWithoutCreatedByInput[] | MeasureUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: MeasureCreateOrConnectWithoutCreatedByInput | MeasureCreateOrConnectWithoutCreatedByInput[]
+    upsert?: MeasureUpsertWithWhereUniqueWithoutCreatedByInput | MeasureUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: MeasureCreateManyCreatedByInputEnvelope
+    set?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    disconnect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    delete?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    connect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    update?: MeasureUpdateWithWhereUniqueWithoutCreatedByInput | MeasureUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: MeasureUpdateManyWithWhereWithoutCreatedByInput | MeasureUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: MeasureScalarWhereInput | MeasureScalarWhereInput[]
+  }
+
+  export type MapMarkerUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<MapMarkerCreateWithoutCreatedByInput, MapMarkerUncheckedCreateWithoutCreatedByInput> | MapMarkerCreateWithoutCreatedByInput[] | MapMarkerUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: MapMarkerCreateOrConnectWithoutCreatedByInput | MapMarkerCreateOrConnectWithoutCreatedByInput[]
+    upsert?: MapMarkerUpsertWithWhereUniqueWithoutCreatedByInput | MapMarkerUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: MapMarkerCreateManyCreatedByInputEnvelope
+    set?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    disconnect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    delete?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    connect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    update?: MapMarkerUpdateWithWhereUniqueWithoutCreatedByInput | MapMarkerUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: MapMarkerUpdateManyWithWhereWithoutCreatedByInput | MapMarkerUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: MapMarkerScalarWhereInput | MapMarkerScalarWhereInput[]
+  }
+
   export type EtatUpdateManyWithoutUsersNestedInput = {
     create?: XOR<EtatCreateWithoutUsersInput, EtatUncheckedCreateWithoutUsersInput> | EtatCreateWithoutUsersInput[] | EtatUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: EtatCreateOrConnectWithoutUsersInput | EtatCreateOrConnectWithoutUsersInput[]
@@ -9683,6 +16226,62 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
+  export type CrisisUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<CrisisCreateWithoutCreatedByInput, CrisisUncheckedCreateWithoutCreatedByInput> | CrisisCreateWithoutCreatedByInput[] | CrisisUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: CrisisCreateOrConnectWithoutCreatedByInput | CrisisCreateOrConnectWithoutCreatedByInput[]
+    upsert?: CrisisUpsertWithWhereUniqueWithoutCreatedByInput | CrisisUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: CrisisCreateManyCreatedByInputEnvelope
+    set?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    disconnect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    delete?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    connect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    update?: CrisisUpdateWithWhereUniqueWithoutCreatedByInput | CrisisUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: CrisisUpdateManyWithWhereWithoutCreatedByInput | CrisisUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: CrisisScalarWhereInput | CrisisScalarWhereInput[]
+  }
+
+  export type TimelineEntryUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<TimelineEntryCreateWithoutCreatedByInput, TimelineEntryUncheckedCreateWithoutCreatedByInput> | TimelineEntryCreateWithoutCreatedByInput[] | TimelineEntryUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TimelineEntryCreateOrConnectWithoutCreatedByInput | TimelineEntryCreateOrConnectWithoutCreatedByInput[]
+    upsert?: TimelineEntryUpsertWithWhereUniqueWithoutCreatedByInput | TimelineEntryUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: TimelineEntryCreateManyCreatedByInputEnvelope
+    set?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    disconnect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    delete?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    connect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    update?: TimelineEntryUpdateWithWhereUniqueWithoutCreatedByInput | TimelineEntryUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: TimelineEntryUpdateManyWithWhereWithoutCreatedByInput | TimelineEntryUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: TimelineEntryScalarWhereInput | TimelineEntryScalarWhereInput[]
+  }
+
+  export type MeasureUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<MeasureCreateWithoutCreatedByInput, MeasureUncheckedCreateWithoutCreatedByInput> | MeasureCreateWithoutCreatedByInput[] | MeasureUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: MeasureCreateOrConnectWithoutCreatedByInput | MeasureCreateOrConnectWithoutCreatedByInput[]
+    upsert?: MeasureUpsertWithWhereUniqueWithoutCreatedByInput | MeasureUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: MeasureCreateManyCreatedByInputEnvelope
+    set?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    disconnect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    delete?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    connect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    update?: MeasureUpdateWithWhereUniqueWithoutCreatedByInput | MeasureUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: MeasureUpdateManyWithWhereWithoutCreatedByInput | MeasureUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: MeasureScalarWhereInput | MeasureScalarWhereInput[]
+  }
+
+  export type MapMarkerUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<MapMarkerCreateWithoutCreatedByInput, MapMarkerUncheckedCreateWithoutCreatedByInput> | MapMarkerCreateWithoutCreatedByInput[] | MapMarkerUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: MapMarkerCreateOrConnectWithoutCreatedByInput | MapMarkerCreateOrConnectWithoutCreatedByInput[]
+    upsert?: MapMarkerUpsertWithWhereUniqueWithoutCreatedByInput | MapMarkerUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: MapMarkerCreateManyCreatedByInputEnvelope
+    set?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    disconnect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    delete?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    connect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    update?: MapMarkerUpdateWithWhereUniqueWithoutCreatedByInput | MapMarkerUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: MapMarkerUpdateManyWithWhereWithoutCreatedByInput | MapMarkerUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: MapMarkerScalarWhereInput | MapMarkerScalarWhereInput[]
+  }
+
   export type EtatUncheckedUpdateManyWithoutUsersNestedInput = {
     create?: XOR<EtatCreateWithoutUsersInput, EtatUncheckedCreateWithoutUsersInput> | EtatCreateWithoutUsersInput[] | EtatUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: EtatCreateOrConnectWithoutUsersInput | EtatCreateOrConnectWithoutUsersInput[]
@@ -9702,10 +16301,64 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
+  export type CrisisCreateNestedManyWithoutAllowedEtaterInput = {
+    create?: XOR<CrisisCreateWithoutAllowedEtaterInput, CrisisUncheckedCreateWithoutAllowedEtaterInput> | CrisisCreateWithoutAllowedEtaterInput[] | CrisisUncheckedCreateWithoutAllowedEtaterInput[]
+    connectOrCreate?: CrisisCreateOrConnectWithoutAllowedEtaterInput | CrisisCreateOrConnectWithoutAllowedEtaterInput[]
+    connect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+  }
+
+  export type TimelineEntryCreateNestedManyWithoutEtatInput = {
+    create?: XOR<TimelineEntryCreateWithoutEtatInput, TimelineEntryUncheckedCreateWithoutEtatInput> | TimelineEntryCreateWithoutEtatInput[] | TimelineEntryUncheckedCreateWithoutEtatInput[]
+    connectOrCreate?: TimelineEntryCreateOrConnectWithoutEtatInput | TimelineEntryCreateOrConnectWithoutEtatInput[]
+    createMany?: TimelineEntryCreateManyEtatInputEnvelope
+    connect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+  }
+
+  export type MeasureCreateNestedManyWithoutEtatInput = {
+    create?: XOR<MeasureCreateWithoutEtatInput, MeasureUncheckedCreateWithoutEtatInput> | MeasureCreateWithoutEtatInput[] | MeasureUncheckedCreateWithoutEtatInput[]
+    connectOrCreate?: MeasureCreateOrConnectWithoutEtatInput | MeasureCreateOrConnectWithoutEtatInput[]
+    createMany?: MeasureCreateManyEtatInputEnvelope
+    connect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+  }
+
+  export type MapMarkerCreateNestedManyWithoutEtatInput = {
+    create?: XOR<MapMarkerCreateWithoutEtatInput, MapMarkerUncheckedCreateWithoutEtatInput> | MapMarkerCreateWithoutEtatInput[] | MapMarkerUncheckedCreateWithoutEtatInput[]
+    connectOrCreate?: MapMarkerCreateOrConnectWithoutEtatInput | MapMarkerCreateOrConnectWithoutEtatInput[]
+    createMany?: MapMarkerCreateManyEtatInputEnvelope
+    connect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutEtaterInput = {
     create?: XOR<UserCreateWithoutEtaterInput, UserUncheckedCreateWithoutEtaterInput> | UserCreateWithoutEtaterInput[] | UserUncheckedCreateWithoutEtaterInput[]
     connectOrCreate?: UserCreateOrConnectWithoutEtaterInput | UserCreateOrConnectWithoutEtaterInput[]
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type CrisisUncheckedCreateNestedManyWithoutAllowedEtaterInput = {
+    create?: XOR<CrisisCreateWithoutAllowedEtaterInput, CrisisUncheckedCreateWithoutAllowedEtaterInput> | CrisisCreateWithoutAllowedEtaterInput[] | CrisisUncheckedCreateWithoutAllowedEtaterInput[]
+    connectOrCreate?: CrisisCreateOrConnectWithoutAllowedEtaterInput | CrisisCreateOrConnectWithoutAllowedEtaterInput[]
+    connect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+  }
+
+  export type TimelineEntryUncheckedCreateNestedManyWithoutEtatInput = {
+    create?: XOR<TimelineEntryCreateWithoutEtatInput, TimelineEntryUncheckedCreateWithoutEtatInput> | TimelineEntryCreateWithoutEtatInput[] | TimelineEntryUncheckedCreateWithoutEtatInput[]
+    connectOrCreate?: TimelineEntryCreateOrConnectWithoutEtatInput | TimelineEntryCreateOrConnectWithoutEtatInput[]
+    createMany?: TimelineEntryCreateManyEtatInputEnvelope
+    connect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+  }
+
+  export type MeasureUncheckedCreateNestedManyWithoutEtatInput = {
+    create?: XOR<MeasureCreateWithoutEtatInput, MeasureUncheckedCreateWithoutEtatInput> | MeasureCreateWithoutEtatInput[] | MeasureUncheckedCreateWithoutEtatInput[]
+    connectOrCreate?: MeasureCreateOrConnectWithoutEtatInput | MeasureCreateOrConnectWithoutEtatInput[]
+    createMany?: MeasureCreateManyEtatInputEnvelope
+    connect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+  }
+
+  export type MapMarkerUncheckedCreateNestedManyWithoutEtatInput = {
+    create?: XOR<MapMarkerCreateWithoutEtatInput, MapMarkerUncheckedCreateWithoutEtatInput> | MapMarkerCreateWithoutEtatInput[] | MapMarkerUncheckedCreateWithoutEtatInput[]
+    connectOrCreate?: MapMarkerCreateOrConnectWithoutEtatInput | MapMarkerCreateOrConnectWithoutEtatInput[]
+    createMany?: MapMarkerCreateManyEtatInputEnvelope
+    connect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
   }
 
   export type UserUpdateManyWithoutEtaterNestedInput = {
@@ -9721,6 +16374,61 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
+  export type CrisisUpdateManyWithoutAllowedEtaterNestedInput = {
+    create?: XOR<CrisisCreateWithoutAllowedEtaterInput, CrisisUncheckedCreateWithoutAllowedEtaterInput> | CrisisCreateWithoutAllowedEtaterInput[] | CrisisUncheckedCreateWithoutAllowedEtaterInput[]
+    connectOrCreate?: CrisisCreateOrConnectWithoutAllowedEtaterInput | CrisisCreateOrConnectWithoutAllowedEtaterInput[]
+    upsert?: CrisisUpsertWithWhereUniqueWithoutAllowedEtaterInput | CrisisUpsertWithWhereUniqueWithoutAllowedEtaterInput[]
+    set?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    disconnect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    delete?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    connect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    update?: CrisisUpdateWithWhereUniqueWithoutAllowedEtaterInput | CrisisUpdateWithWhereUniqueWithoutAllowedEtaterInput[]
+    updateMany?: CrisisUpdateManyWithWhereWithoutAllowedEtaterInput | CrisisUpdateManyWithWhereWithoutAllowedEtaterInput[]
+    deleteMany?: CrisisScalarWhereInput | CrisisScalarWhereInput[]
+  }
+
+  export type TimelineEntryUpdateManyWithoutEtatNestedInput = {
+    create?: XOR<TimelineEntryCreateWithoutEtatInput, TimelineEntryUncheckedCreateWithoutEtatInput> | TimelineEntryCreateWithoutEtatInput[] | TimelineEntryUncheckedCreateWithoutEtatInput[]
+    connectOrCreate?: TimelineEntryCreateOrConnectWithoutEtatInput | TimelineEntryCreateOrConnectWithoutEtatInput[]
+    upsert?: TimelineEntryUpsertWithWhereUniqueWithoutEtatInput | TimelineEntryUpsertWithWhereUniqueWithoutEtatInput[]
+    createMany?: TimelineEntryCreateManyEtatInputEnvelope
+    set?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    disconnect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    delete?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    connect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    update?: TimelineEntryUpdateWithWhereUniqueWithoutEtatInput | TimelineEntryUpdateWithWhereUniqueWithoutEtatInput[]
+    updateMany?: TimelineEntryUpdateManyWithWhereWithoutEtatInput | TimelineEntryUpdateManyWithWhereWithoutEtatInput[]
+    deleteMany?: TimelineEntryScalarWhereInput | TimelineEntryScalarWhereInput[]
+  }
+
+  export type MeasureUpdateManyWithoutEtatNestedInput = {
+    create?: XOR<MeasureCreateWithoutEtatInput, MeasureUncheckedCreateWithoutEtatInput> | MeasureCreateWithoutEtatInput[] | MeasureUncheckedCreateWithoutEtatInput[]
+    connectOrCreate?: MeasureCreateOrConnectWithoutEtatInput | MeasureCreateOrConnectWithoutEtatInput[]
+    upsert?: MeasureUpsertWithWhereUniqueWithoutEtatInput | MeasureUpsertWithWhereUniqueWithoutEtatInput[]
+    createMany?: MeasureCreateManyEtatInputEnvelope
+    set?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    disconnect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    delete?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    connect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    update?: MeasureUpdateWithWhereUniqueWithoutEtatInput | MeasureUpdateWithWhereUniqueWithoutEtatInput[]
+    updateMany?: MeasureUpdateManyWithWhereWithoutEtatInput | MeasureUpdateManyWithWhereWithoutEtatInput[]
+    deleteMany?: MeasureScalarWhereInput | MeasureScalarWhereInput[]
+  }
+
+  export type MapMarkerUpdateManyWithoutEtatNestedInput = {
+    create?: XOR<MapMarkerCreateWithoutEtatInput, MapMarkerUncheckedCreateWithoutEtatInput> | MapMarkerCreateWithoutEtatInput[] | MapMarkerUncheckedCreateWithoutEtatInput[]
+    connectOrCreate?: MapMarkerCreateOrConnectWithoutEtatInput | MapMarkerCreateOrConnectWithoutEtatInput[]
+    upsert?: MapMarkerUpsertWithWhereUniqueWithoutEtatInput | MapMarkerUpsertWithWhereUniqueWithoutEtatInput[]
+    createMany?: MapMarkerCreateManyEtatInputEnvelope
+    set?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    disconnect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    delete?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    connect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    update?: MapMarkerUpdateWithWhereUniqueWithoutEtatInput | MapMarkerUpdateWithWhereUniqueWithoutEtatInput[]
+    updateMany?: MapMarkerUpdateManyWithWhereWithoutEtatInput | MapMarkerUpdateManyWithWhereWithoutEtatInput[]
+    deleteMany?: MapMarkerScalarWhereInput | MapMarkerScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutEtaterNestedInput = {
     create?: XOR<UserCreateWithoutEtaterInput, UserUncheckedCreateWithoutEtaterInput> | UserCreateWithoutEtaterInput[] | UserUncheckedCreateWithoutEtaterInput[]
     connectOrCreate?: UserCreateOrConnectWithoutEtaterInput | UserCreateOrConnectWithoutEtaterInput[]
@@ -9732,6 +16440,389 @@ export namespace Prisma {
     update?: UserUpdateWithWhereUniqueWithoutEtaterInput | UserUpdateWithWhereUniqueWithoutEtaterInput[]
     updateMany?: UserUpdateManyWithWhereWithoutEtaterInput | UserUpdateManyWithWhereWithoutEtaterInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type CrisisUncheckedUpdateManyWithoutAllowedEtaterNestedInput = {
+    create?: XOR<CrisisCreateWithoutAllowedEtaterInput, CrisisUncheckedCreateWithoutAllowedEtaterInput> | CrisisCreateWithoutAllowedEtaterInput[] | CrisisUncheckedCreateWithoutAllowedEtaterInput[]
+    connectOrCreate?: CrisisCreateOrConnectWithoutAllowedEtaterInput | CrisisCreateOrConnectWithoutAllowedEtaterInput[]
+    upsert?: CrisisUpsertWithWhereUniqueWithoutAllowedEtaterInput | CrisisUpsertWithWhereUniqueWithoutAllowedEtaterInput[]
+    set?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    disconnect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    delete?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    connect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    update?: CrisisUpdateWithWhereUniqueWithoutAllowedEtaterInput | CrisisUpdateWithWhereUniqueWithoutAllowedEtaterInput[]
+    updateMany?: CrisisUpdateManyWithWhereWithoutAllowedEtaterInput | CrisisUpdateManyWithWhereWithoutAllowedEtaterInput[]
+    deleteMany?: CrisisScalarWhereInput | CrisisScalarWhereInput[]
+  }
+
+  export type TimelineEntryUncheckedUpdateManyWithoutEtatNestedInput = {
+    create?: XOR<TimelineEntryCreateWithoutEtatInput, TimelineEntryUncheckedCreateWithoutEtatInput> | TimelineEntryCreateWithoutEtatInput[] | TimelineEntryUncheckedCreateWithoutEtatInput[]
+    connectOrCreate?: TimelineEntryCreateOrConnectWithoutEtatInput | TimelineEntryCreateOrConnectWithoutEtatInput[]
+    upsert?: TimelineEntryUpsertWithWhereUniqueWithoutEtatInput | TimelineEntryUpsertWithWhereUniqueWithoutEtatInput[]
+    createMany?: TimelineEntryCreateManyEtatInputEnvelope
+    set?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    disconnect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    delete?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    connect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    update?: TimelineEntryUpdateWithWhereUniqueWithoutEtatInput | TimelineEntryUpdateWithWhereUniqueWithoutEtatInput[]
+    updateMany?: TimelineEntryUpdateManyWithWhereWithoutEtatInput | TimelineEntryUpdateManyWithWhereWithoutEtatInput[]
+    deleteMany?: TimelineEntryScalarWhereInput | TimelineEntryScalarWhereInput[]
+  }
+
+  export type MeasureUncheckedUpdateManyWithoutEtatNestedInput = {
+    create?: XOR<MeasureCreateWithoutEtatInput, MeasureUncheckedCreateWithoutEtatInput> | MeasureCreateWithoutEtatInput[] | MeasureUncheckedCreateWithoutEtatInput[]
+    connectOrCreate?: MeasureCreateOrConnectWithoutEtatInput | MeasureCreateOrConnectWithoutEtatInput[]
+    upsert?: MeasureUpsertWithWhereUniqueWithoutEtatInput | MeasureUpsertWithWhereUniqueWithoutEtatInput[]
+    createMany?: MeasureCreateManyEtatInputEnvelope
+    set?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    disconnect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    delete?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    connect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    update?: MeasureUpdateWithWhereUniqueWithoutEtatInput | MeasureUpdateWithWhereUniqueWithoutEtatInput[]
+    updateMany?: MeasureUpdateManyWithWhereWithoutEtatInput | MeasureUpdateManyWithWhereWithoutEtatInput[]
+    deleteMany?: MeasureScalarWhereInput | MeasureScalarWhereInput[]
+  }
+
+  export type MapMarkerUncheckedUpdateManyWithoutEtatNestedInput = {
+    create?: XOR<MapMarkerCreateWithoutEtatInput, MapMarkerUncheckedCreateWithoutEtatInput> | MapMarkerCreateWithoutEtatInput[] | MapMarkerUncheckedCreateWithoutEtatInput[]
+    connectOrCreate?: MapMarkerCreateOrConnectWithoutEtatInput | MapMarkerCreateOrConnectWithoutEtatInput[]
+    upsert?: MapMarkerUpsertWithWhereUniqueWithoutEtatInput | MapMarkerUpsertWithWhereUniqueWithoutEtatInput[]
+    createMany?: MapMarkerCreateManyEtatInputEnvelope
+    set?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    disconnect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    delete?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    connect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    update?: MapMarkerUpdateWithWhereUniqueWithoutEtatInput | MapMarkerUpdateWithWhereUniqueWithoutEtatInput[]
+    updateMany?: MapMarkerUpdateManyWithWhereWithoutEtatInput | MapMarkerUpdateManyWithWhereWithoutEtatInput[]
+    deleteMany?: MapMarkerScalarWhereInput | MapMarkerScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutCrisesInput = {
+    create?: XOR<UserCreateWithoutCrisesInput, UserUncheckedCreateWithoutCrisesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCrisesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EtatCreateNestedManyWithoutCrisesInput = {
+    create?: XOR<EtatCreateWithoutCrisesInput, EtatUncheckedCreateWithoutCrisesInput> | EtatCreateWithoutCrisesInput[] | EtatUncheckedCreateWithoutCrisesInput[]
+    connectOrCreate?: EtatCreateOrConnectWithoutCrisesInput | EtatCreateOrConnectWithoutCrisesInput[]
+    connect?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+  }
+
+  export type TimelineEntryCreateNestedManyWithoutCrisisInput = {
+    create?: XOR<TimelineEntryCreateWithoutCrisisInput, TimelineEntryUncheckedCreateWithoutCrisisInput> | TimelineEntryCreateWithoutCrisisInput[] | TimelineEntryUncheckedCreateWithoutCrisisInput[]
+    connectOrCreate?: TimelineEntryCreateOrConnectWithoutCrisisInput | TimelineEntryCreateOrConnectWithoutCrisisInput[]
+    createMany?: TimelineEntryCreateManyCrisisInputEnvelope
+    connect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+  }
+
+  export type MeasureCreateNestedManyWithoutCrisisInput = {
+    create?: XOR<MeasureCreateWithoutCrisisInput, MeasureUncheckedCreateWithoutCrisisInput> | MeasureCreateWithoutCrisisInput[] | MeasureUncheckedCreateWithoutCrisisInput[]
+    connectOrCreate?: MeasureCreateOrConnectWithoutCrisisInput | MeasureCreateOrConnectWithoutCrisisInput[]
+    createMany?: MeasureCreateManyCrisisInputEnvelope
+    connect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+  }
+
+  export type MapMarkerCreateNestedManyWithoutCrisisInput = {
+    create?: XOR<MapMarkerCreateWithoutCrisisInput, MapMarkerUncheckedCreateWithoutCrisisInput> | MapMarkerCreateWithoutCrisisInput[] | MapMarkerUncheckedCreateWithoutCrisisInput[]
+    connectOrCreate?: MapMarkerCreateOrConnectWithoutCrisisInput | MapMarkerCreateOrConnectWithoutCrisisInput[]
+    createMany?: MapMarkerCreateManyCrisisInputEnvelope
+    connect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+  }
+
+  export type EtatUncheckedCreateNestedManyWithoutCrisesInput = {
+    create?: XOR<EtatCreateWithoutCrisesInput, EtatUncheckedCreateWithoutCrisesInput> | EtatCreateWithoutCrisesInput[] | EtatUncheckedCreateWithoutCrisesInput[]
+    connectOrCreate?: EtatCreateOrConnectWithoutCrisesInput | EtatCreateOrConnectWithoutCrisesInput[]
+    connect?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+  }
+
+  export type TimelineEntryUncheckedCreateNestedManyWithoutCrisisInput = {
+    create?: XOR<TimelineEntryCreateWithoutCrisisInput, TimelineEntryUncheckedCreateWithoutCrisisInput> | TimelineEntryCreateWithoutCrisisInput[] | TimelineEntryUncheckedCreateWithoutCrisisInput[]
+    connectOrCreate?: TimelineEntryCreateOrConnectWithoutCrisisInput | TimelineEntryCreateOrConnectWithoutCrisisInput[]
+    createMany?: TimelineEntryCreateManyCrisisInputEnvelope
+    connect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+  }
+
+  export type MeasureUncheckedCreateNestedManyWithoutCrisisInput = {
+    create?: XOR<MeasureCreateWithoutCrisisInput, MeasureUncheckedCreateWithoutCrisisInput> | MeasureCreateWithoutCrisisInput[] | MeasureUncheckedCreateWithoutCrisisInput[]
+    connectOrCreate?: MeasureCreateOrConnectWithoutCrisisInput | MeasureCreateOrConnectWithoutCrisisInput[]
+    createMany?: MeasureCreateManyCrisisInputEnvelope
+    connect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+  }
+
+  export type MapMarkerUncheckedCreateNestedManyWithoutCrisisInput = {
+    create?: XOR<MapMarkerCreateWithoutCrisisInput, MapMarkerUncheckedCreateWithoutCrisisInput> | MapMarkerCreateWithoutCrisisInput[] | MapMarkerUncheckedCreateWithoutCrisisInput[]
+    connectOrCreate?: MapMarkerCreateOrConnectWithoutCrisisInput | MapMarkerCreateOrConnectWithoutCrisisInput[]
+    createMany?: MapMarkerCreateManyCrisisInputEnvelope
+    connect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+  }
+
+  export type EnumSeverityFieldUpdateOperationsInput = {
+    set?: $Enums.Severity
+  }
+
+  export type UserUpdateOneRequiredWithoutCrisesNestedInput = {
+    create?: XOR<UserCreateWithoutCrisesInput, UserUncheckedCreateWithoutCrisesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCrisesInput
+    upsert?: UserUpsertWithoutCrisesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCrisesInput, UserUpdateWithoutCrisesInput>, UserUncheckedUpdateWithoutCrisesInput>
+  }
+
+  export type EtatUpdateManyWithoutCrisesNestedInput = {
+    create?: XOR<EtatCreateWithoutCrisesInput, EtatUncheckedCreateWithoutCrisesInput> | EtatCreateWithoutCrisesInput[] | EtatUncheckedCreateWithoutCrisesInput[]
+    connectOrCreate?: EtatCreateOrConnectWithoutCrisesInput | EtatCreateOrConnectWithoutCrisesInput[]
+    upsert?: EtatUpsertWithWhereUniqueWithoutCrisesInput | EtatUpsertWithWhereUniqueWithoutCrisesInput[]
+    set?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+    disconnect?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+    delete?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+    connect?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+    update?: EtatUpdateWithWhereUniqueWithoutCrisesInput | EtatUpdateWithWhereUniqueWithoutCrisesInput[]
+    updateMany?: EtatUpdateManyWithWhereWithoutCrisesInput | EtatUpdateManyWithWhereWithoutCrisesInput[]
+    deleteMany?: EtatScalarWhereInput | EtatScalarWhereInput[]
+  }
+
+  export type TimelineEntryUpdateManyWithoutCrisisNestedInput = {
+    create?: XOR<TimelineEntryCreateWithoutCrisisInput, TimelineEntryUncheckedCreateWithoutCrisisInput> | TimelineEntryCreateWithoutCrisisInput[] | TimelineEntryUncheckedCreateWithoutCrisisInput[]
+    connectOrCreate?: TimelineEntryCreateOrConnectWithoutCrisisInput | TimelineEntryCreateOrConnectWithoutCrisisInput[]
+    upsert?: TimelineEntryUpsertWithWhereUniqueWithoutCrisisInput | TimelineEntryUpsertWithWhereUniqueWithoutCrisisInput[]
+    createMany?: TimelineEntryCreateManyCrisisInputEnvelope
+    set?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    disconnect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    delete?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    connect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    update?: TimelineEntryUpdateWithWhereUniqueWithoutCrisisInput | TimelineEntryUpdateWithWhereUniqueWithoutCrisisInput[]
+    updateMany?: TimelineEntryUpdateManyWithWhereWithoutCrisisInput | TimelineEntryUpdateManyWithWhereWithoutCrisisInput[]
+    deleteMany?: TimelineEntryScalarWhereInput | TimelineEntryScalarWhereInput[]
+  }
+
+  export type MeasureUpdateManyWithoutCrisisNestedInput = {
+    create?: XOR<MeasureCreateWithoutCrisisInput, MeasureUncheckedCreateWithoutCrisisInput> | MeasureCreateWithoutCrisisInput[] | MeasureUncheckedCreateWithoutCrisisInput[]
+    connectOrCreate?: MeasureCreateOrConnectWithoutCrisisInput | MeasureCreateOrConnectWithoutCrisisInput[]
+    upsert?: MeasureUpsertWithWhereUniqueWithoutCrisisInput | MeasureUpsertWithWhereUniqueWithoutCrisisInput[]
+    createMany?: MeasureCreateManyCrisisInputEnvelope
+    set?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    disconnect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    delete?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    connect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    update?: MeasureUpdateWithWhereUniqueWithoutCrisisInput | MeasureUpdateWithWhereUniqueWithoutCrisisInput[]
+    updateMany?: MeasureUpdateManyWithWhereWithoutCrisisInput | MeasureUpdateManyWithWhereWithoutCrisisInput[]
+    deleteMany?: MeasureScalarWhereInput | MeasureScalarWhereInput[]
+  }
+
+  export type MapMarkerUpdateManyWithoutCrisisNestedInput = {
+    create?: XOR<MapMarkerCreateWithoutCrisisInput, MapMarkerUncheckedCreateWithoutCrisisInput> | MapMarkerCreateWithoutCrisisInput[] | MapMarkerUncheckedCreateWithoutCrisisInput[]
+    connectOrCreate?: MapMarkerCreateOrConnectWithoutCrisisInput | MapMarkerCreateOrConnectWithoutCrisisInput[]
+    upsert?: MapMarkerUpsertWithWhereUniqueWithoutCrisisInput | MapMarkerUpsertWithWhereUniqueWithoutCrisisInput[]
+    createMany?: MapMarkerCreateManyCrisisInputEnvelope
+    set?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    disconnect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    delete?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    connect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    update?: MapMarkerUpdateWithWhereUniqueWithoutCrisisInput | MapMarkerUpdateWithWhereUniqueWithoutCrisisInput[]
+    updateMany?: MapMarkerUpdateManyWithWhereWithoutCrisisInput | MapMarkerUpdateManyWithWhereWithoutCrisisInput[]
+    deleteMany?: MapMarkerScalarWhereInput | MapMarkerScalarWhereInput[]
+  }
+
+  export type EtatUncheckedUpdateManyWithoutCrisesNestedInput = {
+    create?: XOR<EtatCreateWithoutCrisesInput, EtatUncheckedCreateWithoutCrisesInput> | EtatCreateWithoutCrisesInput[] | EtatUncheckedCreateWithoutCrisesInput[]
+    connectOrCreate?: EtatCreateOrConnectWithoutCrisesInput | EtatCreateOrConnectWithoutCrisesInput[]
+    upsert?: EtatUpsertWithWhereUniqueWithoutCrisesInput | EtatUpsertWithWhereUniqueWithoutCrisesInput[]
+    set?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+    disconnect?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+    delete?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+    connect?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+    update?: EtatUpdateWithWhereUniqueWithoutCrisesInput | EtatUpdateWithWhereUniqueWithoutCrisesInput[]
+    updateMany?: EtatUpdateManyWithWhereWithoutCrisesInput | EtatUpdateManyWithWhereWithoutCrisesInput[]
+    deleteMany?: EtatScalarWhereInput | EtatScalarWhereInput[]
+  }
+
+  export type TimelineEntryUncheckedUpdateManyWithoutCrisisNestedInput = {
+    create?: XOR<TimelineEntryCreateWithoutCrisisInput, TimelineEntryUncheckedCreateWithoutCrisisInput> | TimelineEntryCreateWithoutCrisisInput[] | TimelineEntryUncheckedCreateWithoutCrisisInput[]
+    connectOrCreate?: TimelineEntryCreateOrConnectWithoutCrisisInput | TimelineEntryCreateOrConnectWithoutCrisisInput[]
+    upsert?: TimelineEntryUpsertWithWhereUniqueWithoutCrisisInput | TimelineEntryUpsertWithWhereUniqueWithoutCrisisInput[]
+    createMany?: TimelineEntryCreateManyCrisisInputEnvelope
+    set?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    disconnect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    delete?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    connect?: TimelineEntryWhereUniqueInput | TimelineEntryWhereUniqueInput[]
+    update?: TimelineEntryUpdateWithWhereUniqueWithoutCrisisInput | TimelineEntryUpdateWithWhereUniqueWithoutCrisisInput[]
+    updateMany?: TimelineEntryUpdateManyWithWhereWithoutCrisisInput | TimelineEntryUpdateManyWithWhereWithoutCrisisInput[]
+    deleteMany?: TimelineEntryScalarWhereInput | TimelineEntryScalarWhereInput[]
+  }
+
+  export type MeasureUncheckedUpdateManyWithoutCrisisNestedInput = {
+    create?: XOR<MeasureCreateWithoutCrisisInput, MeasureUncheckedCreateWithoutCrisisInput> | MeasureCreateWithoutCrisisInput[] | MeasureUncheckedCreateWithoutCrisisInput[]
+    connectOrCreate?: MeasureCreateOrConnectWithoutCrisisInput | MeasureCreateOrConnectWithoutCrisisInput[]
+    upsert?: MeasureUpsertWithWhereUniqueWithoutCrisisInput | MeasureUpsertWithWhereUniqueWithoutCrisisInput[]
+    createMany?: MeasureCreateManyCrisisInputEnvelope
+    set?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    disconnect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    delete?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    connect?: MeasureWhereUniqueInput | MeasureWhereUniqueInput[]
+    update?: MeasureUpdateWithWhereUniqueWithoutCrisisInput | MeasureUpdateWithWhereUniqueWithoutCrisisInput[]
+    updateMany?: MeasureUpdateManyWithWhereWithoutCrisisInput | MeasureUpdateManyWithWhereWithoutCrisisInput[]
+    deleteMany?: MeasureScalarWhereInput | MeasureScalarWhereInput[]
+  }
+
+  export type MapMarkerUncheckedUpdateManyWithoutCrisisNestedInput = {
+    create?: XOR<MapMarkerCreateWithoutCrisisInput, MapMarkerUncheckedCreateWithoutCrisisInput> | MapMarkerCreateWithoutCrisisInput[] | MapMarkerUncheckedCreateWithoutCrisisInput[]
+    connectOrCreate?: MapMarkerCreateOrConnectWithoutCrisisInput | MapMarkerCreateOrConnectWithoutCrisisInput[]
+    upsert?: MapMarkerUpsertWithWhereUniqueWithoutCrisisInput | MapMarkerUpsertWithWhereUniqueWithoutCrisisInput[]
+    createMany?: MapMarkerCreateManyCrisisInputEnvelope
+    set?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    disconnect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    delete?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    connect?: MapMarkerWhereUniqueInput | MapMarkerWhereUniqueInput[]
+    update?: MapMarkerUpdateWithWhereUniqueWithoutCrisisInput | MapMarkerUpdateWithWhereUniqueWithoutCrisisInput[]
+    updateMany?: MapMarkerUpdateManyWithWhereWithoutCrisisInput | MapMarkerUpdateManyWithWhereWithoutCrisisInput[]
+    deleteMany?: MapMarkerScalarWhereInput | MapMarkerScalarWhereInput[]
+  }
+
+  export type CrisisCreateNestedOneWithoutTimelineEntriesInput = {
+    create?: XOR<CrisisCreateWithoutTimelineEntriesInput, CrisisUncheckedCreateWithoutTimelineEntriesInput>
+    connectOrCreate?: CrisisCreateOrConnectWithoutTimelineEntriesInput
+    connect?: CrisisWhereUniqueInput
+  }
+
+  export type EtatCreateNestedOneWithoutTimelineEntriesInput = {
+    create?: XOR<EtatCreateWithoutTimelineEntriesInput, EtatUncheckedCreateWithoutTimelineEntriesInput>
+    connectOrCreate?: EtatCreateOrConnectWithoutTimelineEntriesInput
+    connect?: EtatWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutTimelineEntriesInput = {
+    create?: XOR<UserCreateWithoutTimelineEntriesInput, UserUncheckedCreateWithoutTimelineEntriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTimelineEntriesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type CrisisUpdateOneRequiredWithoutTimelineEntriesNestedInput = {
+    create?: XOR<CrisisCreateWithoutTimelineEntriesInput, CrisisUncheckedCreateWithoutTimelineEntriesInput>
+    connectOrCreate?: CrisisCreateOrConnectWithoutTimelineEntriesInput
+    upsert?: CrisisUpsertWithoutTimelineEntriesInput
+    connect?: CrisisWhereUniqueInput
+    update?: XOR<XOR<CrisisUpdateToOneWithWhereWithoutTimelineEntriesInput, CrisisUpdateWithoutTimelineEntriesInput>, CrisisUncheckedUpdateWithoutTimelineEntriesInput>
+  }
+
+  export type EtatUpdateOneRequiredWithoutTimelineEntriesNestedInput = {
+    create?: XOR<EtatCreateWithoutTimelineEntriesInput, EtatUncheckedCreateWithoutTimelineEntriesInput>
+    connectOrCreate?: EtatCreateOrConnectWithoutTimelineEntriesInput
+    upsert?: EtatUpsertWithoutTimelineEntriesInput
+    connect?: EtatWhereUniqueInput
+    update?: XOR<XOR<EtatUpdateToOneWithWhereWithoutTimelineEntriesInput, EtatUpdateWithoutTimelineEntriesInput>, EtatUncheckedUpdateWithoutTimelineEntriesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutTimelineEntriesNestedInput = {
+    create?: XOR<UserCreateWithoutTimelineEntriesInput, UserUncheckedCreateWithoutTimelineEntriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTimelineEntriesInput
+    upsert?: UserUpsertWithoutTimelineEntriesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTimelineEntriesInput, UserUpdateWithoutTimelineEntriesInput>, UserUncheckedUpdateWithoutTimelineEntriesInput>
+  }
+
+  export type CrisisCreateNestedOneWithoutMeasuresInput = {
+    create?: XOR<CrisisCreateWithoutMeasuresInput, CrisisUncheckedCreateWithoutMeasuresInput>
+    connectOrCreate?: CrisisCreateOrConnectWithoutMeasuresInput
+    connect?: CrisisWhereUniqueInput
+  }
+
+  export type EtatCreateNestedOneWithoutMeasuresInput = {
+    create?: XOR<EtatCreateWithoutMeasuresInput, EtatUncheckedCreateWithoutMeasuresInput>
+    connectOrCreate?: EtatCreateOrConnectWithoutMeasuresInput
+    connect?: EtatWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutMeasuresInput = {
+    create?: XOR<UserCreateWithoutMeasuresInput, UserUncheckedCreateWithoutMeasuresInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMeasuresInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type CrisisUpdateOneRequiredWithoutMeasuresNestedInput = {
+    create?: XOR<CrisisCreateWithoutMeasuresInput, CrisisUncheckedCreateWithoutMeasuresInput>
+    connectOrCreate?: CrisisCreateOrConnectWithoutMeasuresInput
+    upsert?: CrisisUpsertWithoutMeasuresInput
+    connect?: CrisisWhereUniqueInput
+    update?: XOR<XOR<CrisisUpdateToOneWithWhereWithoutMeasuresInput, CrisisUpdateWithoutMeasuresInput>, CrisisUncheckedUpdateWithoutMeasuresInput>
+  }
+
+  export type EtatUpdateOneRequiredWithoutMeasuresNestedInput = {
+    create?: XOR<EtatCreateWithoutMeasuresInput, EtatUncheckedCreateWithoutMeasuresInput>
+    connectOrCreate?: EtatCreateOrConnectWithoutMeasuresInput
+    upsert?: EtatUpsertWithoutMeasuresInput
+    connect?: EtatWhereUniqueInput
+    update?: XOR<XOR<EtatUpdateToOneWithWhereWithoutMeasuresInput, EtatUpdateWithoutMeasuresInput>, EtatUncheckedUpdateWithoutMeasuresInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutMeasuresNestedInput = {
+    create?: XOR<UserCreateWithoutMeasuresInput, UserUncheckedCreateWithoutMeasuresInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMeasuresInput
+    upsert?: UserUpsertWithoutMeasuresInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMeasuresInput, UserUpdateWithoutMeasuresInput>, UserUncheckedUpdateWithoutMeasuresInput>
+  }
+
+  export type CrisisCreateNestedOneWithoutMapMarkersInput = {
+    create?: XOR<CrisisCreateWithoutMapMarkersInput, CrisisUncheckedCreateWithoutMapMarkersInput>
+    connectOrCreate?: CrisisCreateOrConnectWithoutMapMarkersInput
+    connect?: CrisisWhereUniqueInput
+  }
+
+  export type EtatCreateNestedOneWithoutMapMarkersInput = {
+    create?: XOR<EtatCreateWithoutMapMarkersInput, EtatUncheckedCreateWithoutMapMarkersInput>
+    connectOrCreate?: EtatCreateOrConnectWithoutMapMarkersInput
+    connect?: EtatWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutMapMarkersInput = {
+    create?: XOR<UserCreateWithoutMapMarkersInput, UserUncheckedCreateWithoutMapMarkersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMapMarkersInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumMarkerTypeFieldUpdateOperationsInput = {
+    set?: $Enums.MarkerType
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type CrisisUpdateOneRequiredWithoutMapMarkersNestedInput = {
+    create?: XOR<CrisisCreateWithoutMapMarkersInput, CrisisUncheckedCreateWithoutMapMarkersInput>
+    connectOrCreate?: CrisisCreateOrConnectWithoutMapMarkersInput
+    upsert?: CrisisUpsertWithoutMapMarkersInput
+    connect?: CrisisWhereUniqueInput
+    update?: XOR<XOR<CrisisUpdateToOneWithWhereWithoutMapMarkersInput, CrisisUpdateWithoutMapMarkersInput>, CrisisUncheckedUpdateWithoutMapMarkersInput>
+  }
+
+  export type EtatUpdateOneRequiredWithoutMapMarkersNestedInput = {
+    create?: XOR<EtatCreateWithoutMapMarkersInput, EtatUncheckedCreateWithoutMapMarkersInput>
+    connectOrCreate?: EtatCreateOrConnectWithoutMapMarkersInput
+    upsert?: EtatUpsertWithoutMapMarkersInput
+    connect?: EtatWhereUniqueInput
+    update?: XOR<XOR<EtatUpdateToOneWithWhereWithoutMapMarkersInput, EtatUpdateWithoutMapMarkersInput>, EtatUncheckedUpdateWithoutMapMarkersInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutMapMarkersNestedInput = {
+    create?: XOR<UserCreateWithoutMapMarkersInput, UserUncheckedCreateWithoutMapMarkersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMapMarkersInput
+    upsert?: UserUpsertWithoutMapMarkersInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMapMarkersInput, UserUpdateWithoutMapMarkersInput>, UserUncheckedUpdateWithoutMapMarkersInput>
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -9888,6 +16979,94 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedEnumSeverityFilter<$PrismaModel = never> = {
+    equals?: $Enums.Severity | EnumSeverityFieldRefInput<$PrismaModel>
+    in?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel>
+    not?: NestedEnumSeverityFilter<$PrismaModel> | $Enums.Severity
+  }
+
+  export type NestedEnumSeverityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Severity | EnumSeverityFieldRefInput<$PrismaModel>
+    in?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel>
+    not?: NestedEnumSeverityWithAggregatesFilter<$PrismaModel> | $Enums.Severity
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSeverityFilter<$PrismaModel>
+    _max?: NestedEnumSeverityFilter<$PrismaModel>
+  }
+
+  export type NestedEnumMarkerTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.MarkerType | EnumMarkerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MarkerType[] | ListEnumMarkerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MarkerType[] | ListEnumMarkerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMarkerTypeFilter<$PrismaModel> | $Enums.MarkerType
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedEnumMarkerTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MarkerType | EnumMarkerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MarkerType[] | ListEnumMarkerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MarkerType[] | ListEnumMarkerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMarkerTypeWithAggregatesFilter<$PrismaModel> | $Enums.MarkerType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMarkerTypeFilter<$PrismaModel>
+    _max?: NestedEnumMarkerTypeFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -9925,6 +17104,10 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
+    crises?: CrisisCreateNestedManyWithoutCreatedByInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutCreatedByInput
+    measures?: MeasureCreateNestedManyWithoutCreatedByInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutCreatedByInput
     etater?: EtatCreateNestedManyWithoutUsersInput
   }
 
@@ -9940,6 +17123,10 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutCreatedByInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutCreatedByInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutCreatedByInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutCreatedByInput
     etater?: EtatUncheckedCreateNestedManyWithoutUsersInput
   }
 
@@ -9971,6 +17158,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    crises?: CrisisUpdateManyWithoutCreatedByNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutCreatedByNestedInput
+    measures?: MeasureUpdateManyWithoutCreatedByNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutCreatedByNestedInput
     etater?: EtatUpdateManyWithoutUsersNestedInput
   }
 
@@ -9986,6 +17177,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutCreatedByNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutCreatedByNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutCreatedByNestedInput
     etater?: EtatUncheckedUpdateManyWithoutUsersNestedInput
   }
 
@@ -10083,6 +17278,136 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CrisisCreateWithoutCreatedByInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    allowedEtater?: EtatCreateNestedManyWithoutCrisesInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutCrisisInput
+    measures?: MeasureCreateNestedManyWithoutCrisisInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutCrisisInput
+  }
+
+  export type CrisisUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    allowedEtater?: EtatUncheckedCreateNestedManyWithoutCrisesInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutCrisisInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutCrisisInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutCrisisInput
+  }
+
+  export type CrisisCreateOrConnectWithoutCreatedByInput = {
+    where: CrisisWhereUniqueInput
+    create: XOR<CrisisCreateWithoutCreatedByInput, CrisisUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type CrisisCreateManyCreatedByInputEnvelope = {
+    data: CrisisCreateManyCreatedByInput | CrisisCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TimelineEntryCreateWithoutCreatedByInput = {
+    id?: string
+    text: string
+    createdAt?: Date | string
+    crisis: CrisisCreateNestedOneWithoutTimelineEntriesInput
+    etat: EtatCreateNestedOneWithoutTimelineEntriesInput
+  }
+
+  export type TimelineEntryUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    text: string
+    crisisId: string
+    etatId: string
+    createdAt?: Date | string
+  }
+
+  export type TimelineEntryCreateOrConnectWithoutCreatedByInput = {
+    where: TimelineEntryWhereUniqueInput
+    create: XOR<TimelineEntryCreateWithoutCreatedByInput, TimelineEntryUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type TimelineEntryCreateManyCreatedByInputEnvelope = {
+    data: TimelineEntryCreateManyCreatedByInput | TimelineEntryCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MeasureCreateWithoutCreatedByInput = {
+    id?: string
+    text: string
+    severity: $Enums.Severity
+    createdAt?: Date | string
+    crisis: CrisisCreateNestedOneWithoutMeasuresInput
+    etat: EtatCreateNestedOneWithoutMeasuresInput
+  }
+
+  export type MeasureUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    text: string
+    severity: $Enums.Severity
+    crisisId: string
+    etatId: string
+    createdAt?: Date | string
+  }
+
+  export type MeasureCreateOrConnectWithoutCreatedByInput = {
+    where: MeasureWhereUniqueInput
+    create: XOR<MeasureCreateWithoutCreatedByInput, MeasureUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type MeasureCreateManyCreatedByInputEnvelope = {
+    data: MeasureCreateManyCreatedByInput | MeasureCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MapMarkerCreateWithoutCreatedByInput = {
+    id?: string
+    type: $Enums.MarkerType
+    label: string
+    lat: number
+    lng: number
+    radius?: number | null
+    createdAt?: Date | string
+    crisis: CrisisCreateNestedOneWithoutMapMarkersInput
+    etat: EtatCreateNestedOneWithoutMapMarkersInput
+  }
+
+  export type MapMarkerUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    type: $Enums.MarkerType
+    label: string
+    lat: number
+    lng: number
+    radius?: number | null
+    crisisId: string
+    etatId: string
+    createdAt?: Date | string
+  }
+
+  export type MapMarkerCreateOrConnectWithoutCreatedByInput = {
+    where: MapMarkerWhereUniqueInput
+    create: XOR<MapMarkerCreateWithoutCreatedByInput, MapMarkerUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type MapMarkerCreateManyCreatedByInputEnvelope = {
+    data: MapMarkerCreateManyCreatedByInput | MapMarkerCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
   export type EtatCreateWithoutUsersInput = {
     id?: string
     title: string
@@ -10091,6 +17416,10 @@ export namespace Prisma {
     themeColor: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    crises?: CrisisCreateNestedManyWithoutAllowedEtaterInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutEtatInput
+    measures?: MeasureCreateNestedManyWithoutEtatInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutEtatInput
   }
 
   export type EtatUncheckedCreateWithoutUsersInput = {
@@ -10101,6 +17430,10 @@ export namespace Prisma {
     themeColor: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    crises?: CrisisUncheckedCreateNestedManyWithoutAllowedEtaterInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutEtatInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutEtatInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutEtatInput
   }
 
   export type EtatCreateOrConnectWithoutUsersInput = {
@@ -10200,6 +17533,127 @@ export namespace Prisma {
     createdById?: StringFilter<"Post"> | string
   }
 
+  export type CrisisUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: CrisisWhereUniqueInput
+    update: XOR<CrisisUpdateWithoutCreatedByInput, CrisisUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<CrisisCreateWithoutCreatedByInput, CrisisUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type CrisisUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: CrisisWhereUniqueInput
+    data: XOR<CrisisUpdateWithoutCreatedByInput, CrisisUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type CrisisUpdateManyWithWhereWithoutCreatedByInput = {
+    where: CrisisScalarWhereInput
+    data: XOR<CrisisUpdateManyMutationInput, CrisisUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type CrisisScalarWhereInput = {
+    AND?: CrisisScalarWhereInput | CrisisScalarWhereInput[]
+    OR?: CrisisScalarWhereInput[]
+    NOT?: CrisisScalarWhereInput | CrisisScalarWhereInput[]
+    id?: StringFilter<"Crisis"> | string
+    title?: StringFilter<"Crisis"> | string
+    description?: StringFilter<"Crisis"> | string
+    what?: StringFilter<"Crisis"> | string
+    how?: StringFilter<"Crisis"> | string
+    when?: DateTimeFilter<"Crisis"> | Date | string
+    severity?: EnumSeverityFilter<"Crisis"> | $Enums.Severity
+    createdById?: StringFilter<"Crisis"> | string
+    createdAt?: DateTimeFilter<"Crisis"> | Date | string
+    updatedAt?: DateTimeFilter<"Crisis"> | Date | string
+  }
+
+  export type TimelineEntryUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: TimelineEntryWhereUniqueInput
+    update: XOR<TimelineEntryUpdateWithoutCreatedByInput, TimelineEntryUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<TimelineEntryCreateWithoutCreatedByInput, TimelineEntryUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type TimelineEntryUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: TimelineEntryWhereUniqueInput
+    data: XOR<TimelineEntryUpdateWithoutCreatedByInput, TimelineEntryUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type TimelineEntryUpdateManyWithWhereWithoutCreatedByInput = {
+    where: TimelineEntryScalarWhereInput
+    data: XOR<TimelineEntryUpdateManyMutationInput, TimelineEntryUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type TimelineEntryScalarWhereInput = {
+    AND?: TimelineEntryScalarWhereInput | TimelineEntryScalarWhereInput[]
+    OR?: TimelineEntryScalarWhereInput[]
+    NOT?: TimelineEntryScalarWhereInput | TimelineEntryScalarWhereInput[]
+    id?: StringFilter<"TimelineEntry"> | string
+    text?: StringFilter<"TimelineEntry"> | string
+    crisisId?: StringFilter<"TimelineEntry"> | string
+    etatId?: StringFilter<"TimelineEntry"> | string
+    createdById?: StringFilter<"TimelineEntry"> | string
+    createdAt?: DateTimeFilter<"TimelineEntry"> | Date | string
+  }
+
+  export type MeasureUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: MeasureWhereUniqueInput
+    update: XOR<MeasureUpdateWithoutCreatedByInput, MeasureUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<MeasureCreateWithoutCreatedByInput, MeasureUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type MeasureUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: MeasureWhereUniqueInput
+    data: XOR<MeasureUpdateWithoutCreatedByInput, MeasureUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type MeasureUpdateManyWithWhereWithoutCreatedByInput = {
+    where: MeasureScalarWhereInput
+    data: XOR<MeasureUpdateManyMutationInput, MeasureUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type MeasureScalarWhereInput = {
+    AND?: MeasureScalarWhereInput | MeasureScalarWhereInput[]
+    OR?: MeasureScalarWhereInput[]
+    NOT?: MeasureScalarWhereInput | MeasureScalarWhereInput[]
+    id?: StringFilter<"Measure"> | string
+    text?: StringFilter<"Measure"> | string
+    severity?: EnumSeverityFilter<"Measure"> | $Enums.Severity
+    crisisId?: StringFilter<"Measure"> | string
+    etatId?: StringFilter<"Measure"> | string
+    createdById?: StringFilter<"Measure"> | string
+    createdAt?: DateTimeFilter<"Measure"> | Date | string
+  }
+
+  export type MapMarkerUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: MapMarkerWhereUniqueInput
+    update: XOR<MapMarkerUpdateWithoutCreatedByInput, MapMarkerUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<MapMarkerCreateWithoutCreatedByInput, MapMarkerUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type MapMarkerUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: MapMarkerWhereUniqueInput
+    data: XOR<MapMarkerUpdateWithoutCreatedByInput, MapMarkerUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type MapMarkerUpdateManyWithWhereWithoutCreatedByInput = {
+    where: MapMarkerScalarWhereInput
+    data: XOR<MapMarkerUpdateManyMutationInput, MapMarkerUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type MapMarkerScalarWhereInput = {
+    AND?: MapMarkerScalarWhereInput | MapMarkerScalarWhereInput[]
+    OR?: MapMarkerScalarWhereInput[]
+    NOT?: MapMarkerScalarWhereInput | MapMarkerScalarWhereInput[]
+    id?: StringFilter<"MapMarker"> | string
+    type?: EnumMarkerTypeFilter<"MapMarker"> | $Enums.MarkerType
+    label?: StringFilter<"MapMarker"> | string
+    lat?: FloatFilter<"MapMarker"> | number
+    lng?: FloatFilter<"MapMarker"> | number
+    radius?: IntNullableFilter<"MapMarker"> | number | null
+    crisisId?: StringFilter<"MapMarker"> | string
+    etatId?: StringFilter<"MapMarker"> | string
+    createdById?: StringFilter<"MapMarker"> | string
+    createdAt?: DateTimeFilter<"MapMarker"> | Date | string
+  }
+
   export type EtatUpsertWithWhereUniqueWithoutUsersInput = {
     where: EtatWhereUniqueInput
     update: XOR<EtatUpdateWithoutUsersInput, EtatUncheckedUpdateWithoutUsersInput>
@@ -10242,6 +17696,10 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisCreateNestedManyWithoutCreatedByInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutCreatedByInput
+    measures?: MeasureCreateNestedManyWithoutCreatedByInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutEtaterInput = {
@@ -10257,11 +17715,140 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutCreatedByInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutCreatedByInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutCreatedByInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutEtaterInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutEtaterInput, UserUncheckedCreateWithoutEtaterInput>
+  }
+
+  export type CrisisCreateWithoutAllowedEtaterInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCrisesInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutCrisisInput
+    measures?: MeasureCreateNestedManyWithoutCrisisInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutCrisisInput
+  }
+
+  export type CrisisUncheckedCreateWithoutAllowedEtaterInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutCrisisInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutCrisisInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutCrisisInput
+  }
+
+  export type CrisisCreateOrConnectWithoutAllowedEtaterInput = {
+    where: CrisisWhereUniqueInput
+    create: XOR<CrisisCreateWithoutAllowedEtaterInput, CrisisUncheckedCreateWithoutAllowedEtaterInput>
+  }
+
+  export type TimelineEntryCreateWithoutEtatInput = {
+    id?: string
+    text: string
+    createdAt?: Date | string
+    crisis: CrisisCreateNestedOneWithoutTimelineEntriesInput
+    createdBy: UserCreateNestedOneWithoutTimelineEntriesInput
+  }
+
+  export type TimelineEntryUncheckedCreateWithoutEtatInput = {
+    id?: string
+    text: string
+    crisisId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type TimelineEntryCreateOrConnectWithoutEtatInput = {
+    where: TimelineEntryWhereUniqueInput
+    create: XOR<TimelineEntryCreateWithoutEtatInput, TimelineEntryUncheckedCreateWithoutEtatInput>
+  }
+
+  export type TimelineEntryCreateManyEtatInputEnvelope = {
+    data: TimelineEntryCreateManyEtatInput | TimelineEntryCreateManyEtatInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MeasureCreateWithoutEtatInput = {
+    id?: string
+    text: string
+    severity: $Enums.Severity
+    createdAt?: Date | string
+    crisis: CrisisCreateNestedOneWithoutMeasuresInput
+    createdBy: UserCreateNestedOneWithoutMeasuresInput
+  }
+
+  export type MeasureUncheckedCreateWithoutEtatInput = {
+    id?: string
+    text: string
+    severity: $Enums.Severity
+    crisisId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type MeasureCreateOrConnectWithoutEtatInput = {
+    where: MeasureWhereUniqueInput
+    create: XOR<MeasureCreateWithoutEtatInput, MeasureUncheckedCreateWithoutEtatInput>
+  }
+
+  export type MeasureCreateManyEtatInputEnvelope = {
+    data: MeasureCreateManyEtatInput | MeasureCreateManyEtatInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MapMarkerCreateWithoutEtatInput = {
+    id?: string
+    type: $Enums.MarkerType
+    label: string
+    lat: number
+    lng: number
+    radius?: number | null
+    createdAt?: Date | string
+    crisis: CrisisCreateNestedOneWithoutMapMarkersInput
+    createdBy: UserCreateNestedOneWithoutMapMarkersInput
+  }
+
+  export type MapMarkerUncheckedCreateWithoutEtatInput = {
+    id?: string
+    type: $Enums.MarkerType
+    label: string
+    lat: number
+    lng: number
+    radius?: number | null
+    crisisId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type MapMarkerCreateOrConnectWithoutEtatInput = {
+    where: MapMarkerWhereUniqueInput
+    create: XOR<MapMarkerCreateWithoutEtatInput, MapMarkerUncheckedCreateWithoutEtatInput>
+  }
+
+  export type MapMarkerCreateManyEtatInputEnvelope = {
+    data: MapMarkerCreateManyEtatInput | MapMarkerCreateManyEtatInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithWhereUniqueWithoutEtaterInput = {
@@ -10295,6 +17882,1079 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
   }
 
+  export type CrisisUpsertWithWhereUniqueWithoutAllowedEtaterInput = {
+    where: CrisisWhereUniqueInput
+    update: XOR<CrisisUpdateWithoutAllowedEtaterInput, CrisisUncheckedUpdateWithoutAllowedEtaterInput>
+    create: XOR<CrisisCreateWithoutAllowedEtaterInput, CrisisUncheckedCreateWithoutAllowedEtaterInput>
+  }
+
+  export type CrisisUpdateWithWhereUniqueWithoutAllowedEtaterInput = {
+    where: CrisisWhereUniqueInput
+    data: XOR<CrisisUpdateWithoutAllowedEtaterInput, CrisisUncheckedUpdateWithoutAllowedEtaterInput>
+  }
+
+  export type CrisisUpdateManyWithWhereWithoutAllowedEtaterInput = {
+    where: CrisisScalarWhereInput
+    data: XOR<CrisisUpdateManyMutationInput, CrisisUncheckedUpdateManyWithoutAllowedEtaterInput>
+  }
+
+  export type TimelineEntryUpsertWithWhereUniqueWithoutEtatInput = {
+    where: TimelineEntryWhereUniqueInput
+    update: XOR<TimelineEntryUpdateWithoutEtatInput, TimelineEntryUncheckedUpdateWithoutEtatInput>
+    create: XOR<TimelineEntryCreateWithoutEtatInput, TimelineEntryUncheckedCreateWithoutEtatInput>
+  }
+
+  export type TimelineEntryUpdateWithWhereUniqueWithoutEtatInput = {
+    where: TimelineEntryWhereUniqueInput
+    data: XOR<TimelineEntryUpdateWithoutEtatInput, TimelineEntryUncheckedUpdateWithoutEtatInput>
+  }
+
+  export type TimelineEntryUpdateManyWithWhereWithoutEtatInput = {
+    where: TimelineEntryScalarWhereInput
+    data: XOR<TimelineEntryUpdateManyMutationInput, TimelineEntryUncheckedUpdateManyWithoutEtatInput>
+  }
+
+  export type MeasureUpsertWithWhereUniqueWithoutEtatInput = {
+    where: MeasureWhereUniqueInput
+    update: XOR<MeasureUpdateWithoutEtatInput, MeasureUncheckedUpdateWithoutEtatInput>
+    create: XOR<MeasureCreateWithoutEtatInput, MeasureUncheckedCreateWithoutEtatInput>
+  }
+
+  export type MeasureUpdateWithWhereUniqueWithoutEtatInput = {
+    where: MeasureWhereUniqueInput
+    data: XOR<MeasureUpdateWithoutEtatInput, MeasureUncheckedUpdateWithoutEtatInput>
+  }
+
+  export type MeasureUpdateManyWithWhereWithoutEtatInput = {
+    where: MeasureScalarWhereInput
+    data: XOR<MeasureUpdateManyMutationInput, MeasureUncheckedUpdateManyWithoutEtatInput>
+  }
+
+  export type MapMarkerUpsertWithWhereUniqueWithoutEtatInput = {
+    where: MapMarkerWhereUniqueInput
+    update: XOR<MapMarkerUpdateWithoutEtatInput, MapMarkerUncheckedUpdateWithoutEtatInput>
+    create: XOR<MapMarkerCreateWithoutEtatInput, MapMarkerUncheckedCreateWithoutEtatInput>
+  }
+
+  export type MapMarkerUpdateWithWhereUniqueWithoutEtatInput = {
+    where: MapMarkerWhereUniqueInput
+    data: XOR<MapMarkerUpdateWithoutEtatInput, MapMarkerUncheckedUpdateWithoutEtatInput>
+  }
+
+  export type MapMarkerUpdateManyWithWhereWithoutEtatInput = {
+    where: MapMarkerScalarWhereInput
+    data: XOR<MapMarkerUpdateManyMutationInput, MapMarkerUncheckedUpdateManyWithoutEtatInput>
+  }
+
+  export type UserCreateWithoutCrisesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    isVerified?: boolean
+    isAdmin?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutCreatedByInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutCreatedByInput
+    measures?: MeasureCreateNestedManyWithoutCreatedByInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutCreatedByInput
+    etater?: EtatCreateNestedManyWithoutUsersInput
+  }
+
+  export type UserUncheckedCreateWithoutCrisesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    isVerified?: boolean
+    isAdmin?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutCreatedByInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutCreatedByInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutCreatedByInput
+    etater?: EtatUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type UserCreateOrConnectWithoutCrisesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCrisesInput, UserUncheckedCreateWithoutCrisesInput>
+  }
+
+  export type EtatCreateWithoutCrisesInput = {
+    id?: string
+    title: string
+    contactPhone: string
+    contactEmail: string
+    themeColor: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutEtaterInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutEtatInput
+    measures?: MeasureCreateNestedManyWithoutEtatInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutEtatInput
+  }
+
+  export type EtatUncheckedCreateWithoutCrisesInput = {
+    id?: string
+    title: string
+    contactPhone: string
+    contactEmail: string
+    themeColor: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutEtaterInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutEtatInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutEtatInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutEtatInput
+  }
+
+  export type EtatCreateOrConnectWithoutCrisesInput = {
+    where: EtatWhereUniqueInput
+    create: XOR<EtatCreateWithoutCrisesInput, EtatUncheckedCreateWithoutCrisesInput>
+  }
+
+  export type TimelineEntryCreateWithoutCrisisInput = {
+    id?: string
+    text: string
+    createdAt?: Date | string
+    etat: EtatCreateNestedOneWithoutTimelineEntriesInput
+    createdBy: UserCreateNestedOneWithoutTimelineEntriesInput
+  }
+
+  export type TimelineEntryUncheckedCreateWithoutCrisisInput = {
+    id?: string
+    text: string
+    etatId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type TimelineEntryCreateOrConnectWithoutCrisisInput = {
+    where: TimelineEntryWhereUniqueInput
+    create: XOR<TimelineEntryCreateWithoutCrisisInput, TimelineEntryUncheckedCreateWithoutCrisisInput>
+  }
+
+  export type TimelineEntryCreateManyCrisisInputEnvelope = {
+    data: TimelineEntryCreateManyCrisisInput | TimelineEntryCreateManyCrisisInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MeasureCreateWithoutCrisisInput = {
+    id?: string
+    text: string
+    severity: $Enums.Severity
+    createdAt?: Date | string
+    etat: EtatCreateNestedOneWithoutMeasuresInput
+    createdBy: UserCreateNestedOneWithoutMeasuresInput
+  }
+
+  export type MeasureUncheckedCreateWithoutCrisisInput = {
+    id?: string
+    text: string
+    severity: $Enums.Severity
+    etatId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type MeasureCreateOrConnectWithoutCrisisInput = {
+    where: MeasureWhereUniqueInput
+    create: XOR<MeasureCreateWithoutCrisisInput, MeasureUncheckedCreateWithoutCrisisInput>
+  }
+
+  export type MeasureCreateManyCrisisInputEnvelope = {
+    data: MeasureCreateManyCrisisInput | MeasureCreateManyCrisisInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MapMarkerCreateWithoutCrisisInput = {
+    id?: string
+    type: $Enums.MarkerType
+    label: string
+    lat: number
+    lng: number
+    radius?: number | null
+    createdAt?: Date | string
+    etat: EtatCreateNestedOneWithoutMapMarkersInput
+    createdBy: UserCreateNestedOneWithoutMapMarkersInput
+  }
+
+  export type MapMarkerUncheckedCreateWithoutCrisisInput = {
+    id?: string
+    type: $Enums.MarkerType
+    label: string
+    lat: number
+    lng: number
+    radius?: number | null
+    etatId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type MapMarkerCreateOrConnectWithoutCrisisInput = {
+    where: MapMarkerWhereUniqueInput
+    create: XOR<MapMarkerCreateWithoutCrisisInput, MapMarkerUncheckedCreateWithoutCrisisInput>
+  }
+
+  export type MapMarkerCreateManyCrisisInputEnvelope = {
+    data: MapMarkerCreateManyCrisisInput | MapMarkerCreateManyCrisisInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutCrisesInput = {
+    update: XOR<UserUpdateWithoutCrisesInput, UserUncheckedUpdateWithoutCrisesInput>
+    create: XOR<UserCreateWithoutCrisesInput, UserUncheckedCreateWithoutCrisesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCrisesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCrisesInput, UserUncheckedUpdateWithoutCrisesInput>
+  }
+
+  export type UserUpdateWithoutCrisesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutCreatedByNestedInput
+    measures?: MeasureUpdateManyWithoutCreatedByNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutCreatedByNestedInput
+    etater?: EtatUpdateManyWithoutUsersNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCrisesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutCreatedByNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutCreatedByNestedInput
+    etater?: EtatUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type EtatUpsertWithWhereUniqueWithoutCrisesInput = {
+    where: EtatWhereUniqueInput
+    update: XOR<EtatUpdateWithoutCrisesInput, EtatUncheckedUpdateWithoutCrisesInput>
+    create: XOR<EtatCreateWithoutCrisesInput, EtatUncheckedCreateWithoutCrisesInput>
+  }
+
+  export type EtatUpdateWithWhereUniqueWithoutCrisesInput = {
+    where: EtatWhereUniqueInput
+    data: XOR<EtatUpdateWithoutCrisesInput, EtatUncheckedUpdateWithoutCrisesInput>
+  }
+
+  export type EtatUpdateManyWithWhereWithoutCrisesInput = {
+    where: EtatScalarWhereInput
+    data: XOR<EtatUpdateManyMutationInput, EtatUncheckedUpdateManyWithoutCrisesInput>
+  }
+
+  export type TimelineEntryUpsertWithWhereUniqueWithoutCrisisInput = {
+    where: TimelineEntryWhereUniqueInput
+    update: XOR<TimelineEntryUpdateWithoutCrisisInput, TimelineEntryUncheckedUpdateWithoutCrisisInput>
+    create: XOR<TimelineEntryCreateWithoutCrisisInput, TimelineEntryUncheckedCreateWithoutCrisisInput>
+  }
+
+  export type TimelineEntryUpdateWithWhereUniqueWithoutCrisisInput = {
+    where: TimelineEntryWhereUniqueInput
+    data: XOR<TimelineEntryUpdateWithoutCrisisInput, TimelineEntryUncheckedUpdateWithoutCrisisInput>
+  }
+
+  export type TimelineEntryUpdateManyWithWhereWithoutCrisisInput = {
+    where: TimelineEntryScalarWhereInput
+    data: XOR<TimelineEntryUpdateManyMutationInput, TimelineEntryUncheckedUpdateManyWithoutCrisisInput>
+  }
+
+  export type MeasureUpsertWithWhereUniqueWithoutCrisisInput = {
+    where: MeasureWhereUniqueInput
+    update: XOR<MeasureUpdateWithoutCrisisInput, MeasureUncheckedUpdateWithoutCrisisInput>
+    create: XOR<MeasureCreateWithoutCrisisInput, MeasureUncheckedCreateWithoutCrisisInput>
+  }
+
+  export type MeasureUpdateWithWhereUniqueWithoutCrisisInput = {
+    where: MeasureWhereUniqueInput
+    data: XOR<MeasureUpdateWithoutCrisisInput, MeasureUncheckedUpdateWithoutCrisisInput>
+  }
+
+  export type MeasureUpdateManyWithWhereWithoutCrisisInput = {
+    where: MeasureScalarWhereInput
+    data: XOR<MeasureUpdateManyMutationInput, MeasureUncheckedUpdateManyWithoutCrisisInput>
+  }
+
+  export type MapMarkerUpsertWithWhereUniqueWithoutCrisisInput = {
+    where: MapMarkerWhereUniqueInput
+    update: XOR<MapMarkerUpdateWithoutCrisisInput, MapMarkerUncheckedUpdateWithoutCrisisInput>
+    create: XOR<MapMarkerCreateWithoutCrisisInput, MapMarkerUncheckedCreateWithoutCrisisInput>
+  }
+
+  export type MapMarkerUpdateWithWhereUniqueWithoutCrisisInput = {
+    where: MapMarkerWhereUniqueInput
+    data: XOR<MapMarkerUpdateWithoutCrisisInput, MapMarkerUncheckedUpdateWithoutCrisisInput>
+  }
+
+  export type MapMarkerUpdateManyWithWhereWithoutCrisisInput = {
+    where: MapMarkerScalarWhereInput
+    data: XOR<MapMarkerUpdateManyMutationInput, MapMarkerUncheckedUpdateManyWithoutCrisisInput>
+  }
+
+  export type CrisisCreateWithoutTimelineEntriesInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCrisesInput
+    allowedEtater?: EtatCreateNestedManyWithoutCrisesInput
+    measures?: MeasureCreateNestedManyWithoutCrisisInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutCrisisInput
+  }
+
+  export type CrisisUncheckedCreateWithoutTimelineEntriesInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    allowedEtater?: EtatUncheckedCreateNestedManyWithoutCrisesInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutCrisisInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutCrisisInput
+  }
+
+  export type CrisisCreateOrConnectWithoutTimelineEntriesInput = {
+    where: CrisisWhereUniqueInput
+    create: XOR<CrisisCreateWithoutTimelineEntriesInput, CrisisUncheckedCreateWithoutTimelineEntriesInput>
+  }
+
+  export type EtatCreateWithoutTimelineEntriesInput = {
+    id?: string
+    title: string
+    contactPhone: string
+    contactEmail: string
+    themeColor: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutEtaterInput
+    crises?: CrisisCreateNestedManyWithoutAllowedEtaterInput
+    measures?: MeasureCreateNestedManyWithoutEtatInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutEtatInput
+  }
+
+  export type EtatUncheckedCreateWithoutTimelineEntriesInput = {
+    id?: string
+    title: string
+    contactPhone: string
+    contactEmail: string
+    themeColor: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutEtaterInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutAllowedEtaterInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutEtatInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutEtatInput
+  }
+
+  export type EtatCreateOrConnectWithoutTimelineEntriesInput = {
+    where: EtatWhereUniqueInput
+    create: XOR<EtatCreateWithoutTimelineEntriesInput, EtatUncheckedCreateWithoutTimelineEntriesInput>
+  }
+
+  export type UserCreateWithoutTimelineEntriesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    isVerified?: boolean
+    isAdmin?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisCreateNestedManyWithoutCreatedByInput
+    measures?: MeasureCreateNestedManyWithoutCreatedByInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutCreatedByInput
+    etater?: EtatCreateNestedManyWithoutUsersInput
+  }
+
+  export type UserUncheckedCreateWithoutTimelineEntriesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    isVerified?: boolean
+    isAdmin?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutCreatedByInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutCreatedByInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutCreatedByInput
+    etater?: EtatUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type UserCreateOrConnectWithoutTimelineEntriesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutTimelineEntriesInput, UserUncheckedCreateWithoutTimelineEntriesInput>
+  }
+
+  export type CrisisUpsertWithoutTimelineEntriesInput = {
+    update: XOR<CrisisUpdateWithoutTimelineEntriesInput, CrisisUncheckedUpdateWithoutTimelineEntriesInput>
+    create: XOR<CrisisCreateWithoutTimelineEntriesInput, CrisisUncheckedCreateWithoutTimelineEntriesInput>
+    where?: CrisisWhereInput
+  }
+
+  export type CrisisUpdateToOneWithWhereWithoutTimelineEntriesInput = {
+    where?: CrisisWhereInput
+    data: XOR<CrisisUpdateWithoutTimelineEntriesInput, CrisisUncheckedUpdateWithoutTimelineEntriesInput>
+  }
+
+  export type CrisisUpdateWithoutTimelineEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCrisesNestedInput
+    allowedEtater?: EtatUpdateManyWithoutCrisesNestedInput
+    measures?: MeasureUpdateManyWithoutCrisisNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutCrisisNestedInput
+  }
+
+  export type CrisisUncheckedUpdateWithoutTimelineEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    allowedEtater?: EtatUncheckedUpdateManyWithoutCrisesNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutCrisisNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutCrisisNestedInput
+  }
+
+  export type EtatUpsertWithoutTimelineEntriesInput = {
+    update: XOR<EtatUpdateWithoutTimelineEntriesInput, EtatUncheckedUpdateWithoutTimelineEntriesInput>
+    create: XOR<EtatCreateWithoutTimelineEntriesInput, EtatUncheckedCreateWithoutTimelineEntriesInput>
+    where?: EtatWhereInput
+  }
+
+  export type EtatUpdateToOneWithWhereWithoutTimelineEntriesInput = {
+    where?: EtatWhereInput
+    data: XOR<EtatUpdateWithoutTimelineEntriesInput, EtatUncheckedUpdateWithoutTimelineEntriesInput>
+  }
+
+  export type EtatUpdateWithoutTimelineEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    themeColor?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutEtaterNestedInput
+    crises?: CrisisUpdateManyWithoutAllowedEtaterNestedInput
+    measures?: MeasureUpdateManyWithoutEtatNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutEtatNestedInput
+  }
+
+  export type EtatUncheckedUpdateWithoutTimelineEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    themeColor?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutEtaterNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutAllowedEtaterNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutEtatNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutEtatNestedInput
+  }
+
+  export type UserUpsertWithoutTimelineEntriesInput = {
+    update: XOR<UserUpdateWithoutTimelineEntriesInput, UserUncheckedUpdateWithoutTimelineEntriesInput>
+    create: XOR<UserCreateWithoutTimelineEntriesInput, UserUncheckedCreateWithoutTimelineEntriesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutTimelineEntriesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutTimelineEntriesInput, UserUncheckedUpdateWithoutTimelineEntriesInput>
+  }
+
+  export type UserUpdateWithoutTimelineEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUpdateManyWithoutCreatedByNestedInput
+    measures?: MeasureUpdateManyWithoutCreatedByNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutCreatedByNestedInput
+    etater?: EtatUpdateManyWithoutUsersNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutTimelineEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutCreatedByNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutCreatedByNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutCreatedByNestedInput
+    etater?: EtatUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type CrisisCreateWithoutMeasuresInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCrisesInput
+    allowedEtater?: EtatCreateNestedManyWithoutCrisesInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutCrisisInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutCrisisInput
+  }
+
+  export type CrisisUncheckedCreateWithoutMeasuresInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    allowedEtater?: EtatUncheckedCreateNestedManyWithoutCrisesInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutCrisisInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutCrisisInput
+  }
+
+  export type CrisisCreateOrConnectWithoutMeasuresInput = {
+    where: CrisisWhereUniqueInput
+    create: XOR<CrisisCreateWithoutMeasuresInput, CrisisUncheckedCreateWithoutMeasuresInput>
+  }
+
+  export type EtatCreateWithoutMeasuresInput = {
+    id?: string
+    title: string
+    contactPhone: string
+    contactEmail: string
+    themeColor: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutEtaterInput
+    crises?: CrisisCreateNestedManyWithoutAllowedEtaterInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutEtatInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutEtatInput
+  }
+
+  export type EtatUncheckedCreateWithoutMeasuresInput = {
+    id?: string
+    title: string
+    contactPhone: string
+    contactEmail: string
+    themeColor: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutEtaterInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutAllowedEtaterInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutEtatInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutEtatInput
+  }
+
+  export type EtatCreateOrConnectWithoutMeasuresInput = {
+    where: EtatWhereUniqueInput
+    create: XOR<EtatCreateWithoutMeasuresInput, EtatUncheckedCreateWithoutMeasuresInput>
+  }
+
+  export type UserCreateWithoutMeasuresInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    isVerified?: boolean
+    isAdmin?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisCreateNestedManyWithoutCreatedByInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutCreatedByInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutCreatedByInput
+    etater?: EtatCreateNestedManyWithoutUsersInput
+  }
+
+  export type UserUncheckedCreateWithoutMeasuresInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    isVerified?: boolean
+    isAdmin?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutCreatedByInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutCreatedByInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutCreatedByInput
+    etater?: EtatUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type UserCreateOrConnectWithoutMeasuresInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMeasuresInput, UserUncheckedCreateWithoutMeasuresInput>
+  }
+
+  export type CrisisUpsertWithoutMeasuresInput = {
+    update: XOR<CrisisUpdateWithoutMeasuresInput, CrisisUncheckedUpdateWithoutMeasuresInput>
+    create: XOR<CrisisCreateWithoutMeasuresInput, CrisisUncheckedCreateWithoutMeasuresInput>
+    where?: CrisisWhereInput
+  }
+
+  export type CrisisUpdateToOneWithWhereWithoutMeasuresInput = {
+    where?: CrisisWhereInput
+    data: XOR<CrisisUpdateWithoutMeasuresInput, CrisisUncheckedUpdateWithoutMeasuresInput>
+  }
+
+  export type CrisisUpdateWithoutMeasuresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCrisesNestedInput
+    allowedEtater?: EtatUpdateManyWithoutCrisesNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutCrisisNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutCrisisNestedInput
+  }
+
+  export type CrisisUncheckedUpdateWithoutMeasuresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    allowedEtater?: EtatUncheckedUpdateManyWithoutCrisesNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutCrisisNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutCrisisNestedInput
+  }
+
+  export type EtatUpsertWithoutMeasuresInput = {
+    update: XOR<EtatUpdateWithoutMeasuresInput, EtatUncheckedUpdateWithoutMeasuresInput>
+    create: XOR<EtatCreateWithoutMeasuresInput, EtatUncheckedCreateWithoutMeasuresInput>
+    where?: EtatWhereInput
+  }
+
+  export type EtatUpdateToOneWithWhereWithoutMeasuresInput = {
+    where?: EtatWhereInput
+    data: XOR<EtatUpdateWithoutMeasuresInput, EtatUncheckedUpdateWithoutMeasuresInput>
+  }
+
+  export type EtatUpdateWithoutMeasuresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    themeColor?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutEtaterNestedInput
+    crises?: CrisisUpdateManyWithoutAllowedEtaterNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutEtatNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutEtatNestedInput
+  }
+
+  export type EtatUncheckedUpdateWithoutMeasuresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    themeColor?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutEtaterNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutAllowedEtaterNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutEtatNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutEtatNestedInput
+  }
+
+  export type UserUpsertWithoutMeasuresInput = {
+    update: XOR<UserUpdateWithoutMeasuresInput, UserUncheckedUpdateWithoutMeasuresInput>
+    create: XOR<UserCreateWithoutMeasuresInput, UserUncheckedCreateWithoutMeasuresInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMeasuresInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMeasuresInput, UserUncheckedUpdateWithoutMeasuresInput>
+  }
+
+  export type UserUpdateWithoutMeasuresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUpdateManyWithoutCreatedByNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutCreatedByNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutCreatedByNestedInput
+    etater?: EtatUpdateManyWithoutUsersNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMeasuresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutCreatedByNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutCreatedByNestedInput
+    etater?: EtatUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type CrisisCreateWithoutMapMarkersInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCrisesInput
+    allowedEtater?: EtatCreateNestedManyWithoutCrisesInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutCrisisInput
+    measures?: MeasureCreateNestedManyWithoutCrisisInput
+  }
+
+  export type CrisisUncheckedCreateWithoutMapMarkersInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    allowedEtater?: EtatUncheckedCreateNestedManyWithoutCrisesInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutCrisisInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutCrisisInput
+  }
+
+  export type CrisisCreateOrConnectWithoutMapMarkersInput = {
+    where: CrisisWhereUniqueInput
+    create: XOR<CrisisCreateWithoutMapMarkersInput, CrisisUncheckedCreateWithoutMapMarkersInput>
+  }
+
+  export type EtatCreateWithoutMapMarkersInput = {
+    id?: string
+    title: string
+    contactPhone: string
+    contactEmail: string
+    themeColor: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutEtaterInput
+    crises?: CrisisCreateNestedManyWithoutAllowedEtaterInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutEtatInput
+    measures?: MeasureCreateNestedManyWithoutEtatInput
+  }
+
+  export type EtatUncheckedCreateWithoutMapMarkersInput = {
+    id?: string
+    title: string
+    contactPhone: string
+    contactEmail: string
+    themeColor: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutEtaterInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutAllowedEtaterInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutEtatInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutEtatInput
+  }
+
+  export type EtatCreateOrConnectWithoutMapMarkersInput = {
+    where: EtatWhereUniqueInput
+    create: XOR<EtatCreateWithoutMapMarkersInput, EtatUncheckedCreateWithoutMapMarkersInput>
+  }
+
+  export type UserCreateWithoutMapMarkersInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    isVerified?: boolean
+    isAdmin?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisCreateNestedManyWithoutCreatedByInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutCreatedByInput
+    measures?: MeasureCreateNestedManyWithoutCreatedByInput
+    etater?: EtatCreateNestedManyWithoutUsersInput
+  }
+
+  export type UserUncheckedCreateWithoutMapMarkersInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    isVerified?: boolean
+    isAdmin?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutCreatedByInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutCreatedByInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutCreatedByInput
+    etater?: EtatUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type UserCreateOrConnectWithoutMapMarkersInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMapMarkersInput, UserUncheckedCreateWithoutMapMarkersInput>
+  }
+
+  export type CrisisUpsertWithoutMapMarkersInput = {
+    update: XOR<CrisisUpdateWithoutMapMarkersInput, CrisisUncheckedUpdateWithoutMapMarkersInput>
+    create: XOR<CrisisCreateWithoutMapMarkersInput, CrisisUncheckedCreateWithoutMapMarkersInput>
+    where?: CrisisWhereInput
+  }
+
+  export type CrisisUpdateToOneWithWhereWithoutMapMarkersInput = {
+    where?: CrisisWhereInput
+    data: XOR<CrisisUpdateWithoutMapMarkersInput, CrisisUncheckedUpdateWithoutMapMarkersInput>
+  }
+
+  export type CrisisUpdateWithoutMapMarkersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCrisesNestedInput
+    allowedEtater?: EtatUpdateManyWithoutCrisesNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutCrisisNestedInput
+    measures?: MeasureUpdateManyWithoutCrisisNestedInput
+  }
+
+  export type CrisisUncheckedUpdateWithoutMapMarkersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    allowedEtater?: EtatUncheckedUpdateManyWithoutCrisesNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutCrisisNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutCrisisNestedInput
+  }
+
+  export type EtatUpsertWithoutMapMarkersInput = {
+    update: XOR<EtatUpdateWithoutMapMarkersInput, EtatUncheckedUpdateWithoutMapMarkersInput>
+    create: XOR<EtatCreateWithoutMapMarkersInput, EtatUncheckedCreateWithoutMapMarkersInput>
+    where?: EtatWhereInput
+  }
+
+  export type EtatUpdateToOneWithWhereWithoutMapMarkersInput = {
+    where?: EtatWhereInput
+    data: XOR<EtatUpdateWithoutMapMarkersInput, EtatUncheckedUpdateWithoutMapMarkersInput>
+  }
+
+  export type EtatUpdateWithoutMapMarkersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    themeColor?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutEtaterNestedInput
+    crises?: CrisisUpdateManyWithoutAllowedEtaterNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutEtatNestedInput
+    measures?: MeasureUpdateManyWithoutEtatNestedInput
+  }
+
+  export type EtatUncheckedUpdateWithoutMapMarkersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    themeColor?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutEtaterNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutAllowedEtaterNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutEtatNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutEtatNestedInput
+  }
+
+  export type UserUpsertWithoutMapMarkersInput = {
+    update: XOR<UserUpdateWithoutMapMarkersInput, UserUncheckedUpdateWithoutMapMarkersInput>
+    create: XOR<UserCreateWithoutMapMarkersInput, UserUncheckedCreateWithoutMapMarkersInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMapMarkersInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMapMarkersInput, UserUncheckedUpdateWithoutMapMarkersInput>
+  }
+
+  export type UserUpdateWithoutMapMarkersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUpdateManyWithoutCreatedByNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutCreatedByNestedInput
+    measures?: MeasureUpdateManyWithoutCreatedByNestedInput
+    etater?: EtatUpdateManyWithoutUsersNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMapMarkersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutCreatedByNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutCreatedByNestedInput
+    etater?: EtatUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id: string
     name: string
@@ -10307,6 +18967,10 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisCreateNestedManyWithoutCreatedByInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutCreatedByInput
+    measures?: MeasureCreateNestedManyWithoutCreatedByInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutCreatedByInput
     etater?: EtatCreateNestedManyWithoutUsersInput
   }
 
@@ -10322,6 +18986,10 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutCreatedByInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutCreatedByInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutCreatedByInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutCreatedByInput
     etater?: EtatUncheckedCreateNestedManyWithoutUsersInput
   }
 
@@ -10353,6 +19021,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUpdateManyWithoutCreatedByNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutCreatedByNestedInput
+    measures?: MeasureUpdateManyWithoutCreatedByNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutCreatedByNestedInput
     etater?: EtatUpdateManyWithoutUsersNestedInput
   }
 
@@ -10368,6 +19040,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutCreatedByNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutCreatedByNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutCreatedByNestedInput
     etater?: EtatUncheckedUpdateManyWithoutUsersNestedInput
   }
 
@@ -10383,6 +19059,10 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisCreateNestedManyWithoutCreatedByInput
+    timelineEntries?: TimelineEntryCreateNestedManyWithoutCreatedByInput
+    measures?: MeasureCreateNestedManyWithoutCreatedByInput
+    mapMarkers?: MapMarkerCreateNestedManyWithoutCreatedByInput
     etater?: EtatCreateNestedManyWithoutUsersInput
   }
 
@@ -10398,6 +19078,10 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutCreatedByInput
+    timelineEntries?: TimelineEntryUncheckedCreateNestedManyWithoutCreatedByInput
+    measures?: MeasureUncheckedCreateNestedManyWithoutCreatedByInput
+    mapMarkers?: MapMarkerUncheckedCreateNestedManyWithoutCreatedByInput
     etater?: EtatUncheckedCreateNestedManyWithoutUsersInput
   }
 
@@ -10429,6 +19113,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUpdateManyWithoutCreatedByNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutCreatedByNestedInput
+    measures?: MeasureUpdateManyWithoutCreatedByNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutCreatedByNestedInput
     etater?: EtatUpdateManyWithoutUsersNestedInput
   }
 
@@ -10444,6 +19132,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutCreatedByNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutCreatedByNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutCreatedByNestedInput
     etater?: EtatUncheckedUpdateManyWithoutUsersNestedInput
   }
 
@@ -10477,6 +19169,47 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type CrisisCreateManyCreatedByInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TimelineEntryCreateManyCreatedByInput = {
+    id?: string
+    text: string
+    crisisId: string
+    etatId: string
+    createdAt?: Date | string
+  }
+
+  export type MeasureCreateManyCreatedByInput = {
+    id?: string
+    text: string
+    severity: $Enums.Severity
+    crisisId: string
+    etatId: string
+    createdAt?: Date | string
+  }
+
+  export type MapMarkerCreateManyCreatedByInput = {
+    id?: string
+    type: $Enums.MarkerType
+    label: string
+    lat: number
+    lng: number
+    radius?: number | null
+    crisisId: string
+    etatId: string
+    createdAt?: Date | string
   }
 
   export type SessionUpdateWithoutUserInput = {
@@ -10575,6 +19308,137 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CrisisUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    allowedEtater?: EtatUpdateManyWithoutCrisesNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutCrisisNestedInput
+    measures?: MeasureUpdateManyWithoutCrisisNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutCrisisNestedInput
+  }
+
+  export type CrisisUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    allowedEtater?: EtatUncheckedUpdateManyWithoutCrisesNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutCrisisNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutCrisisNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutCrisisNestedInput
+  }
+
+  export type CrisisUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimelineEntryUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    crisis?: CrisisUpdateOneRequiredWithoutTimelineEntriesNestedInput
+    etat?: EtatUpdateOneRequiredWithoutTimelineEntriesNestedInput
+  }
+
+  export type TimelineEntryUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    crisisId?: StringFieldUpdateOperationsInput | string
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimelineEntryUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    crisisId?: StringFieldUpdateOperationsInput | string
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MeasureUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    crisis?: CrisisUpdateOneRequiredWithoutMeasuresNestedInput
+    etat?: EtatUpdateOneRequiredWithoutMeasuresNestedInput
+  }
+
+  export type MeasureUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    crisisId?: StringFieldUpdateOperationsInput | string
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MeasureUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    crisisId?: StringFieldUpdateOperationsInput | string
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MapMarkerUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMarkerTypeFieldUpdateOperationsInput | $Enums.MarkerType
+    label?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    radius?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    crisis?: CrisisUpdateOneRequiredWithoutMapMarkersNestedInput
+    etat?: EtatUpdateOneRequiredWithoutMapMarkersNestedInput
+  }
+
+  export type MapMarkerUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMarkerTypeFieldUpdateOperationsInput | $Enums.MarkerType
+    label?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    radius?: NullableIntFieldUpdateOperationsInput | number | null
+    crisisId?: StringFieldUpdateOperationsInput | string
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MapMarkerUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMarkerTypeFieldUpdateOperationsInput | $Enums.MarkerType
+    label?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    radius?: NullableIntFieldUpdateOperationsInput | number | null
+    crisisId?: StringFieldUpdateOperationsInput | string
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type EtatUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -10583,6 +19447,10 @@ export namespace Prisma {
     themeColor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    crises?: CrisisUpdateManyWithoutAllowedEtaterNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutEtatNestedInput
+    measures?: MeasureUpdateManyWithoutEtatNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutEtatNestedInput
   }
 
   export type EtatUncheckedUpdateWithoutUsersInput = {
@@ -10593,6 +19461,10 @@ export namespace Prisma {
     themeColor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    crises?: CrisisUncheckedUpdateManyWithoutAllowedEtaterNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutEtatNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutEtatNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutEtatNestedInput
   }
 
   export type EtatUncheckedUpdateManyWithoutUsersInput = {
@@ -10603,6 +19475,35 @@ export namespace Prisma {
     themeColor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimelineEntryCreateManyEtatInput = {
+    id?: string
+    text: string
+    crisisId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type MeasureCreateManyEtatInput = {
+    id?: string
+    text: string
+    severity: $Enums.Severity
+    crisisId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type MapMarkerCreateManyEtatInput = {
+    id?: string
+    type: $Enums.MarkerType
+    label: string
+    lat: number
+    lng: number
+    radius?: number | null
+    crisisId: string
+    createdById: string
+    createdAt?: Date | string
   }
 
   export type UserUpdateWithoutEtaterInput = {
@@ -10618,6 +19519,10 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUpdateManyWithoutCreatedByNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutCreatedByNestedInput
+    measures?: MeasureUpdateManyWithoutCreatedByNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEtaterInput = {
@@ -10633,6 +19538,10 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutCreatedByNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutCreatedByNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutEtaterInput = {
@@ -10645,6 +19554,292 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CrisisUpdateWithoutAllowedEtaterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCrisesNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutCrisisNestedInput
+    measures?: MeasureUpdateManyWithoutCrisisNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutCrisisNestedInput
+  }
+
+  export type CrisisUncheckedUpdateWithoutAllowedEtaterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutCrisisNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutCrisisNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutCrisisNestedInput
+  }
+
+  export type CrisisUncheckedUpdateManyWithoutAllowedEtaterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimelineEntryUpdateWithoutEtatInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    crisis?: CrisisUpdateOneRequiredWithoutTimelineEntriesNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutTimelineEntriesNestedInput
+  }
+
+  export type TimelineEntryUncheckedUpdateWithoutEtatInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    crisisId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimelineEntryUncheckedUpdateManyWithoutEtatInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    crisisId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MeasureUpdateWithoutEtatInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    crisis?: CrisisUpdateOneRequiredWithoutMeasuresNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutMeasuresNestedInput
+  }
+
+  export type MeasureUncheckedUpdateWithoutEtatInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    crisisId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MeasureUncheckedUpdateManyWithoutEtatInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    crisisId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MapMarkerUpdateWithoutEtatInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMarkerTypeFieldUpdateOperationsInput | $Enums.MarkerType
+    label?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    radius?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    crisis?: CrisisUpdateOneRequiredWithoutMapMarkersNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutMapMarkersNestedInput
+  }
+
+  export type MapMarkerUncheckedUpdateWithoutEtatInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMarkerTypeFieldUpdateOperationsInput | $Enums.MarkerType
+    label?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    radius?: NullableIntFieldUpdateOperationsInput | number | null
+    crisisId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MapMarkerUncheckedUpdateManyWithoutEtatInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMarkerTypeFieldUpdateOperationsInput | $Enums.MarkerType
+    label?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    radius?: NullableIntFieldUpdateOperationsInput | number | null
+    crisisId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimelineEntryCreateManyCrisisInput = {
+    id?: string
+    text: string
+    etatId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type MeasureCreateManyCrisisInput = {
+    id?: string
+    text: string
+    severity: $Enums.Severity
+    etatId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type MapMarkerCreateManyCrisisInput = {
+    id?: string
+    type: $Enums.MarkerType
+    label: string
+    lat: number
+    lng: number
+    radius?: number | null
+    etatId: string
+    createdById: string
+    createdAt?: Date | string
+  }
+
+  export type EtatUpdateWithoutCrisesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    themeColor?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutEtaterNestedInput
+    timelineEntries?: TimelineEntryUpdateManyWithoutEtatNestedInput
+    measures?: MeasureUpdateManyWithoutEtatNestedInput
+    mapMarkers?: MapMarkerUpdateManyWithoutEtatNestedInput
+  }
+
+  export type EtatUncheckedUpdateWithoutCrisesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    themeColor?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutEtaterNestedInput
+    timelineEntries?: TimelineEntryUncheckedUpdateManyWithoutEtatNestedInput
+    measures?: MeasureUncheckedUpdateManyWithoutEtatNestedInput
+    mapMarkers?: MapMarkerUncheckedUpdateManyWithoutEtatNestedInput
+  }
+
+  export type EtatUncheckedUpdateManyWithoutCrisesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    themeColor?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimelineEntryUpdateWithoutCrisisInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    etat?: EtatUpdateOneRequiredWithoutTimelineEntriesNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutTimelineEntriesNestedInput
+  }
+
+  export type TimelineEntryUncheckedUpdateWithoutCrisisInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimelineEntryUncheckedUpdateManyWithoutCrisisInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MeasureUpdateWithoutCrisisInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    etat?: EtatUpdateOneRequiredWithoutMeasuresNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutMeasuresNestedInput
+  }
+
+  export type MeasureUncheckedUpdateWithoutCrisisInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MeasureUncheckedUpdateManyWithoutCrisisInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MapMarkerUpdateWithoutCrisisInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMarkerTypeFieldUpdateOperationsInput | $Enums.MarkerType
+    label?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    radius?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    etat?: EtatUpdateOneRequiredWithoutMapMarkersNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutMapMarkersNestedInput
+  }
+
+  export type MapMarkerUncheckedUpdateWithoutCrisisInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMarkerTypeFieldUpdateOperationsInput | $Enums.MarkerType
+    label?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    radius?: NullableIntFieldUpdateOperationsInput | number | null
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MapMarkerUncheckedUpdateManyWithoutCrisisInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMarkerTypeFieldUpdateOperationsInput | $Enums.MarkerType
+    label?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    radius?: NullableIntFieldUpdateOperationsInput | number | null
+    etatId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

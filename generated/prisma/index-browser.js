@@ -151,6 +151,51 @@ exports.Prisma.EtatScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CrisisScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  what: 'what',
+  how: 'how',
+  when: 'when',
+  severity: 'severity',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TimelineEntryScalarFieldEnum = {
+  id: 'id',
+  text: 'text',
+  crisisId: 'crisisId',
+  etatId: 'etatId',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MeasureScalarFieldEnum = {
+  id: 'id',
+  text: 'text',
+  severity: 'severity',
+  crisisId: 'crisisId',
+  etatId: 'etatId',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MapMarkerScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  label: 'label',
+  lat: 'lat',
+  lng: 'lng',
+  radius: 'radius',
+  crisisId: 'crisisId',
+  etatId: 'etatId',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
   expiresAt: 'expiresAt',
@@ -201,12 +246,25 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.Severity = exports.$Enums.Severity = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH'
+};
 
+exports.MarkerType = exports.$Enums.MarkerType = {
+  RADIUS: 'RADIUS',
+  SHELTER: 'SHELTER'
+};
 
 exports.Prisma.ModelName = {
   Post: 'Post',
   User: 'User',
   Etat: 'Etat',
+  Crisis: 'Crisis',
+  TimelineEntry: 'TimelineEntry',
+  Measure: 'Measure',
+  MapMarker: 'MapMarker',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
