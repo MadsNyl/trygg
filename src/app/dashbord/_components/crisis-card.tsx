@@ -67,7 +67,7 @@ export function CrisisCard({ crisis }: CrisisCardProps) {
         </div>
         <div className="flex gap-2">
           <Button variant="outline" size="sm" asChild>
-            <Link href={`/krise/${crisis.id}`}>Se detaljer</Link>
+            <Link href={`/${crisis.id}`}>Se detaljer</Link>
           </Button>
           {crisis.canEdit ? (
             <Button variant="outline" size="sm" asChild>
