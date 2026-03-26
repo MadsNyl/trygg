@@ -35,11 +35,11 @@ export default async function DashbordPage() {
       </div>
 
       {!isEtatMember ? (
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           Du må være verifisert og medlem av en etat for å se kriser.
         </p>
       ) : crises.length === 0 ? (
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           Ingen kriser opprettet enda.
         </p>
       ) : (

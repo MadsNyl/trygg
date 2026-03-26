@@ -84,6 +84,7 @@ model Crisis {
   how            String
   when           DateTime
   severity       Severity @default(LOW)
+  location       String?
 
   createdBy      User     @relation(fields: [createdById], references: [id])
   createdById    String

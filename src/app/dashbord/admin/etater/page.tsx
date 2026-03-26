@@ -18,7 +18,9 @@ export default async function EtaterPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-lg font-semibold">Etater</h1>
-          <p className="text-xs text-muted-foreground">Administrer offentlige enheter</p>
+          <p className="text-muted-foreground text-xs">
+            Administrer offentlige enheter
+          </p>
         </div>
 
         <CreateEtatDialog />
@@ -34,13 +36,16 @@ export default async function EtaterPage() {
                     className="h-3 w-3 rounded-full"
                     style={{ backgroundColor: etat.themeColor }}
                   />
-                  <Link href={`/dashbord/admin/etater/${etat.id}`} className="hover:underline">
+                  <Link
+                    href={`/dashbord/admin/etater/${etat.id}`}
+                    className="hover:underline"
+                  >
                     {etat.title}
                   </Link>
                 </CardTitle>
                 <CardDescription>{etat.contactEmail}</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-1 text-xs text-muted-foreground">
+              <CardContent className="text-muted-foreground space-y-1 text-xs">
                 <p>Telefon: {etat.contactPhone}</p>
                 <p>Medlemmer: {etat._count.users}</p>
               </CardContent>
@@ -48,7 +53,9 @@ export default async function EtaterPage() {
           ))}
         </div>
       ) : (
-        <p className="text-sm text-muted-foreground">Ingen etater opprettet enda.</p>
+        <p className="text-muted-foreground text-sm">
+          Ingen etater opprettet enda.
+        </p>
       )}
     </main>
   );

@@ -103,6 +103,7 @@ const crisisInput = z.object({
   how: z.string().trim().min(1),
   when: z.coerce.date(),
   severity: z.enum(["LOW", "MEDIUM", "HIGH"]),
+  location: z.string().trim().min(1),
   allowedEtaterIds: z.array(z.string()).optional(),
 });
 
@@ -144,6 +145,7 @@ export const crisisRouter = createTRPCRouter({
           how: input.how,
           when: input.when,
           severity: input.severity,
+          location: input.location,
           createdBy: { connect: { id: ctx.session.user.id } },
           ...(input.allowedEtaterIds && input.allowedEtaterIds.length > 0
             ? {
@@ -194,6 +196,7 @@ export const crisisRouter = createTRPCRouter({
           how: input.how,
           when: input.when,
           severity: input.severity,
+          location: input.location,
           allowedEtater: {
             set: input.allowedEtaterIds
               ? input.allowedEtaterIds.map((id) => ({ id }))
@@ -307,18 +310,21 @@ export const crisisRouter = createTRPCRouter({
 
   addMapMarker: protectedProcedure
     .input(
-      z.object({
-        crisisId: z.string().min(1),
-        type: z.enum(["RADIUS", "SHELTER"]),
-        label: z.string().trim().min(1),
-        lat: z.number().min(-90).max(90),
-        lng: z.number().min(-180).max(180),
-        radius: z.number().int().min(1).optional(),
-        etatId: z.string().min(1),
-      }).refine(
-        (data) => data.type !== "RADIUS" || (data.radius != null && data.radius > 0),
-        { message: "Radius is required for RADIUS type", path: ["radius"] },
-      ),
+      z
+        .object({
+          crisisId: z.string().min(1),
+          type: z.enum(["RADIUS", "SHELTER"]),
+          label: z.string().trim().min(1),
+          lat: z.number().min(-90).max(90),
+          lng: z.number().min(-180).max(180),
+          radius: z.number().int().min(1).optional(),
+          etatId: z.string().min(1),
+        })
+        .refine(
+          (data) =>
+            data.type !== "RADIUS" || (data.radius != null && data.radius > 0),
+          { message: "Radius is required for RADIUS type", path: ["radius"] },
+        ),
     )
     .mutation(async ({ ctx, input }) => {
       const userEtatIds = await ensureVerifiedEtatMember(ctx);

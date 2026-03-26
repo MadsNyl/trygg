@@ -52,7 +52,7 @@ export default function RedigerKrisePage() {
   if (!crisis) {
     return (
       <main className="mx-auto w-full max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
-        <p className="text-sm text-muted-foreground">Krise ikke funnet.</p>
+        <p className="text-muted-foreground text-sm">Krise ikke funnet.</p>
       </main>
     );
   }
@@ -64,6 +64,7 @@ export default function RedigerKrisePage() {
     how: crisis.how,
     when: new Date(crisis.when).toISOString().slice(0, 16),
     severity: crisis.severity,
+    location: crisis.location ?? "",
     allowedEtaterIds: crisis.allowedEtater.map((e) => e.id),
   };
 
@@ -71,13 +72,13 @@ export default function RedigerKrisePage() {
     <main className="mx-auto w-full max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
       <Link
         href="/dashbord"
-        className="mb-6 inline-block text-sm text-muted-foreground hover:text-foreground"
+        className="text-muted-foreground hover:text-foreground mb-6 inline-block text-sm"
       >
         ← Tilbake til oversikt
       </Link>
 
       <h1 className="mb-1 text-xl font-semibold">Rediger krise</h1>
-      <p className="mb-8 text-sm text-muted-foreground">
+      <p className="text-muted-foreground mb-8 text-sm">
         Oppdater informasjon om krisesituasjonen.
       </p>
 
@@ -93,6 +94,7 @@ export default function RedigerKrisePage() {
             how: values.how,
             when: new Date(values.when),
             severity: values.severity,
+            location: values.location,
             allowedEtaterIds:
               values.allowedEtaterIds.length > 0
                 ? values.allowedEtaterIds

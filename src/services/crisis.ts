@@ -43,3 +43,72 @@ export async function getMeasures(crisisId: string) {
     },
   });
 }
+
+export async function getPublicCrises(filters?: {
+  search?: string;
+  severity?: "LOW" | "MEDIUM" | "HIGH";
+  location?: string;
+}) {
+  return db.crisis.findMany({
+    where: {
+      ...(filters?.search && {
+        OR: [
+          { title: { contains: filters.search, mode: "insensitive" as const } },
+          {
+            description: {
+              contains: filters.search,
+              mode: "insensitive" as const,
+            },
+          },
+        ],
+      }),
+      ...(filters?.severity && { severity: filters.severity }),
+      ...(filters?.location && { location: filters.location }),
+    },
+    orderBy: { createdAt: "desc" },
+    select: {
+      id: true,
+      title: true,
+      severity: true,
+      location: true,
+      when: true,
+      createdAt: true,
+    },
+  });
+}
+
+export async function getPublicCrisisById(id: string) {
+  return db.crisis.findUnique({
+    where: { id },
+    include: {
+      timelineEntries: {
+        orderBy: { createdAt: "desc" },
+        include: {
+          etat: { select: { id: true, title: true, themeColor: true } },
+        },
+      },
+      measures: {
+        orderBy: [{ severity: "desc" }, { createdAt: "desc" }],
+        include: {
+          etat: { select: { id: true, title: true, themeColor: true } },
+        },
+      },
+      mapMarkers: {
+        include: {
+          etat: { select: { id: true, title: true, themeColor: true } },
+        },
+      },
+    },
+  });
+}
+
+export async function getDistinctLocations() {
+  const results = await db.crisis.findMany({
+    where: { location: { not: null } },
+    select: { location: true },
+    distinct: ["location"],
+    orderBy: { location: "asc" },
+  });
+
+  return results.map((r) => r.location).filter((l): l is string => l !== null);
+}

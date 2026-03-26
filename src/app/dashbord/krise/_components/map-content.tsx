@@ -16,7 +16,8 @@ import "leaflet/dist/leaflet.css";
 // Fix default marker icon issue with webpack/next.js
 const defaultIcon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
   shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
   iconSize: [25, 41],
   iconAnchor: [12, 41],
@@ -36,7 +37,11 @@ type MapMarker = {
   etat: { id: string; title: string; themeColor: string };
 };
 
-function ClickHandler({ onClick }: { onClick: (lat: number, lng: number) => void }) {
+function ClickHandler({
+  onClick,
+}: {
+  onClick: (lat: number, lng: number) => void;
+}) {
   useMapEvents({
     click(e) {
       onClick(e.latlng.lat, e.latlng.lng);
@@ -153,7 +158,10 @@ export default function MapContent({
             }}
           />
         ) : (
-          <Marker position={[pendingClick.lat, pendingClick.lng]} opacity={0.6} />
+          <Marker
+            position={[pendingClick.lat, pendingClick.lng]}
+            opacity={0.6}
+          />
         )
       ) : null}
     </MapContainer>

@@ -18,7 +18,8 @@ export async function getUsers(searchParams: RawSearchParams) {
   const q = getStringParam(searchParams.q)?.trim() ?? "";
 
   const pageParam = Number(getStringParam(searchParams.page) ?? "1");
-  const page = Number.isFinite(pageParam) && pageParam > 0 ? Math.floor(pageParam) : 1;
+  const page =
+    Number.isFinite(pageParam) && pageParam > 0 ? Math.floor(pageParam) : 1;
 
   const where = q
     ? {

@@ -44,16 +44,26 @@ function MarkerList({
           >
             <span className="flex items-center gap-2">
               Faresoner
-              <Badge variant="outline" className="bg-red-500/15 text-red-500 border-red-500/30">
+              <Badge
+                variant="outline"
+                className="border-red-500/30 bg-red-500/15 text-red-500"
+              >
                 {radiusMarkers.length}
               </Badge>
             </span>
-            <span className="text-muted-foreground">{showRadius ? "▲" : "▼"}</span>
+            <span className="text-muted-foreground">
+              {showRadius ? "▲" : "▼"}
+            </span>
           </button>
           {showRadius ? (
             <div className="mt-2 space-y-2">
               {radiusMarkers.map((marker) => (
-                <MarkerRow key={marker.id} marker={marker} onRemove={onRemove} isRemoving={isRemoving} />
+                <MarkerRow
+                  key={marker.id}
+                  marker={marker}
+                  onRemove={onRemove}
+                  isRemoving={isRemoving}
+                />
               ))}
             </div>
           ) : null}
@@ -69,16 +79,26 @@ function MarkerList({
           >
             <span className="flex items-center gap-2">
               Punkter
-              <Badge variant="outline" className="bg-blue-500/15 text-blue-500 border-blue-500/30">
+              <Badge
+                variant="outline"
+                className="border-blue-500/30 bg-blue-500/15 text-blue-500"
+              >
                 {shelterMarkers.length}
               </Badge>
             </span>
-            <span className="text-muted-foreground">{showShelter ? "▲" : "▼"}</span>
+            <span className="text-muted-foreground">
+              {showShelter ? "▲" : "▼"}
+            </span>
           </button>
           {showShelter ? (
             <div className="mt-2 space-y-2">
               {shelterMarkers.map((marker) => (
-                <MarkerRow key={marker.id} marker={marker} onRemove={onRemove} isRemoving={isRemoving} />
+                <MarkerRow
+                  key={marker.id}
+                  marker={marker}
+                  onRemove={onRemove}
+                  isRemoving={isRemoving}
+                />
               ))}
             </div>
           ) : null}
@@ -106,7 +126,9 @@ function MarkerRow({
         />
         <span className="text-sm">{marker.label}</span>
         {marker.type === "RADIUS" && marker.radius ? (
-          <span className="text-xs text-muted-foreground">{marker.radius}m</span>
+          <span className="text-muted-foreground text-xs">
+            {marker.radius}m
+          </span>
         ) : null}
         {marker.type === "SHELTER" ? (
           <a
@@ -212,11 +234,14 @@ export function MapSection({
   return (
     <div className="space-y-4">
       <h2 className="text-sm font-semibold">Kart</h2>
-      <p className="text-xs text-muted-foreground">
+      <p className="text-muted-foreground text-xs">
         Klikk på kartet for å legge til en markør.
       </p>
 
-      <div className="overflow-hidden rounded-lg border" style={{ height: 400 }}>
+      <div
+        className="overflow-hidden rounded-lg border"
+        style={{ height: 400 }}
+      >
         <MapContent
           markers={markers}
           pendingClick={pendingClick}
@@ -230,7 +255,8 @@ export function MapSection({
       {pendingClick ? (
         <div className="space-y-3 rounded-lg border p-4">
           <p className="text-sm font-medium">
-            Ny markør ({pendingClick.lat.toFixed(5)}, {pendingClick.lng.toFixed(5)})
+            Ny markør ({pendingClick.lat.toFixed(5)},{" "}
+            {pendingClick.lng.toFixed(5)})
           </p>
 
           <ToggleGroup
@@ -240,10 +266,16 @@ export function MapSection({
               if (v) setType(v as "RADIUS" | "SHELTER");
             }}
           >
-            <ToggleGroupItem value="RADIUS" className="data-[state=on]:bg-red-500/15 data-[state=on]:text-red-500">
+            <ToggleGroupItem
+              value="RADIUS"
+              className="data-[state=on]:bg-red-500/15 data-[state=on]:text-red-500"
+            >
               Faresone
             </ToggleGroupItem>
-            <ToggleGroupItem value="SHELTER" className="data-[state=on]:bg-blue-500/15 data-[state=on]:text-blue-500">
+            <ToggleGroupItem
+              value="SHELTER"
+              className="data-[state=on]:bg-blue-500/15 data-[state=on]:text-blue-500"
+            >
               Punkt
             </ToggleGroupItem>
           </ToggleGroup>
@@ -252,7 +284,11 @@ export function MapSection({
             <Input
               value={label}
               onChange={(e) => setLabel(e.target.value)}
-              placeholder={type === "RADIUS" ? "Navn på faresone..." : "Navn på punkt (f.eks. Tilfluktsrom)..."}
+              placeholder={
+                type === "RADIUS"
+                  ? "Navn på faresone..."
+                  : "Navn på punkt (f.eks. Tilfluktsrom)..."
+              }
               className="flex-1"
             />
             {type === "RADIUS" ? (

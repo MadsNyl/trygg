@@ -78,7 +78,10 @@ export function InnloggingKort() {
 
     if (result.error) {
       setFeilmelding(
-        hentFeilmelding(result.error, "Kunne ikke registrere bruker. Prøv igjen."),
+        hentFeilmelding(
+          result.error,
+          "Kunne ikke registrere bruker. Prøv igjen.",
+        ),
       );
       setLasterInn(false);
       return;
