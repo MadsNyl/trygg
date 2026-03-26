@@ -1,67 +1,62 @@
-import { headers } from "next/headers";
-import Link from "next/link";
-import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
-import { Button } from "~/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { auth } from "~/server/better-auth";
-import { getSession } from "~/server/better-auth/server";
+import { CrisisListItem } from "~/app/_components/crisis-list-item";
+import { FeedFilters } from "~/app/_components/feed-filters";
+import { FeedFooter } from "~/app/_components/feed-footer";
+import { getDistinctLocations, getPublicCrises } from "~/services/crisis";
 
-export default async function Home() {
-  const session = await getSession();
-  const isVerified = session?.user?.isVerified === true;
+type SearchParams = Promise<{
+  q?: string;
+  severity?: string;
+  location?: string;
+}>;
+
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
+  const params = await searchParams;
+  const severity =
+    params.severity === "LOW" ||
+    params.severity === "MEDIUM" ||
+    params.severity === "HIGH"
+      ? params.severity
+      : undefined;
+
+  const [crises, locations] = await Promise.all([
+    getPublicCrises({
+      search: params.q,
+      severity,
+      location: params.location,
+    }),
+    getDistinctLocations(),
+  ]);
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-white px-4">
-      {session ? (
-        <div className="w-full max-w-md space-y-4">
-          {!isVerified ? (
-            <Card className="border-amber-200 bg-amber-50">
-              <CardHeader>
-                <CardTitle className="text-base text-amber-900">
-                  Kontoen din venter på godkjenning
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-amber-800">
-                  Du er logget inn, men kontoen er ikke verifisert enda. Når en
-                  administrator har godkjent kontoen din, får du full tilgang.
-                </p>
-              </CardContent>
-            </Card>
-          ) : (
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base">Velkommen tilbake</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Kontoen din er verifisert.
-                </p>
-              </CardContent>
-            </Card>
-          )}
+    <main className="mx-auto min-h-screen max-w-md bg-white">
+      <header className="px-4 pt-6 pb-4">
+        <h1 className="font-heading text-2xl font-bold">Trygg</h1>
+        <p className="text-sm text-muted-foreground">Kriseoversikt</p>
+      </header>
 
-          <form className="flex justify-center">
-            <Button
-              size="lg"
-              formAction={async () => {
-                "use server";
-                await auth.api.signOut({
-                  headers: await headers(),
-                });
-                redirect("/");
-              }}
-            >
-              Logg ut
-            </Button>
-          </form>
-        </div>
-      ) : (
-        <Button asChild size="lg">
-          <Link href="/logg-inn">Logg inn</Link>
-        </Button>
-      )}
+      <Suspense>
+        <FeedFilters locations={locations} />
+      </Suspense>
+
+      <div className="mt-4">
+        {crises.length === 0 ? (
+          <p className="px-4 py-8 text-center text-sm text-muted-foreground">
+            Ingen kriser funnet.
+          </p>
+        ) : (
+          crises.map((crisis) => (
+            <CrisisListItem key={crisis.id} crisis={crisis} />
+          ))
+        )}
+      </div>
+
+      <FeedFooter />
     </main>
   );
 }
