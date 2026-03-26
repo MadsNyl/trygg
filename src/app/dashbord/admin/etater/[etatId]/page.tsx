@@ -32,9 +32,9 @@ export default async function EtatDetailsPage({
   }
 
   return (
-    <main className="min-h-[calc(100vh-11.5rem)] space-y-4">
+    <main className="space-y-6">
       <div className="flex items-center justify-between">
-        <Button variant="outline" asChild>
+        <Button variant="outline" asChild className="h-10 px-5 text-sm">
           <Link href="/dashbord/admin/etater">Tilbake til etater</Link>
         </Button>
 
@@ -50,30 +50,33 @@ export default async function EtatDetailsPage({
       </div>
 
       <div className="space-y-1">
-        <h1 className="flex items-center gap-2 text-lg font-semibold">
+        <h1 className="font-heading flex items-center gap-2 text-2xl font-bold tracking-tight">
           <span
-            className="h-3 w-3 rounded-full"
+            className="h-4 w-4 shrink-0 rounded-full"
             style={{ backgroundColor: etat.themeColor }}
+            aria-hidden="true"
           />
           {etat.title}
         </h1>
-        <p className="text-muted-foreground text-xs">{etat.contactEmail}</p>
-        <p className="text-muted-foreground text-xs">
+        <p className="text-muted-foreground text-sm">{etat.contactEmail}</p>
+        <p className="text-muted-foreground text-sm">
           Telefon: {etat.contactPhone}
         </p>
       </div>
 
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-medium">Medlemmer ({etat._count.users})</h2>
+        <h2 className="text-base font-semibold">
+          Medlemmer ({etat._count.users})
+        </h2>
         <AddEtatUserDialog etatId={etat.id} />
       </div>
 
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Navn</TableHead>
-            <TableHead>E-post</TableHead>
-            <TableHead>Handling</TableHead>
+            <TableHead className="text-sm">Navn</TableHead>
+            <TableHead className="text-sm">E-post</TableHead>
+            <TableHead className="text-sm">Handling</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -81,7 +84,7 @@ export default async function EtatDetailsPage({
             <TableRow>
               <TableCell
                 colSpan={3}
-                className="text-muted-foreground py-6 text-center"
+                className="text-muted-foreground py-8 text-center text-sm"
               >
                 Ingen medlemmer ennå.
               </TableCell>
@@ -89,8 +92,8 @@ export default async function EtatDetailsPage({
           ) : (
             etat.users.map((user) => (
               <TableRow key={user.id}>
-                <TableCell>{user.name}</TableCell>
-                <TableCell>{user.email}</TableCell>
+                <TableCell className="text-sm">{user.name}</TableCell>
+                <TableCell className="text-sm">{user.email}</TableCell>
                 <TableCell>
                   <RemoveEtatUserButton etatId={etat.id} userId={user.id} />
                 </TableCell>

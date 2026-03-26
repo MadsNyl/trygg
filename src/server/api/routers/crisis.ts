@@ -206,6 +206,15 @@ export const crisisRouter = createTRPCRouter({
       });
     }),
 
+  delete: protectedProcedure
+    .input(z.object({ id: z.string().min(1) }))
+    .mutation(async ({ ctx, input }) => {
+      const userEtatIds = await ensureVerifiedEtatMember(ctx);
+      await checkEditAccess(ctx, input.id, userEtatIds);
+
+      return ctx.db.crisis.delete({ where: { id: input.id } });
+    }),
+
   listEtater: protectedProcedure.query(async ({ ctx }) => {
     await ensureVerifiedEtatMember(ctx);
 
@@ -291,6 +300,44 @@ export const crisisRouter = createTRPCRouter({
           createdBy: { connect: { id: ctx.session.user.id } },
         },
       });
+    }),
+
+  removeTimelineEntry: protectedProcedure
+    .input(z.object({ id: z.string().min(1) }))
+    .mutation(async ({ ctx, input }) => {
+      const userEtatIds = await ensureVerifiedEtatMember(ctx);
+
+      const entry = await ctx.db.timelineEntry.findUnique({
+        where: { id: input.id },
+        select: { crisisId: true },
+      });
+
+      if (!entry) {
+        throw new TRPCError({ code: "NOT_FOUND" });
+      }
+
+      await checkEditAccess(ctx, entry.crisisId, userEtatIds);
+
+      return ctx.db.timelineEntry.delete({ where: { id: input.id } });
+    }),
+
+  removeMeasure: protectedProcedure
+    .input(z.object({ id: z.string().min(1) }))
+    .mutation(async ({ ctx, input }) => {
+      const userEtatIds = await ensureVerifiedEtatMember(ctx);
+
+      const measure = await ctx.db.measure.findUnique({
+        where: { id: input.id },
+        select: { crisisId: true },
+      });
+
+      if (!measure) {
+        throw new TRPCError({ code: "NOT_FOUND" });
+      }
+
+      await checkEditAccess(ctx, measure.crisisId, userEtatIds);
+
+      return ctx.db.measure.delete({ where: { id: input.id } });
     }),
 
   listMapMarkers: protectedProcedure

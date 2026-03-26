@@ -1,9 +1,24 @@
+import Link from "next/link";
 import { Suspense } from "react";
 
+import { Avatar, AvatarFallback } from "~/components/ui/avatar";
+import { Button } from "~/components/ui/button";
 import { CrisisListItem } from "~/app/_components/crisis-list-item";
 import { FeedFilters } from "~/app/_components/feed-filters";
-import { FeedFooter } from "~/app/_components/feed-footer";
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+} from "~/components/ui/empty";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  Search01Icon,
+  CheckmarkCircle02Icon,
+} from "@hugeicons/core-free-icons";
 import { getDistinctLocations, getPublicCrises } from "~/services/crisis";
+import { getSession } from "~/server/better-auth/server";
 
 type SearchParams = Promise<{
   q?: string;
@@ -24,39 +39,105 @@ export default async function Home({
       ? params.severity
       : undefined;
 
-  const [crises, locations] = await Promise.all([
+  const hasFilters = !!(params.q ?? severity ?? params.location);
+
+  const [crises, locations, session] = await Promise.all([
     getPublicCrises({
       search: params.q,
       severity,
       location: params.location,
     }),
     getDistinctLocations(),
+    getSession(),
   ]);
 
   return (
-    <main className="mx-auto min-h-screen max-w-md bg-white">
-      <header className="px-4 pt-6 pb-4">
-        <h1 className="font-heading text-2xl font-bold">Trygg</h1>
-        <p className="text-muted-foreground text-sm">Kriseoversikt</p>
+    <main className="bg-background min-h-screen">
+      <header className="bg-background border-b">
+        <div className="mx-auto flex h-16 max-w-3xl items-center justify-between px-4 lg:px-0">
+          <div>
+            <h1 className="font-heading text-xl font-bold tracking-tight">
+              trygg
+            </h1>
+          </div>
+          <nav className="hidden items-center gap-3 sm:flex">
+            {session?.user ? (
+              <Link
+                href="/dashbord"
+                className="flex items-center gap-2 text-sm transition-opacity hover:opacity-80"
+              >
+                <Avatar>
+                  <AvatarFallback className="text-sm">
+                    {session.user.name.charAt(0).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+                <span>{session.user.name}</span>
+              </Link>
+            ) : (
+              <Button asChild variant="outline" className="h-9 px-4 text-sm">
+                <Link href="/logg-inn">Logg inn</Link>
+              </Button>
+            )}
+          </nav>
+        </div>
       </header>
 
-      <Suspense>
-        <FeedFilters locations={locations} />
-      </Suspense>
-
-      <div className="mt-4">
-        {crises.length === 0 ? (
-          <p className="text-muted-foreground px-4 py-8 text-center text-sm">
-            Ingen kriser funnet.
+      <div className="mx-auto max-w-3xl px-4 py-6 lg:px-0 lg:py-10">
+        <div className="mb-6">
+          <h2 className="text-lg font-semibold">Kriseoversikt</h2>
+          <p className="text-muted-foreground mt-0.5 text-sm">
+            Aktive krisesituasjoner i ditt område
           </p>
-        ) : (
-          crises.map((crisis) => (
-            <CrisisListItem key={crisis.id} crisis={crisis} />
-          ))
-        )}
-      </div>
+        </div>
 
-      <FeedFooter />
+        <Suspense>
+          <FeedFilters locations={locations} />
+        </Suspense>
+
+        <div className="mt-4 space-y-3">
+          {crises.length === 0 ? (
+            hasFilters ? (
+              <Empty className="py-16">
+                <EmptyMedia>
+                  <HugeiconsIcon
+                    icon={Search01Icon}
+                    size={32}
+                    className="text-muted-foreground"
+                  />
+                </EmptyMedia>
+                <EmptyHeader>
+                  <EmptyTitle className="text-base">Ingen treff</EmptyTitle>
+                  <EmptyDescription className="text-sm">
+                    Prøv å endre søk eller fjern filtre for å se flere kriser.
+                  </EmptyDescription>
+                </EmptyHeader>
+              </Empty>
+            ) : (
+              <Empty className="py-16">
+                <EmptyMedia>
+                  <HugeiconsIcon
+                    icon={CheckmarkCircle02Icon}
+                    size={32}
+                    className="text-green-600"
+                  />
+                </EmptyMedia>
+                <EmptyHeader>
+                  <EmptyTitle className="text-base">
+                    Ingen aktive kriser
+                  </EmptyTitle>
+                  <EmptyDescription className="text-sm">
+                    Alt er rolig. Det er ingen krisesituasjoner akkurat nå.
+                  </EmptyDescription>
+                </EmptyHeader>
+              </Empty>
+            )
+          ) : (
+            crises.map((crisis) => (
+              <CrisisListItem key={crisis.id} crisis={crisis} />
+            ))
+          )}
+        </div>
+      </div>
     </main>
   );
 }

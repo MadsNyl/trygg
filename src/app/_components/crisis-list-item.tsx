@@ -1,43 +1,47 @@
 import Link from "next/link";
 
+import { Badge } from "~/components/ui/badge";
+import { formatDateTime } from "~/lib/format";
+import { severityConfig, type Severity } from "~/lib/severity";
+
 type CrisisListItemProps = {
   crisis: {
     id: string;
     title: string;
-    severity: "LOW" | "MEDIUM" | "HIGH";
+    description?: string;
+    severity: Severity;
     location: string | null;
     when: Date;
   };
 };
 
-const severityDot = {
-  LOW: "bg-green-500",
-  MEDIUM: "bg-amber-500",
-  HIGH: "bg-red-500",
-} as const;
-
 export function CrisisListItem({ crisis }: CrisisListItemProps) {
+  const severity = severityConfig[crisis.severity];
+
   return (
     <Link
       href={`/${crisis.id}`}
-      className="hover:bg-muted/50 flex items-start gap-3 border-b px-4 py-3 transition-colors"
+      className="bg-card hover:bg-muted/50 block rounded-lg border p-4 transition-colors sm:p-5"
     >
-      <span
-        className={`mt-2 h-2.5 w-2.5 shrink-0 rounded-full ${severityDot[crisis.severity]}`}
-      />
-      <div className="min-w-0 flex-1">
-        <p className="font-semibold">{crisis.title}</p>
-        <p className="text-muted-foreground text-sm">
-          {crisis.location ?? "Ukjent sted"} ·{" "}
-          {crisis.when.toLocaleDateString("nb-NO", {
-            day: "numeric",
-            month: "short",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          })}
-        </p>
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2">
+            <h3 className="truncate text-base font-semibold">{crisis.title}</h3>
+            <Badge variant="outline" className={`shrink-0 ${severity.badge}`}>
+              {severity.label}
+            </Badge>
+          </div>
+          {crisis.description ? (
+            <p className="text-muted-foreground mt-1 line-clamp-2 text-sm">
+              {crisis.description}
+            </p>
+          ) : null}
+        </div>
       </div>
+      <p className="text-muted-foreground mt-2 text-sm">
+        {crisis.location ?? "Ukjent sted"} ·{" "}
+        {formatDateTime(crisis.when, "short")}
+      </p>
     </Link>
   );
 }

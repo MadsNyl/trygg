@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 
 import { Input } from "~/components/ui/input";
 
@@ -9,9 +9,13 @@ type FeedFiltersProps = {
   locations: string[];
 };
 
+const selectClass =
+  "border-input bg-input/20 h-10 rounded-md border px-3 text-sm outline-none transition-colors focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30";
+
 export function FeedFilters({ locations }: FeedFiltersProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const updateParams = useCallback(
     (key: string, value: string) => {
@@ -26,26 +30,37 @@ export function FeedFilters({ locations }: FeedFiltersProps) {
     [router, searchParams],
   );
 
+  const debouncedUpdateParams = useCallback(
+    (key: string, value: string) => {
+      if (debounceTimer.current) clearTimeout(debounceTimer.current);
+      debounceTimer.current = setTimeout(() => updateParams(key, value), 300);
+    },
+    [updateParams],
+  );
+
   return (
-    <div className="space-y-3 px-4">
+    <div className="flex flex-col gap-3 sm:flex-row">
       <Input
         placeholder="Søk etter krise..."
         defaultValue={searchParams.get("q") ?? ""}
-        onChange={(e) => updateParams("q", e.target.value)}
+        onChange={(e) => debouncedUpdateParams("q", e.target.value)}
+        className="h-10 px-3 text-sm sm:flex-1 md:text-sm"
       />
-      <div className="flex gap-2">
+      <div className="grid grid-cols-2 gap-2 sm:flex">
         <select
-          className="flex-1 rounded-md border px-3 py-2 text-sm"
+          aria-label="Filtrer etter alvorlighetsgrad"
+          className={selectClass}
           defaultValue={searchParams.get("severity") ?? ""}
           onChange={(e) => updateParams("severity", e.target.value)}
         >
-          <option value="">Alle alvorlighetsgrader</option>
+          <option value="">Alvorlighetsgrad</option>
           <option value="HIGH">Høy</option>
           <option value="MEDIUM">Middels</option>
           <option value="LOW">Lav</option>
         </select>
         <select
-          className="flex-1 rounded-md border px-3 py-2 text-sm"
+          aria-label="Filtrer etter sted"
+          className={selectClass}
           defaultValue={searchParams.get("location") ?? ""}
           onChange={(e) => updateParams("location", e.target.value)}
         >

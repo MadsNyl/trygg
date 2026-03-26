@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { Button } from "~/components/ui/button";
@@ -26,22 +27,26 @@ type UserRowActionsProps = {
 
 export function UserRowActions({ user }: UserRowActionsProps) {
   const router = useRouter();
+  const [verifyOpen, setVerifyOpen] = useState(false);
+  const [adminOpen, setAdminOpen] = useState(false);
 
   const toggleIsVerified = api.users.toggleIsVerified.useMutation({
     onSuccess: () => {
+      setVerifyOpen(false);
       router.refresh();
     },
   });
 
   const toggleIsAdmin = api.users.toggleIsAdmin.useMutation({
     onSuccess: () => {
+      setAdminOpen(false);
       router.refresh();
     },
   });
 
   return (
     <div className="flex items-center gap-2">
-      <Dialog>
+      <Dialog open={verifyOpen} onOpenChange={setVerifyOpen}>
         <DialogTrigger asChild>
           <Button variant="outline" size="sm">
             {user.isVerified ? "Fjern verifisering" : "Verifiser"}
@@ -62,21 +67,19 @@ export function UserRowActions({ user }: UserRowActionsProps) {
             <DialogClose asChild>
               <Button variant="outline">Avbryt</Button>
             </DialogClose>
-            <DialogClose asChild>
-              <Button
-                onClick={() => {
-                  toggleIsVerified.mutate({ userId: user.id });
-                }}
-                disabled={toggleIsVerified.isPending}
-              >
-                Bekreft
-              </Button>
-            </DialogClose>
+            <Button
+              onClick={() => {
+                toggleIsVerified.mutate({ userId: user.id });
+              }}
+              disabled={toggleIsVerified.isPending}
+            >
+              {toggleIsVerified.isPending ? "Bekrefter..." : "Bekreft"}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
 
-      <Dialog>
+      <Dialog open={adminOpen} onOpenChange={setAdminOpen}>
         <DialogTrigger asChild>
           <Button variant="outline" size="sm">
             {user.isAdmin ? "Fjern admin" : "Gjør admin"}
@@ -97,16 +100,14 @@ export function UserRowActions({ user }: UserRowActionsProps) {
             <DialogClose asChild>
               <Button variant="outline">Avbryt</Button>
             </DialogClose>
-            <DialogClose asChild>
-              <Button
-                onClick={() => {
-                  toggleIsAdmin.mutate({ userId: user.id });
-                }}
-                disabled={toggleIsAdmin.isPending}
-              >
-                Bekreft
-              </Button>
-            </DialogClose>
+            <Button
+              onClick={() => {
+                toggleIsAdmin.mutate({ userId: user.id });
+              }}
+              disabled={toggleIsAdmin.isPending}
+            >
+              {toggleIsAdmin.isPending ? "Bekrefter..." : "Bekreft"}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

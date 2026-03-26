@@ -48,51 +48,52 @@ export function AddEtatUserDialog({ etatId }: AddEtatUserDialogProps) {
       }}
     >
       <DialogTrigger asChild>
-        <Button size="sm">Legg til bruker</Button>
+        <Button className="h-10 px-5 text-sm">Legg til bruker</Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle>Legg til bruker</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-xl">Legg til bruker</DialogTitle>
+          <DialogDescription className="text-sm">
             Søk etter navn og legg brukeren til i etaten.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-3">
+        <div className="space-y-4">
           <Input
             value={query}
             onChange={(event) => {
               setQuery(event.target.value);
             }}
             placeholder="Søk etter navn"
+            className="h-10 px-3 text-sm md:text-sm"
           />
 
           {query.trim().length < 2 ? (
-            <p className="text-muted-foreground text-xs">
+            <p className="text-muted-foreground text-sm">
               Skriv minst 2 tegn for å søke.
             </p>
           ) : usersQuery.isLoading ? (
-            <p className="text-muted-foreground text-xs">Søker...</p>
+            <p className="text-muted-foreground text-sm">Søker...</p>
           ) : usersQuery.data && usersQuery.data.length > 0 ? (
-            <div className="max-h-64 space-y-2 overflow-y-auto">
+            <div className="max-h-72 space-y-2 overflow-y-auto">
               {usersQuery.data.map((user) => (
                 <div
                   key={user.id}
-                  className="flex items-center justify-between rounded-md border p-2"
+                  className="flex items-center justify-between rounded-lg border p-3"
                 >
                   <div>
-                    <p className="font-medium">{user.name}</p>
-                    <p className="text-muted-foreground text-xs">
+                    <p className="text-sm font-medium">{user.name}</p>
+                    <p className="text-muted-foreground text-sm">
                       {user.email}
                     </p>
                   </div>
                   <Button
-                    size="sm"
                     variant="outline"
                     onClick={() => {
                       addUser.mutate({ etatId, userId: user.id });
                     }}
                     disabled={addUser.isPending}
+                    className="h-9 px-4 text-sm"
                   >
                     Legg til
                   </Button>
@@ -100,7 +101,7 @@ export function AddEtatUserDialog({ etatId }: AddEtatUserDialogProps) {
               ))}
             </div>
           ) : (
-            <p className="text-muted-foreground text-xs">
+            <p className="text-muted-foreground text-sm">
               Ingen brukere funnet.
             </p>
           )}

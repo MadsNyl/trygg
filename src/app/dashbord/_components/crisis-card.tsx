@@ -2,7 +2,8 @@ import Link from "next/link";
 
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { formatDateTime } from "~/lib/format";
+import { severityConfig, type Severity } from "~/lib/severity";
 
 type CrisisCardProps = {
   crisis: {
@@ -10,81 +11,52 @@ type CrisisCardProps = {
     title: string;
     description: string;
     when: Date;
-    severity: "LOW" | "MEDIUM" | "HIGH";
+    severity: Severity;
     createdBy: { name: string };
     allowedEtater: { title: string }[];
     canEdit: boolean;
   };
 };
 
-const severityConfig = {
-  LOW: {
-    label: "Lav",
-    className: "bg-green-500/15 text-green-500 border-green-500/30",
-  },
-  MEDIUM: {
-    label: "Middels",
-    className: "bg-amber-500/15 text-amber-500 border-amber-500/30",
-  },
-  HIGH: {
-    label: "Høy",
-    className: "bg-red-500/15 text-red-500 border-red-500/30",
-  },
-} as const;
-
-const severityBorderColor = {
-  LOW: "border-l-green-500",
-  MEDIUM: "border-l-amber-500",
-  HIGH: "border-l-red-500",
-} as const;
-
 export function CrisisCard({ crisis }: CrisisCardProps) {
   const severity = severityConfig[crisis.severity];
-  const borderColor = severityBorderColor[crisis.severity];
-
-  const etaterLabel =
-    crisis.allowedEtater.length === 0
-      ? "Alle etater"
-      : crisis.allowedEtater.map((e) => e.title).join(", ");
 
   return (
-    <Card className={`border-l-4 ${borderColor}`}>
-      <CardHeader className="pb-2">
-        <div className="flex items-center gap-2">
-          <CardTitle className="text-base">{crisis.title}</CardTitle>
-          <Badge variant="outline" className={severity.className}>
-            {severity.label}
-          </Badge>
+    <div className="rounded-lg border p-5 transition-shadow hover:shadow-sm">
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2">
+            <h3 className="truncate text-base font-semibold">{crisis.title}</h3>
+            <Badge variant="outline" className={`shrink-0 ${severity.badge}`}>
+              {severity.label}
+            </Badge>
+          </div>
+          <p className="text-muted-foreground mt-1.5 line-clamp-2 text-sm">
+            {crisis.description}
+          </p>
         </div>
-        <p className="text-muted-foreground line-clamp-2 text-sm">
-          {crisis.description}
-        </p>
-      </CardHeader>
-      <CardContent className="space-y-3">
-        <div className="text-muted-foreground flex gap-4 text-xs">
-          <span>
-            {crisis.when.toLocaleDateString("nb-NO", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-          </span>
-          <span>{crisis.createdBy.name}</span>
-          <span>{etaterLabel}</span>
-        </div>
+        <span className="text-muted-foreground shrink-0 text-sm">
+          {formatDateTime(crisis.when, "short")}
+        </span>
+      </div>
+
+      <div className="mt-4 flex items-center justify-between">
+        <span className="text-muted-foreground text-sm">
+          {crisis.createdBy.name}
+        </span>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" asChild>
-            <Link href={`/${crisis.id}`}>Se detaljer</Link>
-          </Button>
           {crisis.canEdit ? (
-            <Button variant="outline" size="sm" asChild>
+            <Button variant="outline" asChild className="h-9 px-4 text-sm">
               <Link href={`/dashbord/krise/${crisis.id}/rediger`}>Rediger</Link>
             </Button>
           ) : null}
+          <Button variant="ghost" asChild className="h-9 px-4 text-sm">
+            <Link href={`/${crisis.id}`} target="_blank">
+              Se offentlig
+            </Link>
+          </Button>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

@@ -3,8 +3,11 @@
  * for Docker builds.
  */
 import "./src/env.js";
+import { env } from "./src/env.js";
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+  output: env.NODE_ENV === "production" ? "standalone" : undefined,
+};
 
 export default config;

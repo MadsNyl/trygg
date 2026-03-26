@@ -4,13 +4,6 @@ import { type FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
@@ -92,97 +85,117 @@ export function InnloggingKort() {
   };
 
   return (
-    <Card className="w-full max-w-md bg-white" size="default">
-      <CardHeader>
-        <CardTitle className="text-base">Velkommen</CardTitle>
-        <CardDescription>
-          Logg inn eller opprett en ny konto for å fortsette.
-        </CardDescription>
-      </CardHeader>
+    <div>
+      <Tabs defaultValue="innlogging" className="w-full">
+        <TabsList className="grid h-11 w-full grid-cols-2">
+          <TabsTrigger value="innlogging" className="text-sm">
+            Logg inn
+          </TabsTrigger>
+          <TabsTrigger value="registrering" className="text-sm">
+            Registrer
+          </TabsTrigger>
+        </TabsList>
 
-      <CardContent>
-        <Tabs defaultValue="innlogging" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="innlogging">Logg inn</TabsTrigger>
-            <TabsTrigger value="registrering">Registrer</TabsTrigger>
-          </TabsList>
+        <TabsContent value="innlogging" className="mt-6">
+          <form className="space-y-5" onSubmit={handleLoggInn}>
+            <div className="space-y-2">
+              <Label htmlFor="innlogging-epost" className="text-sm">
+                E-post
+              </Label>
+              <Input
+                id="innlogging-epost"
+                name="epost"
+                type="email"
+                autoComplete="email"
+                className="h-11 px-3 text-base md:text-base"
+                required
+              />
+            </div>
 
-          <TabsContent value="innlogging" className="mt-4">
-            <form className="space-y-4" onSubmit={handleLoggInn}>
-              <div className="space-y-1.5">
-                <Label htmlFor="innlogging-epost">E-post</Label>
-                <Input
-                  id="innlogging-epost"
-                  name="epost"
-                  type="email"
-                  autoComplete="email"
-                  required
-                />
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="innlogging-passord" className="text-sm">
+                Passord
+              </Label>
+              <Input
+                id="innlogging-passord"
+                name="passord"
+                type="password"
+                autoComplete="current-password"
+                className="h-11 px-3 text-base md:text-base"
+                required
+              />
+            </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="innlogging-passord">Passord</Label>
-                <Input
-                  id="innlogging-passord"
-                  name="passord"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                />
-              </div>
+            <Button
+              type="submit"
+              className="h-11 w-full text-sm"
+              disabled={lasterInn}
+            >
+              {lasterInn ? "Logger inn..." : "Logg inn"}
+            </Button>
+          </form>
+        </TabsContent>
 
-              <Button type="submit" className="w-full" disabled={lasterInn}>
-                {lasterInn ? "Logger inn..." : "Logg inn"}
-              </Button>
-            </form>
-          </TabsContent>
+        <TabsContent value="registrering" className="mt-6">
+          <form className="space-y-5" onSubmit={handleRegistrer}>
+            <div className="space-y-2">
+              <Label htmlFor="registrering-navn" className="text-sm">
+                Navn
+              </Label>
+              <Input
+                id="registrering-navn"
+                name="navn"
+                type="text"
+                autoComplete="name"
+                className="h-11 px-3 text-base md:text-base"
+                required
+              />
+            </div>
 
-          <TabsContent value="registrering" className="mt-4">
-            <form className="space-y-4" onSubmit={handleRegistrer}>
-              <div className="space-y-1.5">
-                <Label htmlFor="registrering-navn">Navn</Label>
-                <Input
-                  id="registrering-navn"
-                  name="navn"
-                  type="text"
-                  autoComplete="name"
-                  required
-                />
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="registrering-epost" className="text-sm">
+                E-post
+              </Label>
+              <Input
+                id="registrering-epost"
+                name="epost"
+                type="email"
+                autoComplete="email"
+                className="h-11 px-3 text-base md:text-base"
+                required
+              />
+            </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="registrering-epost">E-post</Label>
-                <Input
-                  id="registrering-epost"
-                  name="epost"
-                  type="email"
-                  autoComplete="email"
-                  required
-                />
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="registrering-passord" className="text-sm">
+                Passord
+              </Label>
+              <Input
+                id="registrering-passord"
+                name="passord"
+                type="password"
+                autoComplete="new-password"
+                className="h-11 px-3 text-base md:text-base"
+                required
+              />
+            </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="registrering-passord">Passord</Label>
-                <Input
-                  id="registrering-passord"
-                  name="passord"
-                  type="password"
-                  autoComplete="new-password"
-                  required
-                />
-              </div>
+            <Button
+              type="submit"
+              className="h-11 w-full text-sm"
+              disabled={lasterInn}
+            >
+              {lasterInn ? "Oppretter konto..." : "Opprett konto"}
+            </Button>
+          </form>
+        </TabsContent>
+      </Tabs>
 
-              <Button type="submit" className="w-full" disabled={lasterInn}>
-                {lasterInn ? "Oppretter konto..." : "Opprett konto"}
-              </Button>
-            </form>
-          </TabsContent>
-        </Tabs>
-
-        {feilmelding ? (
-          <p className="mt-4 text-xs text-red-600">{feilmelding}</p>
-        ) : null}
-      </CardContent>
-    </Card>
+      {feilmelding ? (
+        <p role="alert" className="text-destructive mt-4 text-sm">
+          {feilmelding}
+        </p>
+      ) : null}
+    </div>
   );
 }
