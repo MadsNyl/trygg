@@ -30,9 +30,7 @@ export function CrisisTabs({
   const tabs: { id: Tab; label: string; icon: typeof News01Icon }[] = [
     { id: "siste-nytt", label: "Siste nytt", icon: News01Icon },
     { id: "tiltak", label: "Tiltak", icon: TaskEdit01Icon },
-    ...(hasMap
-      ? [{ id: "kart" as Tab, label: "Kart", icon: MapsIcon }]
-      : []),
+    ...(hasMap ? [{ id: "kart" as Tab, label: "Kart", icon: MapsIcon }] : []),
   ];
 
   const [activeTab, setActiveTab] = useState<Tab>("siste-nytt");
@@ -54,7 +52,7 @@ export function CrisisTabs({
             onClick={() => setActiveTab(tab.id)}
             className={`flex flex-1 flex-col items-center gap-1 py-3 text-xs font-medium transition-colors ${
               activeTab === tab.id
-                ? "border-t-2 border-primary text-primary"
+                ? "border-primary text-primary border-t-2"
                 : "text-muted-foreground"
             }`}
           >

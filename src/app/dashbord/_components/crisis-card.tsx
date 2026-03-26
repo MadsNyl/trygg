@@ -48,7 +48,9 @@ export function CrisisCard({ crisis }: CrisisCardProps) {
       : crisis.allowedEtater.map((e) => e.title).join(", ");
 
   return (
-    <Card className={`border-l-4 transition-shadow hover:shadow-md ${borderColor}`}>
+    <Card
+      className={`border-l-4 transition-shadow hover:shadow-md ${borderColor}`}
+    >
       <CardHeader className="pb-2">
         <div className="flex items-center gap-2">
           <CardTitle className="text-base">{crisis.title}</CardTitle>

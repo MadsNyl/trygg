@@ -36,7 +36,7 @@ export function CrisisDetail({ crisis }: { crisis: CrisisDetailData }) {
 
   return (
     <div
-      className={`mx-auto flex min-h-screen max-w-md flex-col bg-white border-t-4 ${severity.topBorder}`}
+      className={`mx-auto flex min-h-screen max-w-md flex-col border-t-4 bg-white ${severity.topBorder}`}
     >
       {/* Header */}
       <header className="flex items-center gap-3 px-4 pt-4 pb-2">
@@ -70,7 +70,7 @@ export function CrisisDetail({ crisis }: { crisis: CrisisDetailData }) {
               className="text-primary mt-0.5 shrink-0"
             />
             <div>
-              <p className="text-xs font-medium tracking-wide uppercase text-muted-foreground">
+              <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
                 Hva
               </p>
               <p className="text-sm">{crisis.what}</p>
@@ -83,7 +83,7 @@ export function CrisisDetail({ crisis }: { crisis: CrisisDetailData }) {
               className="text-primary mt-0.5 shrink-0"
             />
             <div>
-              <p className="text-xs font-medium tracking-wide uppercase text-muted-foreground">
+              <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
                 Hvordan
               </p>
               <p className="text-sm">{crisis.how}</p>
@@ -96,7 +96,7 @@ export function CrisisDetail({ crisis }: { crisis: CrisisDetailData }) {
               className="text-primary mt-0.5 shrink-0"
             />
             <div>
-              <p className="text-xs font-medium tracking-wide uppercase text-muted-foreground">
+              <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
                 Når
               </p>
               <p className="text-sm">

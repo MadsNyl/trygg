@@ -9,7 +9,13 @@ import {
 
 import type { MeasureData } from "./types";
 
-const measureIcons = [Home01Icon, Cancel01Icon, Wifi01Icon, CallIcon, Alert02Icon];
+const measureIcons = [
+  Home01Icon,
+  Cancel01Icon,
+  Wifi01Icon,
+  CallIcon,
+  Alert02Icon,
+];
 
 export function PublicMeasures({ measures }: { measures: MeasureData[] }) {
   if (measures.length === 0) {

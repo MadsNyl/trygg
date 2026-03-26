@@ -36,7 +36,7 @@ export default async function Home({
   return (
     <main className="mx-auto min-h-screen max-w-md bg-gray-50">
       <header className="bg-white px-4 pt-6 pb-4 shadow-sm">
-        <h1 className="font-heading text-2xl font-bold text-primary">Trygg</h1>
+        <h1 className="font-heading text-primary text-2xl font-bold">Trygg</h1>
         <p className="text-muted-foreground text-sm">Kriseoversikt</p>
       </header>
 
