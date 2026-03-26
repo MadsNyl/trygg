@@ -1,7 +1,6 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import Link from "next/link";
 
 import { CrisisForm } from "~/app/dashbord/krise/_components/crisis-form";
 import { TimelineSection } from "~/app/dashbord/krise/_components/timeline-section";
@@ -70,14 +69,7 @@ export default function RedigerKrisePage() {
 
   return (
     <main className="mx-auto w-full max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
-      <Link
-        href="/dashbord"
-        className="text-muted-foreground hover:text-foreground mb-6 inline-block text-sm"
-      >
-        ← Tilbake til oversikt
-      </Link>
-
-      <h1 className="mb-1 text-xl font-semibold">Rediger krise</h1>
+      <h1 className="font-heading mb-1 text-xl font-bold">Rediger krise</h1>
       <p className="text-muted-foreground mb-8 text-sm">
         Oppdater informasjon om krisesituasjonen.
       </p>

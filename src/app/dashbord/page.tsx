@@ -25,9 +25,9 @@ export default async function DashbordPage() {
       : [];
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+    <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-lg font-semibold">Kriseoversikt</h1>
+        <h1 className="font-heading text-xl font-bold">Kriseoversikt</h1>
         {isEtatMember ? (
           <Button asChild>
             <Link href="/dashbord/krise/ny">Ny krise</Link>
@@ -44,7 +44,7 @@ export default async function DashbordPage() {
           Ingen kriser opprettet enda.
         </p>
       ) : (
-        <div className="space-y-4">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {crises.map((crisis) => (
             <CrisisCard key={crisis.id} crisis={crisis} />
           ))}

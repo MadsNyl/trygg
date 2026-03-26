@@ -110,7 +110,7 @@ export function CrisisForm({
 
       {/* Detaljer */}
       <div className="space-y-4 border-t pt-6">
-        <h2 className="text-sm font-semibold">Detaljer</h2>
+        <h2 className="font-heading text-sm font-bold">Detaljer</h2>
 
         <div className="space-y-1">
           <label className="text-sm font-medium">Hva</label>
@@ -202,7 +202,7 @@ export function CrisisForm({
       {/* Tilgang */}
       <div className="space-y-4 border-t pt-6">
         <div>
-          <h2 className="text-sm font-semibold">Redigeringstilgang</h2>
+          <h2 className="font-heading text-sm font-bold">Redigeringstilgang</h2>
           <p className="text-muted-foreground text-xs">
             Velg hvilke etater som kan redigere denne krisen. Standard er alle.
           </p>
