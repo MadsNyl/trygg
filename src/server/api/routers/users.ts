@@ -1,0 +1,54 @@
+import { TRPCError } from "@trpc/server";
+import { z } from "zod";
+
+import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+
+const ensureAdmin = (isAdmin: boolean | undefined) => {
+  if (!isAdmin) {
+    throw new TRPCError({ code: "FORBIDDEN" });
+  }
+};
+
+export const usersRouter = createTRPCRouter({
+  toggleIsVerified: protectedProcedure
+    .input(z.object({ userId: z.string().min(1) }))
+    .mutation(async ({ ctx, input }) => {
+      ensureAdmin(ctx.session.user.isAdmin);
+
+      const user = await ctx.db.user.findUnique({
+        where: { id: input.userId },
+        select: { id: true, isVerified: true },
+      });
+
+      if (!user) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
+      }
+
+      return ctx.db.user.update({
+        where: { id: user.id },
+        data: { isVerified: !user.isVerified },
+        select: { id: true, isVerified: true },
+      });
+    }),
+
+  toggleIsAdmin: protectedProcedure
+    .input(z.object({ userId: z.string().min(1) }))
+    .mutation(async ({ ctx, input }) => {
+      ensureAdmin(ctx.session.user.isAdmin);
+
+      const user = await ctx.db.user.findUnique({
+        where: { id: input.userId },
+        select: { id: true, isAdmin: true },
+      });
+
+      if (!user) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
+      }
+
+      return ctx.db.user.update({
+        where: { id: user.id },
+        data: { isAdmin: !user.isAdmin },
+        select: { id: true, isAdmin: true },
+      });
+    }),
+});
