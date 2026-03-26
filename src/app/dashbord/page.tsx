@@ -4,24 +4,25 @@ import { Button } from "~/components/ui/button";
 import { CrisisCard } from "~/app/dashbord/_components/crisis-card";
 import { getCrises } from "~/services/crisis";
 import { getSession } from "~/server/better-auth/server";
-import { redirect } from "next/navigation";
 import { db } from "~/server/db";
 
 export default async function DashbordPage() {
   const session = await getSession();
-  if (!session?.user) redirect("/logg-inn");
 
-  const user = await db.user.findUnique({
-    where: { id: session.user.id },
-    select: { isVerified: true, etater: { select: { id: true } } },
-  });
+  const user = session?.user
+    ? await db.user.findUnique({
+        where: { id: session.user.id },
+        select: { isVerified: true, etater: { select: { id: true } } },
+      })
+    : null;
 
   const isEtatMember = user?.isVerified && (user.etater.length ?? 0) > 0;
   const userEtatIds = user?.etater.map((e) => e.id) ?? [];
 
-  const crises = isEtatMember
-    ? await getCrises(session.user.id, userEtatIds)
-    : [];
+  const crises =
+    isEtatMember && session?.user
+      ? await getCrises(session.user.id, userEtatIds)
+      : [];
 
   return (
     <main className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6 lg:px-8">

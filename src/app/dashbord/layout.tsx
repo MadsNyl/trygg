@@ -1,45 +1,36 @@
-import Link from "next/link";
+import { redirect } from "next/navigation";
 
-import { Avatar, AvatarFallback } from "~/components/ui/avatar";
+import {
+  SidebarProvider,
+  SidebarTrigger,
+  SidebarInset,
+} from "~/components/ui/sidebar";
+import { AppSidebar } from "~/app/dashbord/_components/app-sidebar";
 import { getSession } from "~/server/better-auth/server";
 
 export default async function DashbordLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const session = await getSession();
-  const isAdmin = session?.user?.isAdmin === true;
+
+  if (!session?.user) {
+    redirect("/logg-inn");
+  }
 
   return (
-    <div className="bg-background min-h-screen">
-      <header className="border-b">
-        <nav className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link
-            href="/dashbord"
-            className="text-lg font-semibold tracking-tight"
-          >
-            trygg
-          </Link>
-
-          <div className="flex items-center gap-4">
-            {isAdmin ? (
-              <Link
-                href="/dashbord/admin"
-                className="text-muted-foreground hover:text-foreground text-sm font-medium"
-              >
-                admin
-              </Link>
-            ) : null}
-
-            <Link href="/dashbord/profile" aria-label="Go to profile page">
-              <Avatar>
-                <AvatarFallback>U</AvatarFallback>
-              </Avatar>
-            </Link>
-          </div>
-        </nav>
-      </header>
-
-      {children}
-    </div>
+    <SidebarProvider>
+      <AppSidebar
+        user={{
+          name: session.user.name,
+          isAdmin: session.user.isAdmin === true,
+        }}
+      />
+      <SidebarInset>
+        <header className="flex h-14 items-center gap-2 border-b px-4">
+          <SidebarTrigger />
+        </header>
+        <div className="flex-1">{children}</div>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }
