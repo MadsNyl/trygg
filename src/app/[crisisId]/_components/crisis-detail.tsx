@@ -7,7 +7,7 @@ import type { CrisisDetailData } from "./types";
 
 export function CrisisDetail({ crisis }: { crisis: CrisisDetailData }) {
   return (
-    <div className="flex min-h-screen flex-col bg-white">
+    <div className="mx-auto flex min-h-screen max-w-md flex-col bg-white">
       {/* Header */}
       <header className="flex items-center gap-3 px-4 pt-4 pb-2">
         <Link
