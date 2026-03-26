@@ -5530,6 +5530,7 @@ export namespace Prisma {
     how: string | null
     when: Date | null
     severity: $Enums.Severity | null
+    location: string | null
     createdById: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -5543,6 +5544,7 @@ export namespace Prisma {
     how: string | null
     when: Date | null
     severity: $Enums.Severity | null
+    location: string | null
     createdById: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -5556,6 +5558,7 @@ export namespace Prisma {
     how: number
     when: number
     severity: number
+    location: number
     createdById: number
     createdAt: number
     updatedAt: number
@@ -5571,6 +5574,7 @@ export namespace Prisma {
     how?: true
     when?: true
     severity?: true
+    location?: true
     createdById?: true
     createdAt?: true
     updatedAt?: true
@@ -5584,6 +5588,7 @@ export namespace Prisma {
     how?: true
     when?: true
     severity?: true
+    location?: true
     createdById?: true
     createdAt?: true
     updatedAt?: true
@@ -5597,6 +5602,7 @@ export namespace Prisma {
     how?: true
     when?: true
     severity?: true
+    location?: true
     createdById?: true
     createdAt?: true
     updatedAt?: true
@@ -5683,6 +5689,7 @@ export namespace Prisma {
     how: string
     when: Date
     severity: $Enums.Severity
+    location: string | null
     createdById: string
     createdAt: Date
     updatedAt: Date
@@ -5713,6 +5720,7 @@ export namespace Prisma {
     how?: boolean
     when?: boolean
     severity?: boolean
+    location?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -5732,6 +5740,7 @@ export namespace Prisma {
     how?: boolean
     when?: boolean
     severity?: boolean
+    location?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -5746,6 +5755,7 @@ export namespace Prisma {
     how?: boolean
     when?: boolean
     severity?: boolean
+    location?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -5760,12 +5770,13 @@ export namespace Prisma {
     how?: boolean
     when?: boolean
     severity?: boolean
+    location?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CrisisOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "what" | "how" | "when" | "severity" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["crisis"]>
+  export type CrisisOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "what" | "how" | "when" | "severity" | "location" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["crisis"]>
   export type CrisisInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     allowedEtater?: boolean | Crisis$allowedEtaterArgs<ExtArgs>
@@ -5798,6 +5809,7 @@ export namespace Prisma {
       how: string
       when: Date
       severity: $Enums.Severity
+      location: string | null
       createdById: string
       createdAt: Date
       updatedAt: Date
@@ -6236,6 +6248,7 @@ export namespace Prisma {
     readonly how: FieldRef<"Crisis", 'String'>
     readonly when: FieldRef<"Crisis", 'DateTime'>
     readonly severity: FieldRef<"Crisis", 'Severity'>
+    readonly location: FieldRef<"Crisis", 'String'>
     readonly createdById: FieldRef<"Crisis", 'String'>
     readonly createdAt: FieldRef<"Crisis", 'DateTime'>
     readonly updatedAt: FieldRef<"Crisis", 'DateTime'>
@@ -13445,6 +13458,7 @@ export namespace Prisma {
     how: 'how',
     when: 'when',
     severity: 'severity',
+    location: 'location',
     createdById: 'createdById',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -13901,6 +13915,7 @@ export namespace Prisma {
     how?: StringFilter<"Crisis"> | string
     when?: DateTimeFilter<"Crisis"> | Date | string
     severity?: EnumSeverityFilter<"Crisis"> | $Enums.Severity
+    location?: StringNullableFilter<"Crisis"> | string | null
     createdById?: StringFilter<"Crisis"> | string
     createdAt?: DateTimeFilter<"Crisis"> | Date | string
     updatedAt?: DateTimeFilter<"Crisis"> | Date | string
@@ -13919,6 +13934,7 @@ export namespace Prisma {
     how?: SortOrder
     when?: SortOrder
     severity?: SortOrder
+    location?: SortOrderInput | SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -13940,6 +13956,7 @@ export namespace Prisma {
     how?: StringFilter<"Crisis"> | string
     when?: DateTimeFilter<"Crisis"> | Date | string
     severity?: EnumSeverityFilter<"Crisis"> | $Enums.Severity
+    location?: StringNullableFilter<"Crisis"> | string | null
     createdById?: StringFilter<"Crisis"> | string
     createdAt?: DateTimeFilter<"Crisis"> | Date | string
     updatedAt?: DateTimeFilter<"Crisis"> | Date | string
@@ -13958,6 +13975,7 @@ export namespace Prisma {
     how?: SortOrder
     when?: SortOrder
     severity?: SortOrder
+    location?: SortOrderInput | SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -13977,6 +13995,7 @@ export namespace Prisma {
     how?: StringWithAggregatesFilter<"Crisis"> | string
     when?: DateTimeWithAggregatesFilter<"Crisis"> | Date | string
     severity?: EnumSeverityWithAggregatesFilter<"Crisis"> | $Enums.Severity
+    location?: StringNullableWithAggregatesFilter<"Crisis"> | string | null
     createdById?: StringWithAggregatesFilter<"Crisis"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Crisis"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Crisis"> | Date | string
@@ -14698,6 +14717,7 @@ export namespace Prisma {
     how: string
     when: Date | string
     severity?: $Enums.Severity
+    location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCrisesInput
@@ -14715,6 +14735,7 @@ export namespace Prisma {
     how: string
     when: Date | string
     severity?: $Enums.Severity
+    location?: string | null
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14732,6 +14753,7 @@ export namespace Prisma {
     how?: StringFieldUpdateOperationsInput | string
     when?: DateTimeFieldUpdateOperationsInput | Date | string
     severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCrisesNestedInput
@@ -14749,6 +14771,7 @@ export namespace Prisma {
     how?: StringFieldUpdateOperationsInput | string
     when?: DateTimeFieldUpdateOperationsInput | Date | string
     severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14766,6 +14789,7 @@ export namespace Prisma {
     how: string
     when: Date | string
     severity?: $Enums.Severity
+    location?: string | null
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14779,6 +14803,7 @@ export namespace Prisma {
     how?: StringFieldUpdateOperationsInput | string
     when?: DateTimeFieldUpdateOperationsInput | Date | string
     severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14791,6 +14816,7 @@ export namespace Prisma {
     how?: StringFieldUpdateOperationsInput | string
     when?: DateTimeFieldUpdateOperationsInput | Date | string
     severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15570,6 +15596,7 @@ export namespace Prisma {
     how?: SortOrder
     when?: SortOrder
     severity?: SortOrder
+    location?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -15583,6 +15610,7 @@ export namespace Prisma {
     how?: SortOrder
     when?: SortOrder
     severity?: SortOrder
+    location?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -15596,6 +15624,7 @@ export namespace Prisma {
     how?: SortOrder
     when?: SortOrder
     severity?: SortOrder
+    location?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -17286,6 +17315,7 @@ export namespace Prisma {
     how: string
     when: Date | string
     severity?: $Enums.Severity
+    location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     allowedEtater?: EtatCreateNestedManyWithoutCrisesInput
@@ -17302,6 +17332,7 @@ export namespace Prisma {
     how: string
     when: Date | string
     severity?: $Enums.Severity
+    location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     allowedEtater?: EtatUncheckedCreateNestedManyWithoutCrisesInput
@@ -17560,6 +17591,7 @@ export namespace Prisma {
     how?: StringFilter<"Crisis"> | string
     when?: DateTimeFilter<"Crisis"> | Date | string
     severity?: EnumSeverityFilter<"Crisis"> | $Enums.Severity
+    location?: StringNullableFilter<"Crisis"> | string | null
     createdById?: StringFilter<"Crisis"> | string
     createdAt?: DateTimeFilter<"Crisis"> | Date | string
     updatedAt?: DateTimeFilter<"Crisis"> | Date | string
@@ -17734,6 +17766,7 @@ export namespace Prisma {
     how: string
     when: Date | string
     severity?: $Enums.Severity
+    location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCrisesInput
@@ -17750,6 +17783,7 @@ export namespace Prisma {
     how: string
     when: Date | string
     severity?: $Enums.Severity
+    location?: string | null
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -18231,6 +18265,7 @@ export namespace Prisma {
     how: string
     when: Date | string
     severity?: $Enums.Severity
+    location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCrisesInput
@@ -18247,6 +18282,7 @@ export namespace Prisma {
     how: string
     when: Date | string
     severity?: $Enums.Severity
+    location?: string | null
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -18355,6 +18391,7 @@ export namespace Prisma {
     how?: StringFieldUpdateOperationsInput | string
     when?: DateTimeFieldUpdateOperationsInput | Date | string
     severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCrisesNestedInput
@@ -18371,6 +18408,7 @@ export namespace Prisma {
     how?: StringFieldUpdateOperationsInput | string
     when?: DateTimeFieldUpdateOperationsInput | Date | string
     severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18475,6 +18513,7 @@ export namespace Prisma {
     how: string
     when: Date | string
     severity?: $Enums.Severity
+    location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCrisesInput
@@ -18491,6 +18530,7 @@ export namespace Prisma {
     how: string
     when: Date | string
     severity?: $Enums.Severity
+    location?: string | null
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -18599,6 +18639,7 @@ export namespace Prisma {
     how?: StringFieldUpdateOperationsInput | string
     when?: DateTimeFieldUpdateOperationsInput | Date | string
     severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCrisesNestedInput
@@ -18615,6 +18656,7 @@ export namespace Prisma {
     how?: StringFieldUpdateOperationsInput | string
     when?: DateTimeFieldUpdateOperationsInput | Date | string
     severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18719,6 +18761,7 @@ export namespace Prisma {
     how: string
     when: Date | string
     severity?: $Enums.Severity
+    location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCrisesInput
@@ -18735,6 +18778,7 @@ export namespace Prisma {
     how: string
     when: Date | string
     severity?: $Enums.Severity
+    location?: string | null
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -18843,6 +18887,7 @@ export namespace Prisma {
     how?: StringFieldUpdateOperationsInput | string
     when?: DateTimeFieldUpdateOperationsInput | Date | string
     severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCrisesNestedInput
@@ -18859,6 +18904,7 @@ export namespace Prisma {
     how?: StringFieldUpdateOperationsInput | string
     when?: DateTimeFieldUpdateOperationsInput | Date | string
     severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19179,6 +19225,7 @@ export namespace Prisma {
     how: string
     when: Date | string
     severity?: $Enums.Severity
+    location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -19316,6 +19363,7 @@ export namespace Prisma {
     how?: StringFieldUpdateOperationsInput | string
     when?: DateTimeFieldUpdateOperationsInput | Date | string
     severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     allowedEtater?: EtatUpdateManyWithoutCrisesNestedInput
@@ -19332,6 +19380,7 @@ export namespace Prisma {
     how?: StringFieldUpdateOperationsInput | string
     when?: DateTimeFieldUpdateOperationsInput | Date | string
     severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     allowedEtater?: EtatUncheckedUpdateManyWithoutCrisesNestedInput
@@ -19348,6 +19397,7 @@ export namespace Prisma {
     how?: StringFieldUpdateOperationsInput | string
     when?: DateTimeFieldUpdateOperationsInput | Date | string
     severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19564,6 +19614,7 @@ export namespace Prisma {
     how?: StringFieldUpdateOperationsInput | string
     when?: DateTimeFieldUpdateOperationsInput | Date | string
     severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCrisesNestedInput
@@ -19580,6 +19631,7 @@ export namespace Prisma {
     how?: StringFieldUpdateOperationsInput | string
     when?: DateTimeFieldUpdateOperationsInput | Date | string
     severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19596,6 +19648,7 @@ export namespace Prisma {
     how?: StringFieldUpdateOperationsInput | string
     when?: DateTimeFieldUpdateOperationsInput | Date | string
     severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

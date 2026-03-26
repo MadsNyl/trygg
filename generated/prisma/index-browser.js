@@ -159,6 +159,7 @@ exports.Prisma.CrisisScalarFieldEnum = {
   how: 'how',
   when: 'when',
   severity: 'severity',
+  location: 'location',
   createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
