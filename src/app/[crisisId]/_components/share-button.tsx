@@ -16,7 +16,12 @@ export function ShareButton() {
   };
 
   return (
-    <Button variant="ghost" size="icon" onClick={handleShare}>
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={handleShare}
+      aria-label={copied ? "Lenke kopiert" : "Del denne siden"}
+    >
       <HugeiconsIcon icon={copied ? Tick02Icon : Share01Icon} size={18} />
     </Button>
   );

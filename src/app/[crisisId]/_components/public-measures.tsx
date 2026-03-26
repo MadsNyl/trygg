@@ -5,7 +5,15 @@ import {
   Wifi01Icon,
   CallIcon,
   Alert02Icon,
+  TaskEdit01Icon,
 } from "@hugeicons/core-free-icons";
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+} from "~/components/ui/empty";
 
 import type { MeasureData } from "./types";
 
@@ -20,9 +28,21 @@ const measureIcons = [
 export function PublicMeasures({ measures }: { measures: MeasureData[] }) {
   if (measures.length === 0) {
     return (
-      <p className="text-muted-foreground px-4 py-8 text-center text-sm">
-        Ingen tiltak enda.
-      </p>
+      <Empty className="py-12">
+        <EmptyMedia>
+          <HugeiconsIcon
+            icon={TaskEdit01Icon}
+            size={28}
+            className="text-muted-foreground"
+          />
+        </EmptyMedia>
+        <EmptyHeader>
+          <EmptyTitle>Ingen tiltak enda</EmptyTitle>
+          <EmptyDescription>
+            Tiltak og anbefalinger fra myndighetene vil vises her.
+          </EmptyDescription>
+        </EmptyHeader>
+      </Empty>
     );
   }
 

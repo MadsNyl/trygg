@@ -36,17 +36,27 @@ export default async function BrukerePage({ searchParams }: BrukerePageProps) {
   const { users, query, pagination } = await getUsers(resolvedSearchParams);
 
   return (
-    <main className="min-h-[calc(100vh-11.5rem)] space-y-4">
+    <main className="space-y-6">
+      <div>
+        <h1 className="font-heading text-2xl font-bold tracking-tight">
+          Brukere
+        </h1>
+        <p className="text-muted-foreground mt-1 text-sm">
+          Administrer brukere og tilganger
+        </p>
+      </div>
+
       <form
         action="/dashbord/admin/brukere"
-        className="flex max-w-sm items-center gap-2"
+        className="flex max-w-md items-center gap-3"
       >
         <Input
           name="q"
           placeholder="Søk etter navn eller e-post"
           defaultValue={query}
+          className="h-10 px-3 text-sm md:text-sm"
         />
-        <Button type="submit" variant="outline">
+        <Button type="submit" variant="outline" className="h-10 px-5 text-sm">
           Søk
         </Button>
       </form>
@@ -54,11 +64,11 @@ export default async function BrukerePage({ searchParams }: BrukerePageProps) {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Bruker</TableHead>
-            <TableHead>E-post</TableHead>
-            <TableHead>Verifisert</TableHead>
-            <TableHead>Admin</TableHead>
-            <TableHead>Handlinger</TableHead>
+            <TableHead className="text-sm">Bruker</TableHead>
+            <TableHead className="text-sm">E-post</TableHead>
+            <TableHead className="text-sm">Verifisert</TableHead>
+            <TableHead className="text-sm">Admin</TableHead>
+            <TableHead className="text-sm">Handlinger</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -66,7 +76,7 @@ export default async function BrukerePage({ searchParams }: BrukerePageProps) {
             <TableRow>
               <TableCell
                 colSpan={5}
-                className="text-muted-foreground py-6 text-center"
+                className="text-muted-foreground py-8 text-center text-sm"
               >
                 Ingen brukere funnet.
               </TableCell>
@@ -75,19 +85,19 @@ export default async function BrukerePage({ searchParams }: BrukerePageProps) {
             users.map((user) => (
               <TableRow key={user.id}>
                 <TableCell>
-                  <div className="flex items-center gap-2">
-                    <Avatar size="sm">
+                  <div className="flex items-center gap-3">
+                    <Avatar>
                       {user.image ? (
                         <AvatarImage src={user.image} alt={user.name} />
                       ) : null}
-                      <AvatarFallback>
+                      <AvatarFallback className="text-sm">
                         {user.name.charAt(0).toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
-                    <span className="font-medium">{user.name}</span>
+                    <span className="text-sm font-medium">{user.name}</span>
                   </div>
                 </TableCell>
-                <TableCell>{user.email}</TableCell>
+                <TableCell className="text-sm">{user.email}</TableCell>
                 <TableCell>
                   <Badge variant={user.isVerified ? "default" : "outline"}>
                     {user.isVerified ? "Ja" : "Nei"}
@@ -115,32 +125,32 @@ export default async function BrukerePage({ searchParams }: BrukerePageProps) {
       </Table>
 
       <div className="flex items-center justify-between">
-        <p className="text-muted-foreground text-xs">
+        <p className="text-muted-foreground text-sm">
           Side {pagination.page} av {pagination.totalPages} ({pagination.total}{" "}
           brukere)
         </p>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {pagination.hasPreviousPage ? (
-            <Button variant="outline" asChild>
+            <Button variant="outline" asChild className="h-10 px-5 text-sm">
               <Link href={buildPageHref(pagination.page - 1, query)}>
                 Forrige
               </Link>
             </Button>
           ) : (
-            <Button variant="outline" disabled>
+            <Button variant="outline" disabled className="h-10 px-5 text-sm">
               Forrige
             </Button>
           )}
 
           {pagination.hasNextPage ? (
-            <Button variant="outline" asChild>
+            <Button variant="outline" asChild className="h-10 px-5 text-sm">
               <Link href={buildPageHref(pagination.page + 1, query)}>
                 Neste
               </Link>
             </Button>
           ) : (
-            <Button variant="outline" disabled>
+            <Button variant="outline" disabled className="h-10 px-5 text-sm">
               Neste
             </Button>
           )}

@@ -1,7 +1,7 @@
 import "~/styles/globals.css";
 
 import { type Metadata } from "next";
-import { Geist, Inter, Raleway } from "next/font/google";
+import { Geist, Raleway } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { cn } from "~/lib/utils";
@@ -10,8 +10,6 @@ const ralewayHeading = Raleway({
   subsets: ["latin"],
   variable: "--font-heading",
 });
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Trygg",
@@ -30,12 +28,7 @@ export default function RootLayout({
   return (
     <html
       lang="no"
-      className={cn(
-        geist.variable,
-        "font-sans",
-        inter.variable,
-        ralewayHeading.variable,
-      )}
+      className={cn(geist.variable, "font-sans", ralewayHeading.variable)}
     >
       <body>
         <TRPCReactProvider>{children}</TRPCReactProvider>

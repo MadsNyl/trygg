@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
+import { RemoveButton } from "./remove-button";
 import {
   Select,
   SelectContent,
@@ -13,6 +14,8 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "~/components/ui/toggle-group";
+import { formatDateTimeCompact } from "~/lib/format";
+import { severityConfig, type Severity } from "~/lib/severity";
 import { api } from "~/trpc/react";
 
 type Etat = { id: string; title: string };
@@ -20,40 +23,27 @@ type Etat = { id: string; title: string };
 type Measure = {
   id: string;
   text: string;
-  severity: "LOW" | "MEDIUM" | "HIGH";
+  severity: Severity;
   createdAt: Date;
   etat: { id: string; title: string; themeColor: string };
   createdBy: { id: string; name: string };
 };
-
-const severityConfig = {
-  LOW: {
-    label: "Lav",
-    className: "bg-green-500/15 text-green-500 border-green-500/30",
-  },
-  MEDIUM: {
-    label: "Middels",
-    className: "bg-amber-500/15 text-amber-500 border-amber-500/30",
-  },
-  HIGH: {
-    label: "Høy",
-    className: "bg-red-500/15 text-red-500 border-red-500/30",
-  },
-} as const;
 
 export function MeasuresSection({
   crisisId,
   userEtater,
   measures,
   onMeasureAdded,
+  onMeasureRemoved,
 }: {
   crisisId: string;
   userEtater: Etat[];
   measures: Measure[];
   onMeasureAdded: () => void;
+  onMeasureRemoved: () => void;
 }) {
   const [text, setText] = useState("");
-  const [severity, setSeverity] = useState<"LOW" | "MEDIUM" | "HIGH">("MEDIUM");
+  const [severity, setSeverity] = useState<Severity>("MEDIUM");
   const [etatId, setEtatId] = useState(userEtater[0]?.id ?? "");
 
   useEffect(() => {
@@ -67,56 +57,60 @@ export function MeasuresSection({
     },
   });
 
-  return (
-    <div className="space-y-4">
-      <h2 className="text-sm font-semibold">Tiltak</h2>
+  const removeMeasure = api.crisis.removeMeasure.useMutation({
+    onSuccess: () => {
+      onMeasureRemoved();
+    },
+  });
 
-      <div className="space-y-2">
-        <div className="flex gap-2">
+  return (
+    <div className="space-y-5">
+      <h3 className="text-base font-semibold">Tiltak</h3>
+
+      <div className="space-y-3">
+        {userEtater.length > 1 ? (
+          <Select value={etatId} onValueChange={setEtatId}>
+            <SelectTrigger className="h-10 w-48 text-sm">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {userEtater.map((etat) => (
+                <SelectItem key={etat.id} value={etat.id}>
+                  {etat.title}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        ) : null}
+        <div className="flex items-center gap-2">
           <Input
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Nytt tiltak..."
-            className="flex-1"
+            className="h-10 min-w-0 flex-1 px-3 text-sm md:text-sm"
           />
-          {userEtater.length > 1 ? (
-            <Select value={etatId} onValueChange={setEtatId}>
-              <SelectTrigger className="w-40">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {userEtater.map((etat) => (
-                  <SelectItem key={etat.id} value={etat.id}>
-                    {etat.title}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          ) : null}
-        </div>
-        <div className="flex items-center justify-between">
           <ToggleGroup
             type="single"
             value={severity}
             onValueChange={(value) => {
-              if (value) setSeverity(value as "LOW" | "MEDIUM" | "HIGH");
+              if (value) setSeverity(value as Severity);
             }}
           >
             <ToggleGroupItem
               value="LOW"
-              className="data-[state=on]:bg-green-500/15 data-[state=on]:text-green-500"
+              className={`h-10 px-3 text-sm ${severityConfig.LOW.toggleActive}`}
             >
               Lav
             </ToggleGroupItem>
             <ToggleGroupItem
               value="MEDIUM"
-              className="data-[state=on]:bg-amber-500/15 data-[state=on]:text-amber-500"
+              className={`h-10 px-3 text-sm ${severityConfig.MEDIUM.toggleActive}`}
             >
               Middels
             </ToggleGroupItem>
             <ToggleGroupItem
               value="HIGH"
-              className="data-[state=on]:bg-red-500/15 data-[state=on]:text-red-500"
+              className={`h-10 px-3 text-sm ${severityConfig.HIGH.toggleActive}`}
             >
               Høy
             </ToggleGroupItem>
@@ -124,6 +118,7 @@ export function MeasuresSection({
           <Button
             type="button"
             disabled={!text.trim() || !etatId || addMeasure.isPending}
+            className="h-10 px-5 text-sm"
             onClick={() => {
               addMeasure.mutate({
                 crisisId,
@@ -139,7 +134,9 @@ export function MeasuresSection({
       </div>
 
       {measures.length === 0 ? (
-        <p className="text-muted-foreground text-sm">Ingen tiltak enda.</p>
+        <p className="text-muted-foreground rounded-lg border border-dashed py-8 text-center text-sm">
+          Ingen tiltak enda. Bruk feltet over for å legge til det første.
+        </p>
       ) : (
         <div className="space-y-3">
           {measures.map((measure) => {
@@ -147,34 +144,34 @@ export function MeasuresSection({
             return (
               <div
                 key={measure.id}
-                className="flex gap-3 rounded-lg border p-3"
+                className="flex gap-3 rounded-lg border p-4"
               >
                 <div
-                  className="mt-1 h-3 w-3 shrink-0 rounded-full"
+                  className="mt-1.5 h-3.5 w-3.5 shrink-0 rounded-full"
                   style={{ backgroundColor: measure.etat.themeColor }}
+                  aria-hidden="true"
                 />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
-                    <p className="text-sm">{measure.text}</p>
-                    <Badge variant="outline" className={sev.className}>
+                    <p className="text-sm leading-relaxed">{measure.text}</p>
+                    <Badge variant="outline" className={sev.badge}>
                       {sev.label}
                     </Badge>
                   </div>
-                  <div className="text-muted-foreground mt-1 flex gap-2 text-xs">
-                    <Badge variant="outline" className="text-[0.625rem]">
-                      {measure.etat.title}
-                    </Badge>
+                  <div className="text-muted-foreground mt-1.5 flex items-center gap-2 text-xs">
+                    <Badge variant="outline">{measure.etat.title}</Badge>
                     <span>{measure.createdBy.name}</span>
                     <span>
-                      {new Date(measure.createdAt).toLocaleString("nb-NO", {
-                        day: "numeric",
-                        month: "short",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
+                      {formatDateTimeCompact(new Date(measure.createdAt))}
                     </span>
                   </div>
                 </div>
+                <RemoveButton
+                  title="Fjerne tiltak?"
+                  description={`Er du sikker på at du vil fjerne tiltaket "${measure.text}"?`}
+                  isPending={removeMeasure.isPending}
+                  onConfirm={() => removeMeasure.mutate({ id: measure.id })}
+                />
               </div>
             );
           })}

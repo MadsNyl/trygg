@@ -37,7 +37,12 @@ export function CrisisTabs({
 
   return (
     <div className="flex flex-1 flex-col">
-      <div className="flex-1 overflow-y-auto">
+      <div
+        role="tabpanel"
+        id={`tabpanel-${activeTab}`}
+        aria-labelledby={`tab-${activeTab}`}
+        className="flex-1 overflow-y-auto"
+      >
         {activeTab === "siste-nytt" && (
           <PublicTimeline entries={timelineEntries} />
         )}
@@ -45,10 +50,18 @@ export function CrisisTabs({
         {activeTab === "kart" && hasMap && <PublicMap markers={mapMarkers} />}
       </div>
 
-      <nav className="sticky bottom-0 flex border-t bg-white">
+      <nav
+        role="tablist"
+        aria-label="Krisedetaljer"
+        className="bg-background sticky bottom-0 flex border-t"
+      >
         {tabs.map((tab) => (
           <button
             key={tab.id}
+            id={`tab-${tab.id}`}
+            role="tab"
+            aria-selected={activeTab === tab.id}
+            aria-controls={`tabpanel-${tab.id}`}
             onClick={() => setActiveTab(tab.id)}
             className={`flex flex-1 flex-col items-center gap-1 py-3 text-xs font-medium transition-colors ${
               activeTab === tab.id

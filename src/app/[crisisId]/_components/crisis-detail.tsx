@@ -10,38 +10,23 @@ import {
   Settings02Icon,
   Calendar03Icon,
 } from "@hugeicons/core-free-icons";
+import { formatDateTime } from "~/lib/format";
+import { severityConfig } from "~/lib/severity";
 
 import type { CrisisDetailData } from "./types";
-
-const severityConfig = {
-  LOW: {
-    label: "Lav",
-    className: "bg-green-500/15 text-green-700 border-green-500/30",
-    topBorder: "border-t-green-500",
-  },
-  MEDIUM: {
-    label: "Middels",
-    className: "bg-amber-500/15 text-amber-700 border-amber-500/30",
-    topBorder: "border-t-amber-500",
-  },
-  HIGH: {
-    label: "Høy",
-    className: "bg-red-500/15 text-red-700 border-red-500/30",
-    topBorder: "border-t-red-500",
-  },
-} as const;
 
 export function CrisisDetail({ crisis }: { crisis: CrisisDetailData }) {
   const severity = severityConfig[crisis.severity];
 
   return (
     <div
-      className={`mx-auto flex min-h-screen max-w-md flex-col border-t-4 bg-white ${severity.topBorder}`}
+      className={`bg-background mx-auto flex min-h-screen max-w-md flex-col border-t-4 ${severity.topBorder}`}
     >
       {/* Header */}
       <header className="flex items-center gap-3 px-4 pt-4 pb-2">
         <Link
           href="/"
+          aria-label="Tilbake til kriseoversikt"
           className="text-muted-foreground hover:text-foreground flex items-center justify-center rounded-md p-1"
         >
           <HugeiconsIcon icon={ArrowLeft01Icon} size={20} />
@@ -49,7 +34,7 @@ export function CrisisDetail({ crisis }: { crisis: CrisisDetailData }) {
         <div className="flex-1">
           <h1 className="font-heading text-lg font-bold">{crisis.title}</h1>
           <div className="mt-1 flex items-center gap-2">
-            <Badge variant="outline" className={severity.className}>
+            <Badge variant="outline" className={severity.badge}>
               {severity.label}
             </Badge>
             <span className="text-muted-foreground text-sm">
@@ -61,7 +46,7 @@ export function CrisisDetail({ crisis }: { crisis: CrisisDetailData }) {
       </header>
 
       {/* Info block */}
-      <section className="mx-4 my-4 rounded-lg bg-gray-50 p-4">
+      <section className="bg-muted mx-4 my-4 rounded-lg p-4">
         <div className="space-y-3">
           <div className="flex gap-3">
             <HugeiconsIcon
@@ -99,15 +84,7 @@ export function CrisisDetail({ crisis }: { crisis: CrisisDetailData }) {
               <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
                 Når
               </p>
-              <p className="text-sm">
-                {crisis.when.toLocaleDateString("nb-NO", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-              </p>
+              <p className="text-sm">{formatDateTime(crisis.when)}</p>
             </div>
           </div>
         </div>

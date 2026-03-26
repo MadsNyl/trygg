@@ -1,12 +1,27 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 
+import { Badge } from "~/components/ui/badge";
+import { Button } from "~/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "~/components/ui/dialog";
 import { CrisisForm } from "~/app/dashbord/krise/_components/crisis-form";
 import { TimelineSection } from "~/app/dashbord/krise/_components/timeline-section";
 import { MeasuresSection } from "~/app/dashbord/krise/_components/measures-section";
 import { MapSection } from "~/app/dashbord/krise/_components/map-section";
 import { Spinner } from "~/components/ui/spinner";
+import { severityConfig } from "~/lib/severity";
 import { api } from "~/trpc/react";
 
 export default function RedigerKrisePage() {
@@ -33,7 +48,16 @@ export default function RedigerKrisePage() {
     crisisId: params.crisisId,
   });
 
+  const [deleteOpen, setDeleteOpen] = useState(false);
+
   const updateCrisis = api.crisis.update.useMutation({
+    onSuccess: () => {
+      router.push("/dashbord");
+      router.refresh();
+    },
+  });
+
+  const deleteCrisis = api.crisis.delete.useMutation({
     onSuccess: () => {
       router.push("/dashbord");
       router.refresh();
@@ -43,18 +67,23 @@ export default function RedigerKrisePage() {
   if (crisisLoading) {
     return (
       <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center">
-        <Spinner />
+        <Spinner className="size-6" />
       </main>
     );
   }
 
   if (!crisis) {
     return (
-      <main className="mx-auto w-full max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
-        <p className="text-muted-foreground text-sm">Krise ikke funnet.</p>
+      <main className="mx-auto w-full max-w-6xl px-6 py-12 lg:px-10">
+        <p className="text-muted-foreground text-base">Krise ikke funnet.</p>
+        <Button asChild variant="outline" className="mt-4 h-11 px-6 text-sm">
+          <Link href="/dashbord">Tilbake til oversikt</Link>
+        </Button>
       </main>
     );
   }
+
+  const severity = severityConfig[crisis.severity];
 
   const defaultValues = {
     title: crisis.title,
@@ -68,69 +97,151 @@ export default function RedigerKrisePage() {
   };
 
   return (
-    <main className="mx-auto w-full max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
-      <h1 className="font-heading mb-1 text-xl font-bold">Rediger krise</h1>
-      <p className="text-muted-foreground mb-8 text-sm">
-        Oppdater informasjon om krisesituasjonen.
-      </p>
+    <main className="mx-auto w-full max-w-6xl px-6 py-12 lg:px-10">
+      {/* Header */}
+      <div className="mb-12 flex items-start justify-between">
+        <div>
+          <div className="mb-2 flex items-center gap-3">
+            <h1 className="font-heading text-3xl font-bold tracking-tight">
+              {crisis.title}
+            </h1>
+            <Badge
+              variant="outline"
+              className={`px-3 py-1 text-sm ${severity.badge}`}
+            >
+              {severity.label}
+            </Badge>
+          </div>
+          <p className="text-muted-foreground text-base">
+            Oppdater kriseinformasjon, legg til oppdateringer og tiltak.
+          </p>
+        </div>
+        <div className="flex shrink-0 gap-3">
+          <Button asChild variant="outline" className="h-11 px-6 text-sm">
+            <Link href={`/${params.crisisId}`} target="_blank">
+              Se offentlig side
+            </Link>
+          </Button>
 
-      <CrisisForm
-        etater={etater ?? []}
-        defaultValues={defaultValues}
-        onSubmit={(values) => {
-          updateCrisis.mutate({
-            id: params.crisisId,
-            title: values.title,
-            description: values.description,
-            what: values.what,
-            how: values.how,
-            when: new Date(values.when),
-            severity: values.severity,
-            location: values.location,
-            allowedEtaterIds:
-              values.allowedEtaterIds.length > 0
-                ? values.allowedEtaterIds
-                : undefined,
-          });
-        }}
-        isPending={updateCrisis.isPending}
-        submitLabel="Lagre endringer"
-        pendingLabel="Lagrer..."
-      />
+          <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
+            <DialogTrigger asChild>
+              <Button variant="destructive" className="h-11 px-6 text-sm">
+                Slett krise
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle className="text-xl">Slette krise?</DialogTitle>
+                <DialogDescription className="text-sm">
+                  Er du sikker på at du vil slette &ldquo;{crisis.title}
+                  &rdquo;? Alle oppdateringer, tiltak og kartmarkører vil også
+                  bli slettet. Handlingen kan ikke angres.
+                </DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button variant="outline" className="h-10 px-5 text-sm">
+                    Avbryt
+                  </Button>
+                </DialogClose>
+                <Button
+                  variant="destructive"
+                  disabled={deleteCrisis.isPending}
+                  className="h-10 px-5 text-sm"
+                  onClick={() => {
+                    deleteCrisis.mutate({ id: params.crisisId });
+                  }}
+                >
+                  {deleteCrisis.isPending ? "Sletter..." : "Slett krise"}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </div>
+      </div>
 
-      <div className="mt-10 space-y-10 border-t pt-10">
-        <TimelineSection
-          crisisId={params.crisisId}
-          userEtater={userEtater ?? []}
-          entries={timelineEntries ?? []}
-          onEntryAdded={() => {
-            void utils.crisis.listTimelineEntries.invalidate({
-              crisisId: params.crisisId,
+      {/* Crisis details form */}
+      <section>
+        <h2 className="font-heading mb-8 text-xl font-semibold">
+          Kriseinformasjon
+        </h2>
+        <CrisisForm
+          etater={etater ?? []}
+          defaultValues={defaultValues}
+          onSubmit={(values) => {
+            updateCrisis.mutate({
+              id: params.crisisId,
+              title: values.title,
+              description: values.description,
+              what: values.what,
+              how: values.how,
+              when: new Date(values.when),
+              severity: values.severity,
+              location: values.location,
+              allowedEtaterIds:
+                values.allowedEtaterIds.length > 0
+                  ? values.allowedEtaterIds
+                  : undefined,
             });
           }}
+          isPending={updateCrisis.isPending}
+          submitLabel="Lagre endringer"
+          pendingLabel="Lagrer..."
         />
+      </section>
 
-        <MeasuresSection
-          crisisId={params.crisisId}
-          userEtater={userEtater ?? []}
-          measures={measures ?? []}
-          onMeasureAdded={() => {
-            void utils.crisis.listMeasures.invalidate({
-              crisisId: params.crisisId,
-            });
-          }}
-        />
+      {/* Operational sections */}
+      <div className="mt-16 border-t pt-12">
+        <h2 className="font-heading mb-10 text-xl font-semibold">
+          Oppdateringer og tiltak
+        </h2>
 
-        <MapSection
-          crisisId={params.crisisId}
-          userEtater={userEtater ?? []}
-          markers={mapMarkers ?? []}
-          onMarkersChanged={() => {
-            void utils.crisis.listMapMarkers.invalidate({
-              crisisId: params.crisisId,
-            });
-          }}
-        />
+        <div className="grid gap-12 lg:grid-cols-2">
+          <TimelineSection
+            crisisId={params.crisisId}
+            userEtater={userEtater ?? []}
+            entries={timelineEntries ?? []}
+            onEntryAdded={() => {
+              void utils.crisis.listTimelineEntries.invalidate({
+                crisisId: params.crisisId,
+              });
+            }}
+            onEntryRemoved={() => {
+              void utils.crisis.listTimelineEntries.invalidate({
+                crisisId: params.crisisId,
+              });
+            }}
+          />
+
+          <MeasuresSection
+            crisisId={params.crisisId}
+            userEtater={userEtater ?? []}
+            measures={measures ?? []}
+            onMeasureAdded={() => {
+              void utils.crisis.listMeasures.invalidate({
+                crisisId: params.crisisId,
+              });
+            }}
+            onMeasureRemoved={() => {
+              void utils.crisis.listMeasures.invalidate({
+                crisisId: params.crisisId,
+              });
+            }}
+          />
+        </div>
+
+        <div className="mt-12">
+          <MapSection
+            crisisId={params.crisisId}
+            userEtater={userEtater ?? []}
+            markers={mapMarkers ?? []}
+            onMarkersChanged={() => {
+              void utils.crisis.listMapMarkers.invalidate({
+                crisisId: params.crisisId,
+              });
+            }}
+          />
+        </div>
       </div>
     </main>
   );

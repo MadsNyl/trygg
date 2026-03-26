@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
+import { RemoveButton } from "./remove-button";
 import {
   Select,
   SelectContent,
@@ -141,15 +142,12 @@ function MarkerRow({
           </a>
         ) : null}
       </div>
-      <Button
-        type="button"
-        variant="outline"
-        size="sm"
-        onClick={() => onRemove(marker.id)}
-        disabled={isRemoving}
-      >
-        Fjern
-      </Button>
+      <RemoveButton
+        title="Fjerne markør?"
+        description={`Er du sikker på at du vil fjerne markøren "${marker.label}"?`}
+        isPending={isRemoving}
+        onConfirm={() => onRemove(marker.id)}
+      />
     </div>
   );
 }
@@ -239,7 +237,7 @@ export function MapSection({
       </p>
 
       <div
-        className="overflow-hidden rounded-lg border"
+        className="relative z-0 overflow-hidden rounded-lg border"
         style={{ height: 400 }}
       >
         <MapContent

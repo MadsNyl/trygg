@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { Button } from "~/components/ui/button";
 import {
   Sidebar,
   SidebarContent,
@@ -58,25 +59,31 @@ export function AppSidebar({ user }: AppSidebarProps) {
 
   return (
     <Sidebar>
-      <SidebarHeader className="border-b px-4 py-4">
+      <SidebarHeader className="h-14 items-start justify-center border-b px-5">
         <Link
           href="/dashbord"
-          className="font-heading text-lg font-bold tracking-tight"
+          className="font-heading text-xl font-bold tracking-tight"
         >
-          Trygg
+          trygg
         </Link>
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className="px-1 pt-2">
         <SidebarGroup>
-          <SidebarGroupLabel>Oversikt</SidebarGroupLabel>
+          <SidebarGroupLabel className="px-4 text-xs tracking-wider uppercase">
+            Oversikt
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {mainNav.map((item) => (
                 <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton asChild isActive={isActive(item.href)}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={isActive(item.href)}
+                    className="h-10 gap-3 px-4 text-sm"
+                  >
                     <Link href={item.href}>
-                      <HugeiconsIcon icon={item.icon} size={18} />
+                      <HugeiconsIcon icon={item.icon} size={20} />
                       <span>{item.label}</span>
                     </Link>
                   </SidebarMenuButton>
@@ -88,14 +95,20 @@ export function AppSidebar({ user }: AppSidebarProps) {
 
         {user.isAdmin ? (
           <SidebarGroup>
-            <SidebarGroupLabel>Admin</SidebarGroupLabel>
+            <SidebarGroupLabel className="px-4 text-xs tracking-wider uppercase">
+              Admin
+            </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {adminNav.map((item) => (
                   <SidebarMenuItem key={item.href}>
-                    <SidebarMenuButton asChild isActive={isActive(item.href)}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive(item.href)}
+                      className="h-10 gap-3 px-4 text-sm"
+                    >
                       <Link href={item.href}>
-                        <HugeiconsIcon icon={item.icon} size={18} />
+                        <HugeiconsIcon icon={item.icon} size={20} />
                         <span>{item.label}</span>
                       </Link>
                     </SidebarMenuButton>
@@ -107,26 +120,29 @@ export function AppSidebar({ user }: AppSidebarProps) {
         ) : null}
       </SidebarContent>
 
-      <SidebarFooter className="border-t p-4">
+      <SidebarFooter className="border-t p-5">
         <Link href="/dashbord/profile" className="flex items-center gap-3">
           <Avatar>
-            <AvatarFallback>{user.name.charAt(0).toUpperCase()}</AvatarFallback>
+            <AvatarFallback className="text-sm">
+              {user.name.charAt(0).toUpperCase()}
+            </AvatarFallback>
           </Avatar>
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-medium">{user.name}</p>
             <p className="text-muted-foreground text-xs">Profil</p>
           </div>
         </Link>
-        <button
+        <Button
+          variant="ghost"
           onClick={() => {
             void authClient.signOut().then(() => {
               router.push("/logg-inn");
             });
           }}
-          className="text-muted-foreground hover:text-foreground mt-2 text-xs"
+          className="text-muted-foreground hover:text-foreground mt-2 h-9 w-full justify-start px-3 text-sm"
         >
           Logg ut
-        </button>
+        </Button>
       </SidebarFooter>
     </Sidebar>
   );

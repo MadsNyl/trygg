@@ -15,6 +15,7 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
 import { api } from "~/trpc/react";
 
 type EditEtatDialogProps = {
@@ -60,18 +61,20 @@ export function EditEtatDialog({ etat }: EditEtatDialogProps) {
       }}
     >
       <DialogTrigger asChild>
-        <Button variant="outline">Rediger etat</Button>
+        <Button variant="outline" className="h-10 px-5 text-sm">
+          Rediger etat
+        </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle>Rediger etat</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-xl">Rediger etat</DialogTitle>
+          <DialogDescription className="text-sm">
             Oppdater informasjon for denne etaten.
           </DialogDescription>
         </DialogHeader>
 
         <form
-          className="space-y-3"
+          className="space-y-5"
           onSubmit={(event) => {
             event.preventDefault();
             updateEtat.mutate({
@@ -83,20 +86,27 @@ export function EditEtatDialog({ etat }: EditEtatDialogProps) {
             });
           }}
         >
-          <div className="space-y-1">
-            <label className="text-xs font-medium">Tittel</label>
+          <div className="space-y-2">
+            <Label htmlFor="edit-etat-title" className="text-sm">
+              Tittel
+            </Label>
             <Input
+              id="edit-etat-title"
               value={form.title}
               onChange={(event) => {
                 setForm((prev) => ({ ...prev, title: event.target.value }));
               }}
+              className="h-10 px-3 text-sm md:text-sm"
               required
             />
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-medium">Kontakttelefon</label>
+          <div className="space-y-2">
+            <Label htmlFor="edit-etat-phone" className="text-sm">
+              Kontakttelefon
+            </Label>
             <Input
+              id="edit-etat-phone"
               value={form.contactPhone}
               onChange={(event) => {
                 setForm((prev) => ({
@@ -104,13 +114,17 @@ export function EditEtatDialog({ etat }: EditEtatDialogProps) {
                   contactPhone: event.target.value,
                 }));
               }}
+              className="h-10 px-3 text-sm md:text-sm"
               required
             />
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-medium">Kontakt e-post</label>
+          <div className="space-y-2">
+            <Label htmlFor="edit-etat-email" className="text-sm">
+              Kontakt e-post
+            </Label>
             <Input
+              id="edit-etat-email"
               type="email"
               value={form.contactEmail}
               onChange={(event) => {
@@ -119,32 +133,49 @@ export function EditEtatDialog({ etat }: EditEtatDialogProps) {
                   contactEmail: event.target.value,
                 }));
               }}
+              className="h-10 px-3 text-sm md:text-sm"
               required
             />
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-medium">Temafarge</label>
-            <Input
-              type="color"
-              value={form.themeColor}
-              onChange={(event) => {
-                setForm((prev) => ({
-                  ...prev,
-                  themeColor: event.target.value,
-                }));
-              }}
-              required
-            />
+          <div className="space-y-2">
+            <Label className="text-sm">Temafarge</Label>
+            <label className="flex h-10 cursor-pointer items-center gap-3">
+              <span
+                className="h-8 w-8 shrink-0 rounded-full border"
+                style={{ backgroundColor: form.themeColor }}
+              />
+              <span className="text-sm hover:underline">Velg temafarge</span>
+              <input
+                type="color"
+                value={form.themeColor}
+                onChange={(event) => {
+                  setForm((prev) => ({
+                    ...prev,
+                    themeColor: event.target.value,
+                  }));
+                }}
+                className="sr-only"
+                required
+              />
+            </label>
           </div>
 
           <DialogFooter>
             <DialogClose asChild>
-              <Button type="button" variant="outline">
+              <Button
+                type="button"
+                variant="outline"
+                className="h-10 px-5 text-sm"
+              >
                 Avbryt
               </Button>
             </DialogClose>
-            <Button type="submit" disabled={updateEtat.isPending}>
+            <Button
+              type="submit"
+              disabled={updateEtat.isPending}
+              className="h-10 px-5 text-sm"
+            >
               {updateEtat.isPending ? "Lagrer..." : "Lagre"}
             </Button>
           </DialogFooter>

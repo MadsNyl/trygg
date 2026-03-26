@@ -11,11 +11,16 @@ export default async function LoggInnSide() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gray-50 px-4">
-      <h1 className="font-heading text-primary mb-6 text-2xl font-bold">
-        Trygg
-      </h1>
-      <InnloggingKort />
+    <main className="bg-background flex min-h-screen flex-col items-center justify-center px-6">
+      <div className="w-full max-w-sm">
+        <h1 className="font-heading mb-2 text-3xl font-bold tracking-tight">
+          trygg
+        </h1>
+        <p className="text-muted-foreground mb-8 text-sm">
+          Logg inn eller opprett en ny konto for å fortsette.
+        </p>
+        <InnloggingKort />
+      </div>
     </main>
   );
 }
