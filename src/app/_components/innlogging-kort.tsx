@@ -38,8 +38,8 @@ export function InnloggingKort() {
     setLasterInn(true);
 
     const formData = new FormData(event.currentTarget);
-    const epost = String(formData.get("epost") ?? "");
-    const passord = String(formData.get("passord") ?? "");
+    const epost = (formData.get("epost") as string | null) ?? "";
+    const passord = (formData.get("passord") as string | null) ?? "";
 
     const result = await authClient.signIn.email({
       email: epost,
@@ -65,9 +65,9 @@ export function InnloggingKort() {
     setLasterInn(true);
 
     const formData = new FormData(event.currentTarget);
-    const navn = String(formData.get("navn") ?? "");
-    const epost = String(formData.get("epost") ?? "");
-    const passord = String(formData.get("passord") ?? "");
+    const navn = (formData.get("navn") as string | null) ?? "";
+    const epost = (formData.get("epost") as string | null) ?? "";
+    const passord = (formData.get("passord") as string | null) ?? "";
 
     const result = await authClient.signUp.email({
       name: navn,
