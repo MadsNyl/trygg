@@ -23,6 +23,7 @@ import {
   UserMultipleIcon,
   Building01Icon,
 } from "@hugeicons/core-free-icons";
+import { useRouter } from "next/navigation";
 import { authClient } from "~/server/better-auth/client";
 
 type AppSidebarProps = {
@@ -48,6 +49,7 @@ const adminNav = [
 
 export function AppSidebar({ user }: AppSidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
 
   const isActive = (href: string) => {
     if (href === "/dashbord") return pathname === "/dashbord";
@@ -106,20 +108,25 @@ export function AppSidebar({ user }: AppSidebarProps) {
       </SidebarContent>
 
       <SidebarFooter className="border-t p-4">
-        <div className="flex items-center gap-3">
+        <Link href="/dashbord/profile" className="flex items-center gap-3">
           <Avatar>
             <AvatarFallback>{user.name.charAt(0).toUpperCase()}</AvatarFallback>
           </Avatar>
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-medium">{user.name}</p>
-            <button
-              onClick={() => void authClient.signOut()}
-              className="text-muted-foreground hover:text-foreground text-xs"
-            >
-              Logg ut
-            </button>
+            <p className="text-muted-foreground text-xs">Profil</p>
           </div>
-        </div>
+        </Link>
+        <button
+          onClick={() => {
+            void authClient.signOut().then(() => {
+              router.push("/logg-inn");
+            });
+          }}
+          className="text-muted-foreground hover:text-foreground mt-2 text-xs"
+        >
+          Logg ut
+        </button>
       </SidebarFooter>
     </Sidebar>
   );

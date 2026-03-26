@@ -45,6 +45,11 @@ export function CrisisListItem({ crisis }: CrisisListItemProps) {
         </Badge>
       </div>
       <h3 className="font-heading text-base font-bold">{crisis.title}</h3>
+      {crisis.description ? (
+        <p className="text-muted-foreground mt-1 line-clamp-2 text-sm">
+          {crisis.description}
+        </p>
+      ) : null}
       <p className="text-muted-foreground mt-1 text-sm">
         {crisis.location ?? "Ukjent sted"} ·{" "}
         {crisis.when.toLocaleDateString("nb-NO", {
