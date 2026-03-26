@@ -151,6 +151,19 @@ exports.Prisma.EtatScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CrisisScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  what: 'what',
+  how: 'how',
+  when: 'when',
+  severity: 'severity',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
   expiresAt: 'expiresAt',
@@ -201,12 +214,17 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.Severity = exports.$Enums.Severity = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH'
+};
 
 exports.Prisma.ModelName = {
   Post: 'Post',
   User: 'User',
   Etat: 'Etat',
+  Crisis: 'Crisis',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'

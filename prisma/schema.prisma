@@ -40,6 +40,7 @@ model User {
   sessions      Session[]
   accounts      Account[]
   posts         Post[]
+  crises        Crisis[]
   etater        Etat[]
 
   @@unique([email])
@@ -55,6 +56,31 @@ model Etat {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   users        User[]
+  crises       Crisis[]
+}
+
+enum Severity {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model Crisis {
+  id             String   @id @default(cuid())
+  title          String
+  description    String   @db.Text
+  what           String
+  how            String
+  when           DateTime
+  severity       Severity @default(LOW)
+
+  createdBy      User     @relation(fields: [createdById], references: [id])
+  createdById    String
+
+  allowedEtater  Etat[]
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model Session {

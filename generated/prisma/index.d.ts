@@ -29,6 +29,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type Etat = $Result.DefaultSelection<Prisma.$EtatPayload>
 /**
+ * Model Crisis
+ * 
+ */
+export type Crisis = $Result.DefaultSelection<Prisma.$CrisisPayload>
+/**
  * Model Session
  * 
  */
@@ -43,6 +48,24 @@ export type Account = $Result.DefaultSelection<Prisma.$AccountPayload>
  * 
  */
 export type Verification = $Result.DefaultSelection<Prisma.$VerificationPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const Severity: {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH'
+};
+
+export type Severity = (typeof Severity)[keyof typeof Severity]
+
+}
+
+export type Severity = $Enums.Severity
+
+export const Severity: typeof $Enums.Severity
 
 /**
  * ##  Prisma Client ʲˢ
@@ -191,6 +214,16 @@ export class PrismaClient<
     * ```
     */
   get etat(): Prisma.EtatDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.crisis`: Exposes CRUD operations for the **Crisis** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Crises
+    * const crises = await prisma.crisis.findMany()
+    * ```
+    */
+  get crisis(): Prisma.CrisisDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.session`: Exposes CRUD operations for the **Session** model.
@@ -665,6 +698,7 @@ export namespace Prisma {
     Post: 'Post',
     User: 'User',
     Etat: 'Etat',
+    Crisis: 'Crisis',
     Session: 'Session',
     Account: 'Account',
     Verification: 'Verification'
@@ -686,7 +720,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "post" | "user" | "etat" | "session" | "account" | "verification"
+      modelProps: "post" | "user" | "etat" | "crisis" | "session" | "account" | "verification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -909,6 +943,80 @@ export namespace Prisma {
           count: {
             args: Prisma.EtatCountArgs<ExtArgs>
             result: $Utils.Optional<EtatCountAggregateOutputType> | number
+          }
+        }
+      }
+      Crisis: {
+        payload: Prisma.$CrisisPayload<ExtArgs>
+        fields: Prisma.CrisisFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CrisisFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CrisisFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>
+          }
+          findFirst: {
+            args: Prisma.CrisisFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CrisisFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>
+          }
+          findMany: {
+            args: Prisma.CrisisFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>[]
+          }
+          create: {
+            args: Prisma.CrisisCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>
+          }
+          createMany: {
+            args: Prisma.CrisisCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CrisisCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>[]
+          }
+          delete: {
+            args: Prisma.CrisisDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>
+          }
+          update: {
+            args: Prisma.CrisisUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>
+          }
+          deleteMany: {
+            args: Prisma.CrisisDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CrisisUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CrisisUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>[]
+          }
+          upsert: {
+            args: Prisma.CrisisUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisPayload>
+          }
+          aggregate: {
+            args: Prisma.CrisisAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCrisis>
+          }
+          groupBy: {
+            args: Prisma.CrisisGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CrisisGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CrisisCountArgs<ExtArgs>
+            result: $Utils.Optional<CrisisCountAggregateOutputType> | number
           }
         }
       }
@@ -1233,6 +1341,7 @@ export namespace Prisma {
     post?: PostOmit
     user?: UserOmit
     etat?: EtatOmit
+    crisis?: CrisisOmit
     session?: SessionOmit
     account?: AccountOmit
     verification?: VerificationOmit
@@ -1319,6 +1428,7 @@ export namespace Prisma {
     sessions: number
     accounts: number
     posts: number
+    crises: number
     etater: number
   }
 
@@ -1326,6 +1436,7 @@ export namespace Prisma {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     posts?: boolean | UserCountOutputTypeCountPostsArgs
+    crises?: boolean | UserCountOutputTypeCountCrisesArgs
     etater?: boolean | UserCountOutputTypeCountEtaterArgs
   }
 
@@ -1364,6 +1475,13 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountCrisesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CrisisWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountEtaterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EtatWhereInput
   }
@@ -1375,10 +1493,12 @@ export namespace Prisma {
 
   export type EtatCountOutputType = {
     users: number
+    crises: number
   }
 
   export type EtatCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | EtatCountOutputTypeCountUsersArgs
+    crises?: boolean | EtatCountOutputTypeCountCrisesArgs
   }
 
   // Custom InputTypes
@@ -1397,6 +1517,44 @@ export namespace Prisma {
    */
   export type EtatCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
+  }
+
+  /**
+   * EtatCountOutputType without action
+   */
+  export type EtatCountOutputTypeCountCrisesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CrisisWhereInput
+  }
+
+
+  /**
+   * Count Type CrisisCountOutputType
+   */
+
+  export type CrisisCountOutputType = {
+    allowedEtater: number
+  }
+
+  export type CrisisCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    allowedEtater?: boolean | CrisisCountOutputTypeCountAllowedEtaterArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CrisisCountOutputType without action
+   */
+  export type CrisisCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CrisisCountOutputType
+     */
+    select?: CrisisCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CrisisCountOutputType without action
+   */
+  export type CrisisCountOutputTypeCountAllowedEtaterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EtatWhereInput
   }
 
 
@@ -2661,6 +2819,7 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
+    crises?: boolean | User$crisesArgs<ExtArgs>
     etater?: boolean | User$etaterArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -2706,6 +2865,7 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
+    crises?: boolean | User$crisesArgs<ExtArgs>
     etater?: boolean | User$etaterArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -2718,6 +2878,7 @@ export namespace Prisma {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       posts: Prisma.$PostPayload<ExtArgs>[]
+      crises: Prisma.$CrisisPayload<ExtArgs>[]
       etater: Prisma.$EtatPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -3127,6 +3288,7 @@ export namespace Prisma {
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    crises<T extends User$crisesArgs<ExtArgs> = {}>(args?: Subset<T, User$crisesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     etater<T extends User$etaterArgs<ExtArgs> = {}>(args?: Subset<T, User$etaterArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EtatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3626,6 +3788,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.crises
+   */
+  export type User$crisesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    where?: CrisisWhereInput
+    orderBy?: CrisisOrderByWithRelationInput | CrisisOrderByWithRelationInput[]
+    cursor?: CrisisWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CrisisScalarFieldEnum | CrisisScalarFieldEnum[]
+  }
+
+  /**
    * User.etater
    */
   export type User$etaterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3849,6 +4035,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     users?: boolean | Etat$usersArgs<ExtArgs>
+    crises?: boolean | Etat$crisesArgs<ExtArgs>
     _count?: boolean | EtatCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["etat"]>
 
@@ -3885,6 +4072,7 @@ export namespace Prisma {
   export type EtatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "contactPhone" | "contactEmail" | "themeColor" | "createdAt" | "updatedAt", ExtArgs["result"]["etat"]>
   export type EtatInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Etat$usersArgs<ExtArgs>
+    crises?: boolean | Etat$crisesArgs<ExtArgs>
     _count?: boolean | EtatCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EtatIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3894,6 +4082,7 @@ export namespace Prisma {
     name: "Etat"
     objects: {
       users: Prisma.$UserPayload<ExtArgs>[]
+      crises: Prisma.$CrisisPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4298,6 +4487,7 @@ export namespace Prisma {
   export interface Prisma__EtatClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     users<T extends Etat$usersArgs<ExtArgs> = {}>(args?: Subset<T, Etat$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    crises<T extends Etat$crisesArgs<ExtArgs> = {}>(args?: Subset<T, Etat$crisesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4746,6 +4936,30 @@ export namespace Prisma {
   }
 
   /**
+   * Etat.crises
+   */
+  export type Etat$crisesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    where?: CrisisWhereInput
+    orderBy?: CrisisOrderByWithRelationInput | CrisisOrderByWithRelationInput[]
+    cursor?: CrisisWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CrisisScalarFieldEnum | CrisisScalarFieldEnum[]
+  }
+
+  /**
    * Etat without action
    */
   export type EtatDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4761,6 +4975,1159 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: EtatInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Crisis
+   */
+
+  export type AggregateCrisis = {
+    _count: CrisisCountAggregateOutputType | null
+    _min: CrisisMinAggregateOutputType | null
+    _max: CrisisMaxAggregateOutputType | null
+  }
+
+  export type CrisisMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    what: string | null
+    how: string | null
+    when: Date | null
+    severity: $Enums.Severity | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CrisisMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    what: string | null
+    how: string | null
+    when: Date | null
+    severity: $Enums.Severity | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CrisisCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    what: number
+    how: number
+    when: number
+    severity: number
+    createdById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CrisisMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    what?: true
+    how?: true
+    when?: true
+    severity?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CrisisMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    what?: true
+    how?: true
+    when?: true
+    severity?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CrisisCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    what?: true
+    how?: true
+    when?: true
+    severity?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CrisisAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Crisis to aggregate.
+     */
+    where?: CrisisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Crises to fetch.
+     */
+    orderBy?: CrisisOrderByWithRelationInput | CrisisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CrisisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Crises from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Crises.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Crises
+    **/
+    _count?: true | CrisisCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CrisisMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CrisisMaxAggregateInputType
+  }
+
+  export type GetCrisisAggregateType<T extends CrisisAggregateArgs> = {
+        [P in keyof T & keyof AggregateCrisis]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCrisis[P]>
+      : GetScalarType<T[P], AggregateCrisis[P]>
+  }
+
+
+
+
+  export type CrisisGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CrisisWhereInput
+    orderBy?: CrisisOrderByWithAggregationInput | CrisisOrderByWithAggregationInput[]
+    by: CrisisScalarFieldEnum[] | CrisisScalarFieldEnum
+    having?: CrisisScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CrisisCountAggregateInputType | true
+    _min?: CrisisMinAggregateInputType
+    _max?: CrisisMaxAggregateInputType
+  }
+
+  export type CrisisGroupByOutputType = {
+    id: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date
+    severity: $Enums.Severity
+    createdById: string
+    createdAt: Date
+    updatedAt: Date
+    _count: CrisisCountAggregateOutputType | null
+    _min: CrisisMinAggregateOutputType | null
+    _max: CrisisMaxAggregateOutputType | null
+  }
+
+  type GetCrisisGroupByPayload<T extends CrisisGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CrisisGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CrisisGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CrisisGroupByOutputType[P]>
+            : GetScalarType<T[P], CrisisGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CrisisSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    what?: boolean
+    how?: boolean
+    when?: boolean
+    severity?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    allowedEtater?: boolean | Crisis$allowedEtaterArgs<ExtArgs>
+    _count?: boolean | CrisisCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["crisis"]>
+
+  export type CrisisSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    what?: boolean
+    how?: boolean
+    when?: boolean
+    severity?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["crisis"]>
+
+  export type CrisisSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    what?: boolean
+    how?: boolean
+    when?: boolean
+    severity?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["crisis"]>
+
+  export type CrisisSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    what?: boolean
+    how?: boolean
+    when?: boolean
+    severity?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CrisisOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "what" | "how" | "when" | "severity" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["crisis"]>
+  export type CrisisInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    allowedEtater?: boolean | Crisis$allowedEtaterArgs<ExtArgs>
+    _count?: boolean | CrisisCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CrisisIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CrisisIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $CrisisPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Crisis"
+    objects: {
+      createdBy: Prisma.$UserPayload<ExtArgs>
+      allowedEtater: Prisma.$EtatPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      description: string
+      what: string
+      how: string
+      when: Date
+      severity: $Enums.Severity
+      createdById: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["crisis"]>
+    composites: {}
+  }
+
+  type CrisisGetPayload<S extends boolean | null | undefined | CrisisDefaultArgs> = $Result.GetResult<Prisma.$CrisisPayload, S>
+
+  type CrisisCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CrisisFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CrisisCountAggregateInputType | true
+    }
+
+  export interface CrisisDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Crisis'], meta: { name: 'Crisis' } }
+    /**
+     * Find zero or one Crisis that matches the filter.
+     * @param {CrisisFindUniqueArgs} args - Arguments to find a Crisis
+     * @example
+     * // Get one Crisis
+     * const crisis = await prisma.crisis.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CrisisFindUniqueArgs>(args: SelectSubset<T, CrisisFindUniqueArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Crisis that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CrisisFindUniqueOrThrowArgs} args - Arguments to find a Crisis
+     * @example
+     * // Get one Crisis
+     * const crisis = await prisma.crisis.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CrisisFindUniqueOrThrowArgs>(args: SelectSubset<T, CrisisFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Crisis that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CrisisFindFirstArgs} args - Arguments to find a Crisis
+     * @example
+     * // Get one Crisis
+     * const crisis = await prisma.crisis.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CrisisFindFirstArgs>(args?: SelectSubset<T, CrisisFindFirstArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Crisis that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CrisisFindFirstOrThrowArgs} args - Arguments to find a Crisis
+     * @example
+     * // Get one Crisis
+     * const crisis = await prisma.crisis.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CrisisFindFirstOrThrowArgs>(args?: SelectSubset<T, CrisisFindFirstOrThrowArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Crises that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CrisisFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Crises
+     * const crises = await prisma.crisis.findMany()
+     * 
+     * // Get first 10 Crises
+     * const crises = await prisma.crisis.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const crisisWithIdOnly = await prisma.crisis.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CrisisFindManyArgs>(args?: SelectSubset<T, CrisisFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Crisis.
+     * @param {CrisisCreateArgs} args - Arguments to create a Crisis.
+     * @example
+     * // Create one Crisis
+     * const Crisis = await prisma.crisis.create({
+     *   data: {
+     *     // ... data to create a Crisis
+     *   }
+     * })
+     * 
+     */
+    create<T extends CrisisCreateArgs>(args: SelectSubset<T, CrisisCreateArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Crises.
+     * @param {CrisisCreateManyArgs} args - Arguments to create many Crises.
+     * @example
+     * // Create many Crises
+     * const crisis = await prisma.crisis.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CrisisCreateManyArgs>(args?: SelectSubset<T, CrisisCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Crises and returns the data saved in the database.
+     * @param {CrisisCreateManyAndReturnArgs} args - Arguments to create many Crises.
+     * @example
+     * // Create many Crises
+     * const crisis = await prisma.crisis.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Crises and only return the `id`
+     * const crisisWithIdOnly = await prisma.crisis.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CrisisCreateManyAndReturnArgs>(args?: SelectSubset<T, CrisisCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Crisis.
+     * @param {CrisisDeleteArgs} args - Arguments to delete one Crisis.
+     * @example
+     * // Delete one Crisis
+     * const Crisis = await prisma.crisis.delete({
+     *   where: {
+     *     // ... filter to delete one Crisis
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CrisisDeleteArgs>(args: SelectSubset<T, CrisisDeleteArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Crisis.
+     * @param {CrisisUpdateArgs} args - Arguments to update one Crisis.
+     * @example
+     * // Update one Crisis
+     * const crisis = await prisma.crisis.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CrisisUpdateArgs>(args: SelectSubset<T, CrisisUpdateArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Crises.
+     * @param {CrisisDeleteManyArgs} args - Arguments to filter Crises to delete.
+     * @example
+     * // Delete a few Crises
+     * const { count } = await prisma.crisis.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CrisisDeleteManyArgs>(args?: SelectSubset<T, CrisisDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Crises.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CrisisUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Crises
+     * const crisis = await prisma.crisis.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CrisisUpdateManyArgs>(args: SelectSubset<T, CrisisUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Crises and returns the data updated in the database.
+     * @param {CrisisUpdateManyAndReturnArgs} args - Arguments to update many Crises.
+     * @example
+     * // Update many Crises
+     * const crisis = await prisma.crisis.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Crises and only return the `id`
+     * const crisisWithIdOnly = await prisma.crisis.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CrisisUpdateManyAndReturnArgs>(args: SelectSubset<T, CrisisUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Crisis.
+     * @param {CrisisUpsertArgs} args - Arguments to update or create a Crisis.
+     * @example
+     * // Update or create a Crisis
+     * const crisis = await prisma.crisis.upsert({
+     *   create: {
+     *     // ... data to create a Crisis
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Crisis we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CrisisUpsertArgs>(args: SelectSubset<T, CrisisUpsertArgs<ExtArgs>>): Prisma__CrisisClient<$Result.GetResult<Prisma.$CrisisPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Crises.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CrisisCountArgs} args - Arguments to filter Crises to count.
+     * @example
+     * // Count the number of Crises
+     * const count = await prisma.crisis.count({
+     *   where: {
+     *     // ... the filter for the Crises we want to count
+     *   }
+     * })
+    **/
+    count<T extends CrisisCountArgs>(
+      args?: Subset<T, CrisisCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CrisisCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Crisis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CrisisAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CrisisAggregateArgs>(args: Subset<T, CrisisAggregateArgs>): Prisma.PrismaPromise<GetCrisisAggregateType<T>>
+
+    /**
+     * Group by Crisis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CrisisGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CrisisGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CrisisGroupByArgs['orderBy'] }
+        : { orderBy?: CrisisGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CrisisGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCrisisGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Crisis model
+   */
+  readonly fields: CrisisFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Crisis.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CrisisClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    allowedEtater<T extends Crisis$allowedEtaterArgs<ExtArgs> = {}>(args?: Subset<T, Crisis$allowedEtaterArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EtatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Crisis model
+   */
+  interface CrisisFieldRefs {
+    readonly id: FieldRef<"Crisis", 'String'>
+    readonly title: FieldRef<"Crisis", 'String'>
+    readonly description: FieldRef<"Crisis", 'String'>
+    readonly what: FieldRef<"Crisis", 'String'>
+    readonly how: FieldRef<"Crisis", 'String'>
+    readonly when: FieldRef<"Crisis", 'DateTime'>
+    readonly severity: FieldRef<"Crisis", 'Severity'>
+    readonly createdById: FieldRef<"Crisis", 'String'>
+    readonly createdAt: FieldRef<"Crisis", 'DateTime'>
+    readonly updatedAt: FieldRef<"Crisis", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Crisis findUnique
+   */
+  export type CrisisFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * Filter, which Crisis to fetch.
+     */
+    where: CrisisWhereUniqueInput
+  }
+
+  /**
+   * Crisis findUniqueOrThrow
+   */
+  export type CrisisFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * Filter, which Crisis to fetch.
+     */
+    where: CrisisWhereUniqueInput
+  }
+
+  /**
+   * Crisis findFirst
+   */
+  export type CrisisFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * Filter, which Crisis to fetch.
+     */
+    where?: CrisisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Crises to fetch.
+     */
+    orderBy?: CrisisOrderByWithRelationInput | CrisisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Crises.
+     */
+    cursor?: CrisisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Crises from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Crises.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Crises.
+     */
+    distinct?: CrisisScalarFieldEnum | CrisisScalarFieldEnum[]
+  }
+
+  /**
+   * Crisis findFirstOrThrow
+   */
+  export type CrisisFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * Filter, which Crisis to fetch.
+     */
+    where?: CrisisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Crises to fetch.
+     */
+    orderBy?: CrisisOrderByWithRelationInput | CrisisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Crises.
+     */
+    cursor?: CrisisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Crises from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Crises.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Crises.
+     */
+    distinct?: CrisisScalarFieldEnum | CrisisScalarFieldEnum[]
+  }
+
+  /**
+   * Crisis findMany
+   */
+  export type CrisisFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * Filter, which Crises to fetch.
+     */
+    where?: CrisisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Crises to fetch.
+     */
+    orderBy?: CrisisOrderByWithRelationInput | CrisisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Crises.
+     */
+    cursor?: CrisisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Crises from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Crises.
+     */
+    skip?: number
+    distinct?: CrisisScalarFieldEnum | CrisisScalarFieldEnum[]
+  }
+
+  /**
+   * Crisis create
+   */
+  export type CrisisCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Crisis.
+     */
+    data: XOR<CrisisCreateInput, CrisisUncheckedCreateInput>
+  }
+
+  /**
+   * Crisis createMany
+   */
+  export type CrisisCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Crises.
+     */
+    data: CrisisCreateManyInput | CrisisCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Crisis createManyAndReturn
+   */
+  export type CrisisCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * The data used to create many Crises.
+     */
+    data: CrisisCreateManyInput | CrisisCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Crisis update
+   */
+  export type CrisisUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Crisis.
+     */
+    data: XOR<CrisisUpdateInput, CrisisUncheckedUpdateInput>
+    /**
+     * Choose, which Crisis to update.
+     */
+    where: CrisisWhereUniqueInput
+  }
+
+  /**
+   * Crisis updateMany
+   */
+  export type CrisisUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Crises.
+     */
+    data: XOR<CrisisUpdateManyMutationInput, CrisisUncheckedUpdateManyInput>
+    /**
+     * Filter which Crises to update
+     */
+    where?: CrisisWhereInput
+    /**
+     * Limit how many Crises to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Crisis updateManyAndReturn
+   */
+  export type CrisisUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * The data used to update Crises.
+     */
+    data: XOR<CrisisUpdateManyMutationInput, CrisisUncheckedUpdateManyInput>
+    /**
+     * Filter which Crises to update
+     */
+    where?: CrisisWhereInput
+    /**
+     * Limit how many Crises to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Crisis upsert
+   */
+  export type CrisisUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Crisis to update in case it exists.
+     */
+    where: CrisisWhereUniqueInput
+    /**
+     * In case the Crisis found by the `where` argument doesn't exist, create a new Crisis with this data.
+     */
+    create: XOR<CrisisCreateInput, CrisisUncheckedCreateInput>
+    /**
+     * In case the Crisis was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CrisisUpdateInput, CrisisUncheckedUpdateInput>
+  }
+
+  /**
+   * Crisis delete
+   */
+  export type CrisisDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
+    /**
+     * Filter which Crisis to delete.
+     */
+    where: CrisisWhereUniqueInput
+  }
+
+  /**
+   * Crisis deleteMany
+   */
+  export type CrisisDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Crises to delete
+     */
+    where?: CrisisWhereInput
+    /**
+     * Limit how many Crises to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Crisis.allowedEtater
+   */
+  export type Crisis$allowedEtaterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Etat
+     */
+    select?: EtatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Etat
+     */
+    omit?: EtatOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EtatInclude<ExtArgs> | null
+    where?: EtatWhereInput
+    orderBy?: EtatOrderByWithRelationInput | EtatOrderByWithRelationInput[]
+    cursor?: EtatWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EtatScalarFieldEnum | EtatScalarFieldEnum[]
+  }
+
+  /**
+   * Crisis without action
+   */
+  export type CrisisDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Crisis
+     */
+    select?: CrisisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Crisis
+     */
+    omit?: CrisisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisInclude<ExtArgs> | null
   }
 
 
@@ -8084,6 +9451,22 @@ export namespace Prisma {
   export type EtatScalarFieldEnum = (typeof EtatScalarFieldEnum)[keyof typeof EtatScalarFieldEnum]
 
 
+  export const CrisisScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    what: 'what',
+    how: 'how',
+    when: 'when',
+    severity: 'severity',
+    createdById: 'createdById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CrisisScalarFieldEnum = (typeof CrisisScalarFieldEnum)[keyof typeof CrisisScalarFieldEnum]
+
+
   export const SessionScalarFieldEnum: {
     id: 'id',
     expiresAt: 'expiresAt',
@@ -8194,6 +9577,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Severity'
+   */
+  export type EnumSeverityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Severity'>
+    
+
+
+  /**
+   * Reference to a field of type 'Severity[]'
+   */
+  export type ListEnumSeverityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Severity[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -8281,6 +9678,7 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
     posts?: PostListRelationFilter
+    crises?: CrisisListRelationFilter
     etater?: EtatListRelationFilter
   }
 
@@ -8297,6 +9695,7 @@ export namespace Prisma {
     sessions?: SessionOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
     posts?: PostOrderByRelationAggregateInput
+    crises?: CrisisOrderByRelationAggregateInput
     etater?: EtatOrderByRelationAggregateInput
   }
 
@@ -8316,6 +9715,7 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
     posts?: PostListRelationFilter
+    crises?: CrisisListRelationFilter
     etater?: EtatListRelationFilter
   }, "id" | "email">
 
@@ -8361,6 +9761,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Etat"> | Date | string
     updatedAt?: DateTimeFilter<"Etat"> | Date | string
     users?: UserListRelationFilter
+    crises?: CrisisListRelationFilter
   }
 
   export type EtatOrderByWithRelationInput = {
@@ -8372,6 +9773,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     users?: UserOrderByRelationAggregateInput
+    crises?: CrisisOrderByRelationAggregateInput
   }
 
   export type EtatWhereUniqueInput = Prisma.AtLeast<{
@@ -8386,6 +9788,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Etat"> | Date | string
     updatedAt?: DateTimeFilter<"Etat"> | Date | string
     users?: UserListRelationFilter
+    crises?: CrisisListRelationFilter
   }, "id">
 
   export type EtatOrderByWithAggregationInput = {
@@ -8412,6 +9815,89 @@ export namespace Prisma {
     themeColor?: StringWithAggregatesFilter<"Etat"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Etat"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Etat"> | Date | string
+  }
+
+  export type CrisisWhereInput = {
+    AND?: CrisisWhereInput | CrisisWhereInput[]
+    OR?: CrisisWhereInput[]
+    NOT?: CrisisWhereInput | CrisisWhereInput[]
+    id?: StringFilter<"Crisis"> | string
+    title?: StringFilter<"Crisis"> | string
+    description?: StringFilter<"Crisis"> | string
+    what?: StringFilter<"Crisis"> | string
+    how?: StringFilter<"Crisis"> | string
+    when?: DateTimeFilter<"Crisis"> | Date | string
+    severity?: EnumSeverityFilter<"Crisis"> | $Enums.Severity
+    createdById?: StringFilter<"Crisis"> | string
+    createdAt?: DateTimeFilter<"Crisis"> | Date | string
+    updatedAt?: DateTimeFilter<"Crisis"> | Date | string
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    allowedEtater?: EtatListRelationFilter
+  }
+
+  export type CrisisOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    what?: SortOrder
+    how?: SortOrder
+    when?: SortOrder
+    severity?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdBy?: UserOrderByWithRelationInput
+    allowedEtater?: EtatOrderByRelationAggregateInput
+  }
+
+  export type CrisisWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CrisisWhereInput | CrisisWhereInput[]
+    OR?: CrisisWhereInput[]
+    NOT?: CrisisWhereInput | CrisisWhereInput[]
+    title?: StringFilter<"Crisis"> | string
+    description?: StringFilter<"Crisis"> | string
+    what?: StringFilter<"Crisis"> | string
+    how?: StringFilter<"Crisis"> | string
+    when?: DateTimeFilter<"Crisis"> | Date | string
+    severity?: EnumSeverityFilter<"Crisis"> | $Enums.Severity
+    createdById?: StringFilter<"Crisis"> | string
+    createdAt?: DateTimeFilter<"Crisis"> | Date | string
+    updatedAt?: DateTimeFilter<"Crisis"> | Date | string
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    allowedEtater?: EtatListRelationFilter
+  }, "id">
+
+  export type CrisisOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    what?: SortOrder
+    how?: SortOrder
+    when?: SortOrder
+    severity?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CrisisCountOrderByAggregateInput
+    _max?: CrisisMaxOrderByAggregateInput
+    _min?: CrisisMinOrderByAggregateInput
+  }
+
+  export type CrisisScalarWhereWithAggregatesInput = {
+    AND?: CrisisScalarWhereWithAggregatesInput | CrisisScalarWhereWithAggregatesInput[]
+    OR?: CrisisScalarWhereWithAggregatesInput[]
+    NOT?: CrisisScalarWhereWithAggregatesInput | CrisisScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Crisis"> | string
+    title?: StringWithAggregatesFilter<"Crisis"> | string
+    description?: StringWithAggregatesFilter<"Crisis"> | string
+    what?: StringWithAggregatesFilter<"Crisis"> | string
+    how?: StringWithAggregatesFilter<"Crisis"> | string
+    when?: DateTimeWithAggregatesFilter<"Crisis"> | Date | string
+    severity?: EnumSeverityWithAggregatesFilter<"Crisis"> | $Enums.Severity
+    createdById?: StringWithAggregatesFilter<"Crisis"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Crisis"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Crisis"> | Date | string
   }
 
   export type SessionWhereInput = {
@@ -8704,6 +10190,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisCreateNestedManyWithoutCreatedByInput
     etater?: EtatCreateNestedManyWithoutUsersInput
   }
 
@@ -8720,6 +10207,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutCreatedByInput
     etater?: EtatUncheckedCreateNestedManyWithoutUsersInput
   }
 
@@ -8736,6 +10224,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUpdateManyWithoutCreatedByNestedInput
     etater?: EtatUpdateManyWithoutUsersNestedInput
   }
 
@@ -8752,6 +10241,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutCreatedByNestedInput
     etater?: EtatUncheckedUpdateManyWithoutUsersNestedInput
   }
 
@@ -8800,6 +10290,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutEtaterInput
+    crises?: CrisisCreateNestedManyWithoutAllowedEtaterInput
   }
 
   export type EtatUncheckedCreateInput = {
@@ -8811,6 +10302,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutEtaterInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutAllowedEtaterInput
   }
 
   export type EtatUpdateInput = {
@@ -8822,6 +10314,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutEtaterNestedInput
+    crises?: CrisisUpdateManyWithoutAllowedEtaterNestedInput
   }
 
   export type EtatUncheckedUpdateInput = {
@@ -8833,6 +10326,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutEtaterNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutAllowedEtaterNestedInput
   }
 
   export type EtatCreateManyInput = {
@@ -8861,6 +10355,100 @@ export namespace Prisma {
     contactPhone?: StringFieldUpdateOperationsInput | string
     contactEmail?: StringFieldUpdateOperationsInput | string
     themeColor?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CrisisCreateInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCrisesInput
+    allowedEtater?: EtatCreateNestedManyWithoutCrisesInput
+  }
+
+  export type CrisisUncheckedCreateInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    allowedEtater?: EtatUncheckedCreateNestedManyWithoutCrisesInput
+  }
+
+  export type CrisisUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCrisesNestedInput
+    allowedEtater?: EtatUpdateManyWithoutCrisesNestedInput
+  }
+
+  export type CrisisUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    allowedEtater?: EtatUncheckedUpdateManyWithoutCrisesNestedInput
+  }
+
+  export type CrisisCreateManyInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CrisisUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CrisisUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9240,6 +10828,12 @@ export namespace Prisma {
     none?: PostWhereInput
   }
 
+  export type CrisisListRelationFilter = {
+    every?: CrisisWhereInput
+    some?: CrisisWhereInput
+    none?: CrisisWhereInput
+  }
+
   export type EtatListRelationFilter = {
     every?: EtatWhereInput
     some?: EtatWhereInput
@@ -9260,6 +10854,10 @@ export namespace Prisma {
   }
 
   export type PostOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CrisisOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9367,6 +10965,62 @@ export namespace Prisma {
     themeColor?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EnumSeverityFilter<$PrismaModel = never> = {
+    equals?: $Enums.Severity | EnumSeverityFieldRefInput<$PrismaModel>
+    in?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel>
+    not?: NestedEnumSeverityFilter<$PrismaModel> | $Enums.Severity
+  }
+
+  export type CrisisCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    what?: SortOrder
+    how?: SortOrder
+    when?: SortOrder
+    severity?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CrisisMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    what?: SortOrder
+    how?: SortOrder
+    when?: SortOrder
+    severity?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CrisisMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    what?: SortOrder
+    how?: SortOrder
+    when?: SortOrder
+    severity?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumSeverityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Severity | EnumSeverityFieldRefInput<$PrismaModel>
+    in?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel>
+    not?: NestedEnumSeverityWithAggregatesFilter<$PrismaModel> | $Enums.Severity
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSeverityFilter<$PrismaModel>
+    _max?: NestedEnumSeverityFilter<$PrismaModel>
   }
 
   export type SessionCountOrderByAggregateInput = {
@@ -9545,6 +11199,13 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
+  export type CrisisCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<CrisisCreateWithoutCreatedByInput, CrisisUncheckedCreateWithoutCreatedByInput> | CrisisCreateWithoutCreatedByInput[] | CrisisUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: CrisisCreateOrConnectWithoutCreatedByInput | CrisisCreateOrConnectWithoutCreatedByInput[]
+    createMany?: CrisisCreateManyCreatedByInputEnvelope
+    connect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+  }
+
   export type EtatCreateNestedManyWithoutUsersInput = {
     create?: XOR<EtatCreateWithoutUsersInput, EtatUncheckedCreateWithoutUsersInput> | EtatCreateWithoutUsersInput[] | EtatUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: EtatCreateOrConnectWithoutUsersInput | EtatCreateOrConnectWithoutUsersInput[]
@@ -9570,6 +11231,13 @@ export namespace Prisma {
     connectOrCreate?: PostCreateOrConnectWithoutCreatedByInput | PostCreateOrConnectWithoutCreatedByInput[]
     createMany?: PostCreateManyCreatedByInputEnvelope
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type CrisisUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<CrisisCreateWithoutCreatedByInput, CrisisUncheckedCreateWithoutCreatedByInput> | CrisisCreateWithoutCreatedByInput[] | CrisisUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: CrisisCreateOrConnectWithoutCreatedByInput | CrisisCreateOrConnectWithoutCreatedByInput[]
+    createMany?: CrisisCreateManyCreatedByInputEnvelope
+    connect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
   }
 
   export type EtatUncheckedCreateNestedManyWithoutUsersInput = {
@@ -9628,6 +11296,20 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
+  export type CrisisUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<CrisisCreateWithoutCreatedByInput, CrisisUncheckedCreateWithoutCreatedByInput> | CrisisCreateWithoutCreatedByInput[] | CrisisUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: CrisisCreateOrConnectWithoutCreatedByInput | CrisisCreateOrConnectWithoutCreatedByInput[]
+    upsert?: CrisisUpsertWithWhereUniqueWithoutCreatedByInput | CrisisUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: CrisisCreateManyCreatedByInputEnvelope
+    set?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    disconnect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    delete?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    connect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    update?: CrisisUpdateWithWhereUniqueWithoutCreatedByInput | CrisisUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: CrisisUpdateManyWithWhereWithoutCreatedByInput | CrisisUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: CrisisScalarWhereInput | CrisisScalarWhereInput[]
+  }
+
   export type EtatUpdateManyWithoutUsersNestedInput = {
     create?: XOR<EtatCreateWithoutUsersInput, EtatUncheckedCreateWithoutUsersInput> | EtatCreateWithoutUsersInput[] | EtatUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: EtatCreateOrConnectWithoutUsersInput | EtatCreateOrConnectWithoutUsersInput[]
@@ -9683,6 +11365,20 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
+  export type CrisisUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<CrisisCreateWithoutCreatedByInput, CrisisUncheckedCreateWithoutCreatedByInput> | CrisisCreateWithoutCreatedByInput[] | CrisisUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: CrisisCreateOrConnectWithoutCreatedByInput | CrisisCreateOrConnectWithoutCreatedByInput[]
+    upsert?: CrisisUpsertWithWhereUniqueWithoutCreatedByInput | CrisisUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: CrisisCreateManyCreatedByInputEnvelope
+    set?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    disconnect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    delete?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    connect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    update?: CrisisUpdateWithWhereUniqueWithoutCreatedByInput | CrisisUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: CrisisUpdateManyWithWhereWithoutCreatedByInput | CrisisUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: CrisisScalarWhereInput | CrisisScalarWhereInput[]
+  }
+
   export type EtatUncheckedUpdateManyWithoutUsersNestedInput = {
     create?: XOR<EtatCreateWithoutUsersInput, EtatUncheckedCreateWithoutUsersInput> | EtatCreateWithoutUsersInput[] | EtatUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: EtatCreateOrConnectWithoutUsersInput | EtatCreateOrConnectWithoutUsersInput[]
@@ -9702,10 +11398,22 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
+  export type CrisisCreateNestedManyWithoutAllowedEtaterInput = {
+    create?: XOR<CrisisCreateWithoutAllowedEtaterInput, CrisisUncheckedCreateWithoutAllowedEtaterInput> | CrisisCreateWithoutAllowedEtaterInput[] | CrisisUncheckedCreateWithoutAllowedEtaterInput[]
+    connectOrCreate?: CrisisCreateOrConnectWithoutAllowedEtaterInput | CrisisCreateOrConnectWithoutAllowedEtaterInput[]
+    connect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutEtaterInput = {
     create?: XOR<UserCreateWithoutEtaterInput, UserUncheckedCreateWithoutEtaterInput> | UserCreateWithoutEtaterInput[] | UserUncheckedCreateWithoutEtaterInput[]
     connectOrCreate?: UserCreateOrConnectWithoutEtaterInput | UserCreateOrConnectWithoutEtaterInput[]
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type CrisisUncheckedCreateNestedManyWithoutAllowedEtaterInput = {
+    create?: XOR<CrisisCreateWithoutAllowedEtaterInput, CrisisUncheckedCreateWithoutAllowedEtaterInput> | CrisisCreateWithoutAllowedEtaterInput[] | CrisisUncheckedCreateWithoutAllowedEtaterInput[]
+    connectOrCreate?: CrisisCreateOrConnectWithoutAllowedEtaterInput | CrisisCreateOrConnectWithoutAllowedEtaterInput[]
+    connect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
   }
 
   export type UserUpdateManyWithoutEtaterNestedInput = {
@@ -9721,6 +11429,19 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
+  export type CrisisUpdateManyWithoutAllowedEtaterNestedInput = {
+    create?: XOR<CrisisCreateWithoutAllowedEtaterInput, CrisisUncheckedCreateWithoutAllowedEtaterInput> | CrisisCreateWithoutAllowedEtaterInput[] | CrisisUncheckedCreateWithoutAllowedEtaterInput[]
+    connectOrCreate?: CrisisCreateOrConnectWithoutAllowedEtaterInput | CrisisCreateOrConnectWithoutAllowedEtaterInput[]
+    upsert?: CrisisUpsertWithWhereUniqueWithoutAllowedEtaterInput | CrisisUpsertWithWhereUniqueWithoutAllowedEtaterInput[]
+    set?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    disconnect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    delete?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    connect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    update?: CrisisUpdateWithWhereUniqueWithoutAllowedEtaterInput | CrisisUpdateWithWhereUniqueWithoutAllowedEtaterInput[]
+    updateMany?: CrisisUpdateManyWithWhereWithoutAllowedEtaterInput | CrisisUpdateManyWithWhereWithoutAllowedEtaterInput[]
+    deleteMany?: CrisisScalarWhereInput | CrisisScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutEtaterNestedInput = {
     create?: XOR<UserCreateWithoutEtaterInput, UserUncheckedCreateWithoutEtaterInput> | UserCreateWithoutEtaterInput[] | UserUncheckedCreateWithoutEtaterInput[]
     connectOrCreate?: UserCreateOrConnectWithoutEtaterInput | UserCreateOrConnectWithoutEtaterInput[]
@@ -9732,6 +11453,75 @@ export namespace Prisma {
     update?: UserUpdateWithWhereUniqueWithoutEtaterInput | UserUpdateWithWhereUniqueWithoutEtaterInput[]
     updateMany?: UserUpdateManyWithWhereWithoutEtaterInput | UserUpdateManyWithWhereWithoutEtaterInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type CrisisUncheckedUpdateManyWithoutAllowedEtaterNestedInput = {
+    create?: XOR<CrisisCreateWithoutAllowedEtaterInput, CrisisUncheckedCreateWithoutAllowedEtaterInput> | CrisisCreateWithoutAllowedEtaterInput[] | CrisisUncheckedCreateWithoutAllowedEtaterInput[]
+    connectOrCreate?: CrisisCreateOrConnectWithoutAllowedEtaterInput | CrisisCreateOrConnectWithoutAllowedEtaterInput[]
+    upsert?: CrisisUpsertWithWhereUniqueWithoutAllowedEtaterInput | CrisisUpsertWithWhereUniqueWithoutAllowedEtaterInput[]
+    set?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    disconnect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    delete?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    connect?: CrisisWhereUniqueInput | CrisisWhereUniqueInput[]
+    update?: CrisisUpdateWithWhereUniqueWithoutAllowedEtaterInput | CrisisUpdateWithWhereUniqueWithoutAllowedEtaterInput[]
+    updateMany?: CrisisUpdateManyWithWhereWithoutAllowedEtaterInput | CrisisUpdateManyWithWhereWithoutAllowedEtaterInput[]
+    deleteMany?: CrisisScalarWhereInput | CrisisScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutCrisesInput = {
+    create?: XOR<UserCreateWithoutCrisesInput, UserUncheckedCreateWithoutCrisesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCrisesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EtatCreateNestedManyWithoutCrisesInput = {
+    create?: XOR<EtatCreateWithoutCrisesInput, EtatUncheckedCreateWithoutCrisesInput> | EtatCreateWithoutCrisesInput[] | EtatUncheckedCreateWithoutCrisesInput[]
+    connectOrCreate?: EtatCreateOrConnectWithoutCrisesInput | EtatCreateOrConnectWithoutCrisesInput[]
+    connect?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+  }
+
+  export type EtatUncheckedCreateNestedManyWithoutCrisesInput = {
+    create?: XOR<EtatCreateWithoutCrisesInput, EtatUncheckedCreateWithoutCrisesInput> | EtatCreateWithoutCrisesInput[] | EtatUncheckedCreateWithoutCrisesInput[]
+    connectOrCreate?: EtatCreateOrConnectWithoutCrisesInput | EtatCreateOrConnectWithoutCrisesInput[]
+    connect?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+  }
+
+  export type EnumSeverityFieldUpdateOperationsInput = {
+    set?: $Enums.Severity
+  }
+
+  export type UserUpdateOneRequiredWithoutCrisesNestedInput = {
+    create?: XOR<UserCreateWithoutCrisesInput, UserUncheckedCreateWithoutCrisesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCrisesInput
+    upsert?: UserUpsertWithoutCrisesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCrisesInput, UserUpdateWithoutCrisesInput>, UserUncheckedUpdateWithoutCrisesInput>
+  }
+
+  export type EtatUpdateManyWithoutCrisesNestedInput = {
+    create?: XOR<EtatCreateWithoutCrisesInput, EtatUncheckedCreateWithoutCrisesInput> | EtatCreateWithoutCrisesInput[] | EtatUncheckedCreateWithoutCrisesInput[]
+    connectOrCreate?: EtatCreateOrConnectWithoutCrisesInput | EtatCreateOrConnectWithoutCrisesInput[]
+    upsert?: EtatUpsertWithWhereUniqueWithoutCrisesInput | EtatUpsertWithWhereUniqueWithoutCrisesInput[]
+    set?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+    disconnect?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+    delete?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+    connect?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+    update?: EtatUpdateWithWhereUniqueWithoutCrisesInput | EtatUpdateWithWhereUniqueWithoutCrisesInput[]
+    updateMany?: EtatUpdateManyWithWhereWithoutCrisesInput | EtatUpdateManyWithWhereWithoutCrisesInput[]
+    deleteMany?: EtatScalarWhereInput | EtatScalarWhereInput[]
+  }
+
+  export type EtatUncheckedUpdateManyWithoutCrisesNestedInput = {
+    create?: XOR<EtatCreateWithoutCrisesInput, EtatUncheckedCreateWithoutCrisesInput> | EtatCreateWithoutCrisesInput[] | EtatUncheckedCreateWithoutCrisesInput[]
+    connectOrCreate?: EtatCreateOrConnectWithoutCrisesInput | EtatCreateOrConnectWithoutCrisesInput[]
+    upsert?: EtatUpsertWithWhereUniqueWithoutCrisesInput | EtatUpsertWithWhereUniqueWithoutCrisesInput[]
+    set?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+    disconnect?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+    delete?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+    connect?: EtatWhereUniqueInput | EtatWhereUniqueInput[]
+    update?: EtatUpdateWithWhereUniqueWithoutCrisesInput | EtatUpdateWithWhereUniqueWithoutCrisesInput[]
+    updateMany?: EtatUpdateManyWithWhereWithoutCrisesInput | EtatUpdateManyWithWhereWithoutCrisesInput[]
+    deleteMany?: EtatScalarWhereInput | EtatScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -9888,6 +11678,23 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedEnumSeverityFilter<$PrismaModel = never> = {
+    equals?: $Enums.Severity | EnumSeverityFieldRefInput<$PrismaModel>
+    in?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel>
+    not?: NestedEnumSeverityFilter<$PrismaModel> | $Enums.Severity
+  }
+
+  export type NestedEnumSeverityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Severity | EnumSeverityFieldRefInput<$PrismaModel>
+    in?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel>
+    not?: NestedEnumSeverityWithAggregatesFilter<$PrismaModel> | $Enums.Severity
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSeverityFilter<$PrismaModel>
+    _max?: NestedEnumSeverityFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -9925,6 +11732,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
+    crises?: CrisisCreateNestedManyWithoutCreatedByInput
     etater?: EtatCreateNestedManyWithoutUsersInput
   }
 
@@ -9940,6 +11748,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutCreatedByInput
     etater?: EtatUncheckedCreateNestedManyWithoutUsersInput
   }
 
@@ -9971,6 +11780,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    crises?: CrisisUpdateManyWithoutCreatedByNestedInput
     etater?: EtatUpdateManyWithoutUsersNestedInput
   }
 
@@ -9986,6 +11796,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutCreatedByNestedInput
     etater?: EtatUncheckedUpdateManyWithoutUsersNestedInput
   }
 
@@ -10083,6 +11894,42 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CrisisCreateWithoutCreatedByInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    allowedEtater?: EtatCreateNestedManyWithoutCrisesInput
+  }
+
+  export type CrisisUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    allowedEtater?: EtatUncheckedCreateNestedManyWithoutCrisesInput
+  }
+
+  export type CrisisCreateOrConnectWithoutCreatedByInput = {
+    where: CrisisWhereUniqueInput
+    create: XOR<CrisisCreateWithoutCreatedByInput, CrisisUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type CrisisCreateManyCreatedByInputEnvelope = {
+    data: CrisisCreateManyCreatedByInput | CrisisCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
   export type EtatCreateWithoutUsersInput = {
     id?: string
     title: string
@@ -10091,6 +11938,7 @@ export namespace Prisma {
     themeColor: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    crises?: CrisisCreateNestedManyWithoutAllowedEtaterInput
   }
 
   export type EtatUncheckedCreateWithoutUsersInput = {
@@ -10101,6 +11949,7 @@ export namespace Prisma {
     themeColor: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    crises?: CrisisUncheckedCreateNestedManyWithoutAllowedEtaterInput
   }
 
   export type EtatCreateOrConnectWithoutUsersInput = {
@@ -10200,6 +12049,38 @@ export namespace Prisma {
     createdById?: StringFilter<"Post"> | string
   }
 
+  export type CrisisUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: CrisisWhereUniqueInput
+    update: XOR<CrisisUpdateWithoutCreatedByInput, CrisisUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<CrisisCreateWithoutCreatedByInput, CrisisUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type CrisisUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: CrisisWhereUniqueInput
+    data: XOR<CrisisUpdateWithoutCreatedByInput, CrisisUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type CrisisUpdateManyWithWhereWithoutCreatedByInput = {
+    where: CrisisScalarWhereInput
+    data: XOR<CrisisUpdateManyMutationInput, CrisisUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type CrisisScalarWhereInput = {
+    AND?: CrisisScalarWhereInput | CrisisScalarWhereInput[]
+    OR?: CrisisScalarWhereInput[]
+    NOT?: CrisisScalarWhereInput | CrisisScalarWhereInput[]
+    id?: StringFilter<"Crisis"> | string
+    title?: StringFilter<"Crisis"> | string
+    description?: StringFilter<"Crisis"> | string
+    what?: StringFilter<"Crisis"> | string
+    how?: StringFilter<"Crisis"> | string
+    when?: DateTimeFilter<"Crisis"> | Date | string
+    severity?: EnumSeverityFilter<"Crisis"> | $Enums.Severity
+    createdById?: StringFilter<"Crisis"> | string
+    createdAt?: DateTimeFilter<"Crisis"> | Date | string
+    updatedAt?: DateTimeFilter<"Crisis"> | Date | string
+  }
+
   export type EtatUpsertWithWhereUniqueWithoutUsersInput = {
     where: EtatWhereUniqueInput
     update: XOR<EtatUpdateWithoutUsersInput, EtatUncheckedUpdateWithoutUsersInput>
@@ -10242,6 +12123,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutEtaterInput = {
@@ -10257,11 +12139,43 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutEtaterInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutEtaterInput, UserUncheckedCreateWithoutEtaterInput>
+  }
+
+  export type CrisisCreateWithoutAllowedEtaterInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCrisesInput
+  }
+
+  export type CrisisUncheckedCreateWithoutAllowedEtaterInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CrisisCreateOrConnectWithoutAllowedEtaterInput = {
+    where: CrisisWhereUniqueInput
+    create: XOR<CrisisCreateWithoutAllowedEtaterInput, CrisisUncheckedCreateWithoutAllowedEtaterInput>
   }
 
   export type UserUpsertWithWhereUniqueWithoutEtaterInput = {
@@ -10295,6 +12209,145 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
   }
 
+  export type CrisisUpsertWithWhereUniqueWithoutAllowedEtaterInput = {
+    where: CrisisWhereUniqueInput
+    update: XOR<CrisisUpdateWithoutAllowedEtaterInput, CrisisUncheckedUpdateWithoutAllowedEtaterInput>
+    create: XOR<CrisisCreateWithoutAllowedEtaterInput, CrisisUncheckedCreateWithoutAllowedEtaterInput>
+  }
+
+  export type CrisisUpdateWithWhereUniqueWithoutAllowedEtaterInput = {
+    where: CrisisWhereUniqueInput
+    data: XOR<CrisisUpdateWithoutAllowedEtaterInput, CrisisUncheckedUpdateWithoutAllowedEtaterInput>
+  }
+
+  export type CrisisUpdateManyWithWhereWithoutAllowedEtaterInput = {
+    where: CrisisScalarWhereInput
+    data: XOR<CrisisUpdateManyMutationInput, CrisisUncheckedUpdateManyWithoutAllowedEtaterInput>
+  }
+
+  export type UserCreateWithoutCrisesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    isVerified?: boolean
+    isAdmin?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutCreatedByInput
+    etater?: EtatCreateNestedManyWithoutUsersInput
+  }
+
+  export type UserUncheckedCreateWithoutCrisesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    isVerified?: boolean
+    isAdmin?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    etater?: EtatUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type UserCreateOrConnectWithoutCrisesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCrisesInput, UserUncheckedCreateWithoutCrisesInput>
+  }
+
+  export type EtatCreateWithoutCrisesInput = {
+    id?: string
+    title: string
+    contactPhone: string
+    contactEmail: string
+    themeColor: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutEtaterInput
+  }
+
+  export type EtatUncheckedCreateWithoutCrisesInput = {
+    id?: string
+    title: string
+    contactPhone: string
+    contactEmail: string
+    themeColor: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutEtaterInput
+  }
+
+  export type EtatCreateOrConnectWithoutCrisesInput = {
+    where: EtatWhereUniqueInput
+    create: XOR<EtatCreateWithoutCrisesInput, EtatUncheckedCreateWithoutCrisesInput>
+  }
+
+  export type UserUpsertWithoutCrisesInput = {
+    update: XOR<UserUpdateWithoutCrisesInput, UserUncheckedUpdateWithoutCrisesInput>
+    create: XOR<UserCreateWithoutCrisesInput, UserUncheckedCreateWithoutCrisesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCrisesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCrisesInput, UserUncheckedUpdateWithoutCrisesInput>
+  }
+
+  export type UserUpdateWithoutCrisesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    etater?: EtatUpdateManyWithoutUsersNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCrisesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    etater?: EtatUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type EtatUpsertWithWhereUniqueWithoutCrisesInput = {
+    where: EtatWhereUniqueInput
+    update: XOR<EtatUpdateWithoutCrisesInput, EtatUncheckedUpdateWithoutCrisesInput>
+    create: XOR<EtatCreateWithoutCrisesInput, EtatUncheckedCreateWithoutCrisesInput>
+  }
+
+  export type EtatUpdateWithWhereUniqueWithoutCrisesInput = {
+    where: EtatWhereUniqueInput
+    data: XOR<EtatUpdateWithoutCrisesInput, EtatUncheckedUpdateWithoutCrisesInput>
+  }
+
+  export type EtatUpdateManyWithWhereWithoutCrisesInput = {
+    where: EtatScalarWhereInput
+    data: XOR<EtatUpdateManyMutationInput, EtatUncheckedUpdateManyWithoutCrisesInput>
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id: string
     name: string
@@ -10307,6 +12360,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisCreateNestedManyWithoutCreatedByInput
     etater?: EtatCreateNestedManyWithoutUsersInput
   }
 
@@ -10322,6 +12376,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutCreatedByInput
     etater?: EtatUncheckedCreateNestedManyWithoutUsersInput
   }
 
@@ -10353,6 +12408,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUpdateManyWithoutCreatedByNestedInput
     etater?: EtatUpdateManyWithoutUsersNestedInput
   }
 
@@ -10368,6 +12424,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutCreatedByNestedInput
     etater?: EtatUncheckedUpdateManyWithoutUsersNestedInput
   }
 
@@ -10383,6 +12440,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisCreateNestedManyWithoutCreatedByInput
     etater?: EtatCreateNestedManyWithoutUsersInput
   }
 
@@ -10398,6 +12456,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    crises?: CrisisUncheckedCreateNestedManyWithoutCreatedByInput
     etater?: EtatUncheckedCreateNestedManyWithoutUsersInput
   }
 
@@ -10429,6 +12488,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUpdateManyWithoutCreatedByNestedInput
     etater?: EtatUpdateManyWithoutUsersNestedInput
   }
 
@@ -10444,6 +12504,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutCreatedByNestedInput
     etater?: EtatUncheckedUpdateManyWithoutUsersNestedInput
   }
 
@@ -10475,6 +12536,18 @@ export namespace Prisma {
   export type PostCreateManyCreatedByInput = {
     id?: string
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CrisisCreateManyCreatedByInput = {
+    id?: string
+    title: string
+    description: string
+    what: string
+    how: string
+    when: Date | string
+    severity?: $Enums.Severity
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -10575,6 +12648,44 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CrisisUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    allowedEtater?: EtatUpdateManyWithoutCrisesNestedInput
+  }
+
+  export type CrisisUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    allowedEtater?: EtatUncheckedUpdateManyWithoutCrisesNestedInput
+  }
+
+  export type CrisisUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type EtatUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -10583,6 +12694,7 @@ export namespace Prisma {
     themeColor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    crises?: CrisisUpdateManyWithoutAllowedEtaterNestedInput
   }
 
   export type EtatUncheckedUpdateWithoutUsersInput = {
@@ -10593,6 +12705,7 @@ export namespace Prisma {
     themeColor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    crises?: CrisisUncheckedUpdateManyWithoutAllowedEtaterNestedInput
   }
 
   export type EtatUncheckedUpdateManyWithoutUsersInput = {
@@ -10618,6 +12731,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEtaterInput = {
@@ -10633,6 +12747,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    crises?: CrisisUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutEtaterInput = {
@@ -10643,6 +12758,77 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CrisisUpdateWithoutAllowedEtaterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCrisesNestedInput
+  }
+
+  export type CrisisUncheckedUpdateWithoutAllowedEtaterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CrisisUncheckedUpdateManyWithoutAllowedEtaterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    what?: StringFieldUpdateOperationsInput | string
+    how?: StringFieldUpdateOperationsInput | string
+    when?: DateTimeFieldUpdateOperationsInput | Date | string
+    severity?: EnumSeverityFieldUpdateOperationsInput | $Enums.Severity
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EtatUpdateWithoutCrisesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    themeColor?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutEtaterNestedInput
+  }
+
+  export type EtatUncheckedUpdateWithoutCrisesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    themeColor?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutEtaterNestedInput
+  }
+
+  export type EtatUncheckedUpdateManyWithoutCrisesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    themeColor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
