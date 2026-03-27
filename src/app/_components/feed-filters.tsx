@@ -4,13 +4,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useRef } from "react";
 
 import { Input } from "~/components/ui/input";
+import { Button } from "~/components/ui/button";
 
 type FeedFiltersProps = {
   locations: string[];
 };
 
 const selectClass =
-  "border-input bg-input/20 h-10 rounded-md border px-3 text-sm outline-none transition-colors focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30";
+  "border-input bg-background h-10 rounded-md border px-3 text-sm outline-none transition-colors focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30";
 
 export function FeedFilters({ locations }: FeedFiltersProps) {
   const router = useRouter();
@@ -38,18 +39,27 @@ export function FeedFilters({ locations }: FeedFiltersProps) {
     [updateParams],
   );
 
+  const hasFilters =
+    searchParams.get("q") ??
+    searchParams.get("severity") ??
+    searchParams.get("location");
+
+  const clearFilters = useCallback(() => {
+    router.push("/");
+  }, [router]);
+
   return (
-    <div className="flex flex-col gap-3 sm:flex-row">
+    <div className="space-y-3">
       <Input
         placeholder="Søk etter krise..."
         defaultValue={searchParams.get("q") ?? ""}
         onChange={(e) => debouncedUpdateParams("q", e.target.value)}
-        className="h-10 px-3 text-sm sm:flex-1 md:text-sm"
+        className="h-10 px-3 text-sm md:text-sm"
       />
-      <div className="grid grid-cols-2 gap-2 sm:flex">
+      <div className="grid grid-cols-2 gap-3">
         <select
           aria-label="Filtrer etter alvorlighetsgrad"
-          className={selectClass}
+          className={`${selectClass} w-full`}
           defaultValue={searchParams.get("severity") ?? ""}
           onChange={(e) => updateParams("severity", e.target.value)}
         >
@@ -60,7 +70,7 @@ export function FeedFilters({ locations }: FeedFiltersProps) {
         </select>
         <select
           aria-label="Filtrer etter sted"
-          className={selectClass}
+          className={`${selectClass} w-full`}
           defaultValue={searchParams.get("location") ?? ""}
           onChange={(e) => updateParams("location", e.target.value)}
         >
@@ -72,6 +82,15 @@ export function FeedFilters({ locations }: FeedFiltersProps) {
           ))}
         </select>
       </div>
+      {hasFilters ? (
+        <Button
+          variant="ghost"
+          onClick={clearFilters}
+          className="h-10 px-4 text-sm"
+        >
+          Nullstill
+        </Button>
+      ) : null}
     </div>
   );
 }

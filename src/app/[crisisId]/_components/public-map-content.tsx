@@ -63,8 +63,8 @@ export default function PublicMapContent({
             center={[marker.lat, marker.lng]}
             radius={marker.radius}
             pathOptions={{
-              color: marker.etat.themeColor,
-              fillColor: marker.etat.themeColor,
+              color: "#ef4444",
+              fillColor: "#ef4444",
               fillOpacity: 0.15,
             }}
           >

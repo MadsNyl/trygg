@@ -24,10 +24,14 @@ import { Spinner } from "~/components/ui/spinner";
 import { severityConfig } from "~/lib/severity";
 import { api } from "~/trpc/react";
 
+type Tab = "generelt" | "oppdateringer" | "kart";
+
 export default function RedigerKrisePage() {
   const params = useParams<{ crisisId: string }>();
   const router = useRouter();
   const utils = api.useUtils();
+
+  const [activeTab, setActiveTab] = useState<Tab>("generelt");
 
   const { data: crisis, isLoading: crisisLoading } =
     api.crisis.getById.useQuery({ id: params.crisisId });
@@ -96,10 +100,16 @@ export default function RedigerKrisePage() {
     allowedEtaterIds: crisis.allowedEtater.map((e) => e.id),
   };
 
+  const tabs: { id: Tab; label: string }[] = [
+    { id: "generelt", label: "Generelt" },
+    { id: "oppdateringer", label: "Oppdateringer og tiltak" },
+    { id: "kart", label: "Kart" },
+  ];
+
   return (
     <main className="mx-auto w-full max-w-6xl px-6 py-12 lg:px-10">
       {/* Header */}
-      <div className="mb-12 flex items-start justify-between">
+      <div className="mb-8 flex items-start justify-between">
         <div>
           <div className="mb-2 flex items-center gap-3">
             <h1 className="font-heading text-3xl font-bold tracking-tight">
@@ -160,42 +170,59 @@ export default function RedigerKrisePage() {
         </div>
       </div>
 
-      {/* Crisis details form */}
-      <section>
-        <h2 className="font-heading mb-8 text-xl font-semibold">
-          Kriseinformasjon
-        </h2>
-        <CrisisForm
-          etater={etater ?? []}
-          defaultValues={defaultValues}
-          onSubmit={(values) => {
-            updateCrisis.mutate({
-              id: params.crisisId,
-              title: values.title,
-              description: values.description,
-              what: values.what,
-              how: values.how,
-              when: new Date(values.when),
-              severity: values.severity,
-              location: values.location,
-              allowedEtaterIds:
-                values.allowedEtaterIds.length > 0
-                  ? values.allowedEtaterIds
-                  : undefined,
-            });
-          }}
-          isPending={updateCrisis.isPending}
-          submitLabel="Lagre endringer"
-          pendingLabel="Lagrer..."
-        />
-      </section>
+      {/* Tabs */}
+      <nav
+        role="tablist"
+        aria-label="Kriseredigering"
+        className="mb-10 flex border-b"
+      >
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            role="tab"
+            aria-selected={activeTab === tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`border-b-2 px-5 py-3 text-sm font-medium transition-colors ${
+              activeTab === tab.id
+                ? "border-primary text-foreground"
+                : "border-transparent text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </nav>
 
-      {/* Operational sections */}
-      <div className="mt-16 border-t pt-12">
-        <h2 className="font-heading mb-10 text-xl font-semibold">
-          Oppdateringer og tiltak
-        </h2>
+      {/* Tab panels */}
+      {activeTab === "generelt" && (
+        <section>
+          <CrisisForm
+            etater={etater ?? []}
+            defaultValues={defaultValues}
+            onSubmit={(values) => {
+              updateCrisis.mutate({
+                id: params.crisisId,
+                title: values.title,
+                description: values.description,
+                what: values.what,
+                how: values.how,
+                when: new Date(values.when),
+                severity: values.severity,
+                location: values.location,
+                allowedEtaterIds:
+                  values.allowedEtaterIds.length > 0
+                    ? values.allowedEtaterIds
+                    : undefined,
+              });
+            }}
+            isPending={updateCrisis.isPending}
+            submitLabel="Lagre endringer"
+            pendingLabel="Lagrer..."
+          />
+        </section>
+      )}
 
+      {activeTab === "oppdateringer" && (
         <div className="grid gap-12 lg:grid-cols-2">
           <TimelineSection
             crisisId={params.crisisId}
@@ -229,20 +256,20 @@ export default function RedigerKrisePage() {
             }}
           />
         </div>
+      )}
 
-        <div className="mt-12">
-          <MapSection
-            crisisId={params.crisisId}
-            userEtater={userEtater ?? []}
-            markers={mapMarkers ?? []}
-            onMarkersChanged={() => {
-              void utils.crisis.listMapMarkers.invalidate({
-                crisisId: params.crisisId,
-              });
-            }}
-          />
-        </div>
-      </div>
+      {activeTab === "kart" && (
+        <MapSection
+          crisisId={params.crisisId}
+          userEtater={userEtater ?? []}
+          markers={mapMarkers ?? []}
+          onMarkersChanged={() => {
+            void utils.crisis.listMapMarkers.invalidate({
+              crisisId: params.crisisId,
+            });
+          }}
+        />
+      )}
     </main>
   );
 }

@@ -238,7 +238,7 @@ export function MapSection({
 
       <div
         className="relative z-0 overflow-hidden rounded-lg border"
-        style={{ height: 400 }}
+        style={{ height: "60vh", minHeight: 400 }}
       >
         <MapContent
           markers={markers}

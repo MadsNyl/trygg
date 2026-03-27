@@ -53,14 +53,15 @@ export default async function Home({
 
   return (
     <main className="bg-background min-h-screen">
-      <header className="bg-background border-b">
-        <div className="mx-auto flex h-16 max-w-3xl items-center justify-between px-4 lg:px-0">
-          <div>
-            <h1 className="font-heading text-xl font-bold tracking-tight">
-              trygg
-            </h1>
-          </div>
-          <nav className="hidden items-center gap-3 sm:flex">
+      <header className="bg-background sticky top-0 z-10 border-b">
+        <div className="mx-auto flex h-14 max-w-4xl items-center justify-between px-6 lg:px-10">
+          <Link
+            href="/"
+            className="font-heading text-xl font-bold tracking-tight"
+          >
+            trygg
+          </Link>
+          <nav className="flex items-center gap-3">
             {session?.user ? (
               <Link
                 href="/dashbord"
@@ -71,10 +72,10 @@ export default async function Home({
                     {session.user.name.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
-                <span>{session.user.name}</span>
+                <span className="hidden sm:inline">{session.user.name}</span>
               </Link>
             ) : (
-              <Button asChild variant="outline" className="h-9 px-4 text-sm">
+              <Button asChild variant="outline" className="h-10 px-5 text-sm">
                 <Link href="/logg-inn">Logg inn</Link>
               </Button>
             )}
@@ -82,10 +83,12 @@ export default async function Home({
         </div>
       </header>
 
-      <div className="mx-auto max-w-3xl px-4 py-6 lg:px-0 lg:py-10">
-        <div className="mb-6">
-          <h2 className="text-lg font-semibold">Kriseoversikt</h2>
-          <p className="text-muted-foreground mt-0.5 text-sm">
+      <div className="mx-auto max-w-4xl px-6 py-10 lg:px-10">
+        <div className="mb-8">
+          <h2 className="font-heading text-2xl font-bold tracking-tight">
+            Kriseoversikt
+          </h2>
+          <p className="text-muted-foreground mt-1 text-sm">
             Aktive krisesituasjoner i ditt område
           </p>
         </div>
@@ -94,14 +97,14 @@ export default async function Home({
           <FeedFilters locations={locations} />
         </Suspense>
 
-        <div className="mt-4 space-y-3">
+        <div className="mt-6 space-y-4">
           {crises.length === 0 ? (
             hasFilters ? (
-              <Empty className="py-16">
+              <Empty className="py-20">
                 <EmptyMedia>
                   <HugeiconsIcon
                     icon={Search01Icon}
-                    size={32}
+                    size={36}
                     className="text-muted-foreground"
                   />
                 </EmptyMedia>
@@ -113,11 +116,11 @@ export default async function Home({
                 </EmptyHeader>
               </Empty>
             ) : (
-              <Empty className="py-16">
+              <Empty className="py-20">
                 <EmptyMedia>
                   <HugeiconsIcon
                     icon={CheckmarkCircle02Icon}
-                    size={32}
+                    size={36}
                     className="text-green-600"
                   />
                 </EmptyMedia>

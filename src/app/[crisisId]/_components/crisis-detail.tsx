@@ -9,6 +9,7 @@ import {
   InformationCircleIcon,
   Settings02Icon,
   Calendar03Icon,
+  Location01Icon,
 } from "@hugeicons/core-free-icons";
 import { formatDateTime } from "~/lib/format";
 import { severityConfig } from "~/lib/severity";
@@ -19,83 +20,103 @@ export function CrisisDetail({ crisis }: { crisis: CrisisDetailData }) {
   const severity = severityConfig[crisis.severity];
 
   return (
-    <div
-      className={`bg-background mx-auto flex min-h-screen max-w-md flex-col border-t-4 ${severity.topBorder}`}
-    >
+    <div className="bg-background min-h-screen">
       {/* Header */}
-      <header className="flex items-center gap-3 px-4 pt-4 pb-2">
-        <Link
-          href="/"
-          aria-label="Tilbake til kriseoversikt"
-          className="text-muted-foreground hover:text-foreground flex items-center justify-center rounded-md p-1"
-        >
-          <HugeiconsIcon icon={ArrowLeft01Icon} size={20} />
-        </Link>
-        <div className="flex-1">
-          <h1 className="font-heading text-lg font-bold">{crisis.title}</h1>
-          <div className="mt-1 flex items-center gap-2">
+      <header className="sticky top-0 z-10 border-b bg-white/95 backdrop-blur-sm">
+        <div className="mx-auto flex h-14 max-w-4xl items-center gap-3 px-6 lg:px-10">
+          <Link
+            href="/"
+            aria-label="Tilbake til kriseoversikt"
+            className="text-muted-foreground hover:text-foreground flex items-center justify-center rounded-md p-1"
+          >
+            <HugeiconsIcon icon={ArrowLeft01Icon} size={20} />
+          </Link>
+          <div className="min-w-0 flex-1">
+            <h1 className="font-heading truncate text-lg font-bold tracking-tight">
+              {crisis.title}
+            </h1>
+          </div>
+          <div className="flex items-center gap-2">
             <Badge variant="outline" className={severity.badge}>
               {severity.label}
             </Badge>
-            <span className="text-muted-foreground text-sm">
-              {crisis.location ?? "Ukjent sted"}
-            </span>
+            <ShareButton />
           </div>
         </div>
-        <ShareButton />
       </header>
 
-      {/* Info block */}
-      <section className="bg-muted mx-4 my-4 rounded-lg p-4">
-        <div className="space-y-3">
-          <div className="flex gap-3">
-            <HugeiconsIcon
-              icon={InformationCircleIcon}
-              size={18}
-              className="text-primary mt-0.5 shrink-0"
-            />
-            <div>
-              <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
-                Hva
+      <div className="mx-auto max-w-4xl px-6 lg:px-10">
+        {/* Hero section */}
+        <div className="py-8 pb-6">
+          {/* Info grid */}
+          <div className="grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-2 lg:grid-cols-4">
+            <div className="flex flex-col gap-1 bg-white p-4">
+              <div className="text-muted-foreground flex items-center gap-2">
+                <HugeiconsIcon
+                  icon={Location01Icon}
+                  size={14}
+                  className="text-primary"
+                />
+                <span className="text-xs font-semibold tracking-wider uppercase">
+                  Hvor
+                </span>
+              </div>
+              <p className="text-sm font-medium">
+                {crisis.location ?? "Ukjent sted"}
               </p>
-              <p className="text-sm">{crisis.what}</p>
             </div>
-          </div>
-          <div className="flex gap-3">
-            <HugeiconsIcon
-              icon={Settings02Icon}
-              size={18}
-              className="text-primary mt-0.5 shrink-0"
-            />
-            <div>
-              <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
-                Hvordan
-              </p>
-              <p className="text-sm">{crisis.how}</p>
+
+            <div className="flex flex-col gap-1 bg-white p-4">
+              <div className="text-muted-foreground flex items-center gap-2">
+                <HugeiconsIcon
+                  icon={InformationCircleIcon}
+                  size={14}
+                  className="text-primary"
+                />
+                <span className="text-xs font-semibold tracking-wider uppercase">
+                  Hva
+                </span>
+              </div>
+              <p className="text-sm font-medium">{crisis.what}</p>
             </div>
-          </div>
-          <div className="flex gap-3">
-            <HugeiconsIcon
-              icon={Calendar03Icon}
-              size={18}
-              className="text-primary mt-0.5 shrink-0"
-            />
-            <div>
-              <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
-                Når
-              </p>
-              <p className="text-sm">{formatDateTime(crisis.when)}</p>
+
+            <div className="flex flex-col gap-1 bg-white p-4">
+              <div className="text-muted-foreground flex items-center gap-2">
+                <HugeiconsIcon
+                  icon={Settings02Icon}
+                  size={14}
+                  className="text-primary"
+                />
+                <span className="text-xs font-semibold tracking-wider uppercase">
+                  Hvordan
+                </span>
+              </div>
+              <p className="text-sm font-medium">{crisis.how}</p>
+            </div>
+
+            <div className="flex flex-col gap-1 bg-white p-4">
+              <div className="text-muted-foreground flex items-center gap-2">
+                <HugeiconsIcon
+                  icon={Calendar03Icon}
+                  size={14}
+                  className="text-primary"
+                />
+                <span className="text-xs font-semibold tracking-wider uppercase">
+                  Når
+                </span>
+              </div>
+              <p className="text-sm font-medium">{formatDateTime(crisis.when)}</p>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Tabs */}
-      <CrisisTabs
-        timelineEntries={crisis.timelineEntries}
-        measures={crisis.measures}
-        mapMarkers={crisis.mapMarkers}
-      />
+        {/* Tabs */}
+        <CrisisTabs
+          timelineEntries={crisis.timelineEntries}
+          measures={crisis.measures}
+          mapMarkers={crisis.mapMarkers}
+        />
+      </div>
     </div>
   );
 }

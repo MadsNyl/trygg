@@ -36,24 +36,11 @@ export function CrisisTabs({
   const [activeTab, setActiveTab] = useState<Tab>("siste-nytt");
 
   return (
-    <div className="flex flex-1 flex-col">
-      <div
-        role="tabpanel"
-        id={`tabpanel-${activeTab}`}
-        aria-labelledby={`tab-${activeTab}`}
-        className="flex-1 overflow-y-auto"
-      >
-        {activeTab === "siste-nytt" && (
-          <PublicTimeline entries={timelineEntries} />
-        )}
-        {activeTab === "tiltak" && <PublicMeasures measures={measures} />}
-        {activeTab === "kart" && hasMap && <PublicMap markers={mapMarkers} />}
-      </div>
-
+    <div>
       <nav
         role="tablist"
         aria-label="Krisedetaljer"
-        className="bg-background sticky bottom-0 flex border-t"
+        className="bg-muted mb-8 flex gap-1 rounded-lg p-1"
       >
         {tabs.map((tab) => (
           <button
@@ -63,17 +50,30 @@ export function CrisisTabs({
             aria-selected={activeTab === tab.id}
             aria-controls={`tabpanel-${tab.id}`}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex flex-1 flex-col items-center gap-1 py-3 text-xs font-medium transition-colors ${
+            className={`flex flex-1 items-center justify-center gap-2 rounded-md py-2.5 text-sm font-medium transition-all ${
               activeTab === tab.id
-                ? "border-primary text-primary border-t-2"
-                : "text-muted-foreground"
+                ? "bg-background text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            <HugeiconsIcon icon={tab.icon} size={18} />
+            <HugeiconsIcon icon={tab.icon} size={16} />
             {tab.label}
           </button>
         ))}
       </nav>
+
+      <div
+        role="tabpanel"
+        id={`tabpanel-${activeTab}`}
+        aria-labelledby={`tab-${activeTab}`}
+        className="pb-12"
+      >
+        {activeTab === "siste-nytt" && (
+          <PublicTimeline entries={timelineEntries} />
+        )}
+        {activeTab === "tiltak" && <PublicMeasures measures={measures} />}
+        {activeTab === "kart" && hasMap && <PublicMap markers={mapMarkers} />}
+      </div>
     </div>
   );
 }

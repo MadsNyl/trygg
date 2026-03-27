@@ -1,5 +1,5 @@
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Clock01Icon, News01Icon } from "@hugeicons/core-free-icons";
+import { News01Icon } from "@hugeicons/core-free-icons";
 
 import {
   Empty,
@@ -25,17 +25,19 @@ function getContrastTextColor(hexOrColor: string): string {
 export function PublicTimeline({ entries }: { entries: TimelineEntryData[] }) {
   if (entries.length === 0) {
     return (
-      <Empty className="py-12">
+      <Empty className="py-20">
         <EmptyMedia>
           <HugeiconsIcon
             icon={News01Icon}
-            size={28}
+            size={36}
             className="text-muted-foreground"
           />
         </EmptyMedia>
         <EmptyHeader>
-          <EmptyTitle>Ingen oppdateringer enda</EmptyTitle>
-          <EmptyDescription>
+          <EmptyTitle className="text-base">
+            Ingen oppdateringer enda
+          </EmptyTitle>
+          <EmptyDescription className="text-sm">
             Nye oppdateringer fra involverte etater vil vises her.
           </EmptyDescription>
         </EmptyHeader>
@@ -44,30 +46,41 @@ export function PublicTimeline({ entries }: { entries: TimelineEntryData[] }) {
   }
 
   return (
-    <div className="divide-y">
-      {entries.map((entry) => (
-        <div key={entry.id} className="flex gap-3 px-4 py-3">
-          <div className="flex shrink-0 items-center gap-1.5 pt-1">
-            <HugeiconsIcon
-              icon={Clock01Icon}
-              size={14}
-              className="text-muted-foreground"
-            />
-            <span className="text-muted-foreground text-sm font-medium">
-              {formatTime(entry.createdAt)}
-            </span>
+    <div className="relative space-y-0">
+      {entries.map((entry, index) => {
+        const isLast = index === entries.length - 1;
+
+        return (
+          <div key={entry.id} className="relative flex gap-5">
+            {/* Timeline track */}
+            <div className="flex flex-col items-center">
+              <div
+                className="mt-2 h-3.5 w-3.5 shrink-0 rounded-full ring-4 ring-white"
+                style={{ backgroundColor: entry.etat.themeColor }}
+              />
+              {!isLast && (
+                <div className="w-0.5 flex-1 rounded-full bg-border" />
+              )}
+            </div>
+
+            {/* Content */}
+            <div className={`min-w-0 flex-1 ${isLast ? "pb-2" : "pb-8"}`}>
+              <div className="flex items-center justify-between gap-3">
+                <span
+                  className={`inline-block rounded-full px-3 py-1 text-xs font-semibold ${getContrastTextColor(entry.etat.themeColor)}`}
+                  style={{ backgroundColor: entry.etat.themeColor }}
+                >
+                  {entry.etat.title}
+                </span>
+                <span className="text-muted-foreground shrink-0 text-xs tabular-nums">
+                  {formatTime(entry.createdAt)}
+                </span>
+              </div>
+              <p className="mt-2 text-sm leading-relaxed">{entry.text}</p>
+            </div>
           </div>
-          <div className="min-w-0 flex-1">
-            <span
-              className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${getContrastTextColor(entry.etat.themeColor)}`}
-              style={{ backgroundColor: entry.etat.themeColor }}
-            >
-              {entry.etat.title}
-            </span>
-            <p className="mt-1 text-sm">{entry.text}</p>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

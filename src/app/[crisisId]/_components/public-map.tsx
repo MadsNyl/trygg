@@ -15,15 +15,15 @@ const PublicMapContent = dynamic(() => import("./public-map-content"), {
 
 export function PublicMap({ markers }: { markers: MapMarkerData[] }) {
   return (
-    <div className="flex flex-col">
-      <div className="h-[60vh]">
+    <div className="overflow-hidden rounded-lg border">
+      <div className="h-[50vh] min-h-[320px]">
         <PublicMapContent markers={markers} />
       </div>
       {markers.some((m) => m.type === "RADIUS") && (
-        <div className="flex items-center gap-2 px-4 py-3">
-          <span className="h-3 w-3 rounded-full bg-red-300" />
-          <span className="text-muted-foreground text-sm">
-            Sperret område — hold deg unna
+        <div className="flex items-center gap-2 border-t bg-muted/30 px-4 py-3">
+          <span className="h-3 w-3 rounded-full bg-red-400/60 ring-2 ring-red-400/20" />
+          <span className="text-muted-foreground text-sm font-medium">
+            Sperret område
           </span>
         </div>
       )}
