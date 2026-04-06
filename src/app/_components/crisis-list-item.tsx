@@ -26,9 +26,7 @@ export function CrisisListItem({ crisis }: CrisisListItemProps) {
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
-            <h3 className="truncate text-base font-semibold">
-              {crisis.title}
-            </h3>
+            <h3 className="truncate text-base font-semibold">{crisis.title}</h3>
             <Badge variant="outline" className={`shrink-0 ${severity.badge}`}>
               {severity.label}
             </Badge>

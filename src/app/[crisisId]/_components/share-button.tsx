@@ -89,11 +89,9 @@ export function ShareButton() {
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
       <DrawerContent>
-        <div className="mx-auto w-full max-w-md px-4 pb-8 pt-2">
+        <div className="mx-auto w-full max-w-md px-4 pt-2 pb-8">
           <DrawerHeader className="px-0 pb-4">
-            <DrawerTitle className="text-base font-bold">
-              Del krise
-            </DrawerTitle>
+            <DrawerTitle className="text-base font-bold">Del krise</DrawerTitle>
           </DrawerHeader>
           <ShareContent onClose={() => setOpen(false)} />
         </div>

@@ -44,7 +44,7 @@ export function PublicMeasures({ measures }: { measures: MeasureData[] }) {
             <HugeiconsIcon icon={Alert02Icon} size={18} />
           </div>
           <div className="min-w-0 flex-1 pt-0.5">
-            <p className="text-sm font-medium leading-relaxed">
+            <p className="text-sm leading-relaxed font-medium">
               {measure.text}
             </p>
             <p className="text-muted-foreground mt-1 text-xs">

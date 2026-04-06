@@ -20,7 +20,7 @@ export function PublicMap({ markers }: { markers: MapMarkerData[] }) {
         <PublicMapContent markers={markers} />
       </div>
       {markers.some((m) => m.type === "RADIUS") && (
-        <div className="flex items-center gap-2 border-t bg-muted/30 px-4 py-3">
+        <div className="bg-muted/30 flex items-center gap-2 border-t px-4 py-3">
           <span className="h-3 w-3 rounded-full bg-red-400/60 ring-2 ring-red-400/20" />
           <span className="text-muted-foreground text-sm font-medium">
             Sperret område

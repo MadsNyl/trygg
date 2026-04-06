@@ -208,12 +208,10 @@ function ChangePasswordCard() {
 function parseUserAgent(ua: string | null): string {
   if (!ua) return "Ukjent enhet";
 
-  const browserMatch = ua.match(
-    /(Chrome|Firefox|Safari|Edge|Opera|Brave)[/\s](\d+)/i,
-  );
-  const osMatch = ua.match(
-    /(Windows|Mac OS X|Linux|Android|iOS|iPhone OS)[/\s]?([\d._]*)/i,
-  );
+  const browserMatch =
+    /(Chrome|Firefox|Safari|Edge|Opera|Brave)[/\s](\d+)/i.exec(ua);
+  const osMatch =
+    /(Windows|Mac OS X|Linux|Android|iOS|iPhone OS)[/\s]?([\d._]*)/i.exec(ua);
 
   const browser = browserMatch
     ? `${browserMatch[1]} ${browserMatch[2]}`

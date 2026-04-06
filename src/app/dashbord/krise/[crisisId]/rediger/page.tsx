@@ -185,7 +185,7 @@ export default function RedigerKrisePage() {
             className={`border-b-2 px-5 py-3 text-sm font-medium transition-colors ${
               activeTab === tab.id
                 ? "border-primary text-foreground"
-                : "border-transparent text-muted-foreground hover:text-foreground"
+                : "text-muted-foreground hover:text-foreground border-transparent"
             }`}
           >
             {tab.label}

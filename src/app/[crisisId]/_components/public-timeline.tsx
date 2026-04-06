@@ -59,7 +59,7 @@ export function PublicTimeline({ entries }: { entries: TimelineEntryData[] }) {
                 style={{ backgroundColor: entry.etat.themeColor }}
               />
               {!isLast && (
-                <div className="w-0.5 flex-1 rounded-full bg-border" />
+                <div className="bg-border w-0.5 flex-1 rounded-full" />
               )}
             </div>
 

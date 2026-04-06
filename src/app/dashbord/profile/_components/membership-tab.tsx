@@ -35,9 +35,7 @@ export function MembershipTab({ etater }: { etater: EtatData[] }) {
           />
         </EmptyMedia>
         <EmptyHeader>
-          <EmptyTitle className="text-base">
-            Ingen medlemskap ennå
-          </EmptyTitle>
+          <EmptyTitle className="text-base">Ingen medlemskap ennå</EmptyTitle>
           <EmptyDescription className="text-sm">
             Du er ikke tilknyttet noen etater. Kontakt en administrator for å
             bli lagt til.

@@ -49,7 +49,7 @@ export function CrisisDetail({ crisis }: { crisis: CrisisDetailData }) {
         {/* Hero section */}
         <div className="py-8 pb-6">
           {/* Info grid */}
-          <div className="grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          <div className="bg-border grid gap-px overflow-hidden rounded-lg border sm:grid-cols-2 lg:grid-cols-4">
             <div className="flex flex-col gap-1 bg-white p-4">
               <div className="text-muted-foreground flex items-center gap-2">
                 <HugeiconsIcon
@@ -105,7 +105,9 @@ export function CrisisDetail({ crisis }: { crisis: CrisisDetailData }) {
                   Når
                 </span>
               </div>
-              <p className="text-sm font-medium">{formatDateTime(crisis.when)}</p>
+              <p className="text-sm font-medium">
+                {formatDateTime(crisis.when)}
+              </p>
             </div>
           </div>
         </div>
