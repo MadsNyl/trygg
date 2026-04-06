@@ -53,7 +53,13 @@ type SessionData = {
   updatedAt: Date;
 };
 
-function ChangeEmailCard({ currentEmail }: { currentEmail: string }) {
+function ChangeEmailCard({
+  currentEmail,
+  onSuccess,
+}: {
+  currentEmail: string;
+  onSuccess: () => void;
+}) {
   const [newEmail, setNewEmail] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -72,6 +78,7 @@ function ChangeEmailCard({ currentEmail }: { currentEmail: string }) {
     } else {
       setSuccessMessage("E-postadressen din er oppdatert");
       setNewEmail("");
+      onSuccess();
       setTimeout(() => setSuccessMessage(""), 3000);
     }
   };
@@ -111,7 +118,7 @@ function ChangeEmailCard({ currentEmail }: { currentEmail: string }) {
   );
 }
 
-function ChangePasswordCard() {
+function ChangePasswordCard({ onSuccess }: { onSuccess: () => void }) {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -138,6 +145,7 @@ function ChangePasswordCard() {
       setCurrentPassword("");
       setNewPassword("");
       setConfirmPassword("");
+      onSuccess();
       setTimeout(() => setSuccessMessage(""), 3000);
     }
   };
@@ -224,9 +232,11 @@ function parseUserAgent(ua: string | null): string {
 function SessionsCard({
   sessions,
   currentSessionToken,
+  onSuccess,
 }: {
   sessions: SessionData[];
   currentSessionToken: string;
+  onSuccess: () => void;
 }) {
   const [revokingId, setRevokingId] = useState<string | null>(null);
 
@@ -234,7 +244,7 @@ function SessionsCard({
     setRevokingId(sessionToken);
     await authClient.revokeSession({ token: sessionToken });
     setRevokingId(null);
-    window.location.reload();
+    onSuccess();
   };
 
   const formatDate = (date: Date) =>
@@ -378,13 +388,17 @@ export function SecurityTab({
   sessions: SessionData[];
   currentSessionToken: string;
 }) {
+  const router = useRouter();
+  const handleSuccess = () => router.refresh();
+
   return (
     <div className="space-y-6">
-      <ChangeEmailCard currentEmail={profile.email} />
-      <ChangePasswordCard />
+      <ChangeEmailCard currentEmail={profile.email} onSuccess={handleSuccess} />
+      <ChangePasswordCard onSuccess={handleSuccess} />
       <SessionsCard
         sessions={sessions}
         currentSessionToken={currentSessionToken}
+        onSuccess={handleSuccess}
       />
       <DeleteAccountCard email={profile.email} />
     </div>

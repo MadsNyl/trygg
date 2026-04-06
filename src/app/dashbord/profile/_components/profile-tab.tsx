@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
@@ -29,12 +30,14 @@ type ProfileData = {
 export function ProfileTab({ profile }: { profile: ProfileData }) {
   const [name, setName] = useState(profile.name);
   const [successMessage, setSuccessMessage] = useState("");
+  const router = useRouter();
 
   const utils = api.useUtils();
   const updateName = api.users.updateName.useMutation({
     onSuccess: () => {
       setSuccessMessage("Endringene er lagret");
       void utils.users.getProfile.invalidate();
+      router.refresh();
       setTimeout(() => setSuccessMessage(""), 3000);
     },
   });
