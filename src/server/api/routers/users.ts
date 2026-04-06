@@ -100,7 +100,7 @@ export const usersRouter = createTRPCRouter({
         select: { email: true },
       });
 
-      if (!user || user.email !== input.confirmEmail) {
+      if (user?.email !== input.confirmEmail) {
         throw new TRPCError({
           code: "BAD_REQUEST",
           message: "E-postadressen stemmer ikke overens",
