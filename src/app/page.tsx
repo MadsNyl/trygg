@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Suspense } from "react";
 
-import { Avatar, AvatarFallback } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
+import { HeaderUserMenu } from "~/app/_components/header-user-menu";
 import { CrisisListItem } from "~/app/_components/crisis-list-item";
 import { FeedFilters } from "~/app/_components/feed-filters";
 import {
@@ -62,17 +62,10 @@ export default async function Home({
           </div>
           <nav className="hidden items-center gap-3 sm:flex">
             {session?.user ? (
-              <Link
-                href="/dashbord"
-                className="flex items-center gap-2 text-sm transition-opacity hover:opacity-80"
-              >
-                <Avatar>
-                  <AvatarFallback className="text-sm">
-                    {session.user.name.charAt(0).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-                <span>{session.user.name}</span>
-              </Link>
+              <HeaderUserMenu
+                name={session.user.name}
+                isVerified={session.user.isVerified === true}
+              />
             ) : (
               <Button asChild variant="outline" className="h-9 px-4 text-sm">
                 <Link href="/logg-inn">Logg inn</Link>
