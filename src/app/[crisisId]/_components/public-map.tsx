@@ -19,13 +19,31 @@ export function PublicMap({ markers }: { markers: MapMarkerData[] }) {
       <div className="h-[50vh] min-h-[320px]">
         <PublicMapContent markers={markers} />
       </div>
-      {markers.some((m) => m.type === "RADIUS") && (
-        <div className="bg-muted/30 flex items-center gap-2 border-t px-4 py-3">
-          <span className="h-3 w-3 rounded-full bg-red-400/60 ring-2 ring-red-400/20" />
-          <span className="text-muted-foreground text-sm font-medium">
-            Sperret område
-          </span>
-        </div>
+      {markers.length > 0 && (
+        <ul className="bg-muted/30 divide-border/60 divide-y border-t">
+          {markers.map((marker) => (
+            <li
+              key={marker.id}
+              className="flex items-center gap-2 px-4 py-2.5"
+            >
+              {marker.type === "RADIUS" ? (
+                <span
+                  aria-hidden
+                  className="h-3 w-3 shrink-0 rounded-full bg-red-400/60 ring-2 ring-red-400/20"
+                />
+              ) : (
+                <span
+                  aria-hidden
+                  className="h-3 w-3 shrink-0 rounded-full bg-blue-500 ring-2 ring-blue-500/20"
+                />
+              )}
+              <span className="text-sm font-medium">{marker.label}</span>
+              <span className="text-muted-foreground text-xs">
+                {marker.type === "RADIUS" ? "Sperret område" : "Punkt"}
+              </span>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
