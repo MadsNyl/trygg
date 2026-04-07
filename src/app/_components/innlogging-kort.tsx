@@ -66,7 +66,7 @@ export function InnloggingKort() {
       name: navn,
       email: epost,
       password: passord,
-      callbackURL: "/",
+      callbackURL: "/venter-verifisering",
     });
 
     if (result.error) {
@@ -80,7 +80,7 @@ export function InnloggingKort() {
       return;
     }
 
-    router.push("/");
+    router.push("/venter-verifisering");
     router.refresh();
   };
 
